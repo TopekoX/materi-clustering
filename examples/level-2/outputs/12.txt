@@ -1,0 +1,43 @@
+Tabel bersih   : (200, 5)
+Dataset akhir  : (200, 3)
+
+Lima baris pertama dataset akhir:
+     Age  Annual Income (k$)  Spending Score (1-100)
+0 -1.425              -1.739                  -0.435
+1 -1.281              -1.739                   1.196
+2 -1.353              -1.701                  -1.716
+3 -1.138              -1.701                   1.040
+4 -0.563              -1.663                  -0.396
+Nilai kosong      : 0
+Baris ganda       : 0
+Semua kolom angka : True
+
+Rata-rata (harus ~0):
+Age                      -0.0
+Annual Income (k$)       -0.0
+Spending Score (1-100)   -0.0
+dtype: float64
+
+Simpangan baku (harus ~1):
+Age                       1.0
+Annual Income (k$)        1.0
+Spending Score (1-100)    1.0
+dtype: float64
+
+Baris sama dengan data asli? True
+Tiga baris pertama, dikembalikan ke satuan asli:
+    Age  Annual Income (k$)  Spending Score (1-100)
+0  19.0                15.0                    39.0
+1  21.0                15.0                    81.0
+2  20.0                16.0                     6.0
+
+Sama dengan tabel bersih? True
+
+Baris 0 milik CustomerID: 1
+Berhasil. Jumlah anggota per kelompok:
+0    20
+1    54
+2    40
+3    39
+4    47
+Name: count, dtype: int64

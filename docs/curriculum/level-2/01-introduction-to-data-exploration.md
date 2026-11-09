@@ -71,32 +71,101 @@ Bab pengantar ini belum memerlukan rumus. Statistik ringkasan seperti rata-rata 
 
 ## Python Implementation
 
-Skrip lengkap ada di `examples/level-2/01_explore_mall_customers.py`:
+Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasannya**, jadi baca kode, lalu baca penjelasannya sebelum lanjut. Skrip lengkapnya ada di `examples/level-2/01_explore_mall_customers.py`, dan versi notebook-nya di `notebooks/level-2/01-introduction-to-data-exploration.ipynb`.
 
-```python title="examples/level-2/01_explore_mall_customers.py"
---8<-- "level-2/01_explore_mall_customers.py"
+### Langkah 1 — Siapkan alat dan muat data
+
+```python
+--8<-- "level-2/01_explore_mall_customers.py:setup"
 ```
 
-Notebook versi interaktifnya ada di `notebooks/level-2/01-introduction-to-data-exploration.ipynb`.
+**Penjelasan:**
+
+- `import pandas as pd` memanggil *pandas*, pustaka Python untuk mengolah tabel. Kita beri nama singkat `pd` supaya mengetiknya tidak panjang.
+- `import matplotlib.pyplot as plt` memanggil *matplotlib*, pustaka untuk membuat grafik. Nama singkatnya `plt`.
+- `DATA_PATH = "data/mall_customers.csv"` menyimpan lokasi file data dalam sebuah variabel. Artinya: file `mall_customers.csv` ada di folder `data`.
+- `pd.read_csv(DATA_PATH)` membaca file CSV dan mengubahnya menjadi tabel pandas yang disebut **DataFrame**. Kita simpan di variabel `df`. Mulai sekarang, `df` adalah tabel data pelanggan kita.
+
+### Langkah 2 — Lihat sekilas isi data
+
+```python
+--8<-- "level-2/01_explore_mall_customers.py:glance"
+```
+
+**Penjelasan:**
+
+- `df.head()` menampilkan **5 baris pertama**. Ini seperti mengintip isi tabel tanpa membuka semuanya.
+- `df.shape` memberi pasangan angka `(jumlah baris, jumlah kolom)`. Hasilnya nanti `(200, 5)`: 200 pelanggan dan 5 kolom.
+- `df.dtypes` menunjukkan **tipe data** tiap kolom, misalnya `int64` (bilangan bulat) atau `str` (teks). Tipe data penting karena angka dan teks diperlakukan berbeda.
+- `print("\n...")`: tanda `\n` hanya membuat baris kosong supaya output mudah dibaca.
+
+### Langkah 3 — Ringkasan statistik
+
+```python
+--8<-- "level-2/01_explore_mall_customers.py:summary"
+```
+
+**Penjelasan:**
+
+- `df.describe()` menghitung ringkasan untuk semua kolom angka sekaligus: jumlah data (`count`), rata-rata (`mean`), simpangan baku (`std`), nilai terkecil (`min`), nilai terbesar (`max`), dan kuartil (`25%`, `50%`, `75%`).
+- `.round(2)` membulatkan angka menjadi dua angka di belakang koma, supaya tabelnya rapi.
+- Dengan satu baris ini kita sudah bisa melihat rentang tiap kolom. Misalnya, usia berkisar 18 sampai 70 tahun.
+
+### Langkah 4 — Pemeriksaan kualitas dasar
+
+```python
+--8<-- "level-2/01_explore_mall_customers.py:quality"
+```
+
+**Penjelasan:**
+
+- `df.isna()` menandai sel yang **kosong** (`True`), lalu `.sum()` menjumlahkannya per kolom. Hasil `0` berarti tidak ada sel kosong.
+- `df.duplicated()` menandai baris yang **sama persis** dengan baris sebelumnya, lalu `.sum()` menghitungnya. Hasil `0` berarti tidak ada baris ganda.
+- `df["Gender"]` mengambil satu kolom. `.value_counts()` menghitung berapa kali tiap isi kolom muncul, di sini jumlah pelanggan `Female` dan `Male`.
+
+### Langkah 5 — Histogram: bentuk sebaran tiap kolom
+
+```python
+--8<-- "level-2/01_explore_mall_customers.py:hist"
+```
+
+**Penjelasan:**
+
+- `features = [...]` adalah daftar tiga kolom yang ingin kita gambar.
+- `plt.subplots(1, 3, ...)` membuat satu bidang gambar berisi **1 baris dan 3 grafik** berdampingan. `fig` adalah gambar keseluruhan, `axes` adalah ketiga grafiknya.
+- `for ax, col in zip(axes, features)` mengulang pekerjaan yang sama untuk tiap pasangan (grafik, kolom).
+- `ax.hist(df[col], bins=15)` menggambar **histogram**: nilai dibagi ke 15 rentang, lalu tinggi batang menunjukkan berapa pelanggan di tiap rentang.
+- `plt.show()` menampilkan gambar. (Di skrip ini, gambarnya disimpan ke file.)
+
+### Langkah 6 — Scatter plot: hubungan dua kolom
+
+```python
+--8<-- "level-2/01_explore_mall_customers.py:scatter"
+```
+
+**Penjelasan:**
+
+- `ax.scatter(x, y)` menggambar **satu titik untuk setiap pelanggan**. Posisi titik ditentukan oleh pendapatan (sumbu x) dan skor belanja (sumbu y).
+- `s=18` mengatur ukuran titik.
+- `set_xlabel`, `set_ylabel`, dan `set_title` memberi nama pada sumbu dan judul grafik. Grafik tanpa label sulit dibaca.
 
 ## Code Explanation
 
-| Bagian kode | Penjelasan |
+Ringkasan cara membaca kode di atas:
+
+| Yang kamu lihat | Artinya |
 |---|---|
-| `ROOT = Path(__file__).resolve().parents[2]` | Mencari folder utama repo dari lokasi skrip, sehingga skrip bisa dijalankan dari folder mana pun |
-| `pd.read_csv(DATA_PATH)` | Membaca file CSV menjadi `DataFrame` |
-| `df.head()` | Menampilkan 5 baris pertama |
-| `df.shape` | Pasangan `(jumlah baris, jumlah kolom)` |
-| `df.dtypes` | Tipe data tiap kolom |
-| `df.describe().round(2)` | Ringkasan statistik kolom numerik, dibulatkan dua desimal |
-| `df.isna().sum()` | Menghitung nilai kosong per kolom |
-| `df.duplicated().sum()` | Menghitung baris yang sama persis dengan baris sebelumnya |
-| `df["Gender"].value_counts()` | Menghitung jumlah tiap nilai pada kolom kategori |
-| `ax.hist(...)` | Histogram: seberapa sering tiap rentang nilai muncul |
-| `ax.scatter(...)` | *Scatter plot*: satu titik per pelanggan |
-| `matplotlib.use("Agg")` | Menyimpan gambar ke file tanpa membuka jendela |
+| `df` | Tabel data (DataFrame). Hampir semua perintah dimulai dari sini |
+| `df.sesuatu()` | **Metode**: perintah yang dijalankan pada tabel, misalnya `df.head()` |
+| `df.sesuatu` (tanpa kurung) | **Atribut**: informasi yang sudah tersedia, misalnya `df.shape` |
+| `df["Nama Kolom"]` | Mengambil satu kolom |
+| `print(...)` | Menampilkan hasil di layar |
+
+Pola umumnya: **muat data → lihat sekilas → ringkas → periksa kualitas → gambar**. Pola ini kita ulangi di bab-bab berikutnya.
 
 ## How to Run
+
+Jalankan dari **folder utama proyek** (folder yang berisi `mkdocs.yml`):
 
 ```powershell
 python -m venv .venv
@@ -116,50 +185,7 @@ jupyter notebook notebooks/level-2/01-introduction-to-data-exploration.ipynb
 Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, matplotlib 3.11.2, Python 3.14.7):
 
 ```text
-Lima baris pertama:
-   CustomerID  Gender  Age  Annual Income (k$)  Spending Score (1-100)
-0           1    Male   19                  15                      39
-1           2    Male   21                  15                      81
-2           3  Female   20                  16                       6
-3           4  Female   23                  16                      77
-4           5  Female   31                  17                      40
-
-Ukuran (baris, kolom): (200, 5)
-
-Tipe data per kolom:
-CustomerID                int64
-Gender                      str
-Age                       int64
-Annual Income (k$)        int64
-Spending Score (1-100)    int64
-dtype: object
-
-Ringkasan statistik:
-       CustomerID     Age  Annual Income (k$)  Spending Score (1-100)
-count      200.00  200.00              200.00                  200.00
-mean       100.50   38.85               60.56                   50.20
-std         57.88   13.97               26.26                   25.82
-min          1.00   18.00               15.00                    1.00
-25%         50.75   28.75               41.50                   34.75
-50%        100.50   36.00               61.50                   50.00
-75%        150.25   49.00               78.00                   73.00
-max        200.00   70.00              137.00                   99.00
-
-Jumlah nilai kosong per kolom:
-CustomerID                0
-Gender                    0
-Age                       0
-Annual Income (k$)        0
-Spending Score (1-100)    0
-dtype: int64
-
-Jumlah baris duplikat: 0
-
-Jumlah per Gender:
-Gender
-Female    112
-Male       88
-Name: count, dtype: int64
+--8<-- "level-2/outputs/01.txt"
 ```
 
 Gambar yang dihasilkan:

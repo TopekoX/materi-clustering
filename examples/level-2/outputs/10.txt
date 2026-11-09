@@ -1,0 +1,55 @@
+Rentang tiap fitur:
+     Age  Annual Income (k$)  Spending Score (1-100)
+min   18                  15                       1
+max   70                 137                      99
+
+Varians tiap fitur:
+Age                       195.1
+Annual Income (k$)        689.8
+Spending Score (1-100)    666.9
+dtype: float64
+
+Porsi varians (persen) pada skala asli:
+Age                       12.6
+Annual Income (k$)        44.5
+Spending Score (1-100)    43.0
+dtype: float64
+Min-Max scaling (5 baris pertama):
+     Age  Annual Income (k$)  Spending Score (1-100)
+0  0.019               0.000                   0.388
+1  0.058               0.000                   0.816
+2  0.038               0.008                   0.051
+3  0.096               0.008                   0.776
+4  0.250               0.016                   0.398
+
+Min dan max setiap kolom:
+     Age  Annual Income (k$)  Spending Score (1-100)
+min  0.0                 0.0                     0.0
+max  1.0                 1.0                     1.0
+Standardization (5 baris pertama):
+     Age  Annual Income (k$)  Spending Score (1-100)
+0 -1.425              -1.739                  -0.435
+1 -1.281              -1.739                   1.196
+2 -1.353              -1.701                  -1.716
+3 -1.138              -1.701                   1.040
+4 -0.563              -1.663                  -0.396
+
+Rata-rata dan simpangan baku setiap kolom:
+        Age  Annual Income (k$)  Spending Score (1-100)
+mean -0.000              -0.000                  -0.000
+std   1.003               1.003                   1.003
+Min-Max sama dengan hitungan manual? True
+Standardization sama dengan hitungan manual? True
+Porsi varians (persen) setelah Min-Max:
+Age                       38.4
+Annual Income (k$)        24.7
+Spending Score (1-100)    36.9
+dtype: float64
+
+Porsi varians (persen) setelah Standardization:
+Age                       33.3
+Annual Income (k$)        33.3
+Spending Score (1-100)    33.3
+dtype: float64
+
+[gambar disimpan: docs/assets/level-2/10-scaling-scatter.png]

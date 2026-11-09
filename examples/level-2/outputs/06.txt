@@ -1,0 +1,33 @@
+Baris ganda penuh pada data asli  : 0
+CustomerID yang muncul lebih dari sekali: 0
+Baris dengan sifat yang sama persis (tanpa CustomerID): 0
+
+Empty DataFrame
+Columns: [CustomerID, Gender, Age, Annual Income (k$), Spending Score (1-100)]
+Index: []
+Ukuran data asli     : (200, 5)
+Ukuran setelah ditambah: (208, 5)
+Jumlah baris ganda: 8
+
+Semua baris yang terlibat (aslinya dan salinannya):
+     CustomerID  Gender  Age  Annual Income (k$)  Spending Score (1-100)
+15           16    Male   22                  20                      79
+201          16    Male   22                  20                      79
+202          31    Male   60                  30                       4
+30           31    Male   60                  30                       4
+69           70  Female   32                  48                      47
+206          70  Female   32                  48                      47
+200          96    Male   24                  60                      52
+95           96    Male   24                  60                      52
+205         116  Female   19                  65                      50
+115         116  Female   19                  65                      50
+128         129    Male   59                  71                      11
+204         129    Male   59                  71                      11
+203         159    Male   34                  78                       1
+158         159    Male   34                  78                       1
+170         171    Male   40                  87                      13
+207         171    Male   40                  87                      13
+Sebelum: (208, 5)
+Sesudah: (200, 5)
+Baris ganda tersisa: 0
+Jumlah baris sama dengan data asli? True

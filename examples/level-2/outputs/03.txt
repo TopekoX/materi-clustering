@@ -1,0 +1,55 @@
+Mean  :
+Age                       38.85
+Annual Income (k$)        60.56
+Spending Score (1-100)    50.20
+dtype: float64
+
+Median:
+Age                       36.0
+Annual Income (k$)        61.5
+Spending Score (1-100)    50.0
+dtype: float64
+
+Modus Age : [32]
+Rentang (max - min):
+Age                        52
+Annual Income (k$)        122
+Spending Score (1-100)     98
+dtype: int64
+
+Simpangan baku:
+Age                       13.97
+Annual Income (k$)        26.26
+Spending Score (1-100)    25.82
+dtype: float64
+
+IQR (Q3 - Q1):
+Age                       20.25
+Annual Income (k$)        36.50
+Spending Score (1-100)    38.25
+dtype: float64
+Rata-rata Age (manual)        : 38.85
+Simpangan baku Age (manual)   : 13.97
+Rata-rata Age (pandas)        : 38.85
+Simpangan baku Age (pandas)   : 13.97
+Skewness (kemiringan):
+Age                       0.49
+Annual Income (k$)        0.32
+Spending Score (1-100)   -0.05
+dtype: float64
+Rata-rata per Gender:
+          Age  Annual Income (k$)  Spending Score (1-100)
+Gender                                                   
+Female  38.10               59.25                   51.53
+Male    39.81               62.23                   48.51
+
+Jumlah pelanggan per Gender:
+Gender
+Female    112
+Male       88
+dtype: int64
+Matriks korelasi:
+                         Age  Annual Income (k$)  Spending Score (1-100)
+Age                     1.00               -0.01                   -0.33
+Annual Income (k$)     -0.01                1.00                    0.01
+Spending Score (1-100) -0.33                0.01                    1.00

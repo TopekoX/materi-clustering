@@ -1,0 +1,20 @@
+[gambar disimpan: docs/assets/level-2/04-boxplot.png]
+Gender
+Female    112
+Male       88
+Name: count, dtype: int64
+[gambar disimpan: docs/assets/level-2/04-gender-bar.png]
+[gambar disimpan: docs/assets/level-2/04-scatter-pairs.png]
+[gambar disimpan: docs/assets/level-2/04-scatter-gender.png]
+                         Age  Annual Income (k$)  Spending Score (1-100)
+Age                     1.00               -0.01                   -0.33
+Annual Income (k$)     -0.01                1.00                    0.01
+Spending Score (1-100) -0.33                0.01                    1.00
+[gambar disimpan: docs/assets/level-2/04-heatmap.png]
+Age Group
+18-30    61.03
+31-45    52.57
+46-60    35.10
+61-70    44.18
+Name: Spending Score (1-100), dtype: float64
+[gambar disimpan: docs/assets/level-2/04-age-group.png]

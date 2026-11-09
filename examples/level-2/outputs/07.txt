@@ -1,0 +1,44 @@
+Batas bawah:
+Age                       -1.625
+Annual Income (k$)       -13.250
+Spending Score (1-100)   -22.625
+dtype: float64
+
+Batas atas:
+Age                        79.375
+Annual Income (k$)        132.750
+Spending Score (1-100)    130.375
+dtype: float64
+
+Jumlah outlier per kolom (aturan IQR):
+Age                       0
+Annual Income (k$)        2
+Spending Score (1-100)    0
+dtype: int64
+
+Baris yang punya outlier:
+     CustomerID Gender  Age  Annual Income (k$)  Spending Score (1-100)
+198         199   Male   32                 137                      18
+199         200   Male   30                 137                      83
+Nilai |z| terbesar per kolom:
+Age                       2.23
+Annual Income (k$)        2.91
+Spending Score (1-100)    1.91
+dtype: float64
+
+Jumlah |z| > 3 per kolom:
+Age                       0
+Annual Income (k$)        0
+Spending Score (1-100)    0
+dtype: int64
+[gambar disimpan: docs/assets/level-2/07-outlier-income.png]
+Sebelum: (200, 5)
+Sesudah: (198, 5)
+Ukuran: (200, 5)
+Nilai maksimum Annual Income sebelum: 137
+Nilai maksimum Annual Income sesudah : 132.75
+         asli  dibuang  dibatasi
+count  200.00   198.00    200.00
+mean    60.56    59.79     60.52
+std     26.26    25.24     26.14
+max    137.00   126.00    132.75

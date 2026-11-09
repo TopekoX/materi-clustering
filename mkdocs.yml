@@ -97,6 +97,17 @@ nav:
   - Level 2 — Data Exploration and Preprocessing:
       - curriculum/level-2/index.md
       - Bab 1 — Introduction to Data Exploration: curriculum/level-2/01-introduction-to-data-exploration.md
+      - Bab 2 — Understanding Data Types: curriculum/level-2/02-understanding-data-types.md
+      - Bab 3 — Descriptive Statistics: curriculum/level-2/03-descriptive-statistics.md
+      - Bab 4 — Exploratory Data Analysis: curriculum/level-2/04-exploratory-data-analysis.md
+      - Bab 5 — Missing Values Analysis: curriculum/level-2/05-missing-values-analysis.md
+      - Bab 6 — Duplicate Data Analysis: curriculum/level-2/06-duplicate-data-analysis.md
+      - Bab 7 — Outlier Detection and Handling: curriculum/level-2/07-outlier-detection-and-handling.md
+      - Bab 8 — Data Cleaning: curriculum/level-2/08-data-cleaning.md
+      - Bab 9 — Data Transformation and Encoding: curriculum/level-2/09-data-transformation-and-encoding.md
+      - Bab 10 — Feature Scaling: curriculum/level-2/10-feature-scaling.md
+      - Bab 11 — Feature Selection and Feature Engineering: curriculum/level-2/11-feature-selection-and-feature-engineering.md
+      - Bab 12 — Dataset Preparation for Clustering: curriculum/level-2/12-dataset-preparation-for-clustering.md
 
 # --- Plugins ----------------------------------------------------------------
 plugins:
