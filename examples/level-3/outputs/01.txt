@@ -1,0 +1,36 @@
+Kolom yang tersedia: ['CustomerID', 'Gender', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)']
+Bentuk data yang dikelompokkan (baris, kolom): (200, 2)
+
+Lima baris pertama fitur:
+   Annual Income (k$)  Spending Score (1-100)
+0                  15                      39
+1                  15                      81
+2                  16                       6
+3                  16                      77
+4                  17                      40
+[gambar disimpan: docs/assets/level-3/01-data-mentah.png]
+   CustomerID  Annual Income (k$)  Spending Score (1-100)  Cluster
+0           1                  15                      39        4
+1           2                  15                      81        2
+2           3                  16                       6        4
+3           4                  16                      77        2
+4           5                  17                      40        4
+
+Jumlah pelanggan per kelompok:
+Cluster
+0    81
+1    39
+2    22
+3    35
+4    23
+Name: count, dtype: int64
+
+Rata-rata tiap kelompok:
+         Annual Income (k$)  Spending Score (1-100)
+Cluster                                            
+0                      55.3                    49.5
+1                      86.5                    82.1
+2                      25.7                    79.4
+3                      88.2                    17.1
+4                      26.3                    20.9
+[gambar disimpan: docs/assets/level-3/01-hasil-clustering.png]

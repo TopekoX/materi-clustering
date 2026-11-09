@@ -210,7 +210,7 @@ Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, matplotl
 --8<-- "level-2/outputs/07.txt"
 ```
 
-![Scatter plot pendapatan vs skor belanja dengan outlier berwarna merah](../../assets/level-2/07-outlier-income.png)
+![Scatter plot pendapatan vs skor belanja dengan outlier berwarna merah](../assets/level-2/07-outlier-income.png)
 
 **Cara membaca output:**
 

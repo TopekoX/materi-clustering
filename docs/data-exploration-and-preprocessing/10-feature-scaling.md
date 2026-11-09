@@ -199,7 +199,7 @@ Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, scikit-l
 --8<-- "level-2/outputs/10.txt"
 ```
 
-![Scatter plot usia vs pendapatan, sebelum dan sesudah standardization](../../assets/level-2/10-scaling-scatter.png)
+![Scatter plot usia vs pendapatan, sebelum dan sesudah standardization](../assets/level-2/10-scaling-scatter.png)
 
 **Cara membaca output:**
 

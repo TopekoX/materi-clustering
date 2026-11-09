@@ -192,7 +192,7 @@ Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, numpy, m
 --8<-- "level-2/outputs/09.txt"
 ```
 
-![Histogram pendapatan sebelum dan sesudah log1p](../../assets/level-2/09-log-transform.png)
+![Histogram pendapatan sebelum dan sesudah log1p](../assets/level-2/09-log-transform.png)
 
 **Cara membaca output:**
 

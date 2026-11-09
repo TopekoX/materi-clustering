@@ -1,0 +1,50 @@
+     x1   x2
+P1  2.0  3.0
+P2  3.0  5.0
+P3  4.0  4.0
+P4  3.0  2.0
+P5  8.0  8.0
+Jumlah per kolom: [20. 22.]
+Jumlah titik n  : 5
+Centroid        : [4.  4.4]
+Sama dengan points.mean(axis=0)? True
+Jumlah jarak tiap titik ke semua titik lain:
+  P1: 13.7
+  P2: 12.48
+  P3: 11.54
+  P4: 14.46
+  P5: 27.11
+Medoid: P3 [4. 4.]
+Centroid sebelum outlier: [4.  4.4]
+Centroid sesudah outlier: [8.33 8.67]
+Medoid sebelum outlier  : [4. 4.]
+Medoid sesudah outlier  : [4. 4.]
+Pusat awal:
+ [[2. 2.]
+ [7. 7.]]
+Kelompok tiap titik: {'P1': 0, 'P2': 0, 'P3': 0, 'P4': 0, 'P5': 1}
+Pusat baru (rata-rata anggota):
+ [[3.  3.5]
+ [8.  8. ]]
+Pergeseran pusat: [1.8  1.41]
+Rata-rata per kelompok (groupby):
+         Annual Income (k$)  Spending Score (1-100)
+Cluster                                            
+0                     55.30                   49.52
+1                     86.54                   82.13
+2                     25.73                   79.36
+3                     88.20                   17.11
+4                     26.30                   20.91
+
+Centroid dari KMeans:
+   Annual Income (k$)  Spending Score (1-100)
+0               55.30                   49.52
+1               86.54                   82.13
+2               25.73                   79.36
+3               88.20                   17.11
+4               26.30                   20.91
+
+Sama? True
+[gambar disimpan: docs/assets/level-3/03-centroid-vs-medoid.png]
+[gambar disimpan: docs/assets/level-3/03-centroid-berpindah.png]
+[gambar disimpan: docs/assets/level-3/03-centroid-mall.png]

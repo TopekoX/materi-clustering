@@ -185,19 +185,19 @@ Output teks dari eksekusi nyata skrip (pandas 3.1.1, matplotlib 3.11.2, Python 3
 
 ### Box plot
 
-![Box plot tiga fitur](../../assets/level-2/04-boxplot.png)
+![Box plot tiga fitur](../assets/level-2/04-boxplot.png)
 
 Angka `1` di bawah tiap kotak hanyalah nomor kotak, bukan data. Pada `Annual Income (k$)` terlihat **satu titik di atas kumis**, sekitar 137. Titik itu patut dicatat untuk Bab 7. `Age` dan `Spending Score (1-100)` tidak menampilkan titik di luar kumis.
 
 ### Diagram batang Gender
 
-![Diagram batang jumlah pelanggan per Gender](../../assets/level-2/04-gender-bar.png)
+![Diagram batang jumlah pelanggan per Gender](../assets/level-2/04-gender-bar.png)
 
 `Female` (112) sedikit lebih banyak dari `Male` (88).
 
 ### Scatter plot tiap pasangan
 
-![Tiga scatter plot pasangan fitur](../../assets/level-2/04-scatter-pairs.png)
+![Tiga scatter plot pasangan fitur](../assets/level-2/04-scatter-pairs.png)
 
 - **Age vs Annual Income**: titik tersebar tanpa pola yang jelas.
 - **Age vs Spending Score**: pelanggan **yang lebih muda** (sekitar di bawah 40 tahun) punya skor belanja yang bisa sangat tinggi, sedangkan pelanggan yang lebih tua jarang melewati skor 60.
@@ -205,19 +205,19 @@ Angka `1` di bawah tiap kotak hanyalah nomor kotak, bukan data. Pada `Annual Inc
 
 ### Berwarna menurut Gender
 
-![Scatter plot pendapatan vs skor belanja berwarna menurut Gender](../../assets/level-2/04-scatter-gender.png)
+![Scatter plot pendapatan vs skor belanja berwarna menurut Gender](../assets/level-2/04-scatter-gender.png)
 
 Warna `Female` dan `Male` bercampur di semua gerombol. Jadi `Gender` tampaknya bukan pembeda yang jelas pada pasangan ini.
 
 ### Heatmap korelasi
 
-![Heatmap korelasi](../../assets/level-2/04-heatmap.png)
+![Heatmap korelasi](../assets/level-2/04-heatmap.png)
 
 Isinya sama dengan matriks korelasi di Bab 3, hanya disajikan sebagai warna.
 
 ### Rata-rata skor belanja per kelompok usia
 
-![Rata-rata Spending Score per kelompok usia](../../assets/level-2/04-age-group.png)
+![Rata-rata Spending Score per kelompok usia](../assets/level-2/04-age-group.png)
 
 Rata-rata skor belanja: 61,03 (usia 18–30), 52,57 (31–45), 35,10 (46–60), dan 44,18 (61–70). Skor rata-rata cenderung turun dengan bertambahnya usia, tetapi tidak mulus: kelompok 61–70 sedikit naik lagi.
 

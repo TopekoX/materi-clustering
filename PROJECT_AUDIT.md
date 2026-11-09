@@ -71,7 +71,7 @@ Available and reusable: light/dark/system toggle; sidebar sections and section i
 
 ## 5. Integration opportunities
 
-1. **Curriculum section:** rewrite `docs/curriculum/index.md` as the 8-level roadmap; add `curriculum/level-2/` as a section (`navigation.indexes` already supports `index.md` landing pages).
+1. **Curriculum section:** rewrite `docs/curriculum/index.md` as the 8-level roadmap; add `data-exploration-and-preprocessing/` as a section (`navigation.indexes` already supports `index.md` landing pages).
 2. **Chapter template:** extend the existing sample-chapter pattern to the 14-part standard rather than inventing a new layout.
 3. **Notebooks:** `pymdownx.snippets` (`base_path: [examples]`) can include `.py` excerpts from non-published sources with `check_paths: true`. Notebook source can live in a new top-level `notebooks/` (unpublished) and be linked as downloads.
 4. **Dataset:** put Mall Customers under a new `data/` (or `examples/`) directory; no dataset is present now.
@@ -103,8 +103,8 @@ Available and reusable: light/dark/system toggle; sidebar sections and section i
 3. **Structure (Phase 3), additive only:**
    ```
    docs/curriculum/index.md                  # roadmap (edit existing placeholder)
-   docs/curriculum/level-2/index.md          # Level 2 landing
-   docs/curriculum/level-2/01-introduction-to-data-exploration.md ... 12-dataset-preparation-for-clustering.md
+   docs/data-exploration-and-preprocessing/index.md          # Level 2 landing
+   docs/data-exploration-and-preprocessing/01-introduction-to-data-exploration.md ... 12-dataset-preparation-for-clustering.md
    docs/assets/level-2/                       # figures
    data/mall_customers.csv                    # dataset (pending C9)
    notebooks/level-2/NN-*.ipynb               # executable notebooks

@@ -190,9 +190,9 @@ Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, matplotl
 
 Gambar yang dihasilkan:
 
-![Histogram usia, pendapatan, dan skor belanja](../../assets/level-2/01-distribusi-fitur.png)
+![Histogram usia, pendapatan, dan skor belanja](../assets/level-2/01-distribusi-fitur.png)
 
-![Scatter plot pendapatan vs skor belanja](../../assets/level-2/01-scatter-income-spending.png)
+![Scatter plot pendapatan vs skor belanja](../assets/level-2/01-scatter-income-spending.png)
 
 ## Practical Examples
 

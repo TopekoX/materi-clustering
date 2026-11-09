@@ -1,0 +1,25 @@
+Pelanggan 1 sebagai titik di ruang 3 dimensi: [19. 15. 39.]
+Pelanggan 2 sebagai titik di ruang 3 dimensi: [21. 15. 81.]
+Jumlah dimensi (fitur): 3
+Jarak pelanggan 1 dan 2 memakai 1 fitur (Age): 2.00
+Jarak pelanggan 1 dan 2 memakai 2 fitur (Age, Annual Income (k$)): 2.00
+Jarak pelanggan 1 dan 2 memakai 3 fitur (Age, Annual Income (k$), Spending Score (1-100)): 42.05
+[gambar disimpan: docs/assets/level-3/06-ruang-1d-2d-3d.png]
+ dimensi  jarak_min  jarak_maks  jarak_rata2   kontras
+       1      0.000       0.985        0.327 29829.309
+       2      0.003       1.341        0.524   438.081
+       5      0.072       1.757        0.892    23.273
+      10      0.328       2.139        1.277     5.524
+      50      1.842       3.782        2.857     1.054
+     100      3.174       4.953        4.081     0.560
+     500      8.056      10.102        9.116     0.254
+    1000     11.949      13.859       12.909     0.160
+[gambar disimpan: docs/assets/level-3/06-efek-dimensi.png]
+Fitur acak yang ditambahkan | pelanggan yang tetangga terdekatnya berubah
+                          0 | 0 dari 200
+                          2 | 179 dari 200
+                         10 | 193 dari 200
+                         50 | 197 dari 200
+[gambar disimpan: docs/assets/level-3/06-skala-ruang-fitur.png]
+Rentang usia   : 52.0
+Rentang income : 122.0

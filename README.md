@@ -82,7 +82,7 @@ docs/                      konten yang dipublikasikan
   assets/vendor/mermaid/   Mermaid yang di-vendor
 ```
 
-Struktur berikut direncanakan untuk Level 2: `docs/curriculum/level-2/`, `data/`, `notebooks/level-2/`, dan `requirements-notebooks.txt`.
+Struktur berikut direncanakan untuk Level 2: `docs/data-exploration-and-preprocessing/`, `data/`, `notebooks/level-2/`, dan `requirements-notebooks.txt`.
 
 ## Menulis konten
 

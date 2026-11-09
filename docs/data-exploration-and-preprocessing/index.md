@@ -23,5 +23,5 @@ Level ini mengajarkan cara mengeksplorasi dan membersihkan data sampai siap di-*
 
 ## Prasyarat
 
-- Sudah membaca Level 1 ([Introduction to Machine Learning](../../introduction-to-machine-learning/index.md) dan [Types of Machine Learning](../../types-of-machine-learning/index.md)).
+- Sudah membaca Level 1 ([Introduction to Machine Learning](../introduction-to-machine-learning/index.md) dan [Types of Machine Learning](../types-of-machine-learning/index.md)).
 - Python dasar: variabel, fungsi, dan menjalankan skrip.

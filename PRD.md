@@ -42,7 +42,19 @@ Pendekatan belajar: Konsep → Fondasi Matematika → Implementasi Python → La
 11. Feature Selection and Feature Engineering
 12. Dataset Preparation for Clustering
 
-Level lain di luar lingkup sampai Level 2 disetujui.
+### Level 3 (disetujui dikerjakan, 2026-11-09): Fundamental Clustering — 7 bab
+
+1. Introduction to Clustering
+2. Understanding Clusters
+3. Centroid and Cluster Representation
+4. Similarity and Dissimilarity
+5. Distance Metrics
+6. Feature Space and Dimensionality
+7. Clustering Workflow
+
+Folder: `docs/fundamental-clustering/`. Algoritma clustering tidak dibahas mendalam (itu Level 4); K-Means hanya disebut sebagai alat bantu.
+
+Level 4–7 di luar lingkup sampai Level 3 disetujui.
 
 ## 4. Standar isi bab (wajib)
 
@@ -56,7 +68,7 @@ Judul bagian memakai istilah Inggris di atas atau padanan Indonesia yang konsist
 |---|---|
 | F1 | Seluruh materi berbahasa Indonesia; `theme.language: id`; `site_name: Materi Clustering`; `site_description: Clustering pada Machine Learning` |
 | F2 | Menggunakan template, tema, CSS, JS, dan navigasi yang ada; perubahan hanya aditif |
-| F3 | Level 2 berada di `docs/curriculum/level-2/` dengan halaman indeks dan 12 bab |
+| F3 | Setiap level berada langsung di bawah `docs/` dalam folder bernama sesuai topik; Level 2 di `docs/data-exploration-and-preprocessing/` dengan halaman indeks dan 12 bab |
 | F4 | Setiap bab mengikuti standar 14 bagian |
 | F5 | Rumus matematika memakai arithmatex/MathJax yang ada |
 | F6 | Setiap bab punya kode Python yang dapat dijalankan dan output yang diharapkan yang benar-benar dihasilkan dari kode tersebut |
@@ -76,8 +88,8 @@ Judul bagian memakai istilah Inggris di atas atau padanan Indonesia yang konsist
 
 ```
 mkdocs.yml                       (ubah hanya nav, identitas yang disetujui)
-docs/curriculum/index.md         roadmap 7 level (Level 1–7)
-docs/curriculum/level-2/         index.md + 01-…12-*.md
+docs/curriculum/index.md         roadmap 7 level (hanya indeks; level tidak ditaruh di sini)
+docs/data-exploration-and-preprocessing/         index.md + 01-…12-*.md
 docs/assets/level-2/             gambar
 data/mall_customers.csv          dataset
 notebooks/level-2/NN-*.ipynb     notebook (diunduh dari situs / dijalankan lokal)

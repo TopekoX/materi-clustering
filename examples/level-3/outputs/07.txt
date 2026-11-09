@@ -1,0 +1,45 @@
+Ukuran: (200, 5)
+Nilai kosong total: 0
+Baris duplikat: 0
+      CustomerID   Age  Annual Income (k$)  Spending Score (1-100)
+min          1.0  18.0                15.0                     1.0
+mean       100.5  38.8                60.6                    50.2
+max        200.0  70.0               137.0                    99.0
+Fitur untuk clustering: ['Annual Income (k$)', 'Spending Score (1-100)']
+Kolom yang tidak dipakai: ['CustomerID', 'Gender', 'Age']
+Rata-rata setelah skala: [0. 0.]
+Simpangan baku setelah skala: [1. 1.]
+k = 2: silhouette = 0.321
+k = 3: silhouette = 0.467
+k = 4: silhouette = 0.494
+k = 5: silhouette = 0.555
+k = 6: silhouette = 0.540
+k = 7: silhouette = 0.528
+k = 8: silhouette = 0.455
+k dengan silhouette tertinggi: 5
+[gambar disimpan: docs/assets/level-3/07-pemilihan-k.png]
+Cluster
+0    81
+1    39
+2    22
+3    35
+4    23
+Name: count, dtype: int64
+random_state = 0: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 1: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 2: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 3: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 4: kesamaan dengan hasil utama (ARI) = 1.000
+         Jumlah  Annual Income (k$)  Spending Score (1-100)   Age
+Cluster                                                          
+0            81                55.3                    49.5  42.7
+1            39                86.5                    82.1  32.7
+2            22                25.7                    79.4  25.3
+3            35                88.2                    17.1  41.1
+4            23                26.3                    20.9  45.2
+[gambar disimpan: docs/assets/level-3/07-segmentasi-akhir.png]
+Kelompok 0: 81 pelanggan (40.5%), pendapatan rata-rata 55.3, skor belanja rata-rata 49.5, usia rata-rata 42.7
+Kelompok 1: 39 pelanggan (19.5%), pendapatan rata-rata 86.5, skor belanja rata-rata 82.1, usia rata-rata 32.7
+Kelompok 2: 22 pelanggan (11.0%), pendapatan rata-rata 25.7, skor belanja rata-rata 79.4, usia rata-rata 25.3
+Kelompok 3: 35 pelanggan (17.5%), pendapatan rata-rata 88.2, skor belanja rata-rata 17.1, usia rata-rata 41.1
+Kelompok 4: 23 pelanggan (11.5%), pendapatan rata-rata 26.3, skor belanja rata-rata 20.9, usia rata-rata 45.2

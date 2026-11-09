@@ -1,0 +1,22 @@
+Bentuk XA: (150, 2) | Bentuk XB: (150, 2)
+Jumlah anggota per kelompok (A): [50 50 50]
+[gambar disimpan: docs/assets/level-3/02-terpisah-vs-tumpang-tindih.png]
+Kekompakan dataset A: [0.68 0.72 0.79]
+Kekompakan dataset B: [2.05 2.16 2.38]
+Jarak antar pusat dataset A: {(0, 1): 6.03, (0, 2): 5.95, (1, 2): 5.69}
+  Jarak pusat terdekat / rata-rata kekompakan = 7.76
+Jarak antar pusat dataset B: {(0, 1): 6.08, (0, 2): 6.2, (1, 2): 5.41}
+  Jarak pusat terdekat / rata-rata kekompakan = 2.46
+Jarak tetangga terdekat, kelompok padat  : 0.063
+Jarak tetangga terdekat, kelompok jarang : 0.422
+[gambar disimpan: docs/assets/level-3/02-bentuk-dan-ukuran.png]
+Titik uji: [2.79 0.36]
+Jarak titik ke pusat tiap kelompok: [3.08 3.04 4.66]
+Kelompok terdekat: 1
+[gambar disimpan: docs/assets/level-3/02-keanggotaan-batas.png]
+   Jumlah  Kekompakan
+0      81        10.1
+1      39        16.3
+2      22        11.6
+3      35        16.3
+4      23        14.2
