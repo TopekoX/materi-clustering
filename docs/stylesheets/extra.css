@@ -53,3 +53,9 @@
     scroll-behavior: auto !important;
   }
 }
+
+/* Sembunyikan info repositori GitHub di header dan drawer */
+.md-header__source,
+.md-nav__source {
+  display: none;
+}

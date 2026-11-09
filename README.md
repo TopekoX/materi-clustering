@@ -8,7 +8,6 @@ Pendekatan belajar: konsep → fondasi matematika → implementasi Python → la
 
 | Level | Topik | Status |
 |---|---|---|
-| 0 | Python Fundamentals | Direncanakan |
 | 1 | Machine Learning Fundamentals | Direncanakan |
 | 2 | Data Exploration and Preprocessing | Dalam penyusunan |
 | 3 | Fundamental Clustering | Direncanakan |
@@ -46,6 +45,29 @@ mkdocs build --strict
 ```
 
 Persamaan matematika dirender oleh MathJax dari CDN (`cdn.jsdelivr.net`), sehingga memerlukan koneksi internet.
+
+## Deploy ke GitHub Pages
+
+1. Pastikan repositori GitHub sudah dibuat dan `origin` mengarah ke sana:
+
+    ```bash
+    git remote -v
+    git remote set-url origin git@github.com:TopekoX/materi-clustering.git
+    ```
+
+2. Pastikan `site_url` dan `repo_url` di `mkdocs.yml` sesuai:
+   `https://topekox.github.io/materi-clustering/` dan `https://github.com/topekox/materi-clustering`.
+3. Push kode ke branch `main`, lalu aktifkan lingkungan virtual dan jalankan:
+
+    ```bash
+    mkdocs gh-deploy --strict
+    ```
+
+    Perintah ini membangun situs dan mendorong hasilnya ke branch `gh-pages`. Build gagal bila ada tautan atau anchor yang rusak.
+4. Di GitHub buka **Settings → Pages → Build and deployment → Deploy from a branch**, pilih branch `gh-pages` dan folder `/ (root)`, lalu simpan.
+5. Situs tersedia di `site_url` setelah beberapa menit.
+
+> **Catatan:** `mkdocs gh-deploy` menimpa isi branch `gh-pages` setiap kali dijalankan. Jangan mengedit branch itu secara manual. Jalankan hanya setelah `mkdocs build --strict` lulus.
 
 ## Struktur proyek
 

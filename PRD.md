@@ -19,7 +19,6 @@ Pendekatan belajar: Konsep → Fondasi Matematika → Implementasi Python → La
 
 | Level | Topik |
 |---|---|
-| 0 | Python Fundamentals |
 | 1 | Machine Learning Fundamentals |
 | 2 | Data Exploration and Preprocessing **(lingkup awal)** |
 | 3 | Fundamental Clustering |
@@ -77,7 +76,7 @@ Judul bagian memakai istilah Inggris di atas atau padanan Indonesia yang konsist
 
 ```
 mkdocs.yml                       (ubah hanya nav, identitas yang disetujui)
-docs/curriculum/index.md         roadmap 8 level
+docs/curriculum/index.md         roadmap 7 level (Level 1–7)
 docs/curriculum/level-2/         index.md + 01-…12-*.md
 docs/assets/level-2/             gambar
 data/mall_customers.csv          dataset

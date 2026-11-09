@@ -19,7 +19,6 @@ theme:
   language: id
   font: false # system fonts; no Google Fonts request
   features:
-    - navigation.sections
     - navigation.indexes
     - navigation.path # breadcrumbs
     - navigation.footer # previous / next links
@@ -57,6 +56,47 @@ theme:
 nav:
   - Beranda: index.md
   - Kurikulum: curriculum/index.md
+  - Level 1 — Machine Learning Fundamentals:
+      - Bab 1 — Introduction to Machine Learning:
+          - introduction-to-machine-learning/index.md
+          - Pendahuluan: introduction-to-machine-learning/01-introduction.md
+          - Definisi Machine Learning: introduction-to-machine-learning/02-definition-of-machine-learning.md
+          - AI, ML, dan Deep Learning: introduction-to-machine-learning/03-ai-ml-deep-learning.md
+          - Pemrograman Tradisional vs ML: introduction-to-machine-learning/04-traditional-programming-vs-ml.md
+          - Bagaimana ML Bekerja: introduction-to-machine-learning/05-how-machine-learning-works.md
+          - Komponen Dasar: introduction-to-machine-learning/06-basic-components.md
+          - Penerapan di Dunia Nyata: introduction-to-machine-learning/07-real-world-applications.md
+          - Workflow Machine Learning: introduction-to-machine-learning/08-machine-learning-workflow.md
+          - Jenis Masalah ML: introduction-to-machine-learning/09-machine-learning-problems.md
+          - Peran ML dalam Clustering: introduction-to-machine-learning/10-role-of-ml-in-clustering.md
+          - Praktik Pertama: introduction-to-machine-learning/11-hands-on-introduction.md
+          - Latihan: introduction-to-machine-learning/12-exercises.md
+          - Ringkasan: introduction-to-machine-learning/13-summary.md
+          - Referensi: introduction-to-machine-learning/14-references.md
+      - Bab 2 — Types of Machine Learning:
+          - types-of-machine-learning/index.md
+          - Pendahuluan: types-of-machine-learning/01-introduction.md
+          - Labeled dan Unlabeled Data: types-of-machine-learning/02-labeled-and-unlabeled-data.md
+          - Supervised Learning: types-of-machine-learning/03-supervised-learning.md
+          - Classification: types-of-machine-learning/04-classification.md
+          - Regression: types-of-machine-learning/05-regression.md
+          - Unsupervised Learning: types-of-machine-learning/06-unsupervised-learning.md
+          - Clustering: types-of-machine-learning/07-clustering.md
+          - Dimensionality Reduction: types-of-machine-learning/08-dimensionality-reduction.md
+          - Association Rule Learning: types-of-machine-learning/09-association-rule-learning.md
+          - Semi-Supervised Learning: types-of-machine-learning/10-semi-supervised-learning.md
+          - Reinforcement Learning: types-of-machine-learning/11-reinforcement-learning.md
+          - Perbandingan Jenis ML: types-of-machine-learning/12-comparison-of-learning-types.md
+          - Memilih Pendekatan ML: types-of-machine-learning/13-choosing-machine-learning-approach.md
+          - Praktik Supervised Learning: types-of-machine-learning/14-python-supervised-learning.md
+          - Praktik Unsupervised Learning: types-of-machine-learning/15-python-unsupervised-learning.md
+          - Miskonsepsi Umum: types-of-machine-learning/16-common-misconceptions.md
+          - Latihan: types-of-machine-learning/17-exercises.md
+          - Ringkasan: types-of-machine-learning/18-summary.md
+          - Referensi: types-of-machine-learning/19-references.md
+  - Level 2 — Data Exploration and Preprocessing:
+      - curriculum/level-2/index.md
+      - Bab 1 — Introduction to Data Exploration: curriculum/level-2/01-introduction-to-data-exploration.md
 
 # --- Plugins ----------------------------------------------------------------
 plugins:

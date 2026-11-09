@@ -8,7 +8,7 @@ Setiap bab mengikuti alur: konsep, fondasi matematika, implementasi Python, lati
 
 - :material-school: **[Kurikulum](curriculum/index.md)**
 
-    Peta belajar dari Level 0 sampai Level 7.
+    Peta belajar dari Level 1 sampai Level 7.
 
 </div>
 
