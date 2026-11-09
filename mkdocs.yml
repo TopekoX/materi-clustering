@@ -1,0 +1,120 @@
+# ---------------------------------------------------------------------------
+# Reusable MkDocs + Material template.
+# To start a new subject, edit: site identity, `nav`, and (optionally) palette.
+# ---------------------------------------------------------------------------
+
+# --- Site identity (EDIT PER SUBJECT) --------------------------------------
+site_name: Materi Clustering
+site_description: Clustering pada Machine Learning
+# Canonical URL. For GitHub Pages: https://<user>.github.io/<repo>/
+site_url: https://topekox.github.io/materi-clustering/
+# Repository + "edit this page" links. Remove these three lines if not wanted.
+repo_url: https://github.com/topekox/materi-clustering
+repo_name: TopekoX/materi-clustering
+edit_uri: edit/main/docs/
+
+# --- Theme (shared) --------------------------------------------------------
+theme:
+  name: material
+  language: id
+  font: false # system fonts; no Google Fonts request
+  features:
+    - navigation.sections
+    - navigation.indexes
+    - navigation.path # breadcrumbs
+    - navigation.footer # previous / next links
+    - navigation.top
+    - navigation.tracking
+    - toc.follow
+    - search.highlight
+    - search.suggest
+    - content.code.copy
+    - content.code.annotate
+    - content.tabs.link
+    - content.action.edit
+  # Native three-state switcher: System -> Light -> Dark.
+  palette:
+    - media: "(prefers-color-scheme)"
+      toggle:
+        icon: material/brightness-auto
+        name: "Theme: system (click for light)"
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: "Theme: light (click for dark)"
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: "Theme: dark (click for system)"
+
+# --- Navigation (EDIT PER SUBJECT) -----------------------------------------
+nav:
+  - Beranda: index.md
+  - Kurikulum: curriculum/index.md
+
+# --- Plugins ----------------------------------------------------------------
+plugins:
+  - search
+
+# --- Markdown extensions (shared) ------------------------------------------
+markdown_extensions:
+  - admonition
+  - attr_list
+  - def_list
+  - footnotes
+  - md_in_html
+  - tables
+  - toc:
+      permalink: true
+  - pymdownx.arithmatex:
+      generic: true
+  - pymdownx.betterem
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.keys
+  - pymdownx.mark
+  - pymdownx.snippets:
+      base_path: [examples]
+      check_paths: true
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+# --- Custom assets (shared) -------------------------------------------------
+extra_css:
+  - stylesheets/extra.css
+extra_javascript:
+  # Vendored, pinned Mermaid 11.17.2 (docs/assets/vendor/mermaid/VERSION.txt).
+  # Material uses this global instead of fetching Mermaid from unpkg.
+  # Keep it BEFORE the MathJax CDN script so a slow CDN cannot delay diagrams.
+  - assets/vendor/mermaid/mermaid.min.js
+  - javascripts/mermaid-config.js
+  - javascripts/mathjax.js
+  # Pinned MathJax; requires network access (CDN). See README for vendoring.
+  - https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js
+
+# --- Validation: broken links/anchors fail `mkdocs build --strict` ----------
+validation:
+  omitted_files: warn
+  absolute_links: warn
+  unrecognized_links: warn
+  anchors: warn

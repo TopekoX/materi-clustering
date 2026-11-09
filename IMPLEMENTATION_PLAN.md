@@ -1,0 +1,37 @@
+# IMPLEMENTATION PLAN — Materi Clustering (Level 2)
+
+Aturan: kerjakan bertahap, validasi tiap fase sebelum lanjut, laporkan file yang berubah dan hasil validasi. Tidak ada commit/push/deploy tanpa instruksi.
+
+| Fase | Isi | Keluaran | Gerbang validasi |
+|---|---|---|---|
+| 1 | Audit repositori | `PROJECT_AUDIT.md` | Disetujui ✅ |
+| 2 | Perencanaan | `PRD.md`, `IMPLEMENTATION_PLAN.md`, `CLAUDE.md`; identitas situs (`site_name`, `site_description`, `language: id`); PRD lama → `PRD_TEMPLATE.md` | Review pengguna |
+| 0* | Prasyarat lingkungan | `.venv` (docs) dan venv notebook; baseline `mkdocs build --strict` | Build baseline lulus; paket sains terpasang |
+| 3 | Arsitektur konten | Struktur `docs/curriculum/level-2/`, nav, `_chapter-template` (satu format bab) | Build strict lulus dengan bab contoh |
+| 4 | Pengembangan bab | Satu bab per iterasi (01 → 12) | Per bab: kode dijalankan, output cocok, build strict, review |
+| 5 | Notebook | `notebooks/level-2/NN-*.ipynb` + `data/mall_customers.csv` | `jupyter nbconvert --execute` tanpa error |
+| 6 | Integrasi MkDocs | Nav final, tautan unduh notebook, roadmap `curriculum/index.md` | Semua fitur lama tetap berfungsi |
+| 7 | QA | Konsistensi, eksekusi kode, dataset, tautan, gambar, rumus, nav, build | Daftar periksa lulus |
+| 8 | Rilis | Catatan rilis, isu tersisa | Persetujuan pengguna |
+
+\*Fase 0 dijalankan segera setelah Fase 2 disetujui; ia prasyarat Fase 3 dan seterusnya.
+
+## Keputusan yang masih terbuka
+
+1. **Dataset Mall Customers**: CSV milik pengguna, unduhan Kaggle (cek lisensi), atau replika sintetis yang diberi label jelas. Dibutuhkan sebelum Fase 5; bab Fase 4 yang memakai data menunggu keputusan ini.
+2. **Git `origin`**: arahkan ulang ke `materi-clustering`? (default: tidak diubah).
+3. **Notebook**: default file unduhan; `mkdocs-jupyter` hanya jika disetujui.
+4. **Bahasa judul bagian bab**: Inggris persis seperti standar (default) atau padanan Indonesia.
+
+## Rencana per bab (Fase 4)
+
+Urutan sama dengan daftar di `PRD.md`. Setiap iterasi: tulis bab → tulis kode → jalankan → tempel output nyata → build strict → laporkan → tunggu persetujuan sebelum bab berikutnya.
+
+## Risiko dan mitigasi
+
+| Risiko | Mitigasi |
+|---|---|
+| Wheel Python 3.14 untuk paket sains | Verifikasi di Fase 0; bila gagal, gunakan Python 3.12/3.13 untuk venv notebook |
+| MathJax butuh jaringan | Diterima dan didokumentasikan |
+| Output yang ditulis tidak cocok dengan eksekusi | Output hanya disalin dari eksekusi nyata |
+| Dataset tak tersedia/lisensi | Keputusan pengguna sebelum Fase 5 |
