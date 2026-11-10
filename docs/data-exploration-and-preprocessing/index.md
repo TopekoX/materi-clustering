@@ -8,18 +8,18 @@ Level ini mengajarkan cara mengeksplorasi dan membersihkan data sampai siap di-*
 
 | Bab | Judul | Status |
 |---|---|---|
-| 1 | [Introduction to Data Exploration](01-introduction-to-data-exploration.md) | Siap ditinjau |
-| 2 | [Understanding Data Types](02-understanding-data-types.md) | Siap ditinjau |
-| 3 | [Descriptive Statistics](03-descriptive-statistics.md) | Siap ditinjau |
-| 4 | [Exploratory Data Analysis](04-exploratory-data-analysis.md) | Siap ditinjau |
-| 5 | [Missing Values Analysis](05-missing-values-analysis.md) | Siap ditinjau |
-| 6 | [Duplicate Data Analysis](06-duplicate-data-analysis.md) | Siap ditinjau |
-| 7 | [Outlier Detection and Handling](07-outlier-detection-and-handling.md) | Siap ditinjau |
-| 8 | [Data Cleaning](08-data-cleaning.md) | Siap ditinjau |
-| 9 | [Data Transformation and Encoding](09-data-transformation-and-encoding.md) | Siap ditinjau |
-| 10 | [Feature Scaling](10-feature-scaling.md) | Siap ditinjau |
-| 11 | [Feature Selection and Feature Engineering](11-feature-selection-and-feature-engineering.md) | Siap ditinjau |
-| 12 | [Dataset Preparation for Clustering](12-dataset-preparation-for-clustering.md) | Siap ditinjau |
+| 1 | [Introduction to Data Exploration](01-introduction-to-data-exploration.md) | Selesai |
+| 2 | [Understanding Data Types](02-understanding-data-types.md) | Selesai |
+| 3 | [Descriptive Statistics](03-descriptive-statistics.md) | Selesai |
+| 4 | [Exploratory Data Analysis](04-exploratory-data-analysis.md) | Selesai |
+| 5 | [Missing Values Analysis](05-missing-values-analysis.md) | Selesai |
+| 6 | [Duplicate Data Analysis](06-duplicate-data-analysis.md) | Selesai |
+| 7 | [Outlier Detection and Handling](07-outlier-detection-and-handling.md) | Selesai |
+| 8 | [Data Cleaning](08-data-cleaning.md) | Selesai |
+| 9 | [Data Transformation and Encoding](09-data-transformation-and-encoding.md) | Selesai |
+| 10 | [Feature Scaling](10-feature-scaling.md) | Selesai |
+| 11 | [Feature Selection and Feature Engineering](11-feature-selection-and-feature-engineering.md) | Selesai |
+| 12 | [Dataset Preparation for Clustering](12-dataset-preparation-for-clustering.md) | Selesai |
 
 ## Prasyarat
 

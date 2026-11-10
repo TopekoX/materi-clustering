@@ -11,13 +11,13 @@ Bab-bab memakai **data sintetis kecil** (`make_blobs`, `make_moons`, dan sejenis
 
 | Bab | Judul | Status |
 |---|---|---|
-| 1 | [Introduction to Clustering Algorithms](01-introduction-to-clustering-algorithms.md) | Siap ditinjau |
-| 2 | [K-Means Clustering](02-k-means-clustering.md) | Siap ditinjau |
-| 3 | [Hierarchical Clustering](03-hierarchical-clustering.md) | Siap ditinjau |
-| 4 | [DBSCAN Clustering](04-dbscan-clustering.md) | Siap ditinjau |
-| 5 | [Gaussian Mixture Models (GMM)](05-gaussian-mixture-models.md) | Siap ditinjau |
-| 6 | [Mean Shift Clustering](06-mean-shift-clustering.md) | Siap ditinjau |
-| 7 | [Comparison of Clustering Algorithms](07-comparison-of-clustering-algorithms.md) | Siap ditinjau |
+| 1 | [Introduction to Clustering Algorithms](01-introduction-to-clustering-algorithms.md) | Selesai |
+| 2 | [K-Means Clustering](02-k-means-clustering.md) | Selesai |
+| 3 | [Hierarchical Clustering](03-hierarchical-clustering.md) | Selesai |
+| 4 | [DBSCAN Clustering](04-dbscan-clustering.md) | Selesai |
+| 5 | [Gaussian Mixture Models (GMM)](05-gaussian-mixture-models.md) | Selesai |
+| 6 | [Mean Shift Clustering](06-mean-shift-clustering.md) | Selesai |
+| 7 | [Comparison of Clustering Algorithms](07-comparison-of-clustering-algorithms.md) | Selesai |
 
 ## Prasyarat
 

@@ -283,7 +283,7 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 
 **Penjelasan baris demi baris:**
 
-- `RISKY` adalah daftar kata yang cenderung melebih-lebihkan. `NEGATIONS` adalah kata penyangkal.
+- `RISKY` adalah daftar kata yang cenderung melebih-lebihkan. `NEGATIONS` adalah kata penyangkal. Pencocokan memakai kata utuh (`RISKY_PATTERNS`), sehingga "dipastikan" tidak dianggap "pasti", dan kata penyangkal dikenali walau menempel pada tanda baca ("tidak,").
 - `re.split(r"(?<=[.!?])\s+", text)` memecah teks menjadi kalimat: memotong pada spasi yang didahului titik, tanda tanya, atau tanda seru.
 - Untuk tiap kalimat, `hits` adalah kata berisiko yang muncul. Kalimat ditandai hanya bila ada `hits` **dan** tidak ada kata penyangkal di kalimat itu. Dengan begitu "tidak membuktikan" tidak ditandai.
 - `draft` adalah contoh draf yang sengaja buruk. Fungsi menandai kalimat yang berlebihan, dan melewatkan kalimat yang memakai kata penyangkal.
@@ -368,7 +368,7 @@ Gambar yang dihasilkan:
 
 **2. Deskripsi data (dari file, bukan diketik).** 200 pelanggan, lima kolom, **tidak ada nilai kosong**, 112 perempuan dan 88 laki-laki, pendapatan 15 sampai 137 k$, skor belanja 1 sampai 99, umur 18 sampai 70 tahun.
 
-**3. Pemeriksaan silang uji permutasi cocok dengan Bab 7.** Selisih rata-rata umur antar kelompok **19,945 tahun**, batas acak 95% **9,890**, p = **0,0005**, sama persis dengan Bab 7. Pernyataan `assert` juga lolos: ukuran kelompok hasil bangun ulang (81, 39, 35, 23, 22) sama dengan yang tersimpan.
+**3. Pemeriksaan silang uji permutasi cocok dengan Bab 7.** Selisih rata-rata umur antar kelompok **19,945 tahun**, batas acak 95% **9,890**, p ≤ **0,0005**, sama persis dengan Bab 7. Angka 0,0005 adalah batas bawah uji permutasi 2000 kali (1/2001): tidak satu pun permutasi acak mencapai selisih teramati, sehingga p dilaporkan sebagai batas, bukan nilai pasti. Pernyataan `assert` juga lolos: ukuran kelompok hasil bangun ulang (81, 39, 35, 23, 22) sama dengan yang tersimpan.
 
 **4. Tabel hasil.** Tabel menurut K dan tabel profil dicetak dalam format yang akan masuk laporan, dengan koma desimal (misalnya `0,555`). Perhatikan bahwa kolom "Kestabilan (minimum)" ikut dilaporkan, termasuk nilai negatif -0,013 pada K = 2, supaya sebaran terlihat.
 
@@ -381,7 +381,7 @@ Gambar yang dihasilkan:
 
 Silhouette dan Davies-Bouldin sama-sama memilih K-Means, tetapi ARI memilih DBSCAN dengan selisih besar. Metrik internal mengukur kekompakan dan keterpisahan berdasarkan jarak, sehingga lebih menyukai kelompok yang bulat dan padat. Dua bulan sabit yang saling melingkar tidak memenuhi gambaran itu, dan K-Means membelahnya menjadi dua bagian yang kompak tetapi salah. ARI membandingkan dengan label acuan, dan di sini DBSCAN mengikuti bentuk yang sebenarnya. Laporan yang baik menyajikan **ketiganya**, menjelaskan alasannya, dan tidak memilih salah satu secara diam-diam.
 
-**6. Pemeriksa kata berlebihan.** Dari draf buruk, tiga kalimat ditandai: "membuktikan ... benar-benar ada", "pasti boros", dan "pilihan terbaik". Kalimat keempat ("Kelompok C tidak berbelanja banyak.") lolos karena tidak berisi kata berisiko. Pada **laporan yang dihasilkan**, kalimat berisiko yang ditandai adalah **0** dari 61 baris dan 617 kata.
+**6. Pemeriksa kata berlebihan.** Dari draf buruk, tiga kalimat ditandai: "membuktikan ... benar-benar ada", "pasti boros", dan "pilihan terbaik". Kalimat keempat ("Kelompok C tidak berbelanja banyak.") lolos karena tidak berisi kata berisiko. Pada **laporan yang dihasilkan**, kalimat berisiko yang ditandai adalah **0** dari 61 baris dan 633 kata.
 
 **7. Laporan dan gambar tersimpan.** `10_report.md` (contoh lengkap di bawah) dan `10_config.json`.
 
@@ -469,7 +469,7 @@ Beberapa hal yang patut dicatat dari laporan ini:
 - Bedakan **temuan** (diamati), **tafsiran** (alasan dari temuan), dan **dugaan** (belum diuji), dan tulis dengan bahasa yang sesuai.
 - **Jangan menyembunyikan hasil yang bertentangan.** Pada data bulan sabit, Silhouette (0,492 versus 0,389) dan Davies-Bouldin (0,816 versus 1,016) memilih K-Means, tetapi ARI memilih DBSCAN (0,960 versus 0,486). Silhouette dan ARI memilih algoritma berbeda pada 4 dari 6 dataset benchmark.
 - **Hindari klaim berlebihan**: bukan "membuktikan", bukan "terbaik", bukan "menyebabkan". Tulis kondisi dan batasnya.
-- **Satu sumber kebenaran:** laporan dibuat oleh kode dari file hasil. Pada eksperimen Mall Customers, ukuran kelompok, uji permutasi (19,945 tahun, p = 0,0005), dan sidik jari data cocok dengan Bab 7 dan 9.
+- **Satu sumber kebenaran:** laporan dibuat oleh kode dari file hasil. Pada eksperimen Mall Customers, ukuran kelompok, uji permutasi (19,945 tahun, p ≤ 0,0005), dan sidik jari data cocok dengan Bab 7 dan 9.
 - Pemeriksa kata hanya **heuristik**. Ia menandai "menyebabkan", tetapi melewatkan kalimat berlebihan yang memakai kata lain atau tertipu kata penyangkal.
 - Level 7 melanjutkan ke makalah penuh: tinjauan pustaka, celah riset, dan publikasi.
 

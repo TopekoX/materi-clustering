@@ -11,16 +11,16 @@ Bab-bab memakai **data sintetis** (`make_blobs`, `make_moons`, dan sejenisnya) d
 
 | Bab | Judul | Status |
 |---|---|---|
-| 1 | [Introduction to Clustering Experiments](01-introduction-to-clustering-experiments.md) | Siap ditinjau |
-| 2 | [Experimental Design and Configuration](02-experimental-design-and-configuration.md) | Siap ditinjau |
-| 3 | [Hyperparameter Tuning and Optimization](03-hyperparameter-tuning-and-optimization.md) | Siap ditinjau |
-| 4 | [Algorithm Comparison and Benchmarking](04-algorithm-comparison-and-benchmarking.md) | Siap ditinjau |
-| 5 | [Feature Selection and Impact Analysis](05-feature-selection-and-impact-analysis.md) | Siap ditinjau |
-| 6 | [Dimensionality Reduction and PCA](06-dimensionality-reduction-and-pca.md) | Siap ditinjau |
-| 7 | [Cluster Interpretation and Profiling](07-cluster-interpretation-and-profiling.md) | Siap ditinjau |
-| 8 | [Cluster Visualization and Analysis](08-cluster-visualization-and-analysis.md) | Siap ditinjau |
-| 9 | [Cluster Stability and Reproducibility](09-cluster-stability-and-reproducibility.md) | Siap ditinjau |
-| 10 | [Experimental Reporting and Interpretation](10-experimental-reporting-and-interpretation.md) | Siap ditinjau |
+| 1 | [Introduction to Clustering Experiments](01-introduction-to-clustering-experiments.md) | Selesai |
+| 2 | [Experimental Design and Configuration](02-experimental-design-and-configuration.md) | Selesai |
+| 3 | [Hyperparameter Tuning and Optimization](03-hyperparameter-tuning-and-optimization.md) | Selesai |
+| 4 | [Algorithm Comparison and Benchmarking](04-algorithm-comparison-and-benchmarking.md) | Selesai |
+| 5 | [Feature Selection and Impact Analysis](05-feature-selection-and-impact-analysis.md) | Selesai |
+| 6 | [Dimensionality Reduction and PCA](06-dimensionality-reduction-and-pca.md) | Selesai |
+| 7 | [Cluster Interpretation and Profiling](07-cluster-interpretation-and-profiling.md) | Selesai |
+| 8 | [Cluster Visualization and Analysis](08-cluster-visualization-and-analysis.md) | Selesai |
+| 9 | [Cluster Stability and Reproducibility](09-cluster-stability-and-reproducibility.md) | Selesai |
+| 10 | [Experimental Reporting and Interpretation](10-experimental-reporting-and-interpretation.md) | Selesai |
 
 ## Prasyarat
 

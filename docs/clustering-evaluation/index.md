@@ -11,14 +11,14 @@ Bab-bab memakai **data sintetis** (`make_blobs`, `make_moons`, `make_circles`) d
 
 | Bab | Judul | Status |
 |---|---|---|
-| 1 | [Introduction to Clustering Evaluation](01-introduction-to-clustering-evaluation.md) | Siap ditinjau |
-| 2 | [Internal Clustering Evaluation](02-internal-clustering-evaluation.md) | Siap ditinjau |
-| 3 | [Inertia and WCSS](03-inertia-and-wcss.md) | Siap ditinjau |
-| 4 | [Elbow Method](04-elbow-method.md) | Siap ditinjau |
-| 5 | [Silhouette Score](05-silhouette-score.md) | Siap ditinjau |
-| 6 | [Davies-Bouldin Index](06-davies-bouldin-index.md) | Siap ditinjau |
-| 7 | [Calinski-Harabasz Index](07-calinski-harabasz-index.md) | Siap ditinjau |
-| 8 | [External Evaluation and Metric Comparison](08-external-evaluation-and-metric-comparison.md) | Siap ditinjau |
+| 1 | [Introduction to Clustering Evaluation](01-introduction-to-clustering-evaluation.md) | Selesai |
+| 2 | [Internal Clustering Evaluation](02-internal-clustering-evaluation.md) | Selesai |
+| 3 | [Inertia and WCSS](03-inertia-and-wcss.md) | Selesai |
+| 4 | [Elbow Method](04-elbow-method.md) | Selesai |
+| 5 | [Silhouette Score](05-silhouette-score.md) | Selesai |
+| 6 | [Davies-Bouldin Index](06-davies-bouldin-index.md) | Selesai |
+| 7 | [Calinski-Harabasz Index](07-calinski-harabasz-index.md) | Selesai |
+| 8 | [External Evaluation and Metric Comparison](08-external-evaluation-and-metric-comparison.md) | Selesai |
 
 ## Prasyarat
 

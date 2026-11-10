@@ -6,19 +6,19 @@ Kurikulum terdiri dari tujuh level. Setiap level berisi beberapa bab, dan setiap
 
 | Level | Topik | Bab | Status |
 |---|---|---|---|
-| 1 | Machine Learning Fundamentals | 2 | Siap ditinjau |
-| 2 | Data Exploration and Preprocessing | 12 | Siap ditinjau |
-| 3 | Fundamental Clustering | 7 | Siap ditinjau |
-| 4 | Clustering Algorithms | 7 | Siap ditinjau |
-| 5 | Clustering Evaluation | 8 | Siap ditinjau |
-| 6 | Experimentation and Interpretation | 10 | Siap ditinjau |
-| 7 | Research Project | 10 | Siap ditinjau |
+| 1 | Machine Learning Fundamentals | 2 | Selesai |
+| 2 | Data Exploration and Preprocessing | 12 | Selesai |
+| 3 | Fundamental Clustering | 7 | Selesai |
+| 4 | Clustering Algorithms | 7 | Selesai |
+| 5 | Clustering Evaluation | 8 | Selesai |
+| 6 | Experimentation and Interpretation | 10 | Selesai |
+| 7 | Research Project | 10 | Selesai |
 
 ## Level 1 — Machine Learning Fundamentals
 
 ### Bab 1 — [Introduction to Machine Learning](../introduction-to-machine-learning/index.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Pendahuluan](../introduction-to-machine-learning/01-introduction.md)
 2. [Definisi Machine Learning](../introduction-to-machine-learning/02-definition-of-machine-learning.md)
@@ -37,7 +37,7 @@ Status: siap ditinjau.
 
 ### Bab 2 — [Types of Machine Learning](../types-of-machine-learning/index.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Pendahuluan](../types-of-machine-learning/01-introduction.md)
 2. [Labeled dan Unlabeled Data](../types-of-machine-learning/02-labeled-and-unlabeled-data.md)
@@ -63,7 +63,7 @@ Status: siap ditinjau.
 
 ### Bab 1 — [Introduction to Data Exploration](../data-exploration-and-preprocessing/01-introduction-to-data-exploration.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/01-introduction-to-data-exploration.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/01-introduction-to-data-exploration.md#introduction)
@@ -82,7 +82,7 @@ Status: siap ditinjau.
 
 ### Bab 2 — [Understanding Data Types](../data-exploration-and-preprocessing/02-understanding-data-types.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/02-understanding-data-types.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/02-understanding-data-types.md#introduction)
@@ -101,7 +101,7 @@ Status: siap ditinjau.
 
 ### Bab 3 — [Descriptive Statistics](../data-exploration-and-preprocessing/03-descriptive-statistics.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/03-descriptive-statistics.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/03-descriptive-statistics.md#introduction)
@@ -120,7 +120,7 @@ Status: siap ditinjau.
 
 ### Bab 4 — [Exploratory Data Analysis](../data-exploration-and-preprocessing/04-exploratory-data-analysis.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/04-exploratory-data-analysis.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/04-exploratory-data-analysis.md#introduction)
@@ -139,7 +139,7 @@ Status: siap ditinjau.
 
 ### Bab 5 — [Missing Values Analysis](../data-exploration-and-preprocessing/05-missing-values-analysis.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/05-missing-values-analysis.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/05-missing-values-analysis.md#introduction)
@@ -158,7 +158,7 @@ Status: siap ditinjau.
 
 ### Bab 6 — [Duplicate Data Analysis](../data-exploration-and-preprocessing/06-duplicate-data-analysis.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/06-duplicate-data-analysis.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/06-duplicate-data-analysis.md#introduction)
@@ -177,7 +177,7 @@ Status: siap ditinjau.
 
 ### Bab 7 — [Outlier Detection and Handling](../data-exploration-and-preprocessing/07-outlier-detection-and-handling.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/07-outlier-detection-and-handling.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/07-outlier-detection-and-handling.md#introduction)
@@ -196,7 +196,7 @@ Status: siap ditinjau.
 
 ### Bab 8 — [Data Cleaning](../data-exploration-and-preprocessing/08-data-cleaning.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/08-data-cleaning.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/08-data-cleaning.md#introduction)
@@ -215,7 +215,7 @@ Status: siap ditinjau.
 
 ### Bab 9 — [Data Transformation and Encoding](../data-exploration-and-preprocessing/09-data-transformation-and-encoding.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/09-data-transformation-and-encoding.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/09-data-transformation-and-encoding.md#introduction)
@@ -234,7 +234,7 @@ Status: siap ditinjau.
 
 ### Bab 10 — [Feature Scaling](../data-exploration-and-preprocessing/10-feature-scaling.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/10-feature-scaling.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/10-feature-scaling.md#introduction)
@@ -253,7 +253,7 @@ Status: siap ditinjau.
 
 ### Bab 11 — [Feature Selection and Feature Engineering](../data-exploration-and-preprocessing/11-feature-selection-and-feature-engineering.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/11-feature-selection-and-feature-engineering.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/11-feature-selection-and-feature-engineering.md#introduction)
@@ -272,7 +272,7 @@ Status: siap ditinjau.
 
 ### Bab 12 — [Dataset Preparation for Clustering](../data-exploration-and-preprocessing/12-dataset-preparation-for-clustering.md)
 
-Status: siap ditinjau.
+Status: selesai.
 
 1. [Learning Objectives](../data-exploration-and-preprocessing/12-dataset-preparation-for-clustering.md#learning-objectives)
 2. [Introduction](../data-exploration-and-preprocessing/12-dataset-preparation-for-clustering.md#introduction)
@@ -291,7 +291,7 @@ Status: siap ditinjau.
 
 ## [Level 3 — Fundamental Clustering](../fundamental-clustering/index.md)
 
-Fondasi clustering sebelum mempelajari algoritma. Tujuh bab sudah siap ditinjau.
+Fondasi clustering sebelum mempelajari algoritma. Tujuh bab sudah selesai.
 
 1. [Introduction to Clustering](../fundamental-clustering/01-introduction-to-clustering.md)
 2. [Understanding Clusters](../fundamental-clustering/02-understanding-clusters.md)
@@ -303,7 +303,7 @@ Fondasi clustering sebelum mempelajari algoritma. Tujuh bab sudah siap ditinjau.
 
 ## [Level 4 — Clustering Algorithms](../clustering-algorithms/index.md)
 
-Lima algoritma clustering inti dan perbandingannya. Tujuh bab sudah siap ditinjau.
+Lima algoritma clustering inti dan perbandingannya. Tujuh bab sudah selesai.
 
 1. [Introduction to Clustering Algorithms](../clustering-algorithms/01-introduction-to-clustering-algorithms.md)
 2. [K-Means Clustering](../clustering-algorithms/02-k-means-clustering.md)
@@ -315,7 +315,7 @@ Lima algoritma clustering inti dan perbandingannya. Tujuh bab sudah siap ditinja
 
 ## [Level 5 — Clustering Evaluation](../clustering-evaluation/index.md)
 
-Alat untuk menilai hasil clustering: metrik internal, Elbow Method, dan metrik eksternal, serta cara memilihnya. Delapan bab sudah siap ditinjau.
+Alat untuk menilai hasil clustering: metrik internal, Elbow Method, dan metrik eksternal, serta cara memilihnya. Delapan bab sudah selesai.
 
 1. [Introduction to Clustering Evaluation](../clustering-evaluation/01-introduction-to-clustering-evaluation.md)
 2. [Internal Clustering Evaluation](../clustering-evaluation/02-internal-clustering-evaluation.md)
@@ -328,7 +328,7 @@ Alat untuk menilai hasil clustering: metrik internal, Elbow Method, dan metrik e
 
 ## [Level 6 — Experimentation and Interpretation](../experimentation-and-interpretation/index.md)
 
-Cara bekerja secara sistematis dengan clustering: merancang eksperimen, menyetel dan membandingkan algoritma, memahami dampak fitur dan PCA, menggambar, menafsirkan, menguji kestabilan, lalu melaporkan hasil. Sepuluh bab sudah siap ditinjau.
+Cara bekerja secara sistematis dengan clustering: merancang eksperimen, menyetel dan membandingkan algoritma, memahami dampak fitur dan PCA, menggambar, menafsirkan, menguji kestabilan, lalu melaporkan hasil. Sepuluh bab sudah selesai.
 
 1. [Introduction to Clustering Experiments](../experimentation-and-interpretation/01-introduction-to-clustering-experiments.md)
 2. [Experimental Design and Configuration](../experimentation-and-interpretation/02-experimental-design-and-configuration.md)
@@ -343,7 +343,7 @@ Cara bekerja secara sistematis dengan clustering: merancang eksperimen, menyetel
 
 ## [Level 7 — Research Project](../research-project/index.md)
 
-Cara meneliti dengan clustering: merumuskan masalah, menelaah pustaka, memilih data, menyusun protokol, menjalankan eksperimen, melaporkan hasil, menulis makalah, dan membuatnya bisa diulang. Sepuluh bab sudah siap ditinjau.
+Cara meneliti dengan clustering: merumuskan masalah, menelaah pustaka, memilih data, menyusun protokol, menjalankan eksperimen, melaporkan hasil, menulis makalah, dan membuatnya bisa diulang. Sepuluh bab sudah selesai.
 
 1. [Introduction to Clustering Research](../research-project/01-introduction-to-clustering-research.md)
 2. [Research Problem Formulation](../research-project/02-research-problem-formulation.md)

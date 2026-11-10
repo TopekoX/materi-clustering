@@ -1,6 +1,6 @@
 # CLAUDE.md — Materi Clustering
 
-Situs dokumentasi berbahasa Indonesia tentang Clustering Machine Learning, di atas template MkDocs + Material yang sudah ada. Lingkup saat ini: **Level 2 — Data Exploration and Preprocessing** (12 bab), **Level 3 — Fundamental Clustering** (7 bab), **Level 4 — Clustering Algorithms** (7 bab, disetujui 2026-11-10), **Level 5 — Clustering Evaluation** (8 bab, disetujui 2026-11-10), **Level 6 — Experimentation and Interpretation** (10 bab, disetujui 2026-11-10), dan **Level 7 — Research Project** (10 bab, disetujui 2026-11-10, semuanya siap ditinjau; lihat `LEVEL7_QA_REPORT.md`). Lihat `PRD.md`, `IMPLEMENTATION_PLAN.md`, `PROJECT_AUDIT.md`.
+Situs dokumentasi berbahasa Indonesia tentang Clustering Machine Learning, di atas template MkDocs + Material yang sudah ada. Lingkup saat ini: **Level 2 — Data Exploration and Preprocessing** (12 bab), **Level 3 — Fundamental Clustering** (7 bab), **Level 4 — Clustering Algorithms** (7 bab, disetujui 2026-11-10), **Level 5 — Clustering Evaluation** (8 bab, disetujui 2026-11-10), **Level 6 — Experimentation and Interpretation** (10 bab, disetujui 2026-11-10), dan **Level 7 — Research Project** (10 bab, disetujui 2026-11-10, semuanya selesai; lihat `LEVEL7_QA_REPORT.md`). Lihat `PRD.md`, `IMPLEMENTATION_PLAN.md`, `PROJECT_AUDIT.md`.
 
 ## Aturan keras
 

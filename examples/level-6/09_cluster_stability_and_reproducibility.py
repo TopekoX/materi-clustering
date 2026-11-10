@@ -58,9 +58,11 @@ def pairwise_ari(label_sets):
     return float(np.mean(values)), float(np.min(values)), float(np.max(values))
 
 seed_rows = []
+seed_inertias = {}
 for n_init in (1, 10):
     runs = [KMeans(n_clusters=5, n_init=n_init, random_state=s).fit(X) for s in range(30)]
     inertias = np.array([r.inertia_ for r in runs])
+    seed_inertias[n_init] = inertias
     mean_ari, min_ari, max_ari = pairwise_ari([r.labels_ for r in runs])
     seed_rows.append({"n_init": n_init, "inertia_min": inertias.min(), "inertia_max": inertias.max(),
                       "ari_mean": mean_ari, "ari_min": min_ari, "ari_max": max_ari})
@@ -218,10 +220,12 @@ print("Hasil dan konfigurasi tersimpan.")
 # --8<-- [end:save]
 
 # --8<-- [start:plotseed]
+# Rentang histogram diambil dari data (bukan angka tetap) supaya tidak ada seed yang terpotong diam-diam
+all_inertias = np.concatenate(list(seed_inertias.values()))
+bins = np.linspace(np.floor(all_inertias.min()), np.ceil(all_inertias.max()), 15)
 fig, axes = plt.subplots(1, 2, figsize=(11, 4.2), sharex=True)
 for ax, n_init in zip(axes, (1, 10)):
-    runs = [KMeans(n_clusters=5, n_init=n_init, random_state=s).fit(X) for s in range(30)]
-    ax.hist([r.inertia_ for r in runs], bins=np.linspace(65, 100, 15), color="#0072B2")
+    ax.hist(seed_inertias[n_init], bins=bins, color="#0072B2")
     ax.set_title(f"Inertia dari 30 seed, n_init = {n_init}", fontsize=10)
     ax.set_xlabel("Inertia")
     ax.set_ylabel("Jumlah seed")

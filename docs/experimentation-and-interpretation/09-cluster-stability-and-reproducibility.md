@@ -351,7 +351,7 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:plotsample"
 ```
 
-**Penjelasan:** gambar pertama adalah histogram inertia 30 seed pada `n_init` 1 dan 10, dengan sumbu x yang sama (65 sampai 100) agar bisa dibandingkan. Gambar kedua berisi kestabilan dan Silhouette menurut K (kiri) serta Jaccard tiap kelompok dengan garis ambang 0,6 (kanan). Gambar ketiga menunjukkan kestabilan terhadap ukuran sampel pada Mall Customers dan data acak seragam, dengan garis penuh untuk rata-rata dan garis putus-putus untuk minimum.
+**Penjelasan:** gambar pertama adalah histogram inertia 30 seed pada `n_init` 1 dan 10, dengan sumbu x yang sama (65 sampai 99, diambil dari data) agar bisa dibandingkan. Gambar kedua berisi kestabilan dan Silhouette menurut K (kiri) serta Jaccard tiap kelompok dengan garis ambang 0,6 (kanan). Gambar ketiga menunjukkan kestabilan terhadap ukuran sampel pada Mall Customers dan data acak seragam, dengan garis penuh untuk rata-rata dan garis putus-putus untuk minimum.
 
 ## Code Explanation
 

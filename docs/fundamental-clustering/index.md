@@ -8,13 +8,13 @@ Bab 1, 2, dan 7 memakai dataset **Mall Customers** seperti Level 2. Bab 3 sampai
 
 | Bab | Judul | Status |
 |---|---|---|
-| 1 | [Introduction to Clustering](01-introduction-to-clustering.md) | Siap ditinjau |
-| 2 | [Understanding Clusters](02-understanding-clusters.md) | Siap ditinjau |
-| 3 | [Centroid and Cluster Representation](03-centroid-and-cluster-representation.md) | Siap ditinjau |
-| 4 | [Similarity and Dissimilarity](04-similarity-and-dissimilarity.md) | Siap ditinjau |
-| 5 | [Distance Metrics](05-distance-metrics.md) | Siap ditinjau |
-| 6 | [Feature Space and Dimensionality](06-feature-space-and-dimensionality.md) | Siap ditinjau |
-| 7 | [Clustering Workflow](07-clustering-workflow.md) | Siap ditinjau |
+| 1 | [Introduction to Clustering](01-introduction-to-clustering.md) | Selesai |
+| 2 | [Understanding Clusters](02-understanding-clusters.md) | Selesai |
+| 3 | [Centroid and Cluster Representation](03-centroid-and-cluster-representation.md) | Selesai |
+| 4 | [Similarity and Dissimilarity](04-similarity-and-dissimilarity.md) | Selesai |
+| 5 | [Distance Metrics](05-distance-metrics.md) | Selesai |
+| 6 | [Feature Space and Dimensionality](06-feature-space-and-dimensionality.md) | Selesai |
+| 7 | [Clustering Workflow](07-clustering-workflow.md) | Selesai |
 
 ## Prasyarat
 

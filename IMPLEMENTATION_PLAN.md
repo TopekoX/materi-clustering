@@ -40,13 +40,13 @@ Urutan sama dengan daftar di `PRD.md`. Setiap iterasi: tulis bab → tulis kode 
 
 | Bab | Bab (file) | Skrip | Notebook | Status |
 |---|---|---|---|---|
-| 1 | `01-introduction-to-clustering.md` | `01_introduction_to_clustering.py` | ✅ dieksekusi | Siap ditinjau |
-| 2 | `02-understanding-clusters.md` | `02_understanding_clusters.py` | ✅ dieksekusi | Siap ditinjau |
-| 3 | `03-centroid-and-cluster-representation.md` | `03_centroid_and_representation.py` | ✅ dieksekusi | Siap ditinjau |
-| 4 | `04-similarity-and-dissimilarity.md` | `04_similarity_and_dissimilarity.py` | ✅ dieksekusi | Siap ditinjau |
-| 5 | `05-distance-metrics.md` | `05_distance_metrics.py` | ✅ dieksekusi | Siap ditinjau |
-| 6 | `06-feature-space-and-dimensionality.md` | `06_feature_space_and_dimensionality.py` | ✅ dieksekusi | Siap ditinjau |
-| 7 | `07-clustering-workflow.md` | `07_clustering_workflow.py` | ✅ dieksekusi | Siap ditinjau |
+| 1 | `01-introduction-to-clustering.md` | `01_introduction_to_clustering.py` | ✅ dieksekusi | Selesai |
+| 2 | `02-understanding-clusters.md` | `02_understanding_clusters.py` | ✅ dieksekusi | Selesai |
+| 3 | `03-centroid-and-cluster-representation.md` | `03_centroid_and_representation.py` | ✅ dieksekusi | Selesai |
+| 4 | `04-similarity-and-dissimilarity.md` | `04_similarity_and_dissimilarity.py` | ✅ dieksekusi | Selesai |
+| 5 | `05-distance-metrics.md` | `05_distance_metrics.py` | ✅ dieksekusi | Selesai |
+| 6 | `06-feature-space-and-dimensionality.md` | `06_feature_space_and_dimensionality.py` | ✅ dieksekusi | Selesai |
+| 7 | `07-clustering-workflow.md` | `07_clustering_workflow.py` | ✅ dieksekusi | Selesai |
 
 Laporan QA: `LEVEL3_QA_REPORT.md`.
 
@@ -54,13 +54,13 @@ Laporan QA: `LEVEL3_QA_REPORT.md`.
 
 | Bab | Bab (file) | Skrip | Notebook | Status |
 |---|---|---|---|---|
-| 1 | `01-introduction-to-clustering-algorithms.md` | `01_introduction_to_clustering_algorithms.py` | ✅ dieksekusi | Siap ditinjau |
-| 2 | `02-k-means-clustering.md` | `02_k_means_clustering.py` | ✅ dieksekusi | Siap ditinjau |
-| 3 | `03-hierarchical-clustering.md` | `03_hierarchical_clustering.py` | ✅ dieksekusi | Siap ditinjau |
-| 4 | `04-dbscan-clustering.md` | `04_dbscan_clustering.py` | ✅ dieksekusi | Siap ditinjau |
-| 5 | `05-gaussian-mixture-models.md` | `05_gaussian_mixture_models.py` | ✅ dieksekusi | Siap ditinjau |
-| 6 | `06-mean-shift-clustering.md` | `06_mean_shift_clustering.py` | ✅ dieksekusi | Siap ditinjau |
-| 7 | `07-comparison-of-clustering-algorithms.md` | `07_comparison_of_clustering_algorithms.py` | ✅ dieksekusi | Siap ditinjau |
+| 1 | `01-introduction-to-clustering-algorithms.md` | `01_introduction_to_clustering_algorithms.py` | ✅ dieksekusi | Selesai |
+| 2 | `02-k-means-clustering.md` | `02_k_means_clustering.py` | ✅ dieksekusi | Selesai |
+| 3 | `03-hierarchical-clustering.md` | `03_hierarchical_clustering.py` | ✅ dieksekusi | Selesai |
+| 4 | `04-dbscan-clustering.md` | `04_dbscan_clustering.py` | ✅ dieksekusi | Selesai |
+| 5 | `05-gaussian-mixture-models.md` | `05_gaussian_mixture_models.py` | ✅ dieksekusi | Selesai |
+| 6 | `06-mean-shift-clustering.md` | `06_mean_shift_clustering.py` | ✅ dieksekusi | Selesai |
+| 7 | `07-comparison-of-clustering-algorithms.md` | `07_comparison_of_clustering_algorithms.py` | ✅ dieksekusi | Selesai |
 
 Laporan QA: `LEVEL4_QA_REPORT.md`.
 
@@ -68,14 +68,14 @@ Laporan QA: `LEVEL4_QA_REPORT.md`.
 
 | Bab | Bab (file) | Skrip | Notebook | Status |
 |---|---|---|---|---|
-| 1 | `01-introduction-to-clustering-evaluation.md` | `01_introduction_to_clustering_evaluation.py` | ✅ dieksekusi | Siap ditinjau |
-| 2 | `02-internal-clustering-evaluation.md` | `02_internal_clustering_evaluation.py` | ✅ dieksekusi | Siap ditinjau |
-| 3 | `03-inertia-and-wcss.md` | `03_inertia_and_wcss.py` | ✅ dieksekusi | Siap ditinjau |
-| 4 | `04-elbow-method.md` | `04_elbow_method.py` | ✅ dieksekusi | Siap ditinjau |
-| 5 | `05-silhouette-score.md` | `05_silhouette_score.py` | ✅ dieksekusi | Siap ditinjau |
-| 6 | `06-davies-bouldin-index.md` | `06_davies_bouldin_index.py` | ✅ dieksekusi | Siap ditinjau |
-| 7 | `07-calinski-harabasz-index.md` | `07_calinski_harabasz_index.py` | ✅ dieksekusi | Siap ditinjau |
-| 8 | `08-external-evaluation-and-metric-comparison.md` | `08_external_evaluation_and_metric_comparison.py` | ✅ dieksekusi | Siap ditinjau |
+| 1 | `01-introduction-to-clustering-evaluation.md` | `01_introduction_to_clustering_evaluation.py` | ✅ dieksekusi | Selesai |
+| 2 | `02-internal-clustering-evaluation.md` | `02_internal_clustering_evaluation.py` | ✅ dieksekusi | Selesai |
+| 3 | `03-inertia-and-wcss.md` | `03_inertia_and_wcss.py` | ✅ dieksekusi | Selesai |
+| 4 | `04-elbow-method.md` | `04_elbow_method.py` | ✅ dieksekusi | Selesai |
+| 5 | `05-silhouette-score.md` | `05_silhouette_score.py` | ✅ dieksekusi | Selesai |
+| 6 | `06-davies-bouldin-index.md` | `06_davies_bouldin_index.py` | ✅ dieksekusi | Selesai |
+| 7 | `07-calinski-harabasz-index.md` | `07_calinski_harabasz_index.py` | ✅ dieksekusi | Selesai |
+| 8 | `08-external-evaluation-and-metric-comparison.md` | `08_external_evaluation_and_metric_comparison.py` | ✅ dieksekusi | Selesai |
 
 Laporan QA: `LEVEL5_QA_REPORT.md`.
 
@@ -83,34 +83,34 @@ Laporan QA: `LEVEL5_QA_REPORT.md`.
 
 | Bab | Bab (file) | Skrip | Notebook | Status |
 |---|---|---|---|---|
-| 1 | `01-introduction-to-clustering-experiments.md` | `01_introduction_to_clustering_experiments.py` | ✅ dieksekusi | Siap ditinjau |
-| 2 | `02-experimental-design-and-configuration.md` | `02_experimental_design_and_configuration.py` | ✅ dieksekusi | Siap ditinjau |
-| 3 | `03-hyperparameter-tuning-and-optimization.md` | `03_hyperparameter_tuning_and_optimization.py` | ✅ dieksekusi | Siap ditinjau |
-| 4 | `04-algorithm-comparison-and-benchmarking.md` | `04_algorithm_comparison_and_benchmarking.py` | ✅ dieksekusi | Siap ditinjau |
-| 5 | `05-feature-selection-and-impact-analysis.md` | `05_feature_selection_and_impact_analysis.py` | ✅ dieksekusi | Siap ditinjau |
-| 6 | `06-dimensionality-reduction-and-pca.md` | `06_dimensionality_reduction_and_pca.py` | ✅ dieksekusi | Siap ditinjau |
-| 7 | `07-cluster-interpretation-and-profiling.md` | `07_cluster_interpretation_and_profiling.py` | ✅ dieksekusi | Siap ditinjau |
-| 8 | `08-cluster-visualization-and-analysis.md` | `08_cluster_visualization_and_analysis.py` | ✅ dieksekusi | Siap ditinjau |
-| 9 | `09-cluster-stability-and-reproducibility.md` | `09_cluster_stability_and_reproducibility.py` | ✅ dieksekusi | Siap ditinjau |
-| 10 | `10-experimental-reporting-and-interpretation.md` | `10_experimental_reporting_and_interpretation.py` | ✅ dieksekusi | Siap ditinjau |
+| 1 | `01-introduction-to-clustering-experiments.md` | `01_introduction_to_clustering_experiments.py` | ✅ dieksekusi | Selesai |
+| 2 | `02-experimental-design-and-configuration.md` | `02_experimental_design_and_configuration.py` | ✅ dieksekusi | Selesai |
+| 3 | `03-hyperparameter-tuning-and-optimization.md` | `03_hyperparameter_tuning_and_optimization.py` | ✅ dieksekusi | Selesai |
+| 4 | `04-algorithm-comparison-and-benchmarking.md` | `04_algorithm_comparison_and_benchmarking.py` | ✅ dieksekusi | Selesai |
+| 5 | `05-feature-selection-and-impact-analysis.md` | `05_feature_selection_and_impact_analysis.py` | ✅ dieksekusi | Selesai |
+| 6 | `06-dimensionality-reduction-and-pca.md` | `06_dimensionality_reduction_and_pca.py` | ✅ dieksekusi | Selesai |
+| 7 | `07-cluster-interpretation-and-profiling.md` | `07_cluster_interpretation_and_profiling.py` | ✅ dieksekusi | Selesai |
+| 8 | `08-cluster-visualization-and-analysis.md` | `08_cluster_visualization_and_analysis.py` | ✅ dieksekusi | Selesai |
+| 9 | `09-cluster-stability-and-reproducibility.md` | `09_cluster_stability_and_reproducibility.py` | ✅ dieksekusi | Selesai |
+| 10 | `10-experimental-reporting-and-interpretation.md` | `10_experimental_reporting_and_interpretation.py` | ✅ dieksekusi | Selesai |
 
 Catatan: urutan bab mengikuti prompt Level 6, dengan satu penyimpangan yang disetujui pengguna. Bab 7 (Cluster Interpretation and Profiling) sudah ditulis lebih dulu, sehingga Bab 8 menjadi Cluster Visualization and Analysis, Bab 9 Cluster Stability and Reproducibility, dan Bab 10 Experimental Reporting and Interpretation.
 
 Laporan QA: `LEVEL6_QA_REPORT.md`.
 
-## Status Level 7 — Research Project (disetujui 2026-11-10, sepuluh bab siap ditinjau)
+## Status Level 7 — Research Project (disetujui 2026-11-10, sepuluh bab selesai)
 
 Satu bab per iterasi, urut 1 sampai 10, masing-masing dengan skrip, eksekusi nyata, output, notebook (kecuali bab 1 dan 8), dan build strict. Iterasi 0: folder, `index.md`, nav, helper.
 
 | Bab | Bab (file) | Skrip | Notebook | Status |
 |---|---|---|---|---|
-| 1 | `01-introduction-to-clustering-research.md` | `01_introduction_to_clustering_research.py` | — (konseptual) | Siap ditinjau |
-| 2 | `02-research-problem-formulation.md` | `02_research_problem_formulation.py` | ✅ dieksekusi (`02-research-problem-formulation.ipynb`) | Siap ditinjau |
-| 3 | `03-literature-review-and-research-gap.md` | `03_literature_review_and_research_gap.py` | ✅ dieksekusi (`03-literature-review-and-research-gap.ipynb`) | Siap ditinjau |
-| 4 | `04-dataset-selection-and-research-data-preparation.md` | `04_dataset_selection_and_preparation.py` | ✅ dieksekusi (`04-dataset-selection-and-preparation.ipynb`) | Siap ditinjau |
-| 5 | `05-research-methodology-and-experimental-protocol.md` | `05_research_methodology_and_protocol.py` | ✅ dieksekusi (`05-research-methodology-and-protocol.ipynb`) | Siap ditinjau |
-| 6 | `06-research-implementation-with-python.md` | `06_research_implementation.py` | ✅ dieksekusi (`06-research-implementation.ipynb`) | Siap ditinjau |
-| 7 | `07-results-presentation-and-discussion.md` | `07_results_presentation_and_discussion.py` | ✅ dieksekusi (`07-results-presentation-and-discussion.ipynb`) | Siap ditinjau |
-| 8 | `08-scientific-research-writing.md` | `08_scientific_research_writing.py` | — (konseptual) | Siap ditinjau |
-| 9 | `09-reproducibility-and-research-documentation.md` | `09_reproducibility_and_documentation.py` | ✅ dieksekusi (`09-reproducibility-and-documentation.ipynb`) | Siap ditinjau |
-| 10 | `10-final-clustering-research-project.md` | `10_final_research_project.py` | ✅ dieksekusi (`10-final-clustering-research-project.ipynb`) | Siap ditinjau |
+| 1 | `01-introduction-to-clustering-research.md` | `01_introduction_to_clustering_research.py` | — (konseptual) | Selesai |
+| 2 | `02-research-problem-formulation.md` | `02_research_problem_formulation.py` | ✅ dieksekusi (`02-research-problem-formulation.ipynb`) | Selesai |
+| 3 | `03-literature-review-and-research-gap.md` | `03_literature_review_and_research_gap.py` | ✅ dieksekusi (`03-literature-review-and-research-gap.ipynb`) | Selesai |
+| 4 | `04-dataset-selection-and-research-data-preparation.md` | `04_dataset_selection_and_preparation.py` | ✅ dieksekusi (`04-dataset-selection-and-preparation.ipynb`) | Selesai |
+| 5 | `05-research-methodology-and-experimental-protocol.md` | `05_research_methodology_and_protocol.py` | ✅ dieksekusi (`05-research-methodology-and-protocol.ipynb`) | Selesai |
+| 6 | `06-research-implementation-with-python.md` | `06_research_implementation.py` | ✅ dieksekusi (`06-research-implementation.ipynb`) | Selesai |
+| 7 | `07-results-presentation-and-discussion.md` | `07_results_presentation_and_discussion.py` | ✅ dieksekusi (`07-results-presentation-and-discussion.ipynb`) | Selesai |
+| 8 | `08-scientific-research-writing.md` | `08_scientific_research_writing.py` | — (konseptual) | Selesai |
+| 9 | `09-reproducibility-and-research-documentation.md` | `09_reproducibility_and_documentation.py` | ✅ dieksekusi (`09-reproducibility-and-documentation.ipynb`) | Selesai |
+| 10 | `10-final-clustering-research-project.md` | `10_final_research_project.py` | ✅ dieksekusi (`10-final-clustering-research-project.ipynb`) | Selesai |

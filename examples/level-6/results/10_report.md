@@ -30,7 +30,7 @@ KMeans n_clusters=5 n_init=10, seed 42. Untuk memilih K, K = 2 sampai 8 dibandin
 
 Silhouette tertinggi pada K = 5 (0,555). Kestabilan rata-rata tertinggi pada K = 3 (1,000). Untuk K = 5, Silhouette 0,555 dan kestabilan rata-rata 0,987 (minimum 0,927).
 
-Kedua kriteria **tidak menunjuk K yang sama**. Silhouette menilai keterpisahan dan kekompakan kelompok. Kestabilan menilai konsistensi hasil terhadap sampel. K = 3 konsisten tetapi lebih longgar dalam keterpisahan. Kami memilih K = 5 karena Silhouette tertinggi dan kestabilannya juga tinggi, bukan karena K = 5 terbukti benar.
+Kedua kriteria **tidak menunjuk K yang sama**. Silhouette menilai keterpisahan dan kekompakan kelompok. Kestabilan menilai konsistensi hasil terhadap sampel. K = 3 paling konsisten tetapi Silhouette-nya lebih rendah. Kami memilih K = 5 karena Silhouette tertinggi dan kestabilannya juga tinggi, bukan karena K = 5 terbukti benar.
 
 ## 6. Hasil: profil kelompok (K = 5)
 
@@ -42,7 +42,7 @@ Kedua kriteria **tidak menunjuk K yang sama**. Silhouette menilai keterpisahan d
 | D | 23 | 26,3 | 20,9 | 46,0 | 0,980 |
 | E | 22 | 25,7 | 79,4 | 23,5 | 0,990 |
 
-Ukuran kelompok: A (81), B (39), C (35), D (23), E (22). Perbedaan umur antar kelompok lebih besar daripada yang diharapkan secara acak (selisih rata-rata terbesar dan terkecil 19,945 tahun, batas acak 95% 9,890, p = 0,0005, uji permutasi 2000 kali). Ini asosiasi, bukan sebab: kami tidak menyimpulkan bahwa umur memengaruhi perilaku belanja.
+Ukuran kelompok: A (81), B (39), C (35), D (23), E (22). Perbedaan umur antar kelompok lebih besar daripada yang diharapkan secara acak (selisih rata-rata terbesar dan terkecil 19,945 tahun, batas acak 95% 9,890, p ≤ 0,0005, uji permutasi 2000 kali; tidak satu pun permutasi mencapai selisih teramati, jadi p tidak dapat lebih kecil dari batas itu). Ini asosiasi, bukan sebab: kami tidak menyimpulkan bahwa umur memengaruhi perilaku belanja.
 
 ## 7. Keterbatasan
 

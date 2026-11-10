@@ -94,8 +94,12 @@ rng = np.random.default_rng(SEED)
 age = df["Age"].to_numpy(float)
 observed = spread(age, cluster)
 shuffled = [spread(age, rng.permutation(cluster)) for _ in range(2000)]
+p_floor = 1 / (len(shuffled) + 1)                      # p terkecil yang mungkin pada uji permutasi
 p_age = (sum(s >= observed for s in shuffled) + 1) / (len(shuffled) + 1)
-print(f"Umur: selisih rata-rata antar kelompok {observed:.3f} tahun | batas acak 95% {np.percentile(shuffled, 95):.3f} | p = {p_age:.4f}")
+at_floor = p_age <= p_floor
+p_text = f"p ≤ {fmt(p_floor, 4)}" if at_floor else f"p = {fmt(p_age, 4)}"
+print(f"Umur: selisih rata-rata antar kelompok {observed:.3f} tahun | batas acak 95% {np.percentile(shuffled, 95):.3f} | {p_text}"
+      + (f" (tidak satu pun dari {len(shuffled)} permutasi mencapai selisih teramati)" if at_floor else ""))
 # --8<-- [end:permtest]
 
 # --8<-- [start:tables]
@@ -132,13 +136,15 @@ print(f"Dipilih menurut Silhouette: {by_sil} | dipilih menurut ARI terhadap labe
 RISKY = ["membuktikan", "pasti", "menyebabkan", "penyebab", "terbaik", "sempurna", "selalu", "benar-benar", "jelas bahwa"]
 NEGATIONS = ("tidak", "bukan", "belum", "jangan")
 
+RISKY_PATTERNS = {w: re.compile(r"(?<!\w)" + re.escape(w) + r"(?!\w)") for w in RISKY}   # kata utuh
+
 def flag_overclaims(text):
-    """Mengembalikan kalimat yang memuat kata berisiko tanpa kata penyangkal di kalimat yang sama."""
+    """Mengembalikan kalimat yang memuat kata berisiko (kata utuh) tanpa kata penyangkal di kalimat yang sama."""
     flagged = []
     for sentence in re.split(r"(?<=[.!?])\s+", text):
         lowered = sentence.lower()
-        hits = [w for w in RISKY if w in lowered]
-        if hits and not any(n in lowered.split() for n in NEGATIONS):
+        hits = [w for w, pattern in RISKY_PATTERNS.items() if pattern.search(lowered)]
+        if hits and not set(re.findall(r"\w+", lowered)) & set(NEGATIONS):
             flagged.append((hits, sentence.strip()))
     return flagged
 
@@ -150,6 +156,28 @@ for hits, sentence in flag_overclaims(draft):
 
 # --8<-- [start:report]
 env = config["environment"]
+k_sil, k_stab = int(best_sil["k"]), int(best_stab["k"])
+if k_sil == k_stab:
+    criteria_text = f"Kedua kriteria menunjuk K yang sama (K = {k_sil})."
+else:
+    criteria_text = ("Kedua kriteria **tidak menunjuk K yang sama**. Silhouette menilai keterpisahan dan kekompakan kelompok. "
+                     f"Kestabilan menilai konsistensi hasil terhadap sampel. K = {k_stab} paling konsisten tetapi Silhouette-nya lebih rendah.")
+if k_sil == 5:
+    choice_text = "Kami memilih K = 5 karena Silhouette tertinggi dan kestabilannya juga tinggi, bukan karena K = 5 terbukti benar."
+else:
+    choice_text = f"K = 5 bukan K dengan Silhouette tertinggi (K = {k_sil}); pilihan ini membutuhkan justifikasi tambahan."
+if at_floor or p_age < 0.05:
+    age_text = "Perbedaan umur antar kelompok lebih besar daripada yang diharapkan secara acak"
+else:
+    age_text = "Perbedaan umur antar kelompok tidak melampaui yang diharapkan secara acak"
+perm_text = (f"selisih rata-rata terbesar dan terkecil {fmt(observed)} tahun, batas acak 95% {fmt(np.percentile(shuffled, 95))}, {p_text}, "
+             f"uji permutasi {len(shuffled)} kali" + (f"; tidak satu pun permutasi mencapai selisih teramati, jadi p tidak dapat lebih kecil dari batas itu" if at_floor else ""))
+stable_k = float(k5["stability_mean"]) >= 0.9 and float(jaccard["jaccard_rata"].min()) >= 0.6
+assert 0.8 in config["subsample_fractions"], "konfigurasi Bab 9 tidak memuat sampel 80%"
+stable_text = ("menghasilkan lima kelompok yang konsisten terhadap seed (dengan n_init = 10) dan sampel" if stable_k
+               else "menghasilkan lima kelompok, tetapi kestabilannya terhadap sampel atau bootstrap tidak memadai untuk sebagian kelompok")
+more_stable = (f", tetapi K = {k_stab} lebih stabil" if k_stab != 5 else "")
+sil_support = "didukung oleh Silhouette tertinggi" if k_sil == 5 else f"tidak didukung oleh Silhouette (tertinggi pada K = {k_sil})"
 facts = data_facts
 sizes = ", ".join(f"{c} ({int(profile.loc[c, 'n'])})" for c in profile.index)
 report = f"""# Laporan Eksperimen: Pengelompokan Pelanggan Mall Customers dengan K-Means
@@ -168,21 +196,21 @@ Fitur untuk clustering: {', '.join(config['features'])}. Praproses: {config['pre
 
 ## 4. Algoritma dan konfigurasi
 
-{config['algorithm']}, seed {config['seed']}. Untuk memilih K, K = 2 sampai 8 dibandingkan memakai Silhouette dan kestabilan terhadap sampel ({int(config['subsample_fractions'][1] * 100)}% data, {config['subsample_repeats']} pengulangan). Kestabilan tiap kelompok dihitung dengan {config['bootstrap_repeats']} sampel bootstrap.
+{config['algorithm']}, seed {config['seed']}. Untuk memilih K, K = 2 sampai 8 dibandingkan memakai Silhouette dan kestabilan terhadap sampel (80% data, {config['subsample_repeats']} pengulangan). Kestabilan tiap kelompok dihitung dengan {config['bootstrap_repeats']} sampel bootstrap.
 
 ## 5. Hasil: memilih K
 
 {md_table(table_k)}
 
-Silhouette tertinggi pada K = {int(best_sil['k'])} ({fmt(best_sil['silhouette'])}). Kestabilan rata-rata tertinggi pada K = {int(best_stab['k'])} ({fmt(best_stab['stability_mean'])}). Untuk K = 5, Silhouette {fmt(k5['silhouette'])} dan kestabilan rata-rata {fmt(k5['stability_mean'])} (minimum {fmt(k5['stability_min'])}).
+Silhouette tertinggi pada K = {k_sil} ({fmt(best_sil['silhouette'])}). Kestabilan rata-rata tertinggi pada K = {k_stab} ({fmt(best_stab['stability_mean'])}). Untuk K = 5, Silhouette {fmt(k5['silhouette'])} dan kestabilan rata-rata {fmt(k5['stability_mean'])} (minimum {fmt(k5['stability_min'])}).
 
-Kedua kriteria **tidak menunjuk K yang sama**. Silhouette menilai keterpisahan dan kekompakan kelompok. Kestabilan menilai konsistensi hasil terhadap sampel. K = {int(best_stab['k'])} konsisten tetapi lebih longgar dalam keterpisahan. Kami memilih K = 5 karena Silhouette tertinggi dan kestabilannya juga tinggi, bukan karena K = 5 terbukti benar.
+{criteria_text} {choice_text}
 
 ## 6. Hasil: profil kelompok (K = 5)
 
 {md_table(table_profile)}
 
-Ukuran kelompok: {sizes}. Perbedaan umur antar kelompok lebih besar daripada yang diharapkan secara acak (selisih rata-rata terbesar dan terkecil {fmt(observed)} tahun, batas acak 95% {fmt(np.percentile(shuffled, 95))}, p = {fmt(p_age, 4)}, uji permutasi {len(shuffled)} kali). Ini asosiasi, bukan sebab: kami tidak menyimpulkan bahwa umur memengaruhi perilaku belanja.
+Ukuran kelompok: {sizes}. {age_text} ({perm_text}). Ini asosiasi, bukan sebab: kami tidak menyimpulkan bahwa umur memengaruhi perilaku belanja.
 
 ## 7. Keterbatasan
 
@@ -194,7 +222,7 @@ Ukuran kelompok: {sizes}. Perbedaan umur antar kelompok lebih besar daripada yan
 
 ## 8. Kesimpulan yang didukung data
 
-Pada data ini, K-Means dengan K = 5 pada pendapatan dan skor belanja menghasilkan lima kelompok yang konsisten terhadap seed (dengan n_init = 10) dan sampel, dengan Jaccard tiap kelompok antara {fmt(jaccard['jaccard_rata'].min())} dan {fmt(jaccard['jaccard_rata'].max())}. Pilihan K = 5 didukung oleh Silhouette tertinggi, tetapi K = {int(best_stab['k'])} lebih stabil.
+Pada data ini, K-Means dengan K = 5 pada pendapatan dan skor belanja {stable_text}, dengan Jaccard tiap kelompok antara {fmt(jaccard['jaccard_rata'].min())} dan {fmt(jaccard['jaccard_rata'].max())}. Pilihan K = 5 {sil_support}{more_stable}.
 
 ## 9. Reproduksibilitas
 

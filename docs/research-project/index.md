@@ -14,16 +14,16 @@ Bab-bab memakai dataset **Breast Cancer Wisconsin (Diagnostic)** dari UCI Machin
 
 | Bab | Judul | Status |
 |---|---|---|
-| 1 | [Introduction to Clustering Research](01-introduction-to-clustering-research.md) | Siap ditinjau |
-| 2 | [Research Problem Formulation](02-research-problem-formulation.md) | Siap ditinjau |
-| 3 | [Literature Review and Research Gap](03-literature-review-and-research-gap.md) | Siap ditinjau |
-| 4 | [Dataset Selection and Research Data Preparation](04-dataset-selection-and-research-data-preparation.md) | Siap ditinjau |
-| 5 | [Research Methodology and Experimental Protocol](05-research-methodology-and-experimental-protocol.md) | Siap ditinjau |
-| 6 | [Research Implementation with Python](06-research-implementation-with-python.md) | Siap ditinjau |
-| 7 | [Results Presentation and Discussion](07-results-presentation-and-discussion.md) | Siap ditinjau |
-| 8 | [Scientific Research Writing](08-scientific-research-writing.md) | Siap ditinjau |
-| 9 | [Reproducibility and Research Documentation](09-reproducibility-and-research-documentation.md) | Siap ditinjau |
-| 10 | [Final Clustering Research Project](10-final-clustering-research-project.md) | Siap ditinjau |
+| 1 | [Introduction to Clustering Research](01-introduction-to-clustering-research.md) | Selesai |
+| 2 | [Research Problem Formulation](02-research-problem-formulation.md) | Selesai |
+| 3 | [Literature Review and Research Gap](03-literature-review-and-research-gap.md) | Selesai |
+| 4 | [Dataset Selection and Research Data Preparation](04-dataset-selection-and-research-data-preparation.md) | Selesai |
+| 5 | [Research Methodology and Experimental Protocol](05-research-methodology-and-experimental-protocol.md) | Selesai |
+| 6 | [Research Implementation with Python](06-research-implementation-with-python.md) | Selesai |
+| 7 | [Results Presentation and Discussion](07-results-presentation-and-discussion.md) | Selesai |
+| 8 | [Scientific Research Writing](08-scientific-research-writing.md) | Selesai |
+| 9 | [Reproducibility and Research Documentation](09-reproducibility-and-research-documentation.md) | Selesai |
+| 10 | [Final Clustering Research Project](10-final-clustering-research-project.md) | Selesai |
 
 ## Prasyarat
 
