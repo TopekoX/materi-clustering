@@ -37,9 +37,11 @@ Bab ini membuka **Level 2** dengan latihan pertama: memuat dataset *Mall Custome
 Urutannya penting: **eksplorasi dulu, preprocessing sesudahnya.** Kita tidak bisa memperbaiki masalah yang belum kita lihat.
 
 !!! note "Tentang dataset"
-    **Mall Customers** berisi 200 pelanggan dengan lima kolom: `CustomerID`, `Gender`, `Age`, `Annual Income (k$)`, dan `Spending Score (1-100)`. Skor belanja diberikan oleh pihak mall (1–100, makin tinggi berarti makin sering dan banyak berbelanja). File ada di `data/mall_customers.csv`.
+    **Mall Customers** berisi 200 pelanggan dengan lima kolom: `CustomerID`, `Gender`, `Age`, `Annual Income (k$)`, dan `Spending Score (1-100)`. Skor belanja diberikan oleh pihak mall (1–100, makin tinggi berarti makin sering dan banyak berbelanja). File ada di [`data/mall_customers.csv`](https://github.com/TopekoX/materi-clustering/blob/main/data/mall_customers.csv).
 
     Dataset ini populer sebagai contoh clustering, dan aslinya dipublikasikan di Kaggle. Salinan di repo ini diunduh dari mirror GitHub. Kalau kamu memakainya di luar belajar, periksa lisensi dataset di sumber aslinya.
+
+    Download dataset di [https://www.kaggle.com/datasets/shwetabh123/mall-customers](https://www.kaggle.com/datasets/shwetabh123/mall-customers)
 
 ## Detailed Explanation
 
