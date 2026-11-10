@@ -1,0 +1,10 @@
+{
+  "pernyataan_celah": "Dari 7 sumber yang ditelaah berdasarkan abstrak atau ringkasan, tidak satu pun yang kami baca menyajikan protokol terpadu yang mengukur kestabilan, kepekaan terhadap praproses, dan keselarasan eksternal pada satu dataset publik dengan seluruh konfigurasi dibagikan. Ini bukan klaim bahwa studi serupa tidak ada; tinjauan ini terarah, bukan sistematis.",
+  "jumlah_sumber": 7,
+  "cakupan": {
+    "RQ1": 1,
+    "RQ2": 2,
+    "RQ3": 1
+  },
+  "dibaca_penuh": 0
+}

@@ -1,0 +1,30 @@
+Pertanyaan: ['RQ1', 'RQ2', 'RQ3'] | sidik jari data final: 6b202a2072f9
+Bagian protokol: ['versi', 'judul_kerja', 'dataset', 'pertanyaan', 'analisis', 'algoritma', 'praproses', 'kebijakan_hyperparameter', 'pembanding_adil', 'kondisi_terkontrol', 'aturan_keputusan', 'pengungkapan', 'amendments']
+Algoritma: ['KMeans', 'Agglomerative', 'GMM', 'DBSCAN']
+Protokol asli, masalah: []
+  - protokol rusak: RQ2 tidak punya rencana analisis
+  - protokol rusak: label tidak boleh dipakai untuk menyetel
+  - protokol rusak: sidik jari data tidak tercatat
+  - protokol rusak: RQ3 memakai algoritma 'SpectralClustering' yang tidak didefinisikan
+                           jumlah_eksekusi
+RQ1 seed                                20
+RQ1 subsampel                           50
+RQ2 level x seed                        60
+RQ3 algoritma tak disetel                3
+RQ3 grid DBSCAN                          8
+Sensitivitas K                          15
+TOTAL                                  156
+               berjalan  kelompok  noise  detik
+algoritma                                      
+KMeans             True         2      0  0.063
+Agglomerative      True         2      0  0.058
+GMM                True         2      0  0.173
+DBSCAN             True         1     75  0.013
+Smoke test tidak menghitung ARI/NMI; hasilnya tidak dilaporkan sebagai temuan.
+Hash protokol    : c65be407e00ab39b ...
+Hash setelah baca: sama
+Hash setelah K diubah menjadi 3: BERBEDA
+Amendment pada protokol asli: 0
+Amendment pada salinan contoh: 1
+Hash salinan contoh berbeda dari protokol terkunci: True
+Masalah pada salinan contoh: []

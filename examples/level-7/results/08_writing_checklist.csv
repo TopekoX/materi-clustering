@@ -1,0 +1,22 @@
+butir,jenis,status,rincian
+Judul: tidak ada masalah pada pemeriksa,otomatis,LULUS,19 kata
+Abstrak dalam batas kata,otomatis,LULUS,234 dari 250 kata
+Abstrak: angka terlacak ke berkas hasil,otomatis,LULUS,tak terlacak: []
+Abstrak: tanpa kata berlebihan,otomatis,LULUS,ditemukan: []
+Abstrak menyebut keterbatasan,otomatis,LULUS,27 kata
+Semua sumber proyek untuk bagian naskah ada,otomatis,LULUS,8 dari 8 bagian
+Tabel dan gambar: berkas ada,otomatis,LULUS,5 dari 5
+Keterangan tabel dan gambar cukup mandiri (minimal 15 kata),otomatis,LULUS,terpendek 18 kata
+Semua simbol persamaan didefinisikan,otomatis,LULUS,4 persamaan
+Keterbatasan minimal tiga butir,otomatis,LULUS,7 butir
+Analisis eksploratori diberi label,otomatis,LULUS,4 kalimat berlabel
+"Pernyataan data memuat DOI, lisensi, dan sidik jari",otomatis,LULUS,"DOI, lisensi, sidik jari"
+Pernyataan data: tautan repositori sudah final,otomatis,PERINGATAN,"masih placeholder, diisi penulis"
+Hash protokol dikutip pada pernyataan,otomatis,LULUS,c65be407e00ab39b
+Kajian pustaka: sumber dibaca penuh,otomatis,PERINGATAN,0 dari 5 dibaca penuh
+Kajian pustaka: tiap pertanyaan punya pustaka,otomatis,PERINGATAN,tanpa pustaka: ['RQ2']
+Tata bahasa dan gaya sesuai pedoman penerbit tujuan,manual,MANUAL,memerlukan penilaian manusia
+Format sitasi dan daftar pustaka konsisten,manual,MANUAL,memerlukan penilaian manusia
+"Kebijakan etik, kepengarangan, dan penggunaan alat bantu penulisan penerbit dibaca dan dipenuhi",manual,MANUAL,memerlukan penilaian manusia
+Pemeriksaan kemiripan teks (plagiarisme) dilakukan,manual,MANUAL,memerlukan penilaian manusia
+Semua penulis menyetujui naskah,manual,MANUAL,memerlukan penilaian manusia

@@ -1,0 +1,31 @@
+{
+  "pernyataan_celah": "Dari 5 sumber yang ditelaah berdasarkan abstrak atau ringkasan, tidak satu pun yang kami baca menyajikan protokol terpadu yang mengukur kestabilan, kepekaan terhadap praproses, dan keselarasan eksternal pada satu dataset publik dengan seluruh konfigurasi dibagikan. Ini bukan klaim bahwa studi serupa tidak ada; tinjauan ini terarah, bukan sistematis.",
+  "jumlah_sumber": 5,
+  "jenis_tinjauan": "terarah",
+  "cakupan": {
+    "RQ1": {
+      "topik_dibutuhkan": "kestabilan",
+      "jumlah_makalah": 1,
+      "makalah": [
+        "L3"
+      ]
+    },
+    "RQ2": {
+      "topik_dibutuhkan": "sensitivitas-praproses",
+      "jumlah_makalah": 0,
+      "makalah": []
+    },
+    "RQ3": {
+      "topik_dibutuhkan": "pembanding-partisi",
+      "jumlah_makalah": 1,
+      "makalah": [
+        "L4"
+      ]
+    }
+  },
+  "pertanyaan_tanpa_pustaka": [
+    "RQ2"
+  ],
+  "perubahan_pertanyaan_dari_bab_2": "tidak ada perubahan teks; RQ2 ditandai butuh pustaka tambahan",
+  "sumber_rumusan": "02_research_problem.json"
+}

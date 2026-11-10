@@ -1,0 +1,148 @@
+{
+  "versi": "1.0",
+  "judul_kerja": "Stabilitas dan keselarasan struktur kelompok pada profil morfologi inti sel",
+  "dataset": {
+    "nama": "Breast Cancer Wisconsin (Diagnostic)",
+    "sidik_jari": "6b202a2072f9",
+    "jumlah_sampel": 569,
+    "jumlah_fitur": 30,
+    "label": "diagnosis: hanya untuk validasi eksternal, tidak dipakai melatih atau menyetel"
+  },
+  "pertanyaan": {
+    "RQ1": "Seberapa stabil pengelompokan K-Means pada 30 fitur morfologi bila seed dan sampel data diubah?",
+    "RQ2": "Apakah pengelompokan pada 30 fitur morfologi berubah bila fitur tidak distandarkan, dan seberapa besar perubahannya (ARI)?",
+    "RQ3": "Seberapa selaras pengelompokan tak terawasi pada profil morfologi dengan diagnosis yang tercatat (ARI dan NMI)?"
+  },
+  "analisis": {
+    "RQ1": {
+      "faktor": "seed dan sampel data",
+      "algoritma": [
+        "KMeans"
+      ],
+      "ulangan": {
+        "seed": 20,
+        "subsampel": 50,
+        "fraksi_subsampel": 0.8
+      },
+      "metrik": [
+        "ARI antar-seed",
+        "ARI pengelompokan subsampel vs data penuh"
+      ]
+    },
+    "RQ2": {
+      "faktor": "perlakuan skala fitur",
+      "level": [
+        "StandardScaler (baseline)",
+        "tanpa skala",
+        "MinMaxScaler"
+      ],
+      "algoritma": [
+        "KMeans"
+      ],
+      "ulangan": {
+        "seed": 20
+      },
+      "metrik": [
+        "ARI vs baseline"
+      ]
+    },
+    "RQ3": {
+      "faktor": "algoritma",
+      "algoritma": [
+        "KMeans",
+        "Agglomerative",
+        "GMM",
+        "DBSCAN"
+      ],
+      "metrik": [
+        "ARI vs diagnosis",
+        "NMI vs diagnosis"
+      ],
+      "metrik_internal": [
+        "Silhouette",
+        "Davies-Bouldin",
+        "Calinski-Harabasz"
+      ]
+    },
+    "sensitivitas_K": {
+      "faktor": "jumlah kelompok K",
+      "level": [
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "algoritma": [
+        "KMeans",
+        "Agglomerative",
+        "GMM"
+      ],
+      "metrik": [
+        "Silhouette"
+      ]
+    }
+  },
+  "algoritma": {
+    "KMeans": {
+      "n_clusters": 2,
+      "n_init": 10,
+      "disetel": false
+    },
+    "Agglomerative": {
+      "n_clusters": 2,
+      "linkage": "ward",
+      "disetel": false
+    },
+    "GMM": {
+      "n_components": 2,
+      "covariance_type": "full",
+      "n_init": 5,
+      "disetel": false
+    },
+    "DBSCAN": {
+      "min_samples": [
+        5,
+        10
+      ],
+      "eps_kuantil_jarak_tetangga": [
+        0.8,
+        0.85,
+        0.9,
+        0.95
+      ],
+      "disetel": true,
+      "aturan_seleksi": "Silhouette tertinggi di antara konfigurasi dengan minimal 2 kelompok dan noise paling banyak 10 persen",
+      "jika_tak_ada_yang_valid": "dilaporkan 'tidak ada konfigurasi valid'; aturan tidak dilonggarkan"
+    }
+  },
+  "praproses": {
+    "baseline": "StandardScaler pada ke-30 fitur",
+    "outlier": "tidak dibuang (keputusan Bab 4)",
+    "seleksi_fitur": "tidak ada pada analisis utama"
+  },
+  "kebijakan_hyperparameter": {
+    "K_analisis_utama": 2,
+    "justifikasi_K": "RQ3 membandingkan dengan diagnosis dua kelas; K = 2 adalah asumsi desain, bukan hasil pemilihan; sensitivitas K dilaporkan terpisah",
+    "label_untuk_tuning": false
+  },
+  "pembanding_adil": [
+    "data dan praproses sama untuk semua algoritma",
+    "metrik internal dihitung di ruang baseline yang sama",
+    "label tidak dipakai untuk memilih konfigurasi",
+    "keterbatasan: hanya DBSCAN yang disetel, jadi upaya penyetelan tidak setara"
+  ],
+  "kondisi_terkontrol": {
+    "random_state_dasar": 42,
+    "catatan": "versi pustaka dicatat terpisah di 05_environment.json"
+  },
+  "aturan_keputusan": {
+    "ambang_praktis_sama_ARI": 0.95,
+    "catatan": "ambang ditetapkan sebelum eksperimen dan tidak digeser setelah melihat hasil"
+  },
+  "pengungkapan": [
+    "Bab 1 menjalankan demonstrasi K-Means pada data yang sama dan menampilkan ARI terhadap diagnosis sebelum protokol ini ditulis",
+    "protokol ini karena itu tidak sepenuhnya buta terhadap data; K = 2 dipengaruhi jumlah kelas diagnosis"
+  ],
+  "amendments": []
+}

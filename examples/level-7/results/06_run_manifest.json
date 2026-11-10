@@ -1,0 +1,13 @@
+{
+  "protokol_hash": "c65be407e00ab39b39c9df5ca226f1aef4ce6be2604a05a0242c380ed2283c1d",
+  "sidik_jari_data": "6b202a2072f9",
+  "eksekusi_direncanakan": 156,
+  "eksekusi_dijalankan": 156,
+  "rincian": {
+    "RQ1": 70,
+    "RQ2": 60,
+    "RQ3": 11,
+    "K": 15
+  },
+  "dbscan_terpilih": null
+}

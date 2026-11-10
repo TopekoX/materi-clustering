@@ -1,0 +1,37 @@
+Pertanyaan dari Bab 2: ['RQ1', 'RQ2', 'RQ3']
+                                  referensi                          dataset                                             algoritma                                                                  metrik               topik                     dibaca
+id                                                                                                                                                                                                                                                       
+L1  von Luxburg, Williamson, & Guyon (2012)                                —                                                     —                                                                       —    konteks-evaluasi                    abstrak
+L2                            Hennig (2015)                                —                                                     —                                                                       —    konteks-evaluasi    ringkasan halaman arXiv
+L3       Ben-Hur, Elisseeff, & Guyon (2002)  Data buatan dan data microarray  Hierarchical clustering (pada hasil yang dilaporkan)   Kemiripan antara pengelompokan acuan dan pengelompokan dari subsampel          kestabilan  ringkasan hasil pencarian
+L4              Vinh, Epps, & Bailey (2010)                                —                                                     —  Ukuran teori informasi (termasuk NMI dan NID) dengan koreksi kebetulan  pembanding-partisi     ringkasan halaman JMLR
+L5                              Jain (2010)                                —               Tinjauan metode clustering yang dikenal                                                                       —       tinjauan-umum  ringkasan hasil pencarian
+    sel_terisi  dari                     dibaca
+id                                             
+L1           2     7                    abstrak
+L2           2     7    ringkasan halaman arXiv
+L3           5     7  ringkasan hasil pencarian
+L4           3     7     ringkasan halaman JMLR
+L5           3     7  ringkasan hasil pencarian
+Makalah dibaca penuh : 0 dari 5
+Kolom 'keterbatasan' terisi: 0 dari 5
+RQ1: butuh 'kestabilan' -> 1 makalah ['L3']
+RQ2: butuh 'sensitivitas-praproses' -> 0 makalah []
+RQ3: butuh 'pembanding-partisi' -> 1 makalah ['L4']
+Pertanyaan tanpa dukungan pustaka pada set ini: ['RQ2']
+   tanggal             sumber                                                         kueri hasil_dipilih
+2026-11-10 alat pencarian web      Clustering: Science or Art? von Luxburg Williamson Guyon            L1
+2026-11-10      halaman arXiv                                     arXiv:1502.02555 (Hennig)            L2
+2026-11-10 alat pencarian web Ben-Hur Elisseeff Guyon stability based method clustered data            L3
+2026-11-10       halaman JMLR                              jmlr.org/papers/v11/vinh10a.html            L4
+2026-11-10 alat pencarian web                  Jain Data clustering 50 years beyond K-means            L5
+Jenis tinjauan: terarah (bukan sistematis); jumlah pencarian: 5
+C1: perlu diperbaiki: klaim_mutlak, tanpa_batas_pencarian
+C2: perlu diperbaiki: klaim_mutlak, tanpa_batas_pencarian
+C3: lolos
+Pernyataan celah: Dari 5 sumber yang ditelaah berdasarkan abstrak atau ringkasan, tidak satu pun yang kami baca menyajikan protokol terpadu yang mengukur kestabilan, kepekaan terhadap praproses, dan keselarasan eksternal pada satu dataset publik dengan seluruh konfigurasi dibagikan. Ini bukan klaim bahwa studi serupa tidak ada; tinjauan ini terarah, bukan sistematis.
+Pemeriksa klaim : lolos
+Disimpan: examples/level-7/results/03_literature_matrix.csv
+Disimpan: examples/level-7/results/03_literature_matrix.md
+Disimpan: examples/level-7/results/03_search_log.csv
+Disimpan: examples/level-7/results/03_gap_statement.json

@@ -1,0 +1,16 @@
+isi,bab,label,sumber,sumber_ada
+Demonstrasi tiga pertanyaan riset pada data yang sama,Bab 1,ILUSTRASI DIDAKTIK,outputs/01.txt,True
+"Contoh pertanyaan baik dan buruk, pemeriksa kata kunci",Bab 2,ILUSTRASI DIDAKTIK,outputs/02.txt,True
+Matriks pustaka (abstrak atau ringkasan),Bab 3 dan 10,TINJAUAN PUSTAKA TERBATAS,results/03_literature_matrix.csv,True
+"Kartu data, kriteria, etika",Bab 4,DOKUMENTASI,results/04_dataset_card.json,True
+Protokol terkunci (156 eksekusi),Bab 5,RENCANA DAN PROTOKOL,results/05_protocol.json,True
+RQ1 kestabilan,Bab 6,TEMUAN EKSPERIMEN,results/06_rq1_summary.json,True
+RQ2 kepekaan skala,Bab 6,TEMUAN EKSPERIMEN,results/06_rq2_scaling.csv,True
+RQ3 perbandingan algoritma dan validasi,Bab 6,TEMUAN EKSPERIMEN,results/06_rq3_algorithms.csv,True
+Sensitivitas K dan grid DBSCAN,Bab 6,TEMUAN EKSPERIMEN,results/06_k_sensitivity.csv,True
+Profil kelompok,Bab 6,TEMUAN EKSPERIMEN,results/06_cluster_profile.csv,True
+Bootstrap ARI,Bab 7,EKSPLORATORI,results/07_bootstrap_ari.csv,True
+Pangsa varians fitur,Bab 7,EKSPLORATORI,results/07_facts.json,True
+Uji dominasi fitur berskala besar,Bab 10,EKSPLORATORI,10_final_research_project.py,True
+Kerangka naskah dan daftar periksa penulisan,Bab 8,DOKUMENTASI,results/08_manuscript_outline.md,True
+Paket reproduksi dan uji keterulangan,Bab 9,DOKUMENTASI,results/09_package_checklist.csv,True

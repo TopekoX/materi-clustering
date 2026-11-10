@@ -1,0 +1,70 @@
+Dimuat: (569, 30) | label: 569
+nama                              : Breast Cancer Wisconsin (Diagnostic)
+sumber_asli                       : UCI Machine Learning Repository, https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic
+doi                               : 10.24432/C5DW2B
+pembuat                           : William Wolberg, Olvi Mangasarian, Nick Street, W. Street (menurut halaman UCI)
+tanggal_donasi                    : 1995-10-31 (menurut halaman UCI)
+lisensi                           : CC BY 4.0 (menurut halaman UCI); pemakaian wajib mencantumkan atribusi
+salinan_yang_dipakai              : sklearn.datasets.load_breast_cancer (salinan UCI yang disertakan scikit-learn)
+cara_pengumpulan                  : Fitur dihitung dari citra digital aspirasi jarum halus (FNA) massa payudara; menggambarkan inti sel (menurut UCI dan scikit-learn)
+fitur                             : 10 ukuran inti sel, masing-masing dalam bentuk mean, standard error, dan worst = 30 fitur (menurut scikit-learn)
+label                             : Diagnosis malignant atau benign (menurut UCI dan scikit-learn)
+tugas_asli                        : Classification (menurut halaman UCI)
+persetujuan_etika_deidentifikasi  : tidak dinyatakan pada sumber yang dibaca
+demografi_pasien                  : tidak dinyatakan pada sumber yang dibaca
+satuan_fitur                      : tidak dinyatakan pada sumber yang dibaca
+makalah_pengantar                 : Street, Wolberg, & Mangasarian (1993), Nuclear feature extraction for breast tumor diagnosis
+                dokumentasi    data status
+jumlah_sampel         569.0   569.0  cocok
+jumlah_fitur           30.0    30.0  cocok
+nilai_hilang            0.0     0.0  cocok
+malignant             212.0   212.0  cocok
+benign                357.0   357.0  cocok
+mean radius min       6.981   6.981  cocok
+mean radius max       28.11   28.11  cocok
+mean area min         143.5   143.5  cocok
+mean area max        2501.0  2501.0  cocok
+Semua cocok: True
+baris_duplikat                          : 0
+kolom_konstan                           : 0
+nilai_negatif                           : 0
+pasangan_fitur_korelasi_di_atas_0.95    : 15
+fitur_miring_kuat_(|skew|>1)            : 22
+total_nilai_di_luar_pagar_IQR           : 608
+Lima pasangan fitur paling berkorelasi:
+mean radius     mean perimeter     0.998
+worst radius    worst perimeter    0.994
+mean radius     mean area          0.987
+mean perimeter  mean area          0.987
+worst radius    worst area         0.984
+Lima fitur dengan nilai luar pagar IQR terbanyak:
+area error          65
+radius error        38
+perimeter error     38
+worst area          35
+smoothness error    30
+                                  langkah  sisa_baris  dikeluarkan
+                                Data awal         569            0
+  I1 tidak ada nilai hilang pada 30 fitur         569            0
+I2 punya label diagnosis (hanya validasi)         569            0
+           E1 bukan baris duplikat persis         569            0
+ E2 fitur yang harus positif bernilai > 0         569            0
+                              pemeriksaan              status                                             dasar
+       Kategori data sensitif (kesehatan)                  Ya           Subjek halaman UCI: Health and Medicine
+Kolom identitas pada salinan yang dipakai           Tidak ada             Diperiksa dengan kode pada nama kolom
+     Persetujuan pasien dan tinjauan etik     Tidak diketahui                     Halaman UCI tidak membahasnya
+                   Status de-identifikasi     Tidak diketahui                     Halaman UCI tidak membahasnya
+      Lisensi mengizinkan pemakaian ulang Ya, dengan atribusi                     CC BY 4.0 menurut halaman UCI
+      Tujuan asli sama dengan tujuan kita          Tidak sama Asli: classification; kita: metodologi clustering
+                   Klaim klinis dilakukan               Tidak                Dinyatakan di luar lingkup (Bab 2)
+Butir 'Tidak diketahui': 2 dari 7
+Fitur final   : (569, 30)
+Label final   : {'benign': 357, 'malignant': 212}
+Sidik jari awal : 6b202a2072f9
+Sidik jari final: 6b202a2072f9
+Data berubah    : False
+Disimpan: examples/level-7/results/04_dataset_card.json
+Disimpan: examples/level-7/results/04_documentation_check.csv
+Disimpan: examples/level-7/results/04_inclusion_funnel.csv
+Disimpan: examples/level-7/results/04_ethics_checklist.csv
+Disimpan: examples/level-7/results/04_research_dataset.csv

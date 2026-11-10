@@ -94,7 +94,20 @@ Folder: `docs/clustering-evaluation/`. Struktur bab tetap 14 bagian standar (kep
 
 Folder: `docs/experimentation-and-interpretation/`. Hasil eksperimen disimpan sebagai CSV/JSON di `examples/level-6/results/` tanpa platform pelacakan eksperimen. Tidak ada dependensi baru. Proyek riset penuh (tinjauan pustaka, celah riset, makalah) tetap milik Level 7.
 
-Level 7 di luar lingkup sampai Level 6 disetujui.
+### Level 7 — Research Project (10 bab, disetujui 2026-11-10)
+
+1. Introduction to Clustering Research
+2. Research Problem Formulation
+3. Literature Review and Research Gap
+4. Dataset Selection and Research Data Preparation
+5. Research Methodology and Experimental Protocol
+6. Research Implementation with Python
+7. Results Presentation and Discussion
+8. Scientific Research Writing
+9. Reproducibility and Research Documentation
+10. Final Clustering Research Project
+
+Folder: `docs/research-project/`; skrip `examples/level-7/`; notebook `notebooks/level-7/` (bab 2, 3, 4, 5, 6, 7, 9, 10; bab 1 dan 8 konseptual tanpa notebook). Dataset proyek: Breast Cancer Wisconsin (Diagnostic), UCI, CC BY 4.0 (diverifikasi dari halaman UCI), diakses lewat `sklearn.datasets.load_breast_cancer`; label diagnosis hanya untuk validasi eksternal. Tidak ada dependensi baru (grafik memakai Matplotlib, tanpa Seaborn). Bab 8 dan 9 memperluas Level 6 Bab 10 dan 9 ke tingkat makalah dan proyek, bukan mengulanginya. Semua referensi diverifikasi sebelum dipakai.
 
 ## 4. Standar isi bab (wajib)
 

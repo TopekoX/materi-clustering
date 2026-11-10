@@ -1,0 +1,36 @@
+jumlah_sampel         : 569
+jumlah_fitur          : 30
+nilai_hilang          : 0
+ada_label_eksternal   : True
+kelas_label           : {'benign': 357, 'malignant': 212}
+ada_kolom_waktu       : False
+ada_kolom_pasien      : False
+B1: Menggunakan K-Means untuk mengelompokkan data kanker.
+    -> perlu diperbaiki: bukan_pertanyaan, mulai_dari_algoritma, tidak_terukur
+B2: Apakah clustering bisa mendiagnosis kanker payudara?
+    -> perlu diperbaiki: klaim_klinis, tidak_terukur
+B3: Mengapa ukuran inti sel menyebabkan kelompok ganas?
+    -> perlu diperbaiki: klaim_sebab_akibat, tidak_terukur
+B4: Algoritma clustering mana yang selalu terbaik untuk semua data?
+    -> perlu diperbaiki: klaim_universal, tidak_terukur
+B5: Bagaimana data ini?
+    -> perlu diperbaiki: tidak_terukur
+G1: Seberapa stabil pengelompokan K-Means pada 30 fitur morfologi bila seed dan sampel data diubah?
+    -> lolos
+G2: Apakah pengelompokan pada 30 fitur morfologi berubah bila fitur tidak distandarkan, dan seberapa besar perubahannya (ARI)?
+    -> lolos
+G3: Seberapa selaras pengelompokan tak terawasi pada profil morfologi dengan diagnosis yang tercatat (ARI dan NMI)?
+    -> lolos
+T1: Apakah hasil clustering stabil dan selaras dengan diagnosis serta berbeda antar algoritma pada semua aspek?
+    -> lolos
+   Tipe pertanyaan                                                 Contoh                         Pendekatan                   Evaluasi                   Rujukan
+       Eksploratif                              Adakah struktur kelompok?              K-Means, Hierarchical    Silhouette, visualisasi Level 4 B2-B3, Level 6 B8
+        Komparatif              Algoritma mana yang cocok untuk data ini? K-Means, GMM, DBSCAN, Hierarchical  Metrik di ruang yang sama    Level 4 B7, Level 6 B4
+      Sensitivitas Seberapa peka hasil terhadap praproses atau parameter? Satu algoritma, satu faktor diubah      ARI terhadap baseline        Level 6 B2, B3, B5
+        Kestabilan           Apakah hasil tahan terhadap seed dan sampel? Satu algoritma, ulang berkali-kali ARI antar-ulangan, Jaccard                Level 6 B9
+Validasi eksternal      Seberapa selaras dengan pengetahuan di luar data?  Clustering dulu, label sesudahnya    ARI, NMI terhadap label                Level 5 B8
+RQ1: lolos
+RQ2: lolos
+RQ3: lolos
+Disimpan: examples/level-7/results/02_research_problem.json
+Jumlah pertanyaan: 3 | jumlah tujuan: 3

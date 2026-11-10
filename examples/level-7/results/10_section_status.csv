@@ -1,0 +1,18 @@
+no,judul,label,sumber
+1,Judul penelitian,DOKUMENTASI,08_manuscript_outline.md
+2,Latar belakang dan masalah penelitian,RENCANA DAN PROTOKOL,02_research_problem.json
+3,Tujuan dan pertanyaan penelitian,RENCANA DAN PROTOKOL,02_research_problem.json
+4,Matriks tinjauan pustaka,TINJAUAN PUSTAKA TERBATAS,03_literature_matrix.csv; Bab 10
+5,Celah riset dan kontribusi,TINJAUAN PUSTAKA TERBATAS,Bab 3 dan 10
+6,Pemilihan dan deskripsi dataset,DOKUMENTASI,04_dataset_card.json
+7,Metodologi penelitian,RENCANA DAN PROTOKOL,05_protocol.json
+8,Praproses data,RENCANA DAN PROTOKOL,05_protocol.json; 06_clarifications.json
+9,Implementasi clustering,RENCANA DAN PROTOKOL,05_protocol.json; 06_run_manifest.json
+10,Desain eksperimen,RENCANA DAN PROTOKOL,05_protocol.json
+11,Evaluasi,RENCANA DAN PROTOKOL,05_protocol.json
+12,Visualisasi hasil,TEMUAN EKSPERIMEN,docs/assets/level-7/
+13,Profil kelompok,TEMUAN EKSPERIMEN,06_cluster_profile.csv; 07_profile_by_measure.csv
+14,Hasil dan pembahasan,TEMUAN EKSPERIMEN,07_claim_ledger.csv; Bab 10
+15,Kesimpulan penelitian,TEMUAN EKSPERIMEN,Bab 6 dan 7
+16,Keterbatasan dan pekerjaan lanjutan,KETERBATASAN DAN RENCANA LANJUTAN,07_claim_ledger.csv
+17,Dokumentasi reproduksibilitas,DOKUMENTASI,09_package_checklist.csv; 09_repro_package/

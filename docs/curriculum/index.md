@@ -10,9 +10,9 @@ Kurikulum terdiri dari tujuh level. Setiap level berisi beberapa bab, dan setiap
 | 2 | Data Exploration and Preprocessing | 12 | Siap ditinjau |
 | 3 | Fundamental Clustering | 7 | Siap ditinjau |
 | 4 | Clustering Algorithms | 7 | Siap ditinjau |
-| 5 | Clustering Evaluation | — | Direncanakan |
+| 5 | Clustering Evaluation | 8 | Siap ditinjau |
 | 6 | Experimentation and Interpretation | 10 | Siap ditinjau |
-| 7 | Research Project | — | Direncanakan |
+| 7 | Research Project | 10 | Siap ditinjau |
 
 ## Level 1 — Machine Learning Fundamentals
 
@@ -341,10 +341,17 @@ Cara bekerja secara sistematis dengan clustering: merancang eksperimen, menyetel
 9. [Cluster Stability and Reproducibility](../experimentation-and-interpretation/09-cluster-stability-and-reproducibility.md)
 10. [Experimental Reporting and Interpretation](../experimentation-and-interpretation/10-experimental-reporting-and-interpretation.md)
 
-## Level 7
+## [Level 7 — Research Project](../research-project/index.md)
 
-Judul level sudah ditetapkan, tetapi daftar bab dan sub-babnya belum disusun. Daftar ini akan ditambahkan setelah level sebelumnya disetujui.
+Cara meneliti dengan clustering: merumuskan masalah, menelaah pustaka, memilih data, menyusun protokol, menjalankan eksperimen, melaporkan hasil, menulis makalah, dan membuatnya bisa diulang. Sepuluh bab sudah siap ditinjau.
 
-| Level | Topik | Status |
-|---|---|---|
-| 7 | Research Project | Direncanakan |
+1. [Introduction to Clustering Research](../research-project/01-introduction-to-clustering-research.md)
+2. [Research Problem Formulation](../research-project/02-research-problem-formulation.md)
+3. [Literature Review and Research Gap](../research-project/03-literature-review-and-research-gap.md)
+4. [Dataset Selection and Research Data Preparation](../research-project/04-dataset-selection-and-research-data-preparation.md)
+5. [Research Methodology and Experimental Protocol](../research-project/05-research-methodology-and-experimental-protocol.md)
+6. [Research Implementation with Python](../research-project/06-research-implementation-with-python.md)
+7. [Results Presentation and Discussion](../research-project/07-results-presentation-and-discussion.md)
+8. [Scientific Research Writing](../research-project/08-scientific-research-writing.md)
+9. [Reproducibility and Research Documentation](../research-project/09-reproducibility-and-research-documentation.md)
+10. [Final Clustering Research Project](../research-project/10-final-clustering-research-project.md)

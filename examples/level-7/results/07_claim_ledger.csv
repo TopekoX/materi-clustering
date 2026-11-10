@@ -1,0 +1,28 @@
+id,jenis,kalimat,bukti
+H1,hasil,"Pada 20 seed, ARI rata-rata antar-pasangan K-Means (K = 2) adalah 0,981 (minimum 0,965; 190 pasangan).",06_rq1_summary.json
+H2,hasil,"Pada 50 subsampel (80 persen), ARI rata-rata terhadap pengelompokan data penuh adalah 0,964 dengan rentang 0,871 sampai 1,000.",06_rq1_summary.json
+H3,hasil,"ARI terhadap baseline: StandardScaler 0,982, tanpa skala 0,496, MinMaxScaler 0,896. Ambang praktis sama adalah 0,95.",06_rq2_scaling.csv
+H4,hasil,"Silhouette: K-Means 0,343, Agglomerative 0,339, GMM 0,314. ARI terhadap diagnosis: K-Means 0,654, Agglomerative 0,575, GMM 0,774.",06_rq3_algorithms.csv
+H5,hasil,"Delapan konfigurasi DBSCAN semuanya menghasilkan satu kelompok, dengan noise 2,3 sampai 13,2 persen; tidak ada yang valid menurut protokol.",06_dbscan_grid.csv
+H6,hasil,"Pada K-Means baseline, proporsi malignant adalah 0,096 pada kelompok 0 (375 titik) dan 0,907 pada kelompok 1 (194 titik).",06_crosstab_diagnosis.csv
+H7,hasil,"(Eksploratori) Selisih ARI terhadap diagnosis, GMM dikurangi K-Means, memiliki interval bootstrap 95 persen -0,012 sampai 0,157; K-Means dikurangi Agglomerative -0,112 sampai 0,278.","bootstrap 200 ulangan, bagian explore"
+H8,hasil,"(Eksploratori) Pada data tanpa skala, dua fitur dengan varians terbesar menyumbang 99,1 persen dari total varians.",bagian explore
+I1,interpretasi,Pengelompokan K-Means dua kelompok pada data terstandarisasi tampak konsisten terhadap seed dan pengambilan sampel pada dataset ini.,"H1, H2"
+I2,interpretasi,Konsisten tidak sama dengan bermakna: hasil ini tidak menunjukkan bahwa kelompok mencerminkan kategori nyata.,"H1, H2"
+I3,interpretasi,"Cara menyamakan skala mengubah pengelompokan pada data ini: tanpa skala (0,496) jauh berbeda dari baseline, dan MinMaxScaler (0,896) pun tidak memenuhi ambang praktis sama (0,95).",H3
+I4,interpretasi,"Dugaan: pada data tanpa skala, jarak didominasi beberapa fitur berskala besar. Dua fitur teratas menyumbang 99,1 persen dari total varians, sejalan dengan dugaan ini, tetapi dugaan belum diuji langsung.",H8
+I5,interpretasi,"Peringkat algoritma berbeda antar jenis metrik: K-Means unggul pada metrik internal, GMM unggul pada ARI dan NMI terhadap diagnosis pada eksekusi utama. Namun pada analisis eksploratori, interval selisih ARI GMM dikurangi K-Means mencakup nol (-0,012 sampai 0,157), sehingga keunggulan GMM tidak jelas melampaui ketidakpastian sampel.","H4, H7"
+I6,interpretasi,Tidak ada algoritma yang dapat dinyatakan unggul secara umum tanpa menyebut tujuan evaluasinya.,H4
+I7,interpretasi,"Kelompok 1 pada K-Means ditandai nilai tinggi pada fitur kontur dan ukuran (concavity, concave points, perimeter), dan memuat proporsi malignant yang tinggi; ini deskripsi keselarasan, bukan penjelasan sebab.",H6
+I8,interpretasi,Dugaan: kepadatan titik pada 30 dimensi terstandarisasi relatif seragam sehingga DBSCAN tidak menemukan kelompok terpisah. Dugaan ini belum diuji.,H5
+P1,pembahasan,"Gagasan bahwa pengelompokan yang baik seharusnya stabil terhadap gangguan data (Ben-Hur dkk., 2002) sejalan dengan cara RQ1 diukur; hasil RQ1 konsisten dengan gagasan itu, tetapi tidak membuktikan adanya struktur kelompok.",L3; abstrak atau ringkasan
+P2,pembahasan,"Perbedaan peringkat antara metrik internal dan eksternal sejalan dengan pandangan bahwa evaluasi clustering bergantung pada konteks dan tujuan (von Luxburg dkk., 2012; Hennig, 2015).","L1, L2; abstrak atau ringkasan"
+P3,pembahasan,"ARI dan NMI yang dikoreksi untuk kebetulan (Vinh dkk., 2010) dipakai pada validasi eksternal; dengan 569 titik dan dua kelompok, koreksi ini tidak menjadi masalah utama.",L4; abstrak atau ringkasan
+P4,pembahasan,"Angka penelitian ini tidak dibandingkan dengan angka makalah lain karena tidak ada makalah pada matriks Bab 3 yang memakai data, protokol, dan metrik yang sama.",Bab 3
+K1,keterbatasan,Hasil berlaku untuk satu dataset (569 sampel) dan konfigurasi yang ditetapkan protokol.,protokol
+K2,keterbatasan,"K = 2 dipengaruhi jumlah kelas diagnosis, sehingga ARI terhadap diagnosis tidak independen dari pilihan itu.","protokol, pengungkapan"
+K3,keterbatasan,"Protokol ditulis setelah demonstrasi Bab 1 pada data yang sama, sehingga tidak sepenuhnya buta terhadap data.","protokol, pengungkapan"
+K4,keterbatasan,"Hanya DBSCAN yang disetel, sehingga upaya penyetelan antar algoritma tidak setara.",protokol
+K5,keterbatasan,Tinjauan pustaka bersifat terarah dan kelima sumber hanya dibaca abstrak atau ringkasannya.,Bab 3
+K6,keterbatasan,Persetujuan etik dan status de-identifikasi data tidak diketahui; tidak ada klaim klinis.,Bab 4
+K7,keterbatasan,Analisis bootstrap dan pangsa varians bersifat eksploratori dan tidak ada di protokol.,Bab 5

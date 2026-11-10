@@ -1,0 +1,10 @@
+item,dokumentasi,data,status
+jumlah_sampel,569.0,569.0,cocok
+jumlah_fitur,30.0,30.0,cocok
+nilai_hilang,0.0,0.0,cocok
+malignant,212.0,212.0,cocok
+benign,357.0,357.0,cocok
+mean radius min,6.981,6.981,cocok
+mean radius max,28.11,28.11,cocok
+mean area min,143.5,143.5,cocok
+mean area max,2501.0,2501.0,cocok

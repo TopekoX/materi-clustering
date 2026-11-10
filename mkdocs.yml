@@ -148,6 +148,18 @@ nav:
       - Bab 8 — Cluster Visualization and Analysis: experimentation-and-interpretation/08-cluster-visualization-and-analysis.md
       - Bab 9 — Cluster Stability and Reproducibility: experimentation-and-interpretation/09-cluster-stability-and-reproducibility.md
       - Bab 10 — Experimental Reporting and Interpretation: experimentation-and-interpretation/10-experimental-reporting-and-interpretation.md
+  - Level 7 — Research Project:
+      - research-project/index.md
+      - Bab 1 — Introduction to Clustering Research: research-project/01-introduction-to-clustering-research.md
+      - Bab 2 — Research Problem Formulation: research-project/02-research-problem-formulation.md
+      - Bab 3 — Literature Review and Research Gap: research-project/03-literature-review-and-research-gap.md
+      - Bab 4 — Dataset Selection and Research Data Preparation: research-project/04-dataset-selection-and-research-data-preparation.md
+      - Bab 5 — Research Methodology and Experimental Protocol: research-project/05-research-methodology-and-experimental-protocol.md
+      - Bab 6 — Research Implementation with Python: research-project/06-research-implementation-with-python.md
+      - Bab 7 — Results Presentation and Discussion: research-project/07-results-presentation-and-discussion.md
+      - Bab 8 — Scientific Research Writing: research-project/08-scientific-research-writing.md
+      - Bab 9 — Reproducibility and Research Documentation: research-project/09-reproducibility-and-research-documentation.md
+      - Bab 10 — Final Clustering Research Project: research-project/10-final-clustering-research-project.md
 
 # --- Plugins ----------------------------------------------------------------
 plugins:

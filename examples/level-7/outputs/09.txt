@@ -1,0 +1,67 @@
+Skrip bab yang diperiksa: ['01', '02', '03', '04', '05', '06', '07', '08', '10']
+                direktori_berkas                                             di_proyek_ini  ada
+                       README.md                            docs/research-project/index.md True
+requirements.txt (+ kunci versi) requirements-notebooks.txt (kunci versi ditulis di paket) True
+            data/ (+ kartu data)     results/04_research_dataset.csv, 04_dataset_card.json True
+                       protocol/              results/05_protocol.json, 05_protocol.sha256 True
+            src/ (modul bersama)                             examples/level-7/_research.py True
+                        scripts/                                  examples/level-7/NN_*.py True
+                      notebooks/                                        notebooks/level-7/ True
+                        results/                                 examples/level-7/results/ True
+                        figures/                                      docs/assets/level-7/ True
+    logs/ (keputusan, pencarian)         results/03_search_log.csv, 06_clarifications.json True
+Pemanggilan acak diperiksa: 17 | tanpa seed: tidak ada
+Demo kode tanpa seed: (1, [('demo.py', 2, 'KMeans')])
+Modul pihak ketiga yang diimpor: ['matplotlib', 'numpy', 'pandas', 'sklearn']
+Tidak dikenali (perlu dipetakan): tidak ada
+Kunci versi: ['matplotlib==3.11.1', 'numpy==2.5.2', 'pandas==3.0.5', 'scikit-learn==1.9.0']
+skrip              membaca_hasil_bab ketergantungan_ke_depan
+   01                              -                      []
+   02                              -                      []
+   03                             02                      []
+   04                              -                      []
+   05                         02, 04                      []
+   06                         04, 05                      []
+   07                         05, 06                      []
+   08         02, 03, 04, 05, 06, 07                      []
+   10 02, 03, 04, 05, 06, 07, 08, 09                      []
+   09             02, 03, 04, 05, 06                      []
+Urutan eksekusi: 01 -> 02 -> 03 -> 04 -> 05 -> 06 -> 07 -> 08 -> 10 -> 09 | ada ketergantungan ke depan: False
+Jumlah keputusan tercatat: 18
+jenis
+dikunci         10
+klarifikasi      5
+pengungkapan     2
+revisi           1
+Amendment pada protokol: 0
+Berkas dengan checksum: 67 | total byte: 837862
+                                                      path  bytes                                                           sha256
+examples/level-7/01_introduction_to_clustering_research.py   5402 d63672dc51e3296c1c95459e51d2713a4e4dc99f2c86afd43be4155c01ee659f
+       examples/level-7/02_research_problem_formulation.py   7017 283632ec7619fde0d47fb8a7692a4a62349998648ae0f3722cd85d233589d471
+ examples/level-7/03_literature_review_and_research_gap.py  10772 4e4c4c75f2b9b40cced28442717cb9c7ee501a59c7bf0bf46c4657785aacc544
+skrip  kode_keluar  detik  baris_output_berbeda
+   01            0    8.2                     0
+   02            0    4.2                     0
+   03            0    4.5                     0
+   04            0    4.4                     0
+   05            0    5.6                     4
+   06            0   23.2                     0
+   07            0   61.0                     0
+   08            0    4.3                     0
+   10            0    5.6                     0
+Berkas dibandingkan: 67 | berkas yang berubah setelah dijalankan ulang: tidak ada
+Commit HEAD       : 33a3add
+Berkas Level 7 yang belum di-commit: 97
+Paket reproduksi dapat menunjuk satu commit: False
+Berkas paket: ['DATA_ATTRIBUTION.md', 'DECISIONS.md', 'MANIFEST.sha256', 'README.md', 'RUN_ORDER.md', 'requirements-lock.txt']
+                                                        butir     status                   rincian
+                                         Berkas paket lengkap      LULUS                  6 dari 6
+                          Semua pemanggilan acak memakai seed      LULUS  17 pemanggilan diperiksa
+                 Semua modul pihak ketiga terpetakan ke versi      LULUS         4 pustaka dikunci
+                Tidak ada ketergantungan ke depan antar skrip      LULUS      urutan numerik valid
+                                          Hash protokol cocok      LULUS    protokol belum berubah
+                     Log keputusan mencakup klarifikasi Bab 6      LULUS             5 klarifikasi
+                Semua skrip berjalan tanpa error saat diulang      LULUS                   9 skrip
+                   Berkas hasil tidak berubah setelah diulang      LULUS          0 berkas berubah
+Kode sudah di-commit sehingga paket bisa menunjuk satu commit PERINGATAN 97 berkas belum di-commit
+Ringkasan: {'LULUS': 8, 'PERINGATAN': 1}

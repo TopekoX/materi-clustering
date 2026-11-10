@@ -1,0 +1,26 @@
+{
+  "nama": "Breast Cancer Wisconsin (Diagnostic)",
+  "sumber_asli": "UCI Machine Learning Repository, https://archive.ics.uci.edu/dataset/17/breast+cancer+wisconsin+diagnostic",
+  "doi": "10.24432/C5DW2B",
+  "pembuat": "William Wolberg, Olvi Mangasarian, Nick Street, W. Street (menurut halaman UCI)",
+  "tanggal_donasi": "1995-10-31 (menurut halaman UCI)",
+  "lisensi": "CC BY 4.0 (menurut halaman UCI); pemakaian wajib mencantumkan atribusi",
+  "salinan_yang_dipakai": "sklearn.datasets.load_breast_cancer (salinan UCI yang disertakan scikit-learn)",
+  "cara_pengumpulan": "Fitur dihitung dari citra digital aspirasi jarum halus (FNA) massa payudara; menggambarkan inti sel (menurut UCI dan scikit-learn)",
+  "fitur": "10 ukuran inti sel, masing-masing dalam bentuk mean, standard error, dan worst = 30 fitur (menurut scikit-learn)",
+  "label": "Diagnosis malignant atau benign (menurut UCI dan scikit-learn)",
+  "tugas_asli": "Classification (menurut halaman UCI)",
+  "persetujuan_etika_deidentifikasi": "tidak dinyatakan pada sumber yang dibaca",
+  "demografi_pasien": "tidak dinyatakan pada sumber yang dibaca",
+  "satuan_fitur": "tidak dinyatakan pada sumber yang dibaca",
+  "makalah_pengantar": "Street, Wolberg, & Mangasarian (1993), Nuclear feature extraction for breast tumor diagnosis",
+  "sidik_jari_data_final": "6b202a2072f9",
+  "jumlah_sampel_final": 569,
+  "baris_dikeluarkan": 0,
+  "kriteria": [
+    "I1 tidak ada nilai hilang pada 30 fitur",
+    "I2 punya label diagnosis (hanya validasi)",
+    "E1 bukan baris duplikat persis",
+    "E2 fitur yang harus positif bernilai > 0"
+  ]
+}

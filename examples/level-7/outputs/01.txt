@@ -1,0 +1,29 @@
+Jumlah baris (sampel) : 569
+Jumlah fitur          : 30
+Nilai hilang          : 0
+Diagnosis (hanya untuk validasi): {'benign': 357, 'malignant': 212}
+Sidik jari data       : 6b202a2072f9
+Contoh nama fitur     : ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness']
+Q1 ukuran inti sel            :  3 fitur
+Q2 tekstur dan kehalusan      :  4 fitur
+Q3 seluruh profil morfologi   : 30 fitur
+Q1 ukuran inti sel             ukuran kelompok: [141, 428]
+Q2 tekstur dan kehalusan       ukuran kelompok: [346, 223]
+Q3 seluruh profil morfologi    ukuran kelompok: [375, 194]
+                             Silhouette (internal)  ARI vs diagnosis  NMI vs diagnosis
+Pertanyaan                                                                            
+Q1 ukuran inti sel                           0.658             0.493             0.430
+Q2 tekstur dan kehalusan                     0.287             0.066             0.037
+Q3 seluruh profil morfologi                  0.343             0.654             0.532
+                             Q1 ukuran inti sel  Q2 tekstur dan kehalusan  Q3 seluruh profil morfologi
+Q1 ukuran inti sel                        1.000                     0.014                        0.498
+Q2 tekstur dan kehalusan                  0.014                     1.000                        0.143
+Q3 seluruh profil morfologi               0.498                     0.143                        1.000
+[gambar disimpan: docs/assets/level-7/01-tiga-pertanyaan-tiga-pengelompokan.png]
+dataset         : Breast Cancer Wisconsin (Diagnostic), UCI, CC BY 4.0
+sidik_jari_data : 6b202a2072f9
+algoritma       : KMeans(n_clusters=2, n_init=10)
+praproses       : StandardScaler
+seed            : 42
+pertanyaan      : ['Q1 ukuran inti sel', 'Q2 tekstur dan kehalusan', 'Q3 seluruh profil morfologi']
+label_diagnosis : hanya untuk validasi eksternal, tidak dipakai melatih

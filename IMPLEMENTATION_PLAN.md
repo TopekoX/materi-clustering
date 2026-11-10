@@ -97,3 +97,20 @@ Laporan QA: `LEVEL5_QA_REPORT.md`.
 Catatan: urutan bab mengikuti prompt Level 6, dengan satu penyimpangan yang disetujui pengguna. Bab 7 (Cluster Interpretation and Profiling) sudah ditulis lebih dulu, sehingga Bab 8 menjadi Cluster Visualization and Analysis, Bab 9 Cluster Stability and Reproducibility, dan Bab 10 Experimental Reporting and Interpretation.
 
 Laporan QA: `LEVEL6_QA_REPORT.md`.
+
+## Status Level 7 — Research Project (disetujui 2026-11-10, sepuluh bab siap ditinjau)
+
+Satu bab per iterasi, urut 1 sampai 10, masing-masing dengan skrip, eksekusi nyata, output, notebook (kecuali bab 1 dan 8), dan build strict. Iterasi 0: folder, `index.md`, nav, helper.
+
+| Bab | Bab (file) | Skrip | Notebook | Status |
+|---|---|---|---|---|
+| 1 | `01-introduction-to-clustering-research.md` | `01_introduction_to_clustering_research.py` | — (konseptual) | Siap ditinjau |
+| 2 | `02-research-problem-formulation.md` | `02_research_problem_formulation.py` | ✅ dieksekusi (`02-research-problem-formulation.ipynb`) | Siap ditinjau |
+| 3 | `03-literature-review-and-research-gap.md` | `03_literature_review_and_research_gap.py` | ✅ dieksekusi (`03-literature-review-and-research-gap.ipynb`) | Siap ditinjau |
+| 4 | `04-dataset-selection-and-research-data-preparation.md` | `04_dataset_selection_and_preparation.py` | ✅ dieksekusi (`04-dataset-selection-and-preparation.ipynb`) | Siap ditinjau |
+| 5 | `05-research-methodology-and-experimental-protocol.md` | `05_research_methodology_and_protocol.py` | ✅ dieksekusi (`05-research-methodology-and-protocol.ipynb`) | Siap ditinjau |
+| 6 | `06-research-implementation-with-python.md` | `06_research_implementation.py` | ✅ dieksekusi (`06-research-implementation.ipynb`) | Siap ditinjau |
+| 7 | `07-results-presentation-and-discussion.md` | `07_results_presentation_and_discussion.py` | ✅ dieksekusi (`07-results-presentation-and-discussion.ipynb`) | Siap ditinjau |
+| 8 | `08-scientific-research-writing.md` | `08_scientific_research_writing.py` | — (konseptual) | Siap ditinjau |
+| 9 | `09-reproducibility-and-research-documentation.md` | `09_reproducibility_and_documentation.py` | ✅ dieksekusi (`09-reproducibility-and-documentation.ipynb`) | Siap ditinjau |
+| 10 | `10-final-clustering-research-project.md` | `10_final_research_project.py` | ✅ dieksekusi (`10-final-clustering-research-project.ipynb`) | Siap ditinjau |

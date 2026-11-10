@@ -1,0 +1,6 @@
+langkah,sisa_baris,dikeluarkan
+Data awal,569,0
+I1 tidak ada nilai hilang pada 30 fitur,569,0
+I2 punya label diagnosis (hanya validasi),569,0
+E1 bukan baris duplikat persis,569,0
+E2 fitur yang harus positif bernilai > 0,569,0

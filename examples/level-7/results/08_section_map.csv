@@ -1,0 +1,9 @@
+bagian,sumber_dari_proyek,isi_utama,saran_kata,sumber_ada
+Pendahuluan,02_research_problem.json; 03_gap_statement.json,"Masalah, konteks, celah yang dibatasi, tujuan, pertanyaan",500-800,True
+Kajian pustaka,03_literature_matrix.csv,"Dikelompokkan per tema, bukan per makalah",600-1000,True
+Metode,04_dataset_card.json; 05_protocol.json; 05_environment.json,"Data, praproses, algoritma, metrik, protokol, hash",800-1200,True
+Hasil,06_rq2_scaling.csv; 06_rq3_algorithms.csv; 07_tables.md,"Angka dan pengamatan, tanpa alasan",700-1000,True
+Pembahasan,07_claim_ledger.csv,"Interpretasi, hasil tak terduga, hubungan dengan pustaka",700-1000,True
+Keterbatasan,07_claim_ledger.csv,"Batas data, metode, protokol, bacaan pustaka",200-400,True
+Kesimpulan,07_claim_ledger.csv,Jawaban terbatas untuk tiap pertanyaan,150-300,True
+Ketersediaan data dan kode,04_dataset_card.json; 05_protocol.sha256,"Sumber, lisensi, atribusi, tautan kode",80-150,True

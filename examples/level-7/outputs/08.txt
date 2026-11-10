@@ -1,0 +1,63 @@
+Sumber dibaca: buku bukti 27 kalimat | matriks pustaka 5 makalah
+T1 (6 kata): perlu diperbaiki: terlalu_pendek, klaim_berlebihan, tanpa_konteks_data
+T2 (2 kata): perlu diperbaiki: terlalu_pendek, tanpa_konteks_data
+T3 (19 kata): lolos
+Draf pertama: 262 kata | melebihi batas
+Latar belakang :  18 kata
+Tujuan         :  30 kata
+Metode         :  32 kata
+Hasil          :  60 kata
+Kesimpulan     :  67 kata
+Keterbatasan   :  27 kata
+Total kata abstrak: 234 | contoh batas: 250
+Angka tak terlacak : []
+Kata berlebihan    : []
+                    bagian saran_kata  sumber_ada
+               Pendahuluan    500-800        True
+            Kajian pustaka   600-1000        True
+                    Metode   800-1200        True
+                     Hasil   700-1000        True
+                Pembahasan   700-1000        True
+              Keterbatasan    200-400        True
+                Kesimpulan    150-300        True
+Ketersediaan data dan kode     80-150        True
+Semua sumber ada: True
+    Algoritma                                                             Pengaturan Disetel
+       KMeans                                                n_clusters=2; n_init=10   tidak
+Agglomerative                                             n_clusters=2; linkage=ward   tidak
+          GMM                         n_components=2; covariance_type=full; n_init=5   tidak
+       DBSCAN min_samples=[5, 10]; eps_kuantil_jarak_tetangga=[0.8, 0.85, 0.9, 0.95]      ya
+      id                          file  ada  kata_keterangan
+ Tabel 1                  07_tables.md True               24
+ Tabel 2                  07_tables.md True               18
+Gambar 1   06-kestabilan-dan-skala.png True               25
+Gambar 2        06-empat-algoritma.png True               24
+Gambar 3 07-ari-dan-ketidakpastian.png True               23
+Persamaan: 4 | persamaan dengan simbol belum didefinisikan: tidak ada
+Data: Breast Cancer Wisconsin (Diagnostic), UCI Machine Learning Repository, DOI 10.24432/C5DW2B, lisensi CC BY 4.0 menurut halaman UCI; salinan yang dipakai dimuat melalui scikit-learn. Pembuat: William Wolberg, Olvi Mangasarian, Nick Street, W. Street. Sidik jari data final: 6b202a2072f9. Protokol dikunci dengan hash SHA-256 c65be407e00ab39b...; seluruh kode dan berkas hasil tersedia di [TAUTAN REPOSITORI: diisi penulis].
+Data publik berlisensi CC BY 4.0. Persetujuan etik dan status de-identifikasi tidak dinyatakan pada sumber yang dibaca. Penelitian ini tidak membuat klaim klinis.
+                                                                                          butir    jenis     status                          rincian
+                                                        Judul: tidak ada masalah pada pemeriksa otomatis      LULUS                          19 kata
+                                                                       Abstrak dalam batas kata otomatis      LULUS                234 dari 250 kata
+                                                        Abstrak: angka terlacak ke berkas hasil otomatis      LULUS                 tak terlacak: []
+                                                                 Abstrak: tanpa kata berlebihan otomatis      LULUS                    ditemukan: []
+                                                                  Abstrak menyebut keterbatasan otomatis      LULUS                          27 kata
+                                                    Semua sumber proyek untuk bagian naskah ada otomatis      LULUS                  8 dari 8 bagian
+                                                                   Tabel dan gambar: berkas ada otomatis      LULUS                         5 dari 5
+                                    Keterangan tabel dan gambar cukup mandiri (minimal 15 kata) otomatis      LULUS                terpendek 18 kata
+                                                           Semua simbol persamaan didefinisikan otomatis      LULUS                      4 persamaan
+                                                                Keterbatasan minimal tiga butir otomatis      LULUS                          7 butir
+                                                             Analisis eksploratori diberi label otomatis      LULUS               4 kalimat berlabel
+                                            Pernyataan data memuat DOI, lisensi, dan sidik jari otomatis      LULUS         DOI, lisensi, sidik jari
+                                                 Pernyataan data: tautan repositori sudah final otomatis PERINGATAN masih placeholder, diisi penulis
+                                                          Hash protokol dikutip pada pernyataan otomatis      LULUS                 c65be407e00ab39b
+                                                            Kajian pustaka: sumber dibaca penuh otomatis PERINGATAN            0 dari 5 dibaca penuh
+                                                  Kajian pustaka: tiap pertanyaan punya pustaka otomatis PERINGATAN           tanpa pustaka: ['RQ2']
+                                            Tata bahasa dan gaya sesuai pedoman penerbit tujuan   manual     MANUAL     memerlukan penilaian manusia
+                                                     Format sitasi dan daftar pustaka konsisten   manual     MANUAL     memerlukan penilaian manusia
+Kebijakan etik, kepengarangan, dan penggunaan alat bantu penulisan penerbit dibaca dan dipenuhi   manual     MANUAL     memerlukan penilaian manusia
+                                             Pemeriksaan kemiripan teks (plagiarisme) dilakukan   manual     MANUAL     memerlukan penilaian manusia
+                                                                Semua penulis menyetujui naskah   manual     MANUAL     memerlukan penilaian manusia
+Ringkasan: {'LULUS': 13, 'MANUAL': 5, 'PERINGATAN': 3}
+Kerangka naskah: 786 kata | 7 bagian menunggu prosa penulis
+Berkas hasil disimpan di examples/level-7/results/ (awalan 08_)

@@ -1,0 +1,10 @@
+butir,status,rincian
+Berkas paket lengkap,LULUS,6 dari 6
+Semua pemanggilan acak memakai seed,LULUS,17 pemanggilan diperiksa
+Semua modul pihak ketiga terpetakan ke versi,LULUS,4 pustaka dikunci
+Tidak ada ketergantungan ke depan antar skrip,LULUS,urutan numerik valid
+Hash protokol cocok,LULUS,protokol belum berubah
+Log keputusan mencakup klarifikasi Bab 6,LULUS,5 klarifikasi
+Semua skrip berjalan tanpa error saat diulang,LULUS,9 skrip
+Berkas hasil tidak berubah setelah diulang,LULUS,0 berkas berubah
+Kode sudah di-commit sehingga paket bisa menunjuk satu commit,PERINGATAN,97 berkas belum di-commit

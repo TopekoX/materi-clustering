@@ -1,0 +1,32 @@
+[
+  {
+    "id": "C1",
+    "hal": "metrik internal DBSCAN",
+    "keputusan": "titik noise dikeluarkan saat menghitung Silhouette, Davies-Bouldin, dan Calinski-Harabasz",
+    "alasan": "metrik internal membutuhkan kelompok; noise bukan kelompok"
+  },
+  {
+    "id": "C2",
+    "hal": "noise pada validasi eksternal",
+    "keputusan": "label noise (-1) diperlakukan sebagai satu kelompok tambahan pada ARI dan NMI",
+    "alasan": "agar semua titik ikut dihitung dan hasil tidak tampak lebih baik karena noise dibuang"
+  },
+  {
+    "id": "C3",
+    "hal": "subsampel pada RQ1",
+    "keputusan": "StandardScaler dihitung ulang pada tiap subsampel; K-Means memakai seed 42; subsampel diambil tanpa pengembalian dengan generator seed 42",
+    "alasan": "seluruh alur praproses diulang agar sesuai praktik nyata; protokol hanya menyebut fraksi 0,8"
+  },
+  {
+    "id": "C4",
+    "hal": "baseline acuan",
+    "keputusan": "baseline acuan RQ1 dan RQ2 adalah K-Means StandardScaler dengan seed 42, yang sama dengan K-Means pada RQ3 (dihitung sekali)",
+    "alasan": "protokol menyebut random_state dasar 42 tetapi tidak menyebut dari mana acuan diambil"
+  },
+  {
+    "id": "C5",
+    "hal": "jarak ke tetangga ke-k pada DBSCAN",
+    "keputusan": "jarak ke tetangga ke-k dihitung termasuk titik itu sendiri sebagai tetangga pertama",
+    "alasan": "konsisten dengan cara scikit-learn menghitung min_samples (titik itu sendiri ikut dihitung)"
+  }
+]

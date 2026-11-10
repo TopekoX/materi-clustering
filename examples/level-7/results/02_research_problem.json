@@ -1,0 +1,37 @@
+{
+  "judul_kerja": "Stabilitas dan keselarasan struktur kelompok pada profil morfologi inti sel",
+  "masalah": "Algoritma clustering berbasis partisi menghasilkan kelompok pada data apa pun, tetapi belum tentu kelompok itu stabil atau bermakna.",
+  "tujuan": [
+    "Mengukur kestabilan pengelompokan terhadap seed dan sampel data.",
+    "Mengukur kepekaan pengelompokan terhadap penyamaan skala dan pilihan algoritma.",
+    "Mengukur keselarasan kelompok dengan diagnosis yang tercatat sebagai validasi eksternal."
+  ],
+  "pertanyaan": {
+    "RQ1": "Seberapa stabil pengelompokan K-Means pada 30 fitur morfologi bila seed dan sampel data diubah?",
+    "RQ2": "Apakah pengelompokan pada 30 fitur morfologi berubah bila fitur tidak distandarkan, dan seberapa besar perubahannya (ARI)?",
+    "RQ3": "Seberapa selaras pengelompokan tak terawasi pada profil morfologi dengan diagnosis yang tercatat (ARI dan NMI)?"
+  },
+  "dalam_lingkup": [
+    "satu dataset publik",
+    "empat algoritma dari Level 4",
+    "metrik dari Level 5",
+    "30 fitur numerik"
+  ],
+  "di_luar_lingkup": [
+    "klaim klinis atau diagnosis",
+    "klaim sebab-akibat",
+    "data pasien baru",
+    "generalisasi ke dataset lain"
+  ],
+  "keterbatasan": [
+    "satu dataset dengan 569 sampel",
+    "label diagnosis hanya dua kelas dan bukan satu-satunya struktur yang mungkin ada",
+    "hasil berlaku untuk pengaturan yang diuji"
+  ],
+  "kontribusi": "didaktik dan metodologis: mendemonstrasikan protokol penelitian clustering yang bisa diulang. Tidak mengklaim kebaruan ilmiah.",
+  "data": {
+    "sumber": "UCI, Breast Cancer Wisconsin (Diagnostic), CC BY 4.0",
+    "sidik_jari": "6b202a2072f9"
+  },
+  "status": "draf Bab 2, dirumuskan ulang di Bab 3"
+}
