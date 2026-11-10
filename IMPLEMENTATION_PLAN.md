@@ -63,3 +63,18 @@ Laporan QA: `LEVEL3_QA_REPORT.md`.
 | 7 | `07-comparison-of-clustering-algorithms.md` | `07_comparison_of_clustering_algorithms.py` | ✅ dieksekusi | Siap ditinjau |
 
 Laporan QA: `LEVEL4_QA_REPORT.md`.
+
+## Status Level 5 — Clustering Evaluation (2026-11-10)
+
+| Bab | Bab (file) | Skrip | Notebook | Status |
+|---|---|---|---|---|
+| 1 | `01-introduction-to-clustering-evaluation.md` | `01_introduction_to_clustering_evaluation.py` | ✅ dieksekusi | Siap ditinjau |
+| 2 | `02-internal-clustering-evaluation.md` | `02_internal_clustering_evaluation.py` | ✅ dieksekusi | Siap ditinjau |
+| 3 | `03-inertia-and-wcss.md` | `03_inertia_and_wcss.py` | ✅ dieksekusi | Siap ditinjau |
+| 4 | `04-elbow-method.md` | `04_elbow_method.py` | ✅ dieksekusi | Siap ditinjau |
+| 5 | `05-silhouette-score.md` | `05_silhouette_score.py` | ✅ dieksekusi | Siap ditinjau |
+| 6 | `06-davies-bouldin-index.md` | `06_davies_bouldin_index.py` | ✅ dieksekusi | Siap ditinjau |
+| 7 | `07-calinski-harabasz-index.md` | `07_calinski_harabasz_index.py` | ✅ dieksekusi | Siap ditinjau |
+| 8 | `08-external-evaluation-and-metric-comparison.md` | `08_external_evaluation_and_metric_comparison.py` | ✅ dieksekusi | Siap ditinjau |
+
+Laporan QA: `LEVEL5_QA_REPORT.md`.

@@ -313,12 +313,24 @@ Lima algoritma clustering inti dan perbandingannya. Tujuh bab sudah siap ditinja
 6. [Mean Shift Clustering](../clustering-algorithms/06-mean-shift-clustering.md)
 7. [Comparison of Clustering Algorithms](../clustering-algorithms/07-comparison-of-clustering-algorithms.md)
 
-## Level 5–7
+## [Level 5 — Clustering Evaluation](../clustering-evaluation/index.md)
+
+Alat untuk menilai hasil clustering: metrik internal, Elbow Method, dan metrik eksternal, serta cara memilihnya. Delapan bab sudah siap ditinjau.
+
+1. [Introduction to Clustering Evaluation](../clustering-evaluation/01-introduction-to-clustering-evaluation.md)
+2. [Internal Clustering Evaluation](../clustering-evaluation/02-internal-clustering-evaluation.md)
+3. [Inertia and WCSS](../clustering-evaluation/03-inertia-and-wcss.md)
+4. [Elbow Method](../clustering-evaluation/04-elbow-method.md)
+5. [Silhouette Score](../clustering-evaluation/05-silhouette-score.md)
+6. [Davies-Bouldin Index](../clustering-evaluation/06-davies-bouldin-index.md)
+7. [Calinski-Harabasz Index](../clustering-evaluation/07-calinski-harabasz-index.md)
+8. [External Evaluation and Metric Comparison](../clustering-evaluation/08-external-evaluation-and-metric-comparison.md)
+
+## Level 6–7
 
 Judul level sudah ditetapkan, tetapi daftar bab dan sub-babnya belum disusun. Daftar ini akan ditambahkan setelah level sebelumnya disetujui.
 
 | Level | Topik | Status |
 |---|---|---|
-| 5 | Clustering Evaluation | Direncanakan |
 | 6 | Experimentation and Interpretation | Direncanakan |
 | 7 | Research Project | Direncanakan |

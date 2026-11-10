@@ -1,0 +1,40 @@
+Centroid keseluruhan : [3.0, 5.0]
+B (antar kelompok)   : 124.000
+W (dalam kelompok)   : 4.000
+B + W                : 128.000   (jumlah kuadrat total = 128.000)
+n = 9, k = 3  ->  (B / 2) / (W / 6)
+CH manual = 93.0000
+calinski_harabasz_score = 93.0000
+   Calinski-Harabasz
+K                   
+2              450.2
+3             1683.3
+4             4580.4
+5             3810.5
+6             3388.6
+7             3168.8
+8             3106.7
+K dengan CH tertinggi: 4
+CH data asli          : 4580.38
+CH data x 10          : 4580.38
+CH data digandakan    : 9207.02   (400 -> 800 titik)
+{2: 284.6, 3: 321.1, 4: 423.5, 5: 409.5, 6: 409.0, 7: 422.4, 8: 430.2, 9: 427.7, 10: 433.5}
+K dengan CH tertinggi pada data acak: 10
+CH K-Means (memotong bulan) : 440.2
+CH label benar              : 198.3
+    Silhouette  Davies-Bouldin  Calinski-Harabasz
+K                                                
+2        0.321           1.267             95.669
+3        0.467           0.716            151.335
+4        0.494           0.710            174.595
+5        0.555           0.572            248.649
+6        0.540           0.655            243.088
+7        0.528           0.715            254.621
+8        0.455           0.760            267.279
+9        0.457           0.763            270.948
+10       0.443           0.793            260.540
+K terbaik menurut Silhouette (tertinggi)        : 5
+K terbaik menurut Davies-Bouldin (terendah)     : 5
+K terbaik menurut Calinski-Harabasz (tertinggi) : 9
+[gambar disimpan: docs/assets/level-5/07-ch-vs-k.png]
+[gambar disimpan: docs/assets/level-5/07-tiga-metrik-mall.png]

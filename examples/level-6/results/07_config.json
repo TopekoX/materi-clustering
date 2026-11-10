@@ -1,0 +1,16 @@
+{
+  "seed": 42,
+  "dataset": "data/mall_customers.csv",
+  "algorithm": "KMeans n_clusters=5 n_init=10",
+  "features_used": [
+    "Annual Income (k$)",
+    "Spending Score (1-100)"
+  ],
+  "variables_not_used": [
+    "Age",
+    "Male"
+  ],
+  "preprocessing": "z-score per kolom",
+  "naming_rule": "|z| < 0.5 = menengah",
+  "permutations": 2000
+}

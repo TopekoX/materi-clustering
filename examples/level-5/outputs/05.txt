@@ -1,0 +1,37 @@
+Titik 0 [1.0, 1.0]: a = 1.869, b = 6.895, s = 0.729
+Titik 3 [4.0, 3.0]: a = 3.199, b = 3.347, s = 0.044
+s(i) manual      : [0.729, 0.716, 0.706, 0.044, 0.807, 0.798, 0.794]
+s(i) scikit-learn: [0.729, 0.716, 0.706, 0.044, 0.807, 0.798, 0.794]
+Rata-rata manual       : 0.656
+silhouette_score       : 0.656
+   Silhouette  Titik negatif             Rata-rata per kelompok
+K                                                              
+2    0.689215              0                     [0.603, 0.862]
+3    0.818074              0              [0.803, 0.853, 0.798]
+4    0.655059              3         [0.784, 0.848, 0.367, 0.3]
+5    0.480326              4  [0.328, 0.367, 0.784, 0.322, 0.3]
+[gambar disimpan: docs/assets/level-5/05-silhouette-plot-k.png]
+Penuh (3000 titik)            : 0.6910
+sample_size=500, random_state=0: 0.6826
+sample_size=500, random_state=1: 0.6968
+sample_size=500, random_state=2: 0.6824
+metric='euclidean'            : 0.6910
+metric='manhattan'            : 0.6879
+Skala data x 10               : 0.6910
+satu kelompok: ValueError -> Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
+setiap titik kelompok sendiri: ValueError -> Number of labels is 7. Valid values are 2 to n_samples - 1 (inclusive)
+Kelompok ditemukan: [0, 1, 2] | titik noise (label -1): 43 dari 340
+Silhouette, noise dianggap kelompok : 0.708
+Silhouette, noise dikeluarkan       : 0.897  (297 titik dinilai)
+[gambar disimpan: docs/assets/level-5/05-dbscan-noise.png]
+DBSCAN pada moons menemukan kelompok: [0, 1]
+Silhouette K-Means (memotong bulan) : 0.486
+Silhouette DBSCAN (mengikuti bulan) : 0.330
+   Ukuran  Rata-rata s(i)  s(i) minimum  Titik s(i) < 0
+0      81           0.598         0.116               0
+1      39           0.511         0.228               0
+2      22           0.598         0.050               0
+3      35           0.505        -0.029               1
+4      23           0.511        -0.012               1
+Silhouette keseluruhan: 0.555
+[gambar disimpan: docs/assets/level-5/05-silhouette-mall.png]

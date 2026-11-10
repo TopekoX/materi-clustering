@@ -126,6 +126,25 @@ nav:
       - Bab 5 — Gaussian Mixture Models: clustering-algorithms/05-gaussian-mixture-models.md
       - Bab 6 — Mean Shift Clustering: clustering-algorithms/06-mean-shift-clustering.md
       - Bab 7 — Comparison of Clustering Algorithms: clustering-algorithms/07-comparison-of-clustering-algorithms.md
+  - Level 5 — Clustering Evaluation:
+      - clustering-evaluation/index.md
+      - Bab 1 — Introduction to Clustering Evaluation: clustering-evaluation/01-introduction-to-clustering-evaluation.md
+      - Bab 2 — Internal Clustering Evaluation: clustering-evaluation/02-internal-clustering-evaluation.md
+      - Bab 3 — Inertia and WCSS: clustering-evaluation/03-inertia-and-wcss.md
+      - Bab 4 — Elbow Method: clustering-evaluation/04-elbow-method.md
+      - Bab 5 — Silhouette Score: clustering-evaluation/05-silhouette-score.md
+      - Bab 6 — Davies-Bouldin Index: clustering-evaluation/06-davies-bouldin-index.md
+      - Bab 7 — Calinski-Harabasz Index: clustering-evaluation/07-calinski-harabasz-index.md
+      - Bab 8 — External Evaluation and Metric Comparison: clustering-evaluation/08-external-evaluation-and-metric-comparison.md
+  - Level 6 — Experimentation and Interpretation:
+      - experimentation-and-interpretation/index.md
+      - Bab 1 — Introduction to Clustering Experiments: experimentation-and-interpretation/01-introduction-to-clustering-experiments.md
+      - Bab 2 — Experimental Design and Configuration: experimentation-and-interpretation/02-experimental-design-and-configuration.md
+      - Bab 3 — Hyperparameter Tuning and Optimization: experimentation-and-interpretation/03-hyperparameter-tuning-and-optimization.md
+      - Bab 4 — Algorithm Comparison and Benchmarking: experimentation-and-interpretation/04-algorithm-comparison-and-benchmarking.md
+      - Bab 5 — Feature Selection and Impact Analysis: experimentation-and-interpretation/05-feature-selection-and-impact-analysis.md
+      - Bab 6 — Dimensionality Reduction and PCA: experimentation-and-interpretation/06-dimensionality-reduction-and-pca.md
+      - Bab 7 — Cluster Interpretation and Profiling: experimentation-and-interpretation/07-cluster-interpretation-and-profiling.md
 
 # --- Plugins ----------------------------------------------------------------
 plugins:

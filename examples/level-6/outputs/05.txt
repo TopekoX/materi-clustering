@@ -1,0 +1,59 @@
+Wine: (178, 13) | kelas acuan: [59, 71, 48]
+Pasangan fitur dengan |korelasi| > 0.7:
+  total_phenols                  flavanoids                     r = +0.865
+  flavanoids                     od280/od315_of_diluted_wines   r = +0.787
+Fitur disimpan setelah penyaringan redundansi: 12 dari 13
+Fitur dibuang: ['flavanoids']
+Baseline (13 fitur, terskala, K = 3): Silhouette = 0.285, ARI acuan = 0.897
+Tanpa penskalaan: ARI acuan = 0.371, ARI vs baseline = 0.354
+Fitur dengan varians terbesar tanpa penskalaan: proline (99.8% dari total varians)
+30 subset acak berukuran 4 fitur, semuanya K-Means K = 3:
+     ARI acuan  ARI vs baseline
+min      0.244            0.294
+25%      0.371            0.426
+50%      0.498            0.538
+75%      0.623            0.615
+max      0.832            0.834
+               fitur dilepas  ARI vs baseline  ARI acuan
+             color_intensity            0.840      0.778
+                     alcohol            0.850      0.814
+                     proline            0.864      0.799
+                   magnesium            0.913      0.880
+                         ash            0.913      0.847
+               total_phenols            0.931      0.865
+                         hue            0.936      0.837
+                  flavanoids            0.947      0.880
+                  malic_acid            0.951      0.852
+           alcalinity_of_ash            0.964      0.864
+od280/od315_of_diluted_wines            0.967      0.898
+             proanthocyanins            0.967      0.929
+        nonflavanoid_phenols            0.984      0.913
+ fitur acak ditambah  ARI acuan  ARI vs baseline
+                   0      0.897             1.00
+                   2      0.897             1.00
+                   5      0.831             0.93
+                  10      0.831             0.93
+                  20      0.847             0.88
+                  50      0.717             0.78
+ARI acuan (dinilai setelahnya):
+K                              2      3      4      5
+subset                                               
+13 fitur                   0.374  0.897  0.765  0.599
+4 fitur pertama            0.211  0.541  0.430  0.412
+Tanpa redundan (12 fitur)  0.384  0.880  0.726  0.607
+Silhouette di ruang masing-masing (TIDAK sebanding antar baris):
+K                              2      3      4      5
+subset                                               
+13 fitur                   0.259  0.285  0.260  0.202
+4 fitur pertama            0.232  0.294  0.301  0.297
+Tanpa redundan (12 fitur)  0.245  0.277  0.241  0.201
+                                  Variasi  ARI vs baseline  Silhouette ruang baseline      ukuran kelompok
+      Baseline: pendapatan + skor belanja            1.000                      0.555 [81, 39, 35, 23, 22]
+                                   + umur            0.584                      0.296 [54, 47, 40, 39, 20]
+                          + umur + gender            0.400                      0.169 [54, 43, 39, 35, 29]
+                      umur + skor belanja            0.372                     -0.007 [64, 41, 38, 36, 21]
+pendapatan x3 (digandakan) + skor belanja            0.956                      0.550 [78, 39, 37, 23, 23]
+Catatan eksperimen B tersimpan: 18
+[gambar disimpan: docs/assets/level-6/05-dampak-lepas-fitur.png]
+[gambar disimpan: docs/assets/level-6/05-fitur-tak-relevan.png]
+[gambar disimpan: docs/assets/level-6/05-peta-subset-k.png]

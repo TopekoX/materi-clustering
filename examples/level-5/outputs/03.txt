@@ -1,0 +1,47 @@
+Kelompok 0, centroid = [1.333, 1.333]
+  titik [1.0, 1.0] -> jarak kuadrat = 0.222
+  titik [2.0, 1.0] -> jarak kuadrat = 0.556
+  titik [1.0, 2.0] -> jarak kuadrat = 0.556
+Kelompok 1, centroid = [6.333, 5.333]
+  titik [6.0, 5.0] -> jarak kuadrat = 0.222
+  titik [7.0, 5.0] -> jarak kuadrat = 0.556
+  titik [6.0, 6.0] -> jarak kuadrat = 0.556
+WCSS manual = 2.667
+Label K-Means      : [0, 0, 0, 1, 1, 1]
+inertia_ scikit-learn = 2.667
+wcss(X_tiny, labels_tiny) = 2.667
+ K  Inertia  Penurunan
+ 1 27364.56        NaN
+ 2 12840.70   14523.86
+ 3  2886.53    9954.17
+ 4   766.52    2120.01
+ 5   691.25      75.27
+ 6   622.11      69.14
+ 7   554.17      67.93
+ 8   484.52      69.65
+ 9   443.20      41.33
+10   388.60      54.59
+Inertia tidak pernah naik saat K naik? True
+K = 6 pada 6 titik -> Inertia = 0.000
+[gambar disimpan: docs/assets/level-5/03-inertia-vs-k.png]
+Inertia data asli          : 766.52
+Inertia data x 10          : 76651.83  (rasio 100.0)
+Inertia data digandakan    : 1533.04  (rasio 2.00)
+Inertia per titik (asli)   : 1.916
+Inertia per titik (ganda)  : 1.916
+KMeans punya inertia_ : True
+DBSCAN punya inertia_ : False
+Inertia K-Means (label salah bentuk) : 121.63
+WCSS label benar (dua bulan utuh)    : 180.93
+[gambar disimpan: docs/assets/level-5/03-moons-inertia.png]
+ K  Inertia  Penurunan
+ 1   400.00        NaN
+ 2   269.69     130.31
+ 3   157.70     111.99
+ 4   108.92      48.78
+ 5    65.57      43.35
+ 6    55.06      10.51
+ 7    44.86      10.19
+ 8    37.23       7.64
+ 9    32.39       4.84
+10    29.98       2.41

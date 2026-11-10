@@ -1,0 +1,9 @@
+{
+  "seed": 42,
+  "datasets": [
+    "sklearn.datasets.load_wine",
+    "data/mall_customers.csv"
+  ],
+  "algorithm": "KMeans n_init=10",
+  "note": "ari_reference hanya untuk menilai; pada Mall Customers tidak ada label acuan"
+}

@@ -1,0 +1,39 @@
+{
+  "seed": 42,
+  "protocol": [
+    {
+      "Algoritma": "K-Means",
+      "Konfigurasi": "n_clusters = K acuan, n_init = 10, seed 42",
+      "Cara menentukan": "diberi K acuan"
+    },
+    {
+      "Algoritma": "Hierarchical",
+      "Konfigurasi": "n_clusters = K acuan, linkage = ward",
+      "Cara menentukan": "diberi K acuan"
+    },
+    {
+      "Algoritma": "GMM",
+      "Konfigurasi": "n_components = K acuan, covariance_type = full, n_init = 3, seed 42",
+      "Cara menentukan": "diberi K acuan"
+    },
+    {
+      "Algoritma": "DBSCAN",
+      "Konfigurasi": "eps dan min_samples dicari dengan grid",
+      "Cara menentukan": "dipilih TANPA label (batasan + Silhouette)"
+    },
+    {
+      "Algoritma": "Mean Shift",
+      "Konfigurasi": "bandwidth dicari dengan grid",
+      "Cara menentukan": "dipilih TANPA label (batasan + Silhouette)"
+    }
+  ],
+  "environment": {
+    "python": "3.14.7",
+    "os": "Windows",
+    "numpy": "2.5.4",
+    "pandas": "3.1.1",
+    "scikit-learn": "1.9.1",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.2"
+  }
+}

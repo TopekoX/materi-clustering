@@ -1,0 +1,91 @@
+Kecocokan langsung (pred == true), nomor sama    : 1.0
+Kecocokan langsung (pred == true), nomor ditukar : 0.0
+ARI nomor sama    : 1.0
+ARI nomor ditukar : 1.0
+NMI nomor ditukar : 1.0
+Kelompok hasil clustering  0  1  2
+Kelas sebenarnya                  
+0                          2  1  0
+1                          0  3  0
+2                          1  0  2
+Pasangan sel = 5, baris = 9, kolom = 10, total pasangan = 36, diharapkan = 2.500, maksimum = 9.5
+ARI manual        = 0.3571
+ARI scikit-learn  = 0.3571
+                                 Homogeneity  Completeness  V-measure    NMI    ARI
+Kasus                                                                              
+Sempurna                               1.000           1.0      1.000  1.000  1.000
+Dua titik salah                        0.579           0.6      0.590  0.590  0.357
+Semua digabung (1 kelompok)            0.000           1.0      0.000  0.000  0.000
+Tiap titik sendiri (9 kelompok)        1.000           0.5      0.667  0.667  0.000
+H(kelas) = 1.0986, H(kelompok) = 1.0609, informasi bersama = 0.6365
+NMI manual        = 0.5895
+NMI scikit-learn  = 0.5895
+Blobs    bentuk data (300, 2), jumlah kelas acuan = 3, ukuran kelas = [100, 100, 100]
+Moons    bentuk data (300, 2), jumlah kelas acuan = 2, ukuran kelas = [150, 150]
+Circles  bentuk data (300, 2), jumlah kelas acuan = 2, ukuran kelas = [150, 150]
+Blobs    DBSCAN: 3 kelompok, 3 titik noise dari 300
+Moons    DBSCAN: 2 kelompok, 0 titik noise dari 300
+Circles  DBSCAN: 3 kelompok, 0 titik noise dari 300
+
+=== Blobs ===
+Metrik internal (butuh X dan label hasil clustering):
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz  Inertia
+Algoritma                                                                  
+K-Means                   0.773           0.313           2132.101   39.069
+Hierarchical (Ward)       0.773           0.313           2132.101      NaN
+DBSCAN                    0.780           0.306           2263.284      NaN
+GMM                       0.773           0.313           2132.101      NaN
+Metrik eksternal (butuh label acuan):
+                       ARI    NMI  Homogeneity  Completeness  V-measure
+Algoritma                                                              
+K-Means              1.000  1.000        1.000         1.000      1.000
+Hierarchical (Ward)  1.000  1.000        1.000         1.000      1.000
+DBSCAN               0.985  0.974        0.994         0.955      0.974
+GMM                  1.000  1.000        1.000         1.000      1.000
+
+=== Moons ===
+Metrik internal (butuh X dan label hasil clustering):
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz  Inertia
+Algoritma                                                                  
+K-Means                   0.495           0.806            417.437  249.917
+Hierarchical (Ward)       0.425           0.845            286.199      NaN
+DBSCAN                    0.384           1.022            258.481      NaN
+GMM                       0.495           0.806            417.405      NaN
+Metrik eksternal (butuh label acuan):
+                       ARI    NMI  Homogeneity  Completeness  V-measure
+Algoritma                                                              
+K-Means              0.479  0.382        0.382         0.382      0.382
+Hierarchical (Ward)  0.425  0.467        0.446         0.489      0.467
+DBSCAN               1.000  1.000        1.000         1.000      1.000
+GMM                  0.488  0.390        0.390         0.390      0.390
+
+=== Circles ===
+Metrik internal (butuh X dan label hasil clustering):
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz  Inertia
+Algoritma                                                                  
+K-Means                   0.353           1.175            174.943  378.058
+Hierarchical (Ward)       0.307           1.265            134.689      NaN
+DBSCAN                    0.004          24.334              5.201      NaN
+GMM                       0.350           1.184            172.421      NaN
+Metrik eksternal (butuh label acuan):
+                       ARI    NMI  Homogeneity  Completeness  V-measure
+Algoritma                                                              
+K-Means             -0.003  0.000        0.000         0.000      0.000
+Hierarchical (Ward)  0.001  0.003        0.003         0.003      0.003
+DBSCAN               0.961  0.943        1.000         0.892      0.943
+GMM                 -0.003  0.000        0.000         0.000      0.000
+eps = 0.20: 18 kelompok, 29 noise, ARI = 0.529
+eps = 0.25:  7 kelompok,  0 noise, ARI = 0.643
+eps = 0.30:  3 kelompok,  0 noise, ARI = 0.961
+eps = 0.35:  2 kelompok,  0 noise, ARI = 1.000
+eps = 0.40:  2 kelompok,  0 noise, ARI = 1.000
+[gambar disimpan: docs/assets/level-5/08-hasil-algoritma.png]
+[gambar disimpan: docs/assets/level-5/08-metrik-berdampingan.png]
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz
+Algoritma                                                         
+K-Means                   0.555           0.572            248.649
+Hierarchical (Ward)       0.554           0.578            244.410
+GMM                       0.554           0.576            244.940
+Tidak ada label acuan pada Mall Customers, jadi metrik eksternal tidak bisa dihitung.
+ARI antara K-Means dan Gender : -0.0006
+NMI antara K-Means dan Gender : 0.0051

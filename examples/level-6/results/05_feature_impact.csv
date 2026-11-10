@@ -1,0 +1,19 @@
+experiment_id,dataset,dataset_fingerprint,preprocessing,features,algorithm,params,seed,silhouette,ari_reference,runtime_seconds
+B-W-00,wine,d7f713b79c8a,StandardScaler,13 fitur,KMeans,"{""n_clusters"": 3}",42,0.2848589191898987,0.8974949815093207,0.0
+B-W-13 fit-K2,wine,d7f713b79c8a,StandardScaler,13 fitur,KMeans,"{""n_clusters"": 2}",42,0.25931695553182554,0.37431449262136857,0.0
+B-W-13 fit-K3,wine,d7f713b79c8a,StandardScaler,13 fitur,KMeans,"{""n_clusters"": 3}",42,0.28485891918989864,0.8974949815093207,0.0
+B-W-13 fit-K4,wine,d7f713b79c8a,StandardScaler,13 fitur,KMeans,"{""n_clusters"": 4}",42,0.26017035223704527,0.7645635004420589,0.0
+B-W-13 fit-K5,wine,d7f713b79c8a,StandardScaler,13 fitur,KMeans,"{""n_clusters"": 5}",42,0.2016190829407409,0.5990733499120439,0.0
+B-W-Tanpa -K2,wine,fb9f53acda5b,StandardScaler,Tanpa redundan (12 fitur),KMeans,"{""n_clusters"": 2}",42,0.24516759882089542,0.3844533416126258,0.0
+B-W-Tanpa -K3,wine,fb9f53acda5b,StandardScaler,Tanpa redundan (12 fitur),KMeans,"{""n_clusters"": 3}",42,0.2773686720689464,0.8803997758776985,0.0
+B-W-Tanpa -K4,wine,fb9f53acda5b,StandardScaler,Tanpa redundan (12 fitur),KMeans,"{""n_clusters"": 4}",42,0.24120512418813111,0.7258106835144074,0.0
+B-W-Tanpa -K5,wine,fb9f53acda5b,StandardScaler,Tanpa redundan (12 fitur),KMeans,"{""n_clusters"": 5}",42,0.20085637870996112,0.6072437698375882,0.0
+B-W-4 fitu-K2,wine,9e0fc1483968,StandardScaler,4 fitur pertama,KMeans,"{""n_clusters"": 2}",42,0.2318735748557378,0.21116160720760987,0.0
+B-W-4 fitu-K3,wine,9e0fc1483968,StandardScaler,4 fitur pertama,KMeans,"{""n_clusters"": 3}",42,0.294492559601516,0.5411572078375535,0.0
+B-W-4 fitu-K4,wine,9e0fc1483968,StandardScaler,4 fitur pertama,KMeans,"{""n_clusters"": 4}",42,0.30055944223614184,0.43003776738522376,0.0
+B-W-4 fitu-K5,wine,9e0fc1483968,StandardScaler,4 fitur pertama,KMeans,"{""n_clusters"": 5}",42,0.29672484632923213,0.41175367745129293,0.0
+B-M-01,mall_customers,23ed266690d8,z-score per kolom,Baseline: pendapatan + skor belanja,KMeans,"{""n_clusters"": 5}",42,0.5546571631111091,,0.0
+B-M-02,mall_customers,3bcd0b18b1a3,z-score per kolom,+ umur,KMeans,"{""n_clusters"": 5}",42,0.29607062516659166,,0.0
+B-M-03,mall_customers,8a6f7f6807a5,z-score per kolom,+ umur + gender,KMeans,"{""n_clusters"": 5}",42,0.16850257256474188,,0.0
+B-M-04,mall_customers,3296a37a5e08,z-score per kolom,umur + skor belanja,KMeans,"{""n_clusters"": 5}",42,-0.006837636558769411,,0.0
+B-M-05,mall_customers,0798e88a918f,z-score per kolom,pendapatan x3 (digandakan) + skor belanja,KMeans,"{""n_clusters"": 5}",42,0.5496294171510084,,0.0

@@ -1,0 +1,7 @@
+{
+  "seed": 42,
+  "dataset": "make_moons(n_samples=300, noise=0.06) + StandardScaler",
+  "space": "eps 0.10..0.60 langkah 0.05, min_samples [3,5,10,15,20,30]",
+  "constraint": "noise <= 5% dan 2..10 kelompok",
+  "fingerprint": "1509e053e513"
+}

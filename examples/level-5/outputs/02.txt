@@ -1,0 +1,26 @@
+Centroid kelompok 0: [1.333 1.333]
+Centroid kelompok 1: [6.333 5.333]
+Rata-rata jarak dalam kelompok : {0: 1.138, 1: 1.138}
+Cohesion (jarak ke centroid)   : {0: 0.654, 1: 0.654}
+Jarak antar centroid           : {(0, 1): 6.403}
+Jarak antar titik terdekat     : {(0, 1): 5.657}
+                        Cohesion rata-rata  Jarak antar centroid  Rasio separation/cohesion  Silhouette
+Dataset                                                                                                
+Dekat (pusat 3 satuan)               1.161                 3.326                      2.866       0.525
+Jauh (pusat 10 satuan)               1.194                10.244                      8.580       0.834
+[gambar disimpan: docs/assets/level-5/02-dekat-vs-jauh.png]
+Kelompok 0: cohesion = 0.491, rata-rata jarak ke tetangga terdekat = 0.071
+Kelompok 1: cohesion = 1.930, rata-rata jarak ke tetangga terdekat = 0.289
+Silhouette label K-Means : 0.486
+Silhouette label benar   : 0.330
+Cohesion label K-Means   : 0.604
+Cohesion label benar     : 0.729
+[gambar disimpan: docs/assets/level-5/02-moons-label-benar.png]
+   Ukuran  Cohesion
+0      81     0.387
+1      39     0.627
+2      22     0.447
+3      35     0.625
+4      23     0.549
+Pasangan kelompok dengan centroid terdekat: (0, 4) 1.568
+Pasangan kelompok dengan centroid terjauh : (2, 3) 3.395

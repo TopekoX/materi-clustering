@@ -1,0 +1,34 @@
+Ukuran kelompok: {'A': 81, 'B': 39, 'C': 35, 'D': 23, 'E': 22}
+Persentase: {'A': 40.5, 'B': 19.5, 'C': 17.5, 'D': 11.5, 'E': 11.0}
+          n  pendapatan_rata  pendapatan_sd  skor_rata  skor_sd  umur_median  umur_rata  porsi_laki
+Cluster                                                                                            
+A        81            55.30           8.99      49.52     6.53         46.0      42.72        0.41
+B        39            86.54          16.31      82.13     9.36         32.0      32.69        0.46
+C        35            88.20          16.40      17.11     9.95         42.0      41.11        0.54
+D        23            26.30           7.89      20.91    13.02         46.0      45.22        0.39
+E        22            25.73           7.57      79.36    10.50         23.5      25.27        0.41
+
+Seluruh pelanggan: pendapatan 60.56 | skor 50.2 | umur 38.85 | porsi laki-laki 0.44
+         pendapatan  skor belanja  umur  laki-laki
+Cluster                                           
+A             -0.20         -0.03  0.28      -0.07
+B              0.99          1.24 -0.44       0.04
+C              1.05         -1.28  0.16       0.21
+D             -1.30         -1.13  0.46      -0.10
+E             -1.33          1.13 -0.97      -0.06
+Kelompok A (81 pelanggan): pendapatan menengah, belanja menengah
+Kelompok B (39 pelanggan): pendapatan tinggi, belanja tinggi
+Kelompok C (35 pelanggan): pendapatan tinggi, belanja rendah
+Kelompok D (23 pelanggan): pendapatan rendah, belanja rendah
+Kelompok E (22 pelanggan): pendapatan rendah, belanja tinggi
+Kelompok  CustomerID Gender  Age  Income  Score
+       A          81   Male   57      54     51
+       B         176 Female   30      88     86
+       C         177   Male   58      88     15
+       D          25 Female   54      28     14
+       E          26   Male   29      28     82
+Age  : selisih rata-rata antar kelompok = 19.945 | rentang acak 95% = 9.890 | p (permutasi, 2000 kali) = 0.0005
+Male : selisih rata-rata antar kelompok = 0.152 | rentang acak 95% = 0.339 | p (permutasi, 2000 kali) = 0.7426
+Profil dan konfigurasi tersimpan.
+[gambar disimpan: docs/assets/level-6/07-profil-kelompok.png]
+[gambar disimpan: docs/assets/level-6/07-peta-dan-umur.png]

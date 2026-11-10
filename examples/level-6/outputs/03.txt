@@ -1,0 +1,93 @@
+Hyperparameter (kamu yang menentukan, sebelum fit):
+{'n_clusters': 3, 'init': 'k-means++', 'n_init': 10, 'max_iter': 300, 'tol': 0.0001, 'random_state': 42}
+Parameter yang DIPELAJARI (hasil fit, berakhiran _):
+  cluster_centers_ bentuk : (3, 2)
+  inertia_                : 364.47
+  n_iter_                 : 2
+     init  n_init  inertia terkecil  inertia terbesar  seed yang mencapai terkecil
+   random       1           2398.51           3358.04                            2
+   random      10           2398.51           2399.72                           17
+k-means++       1           2398.51           3004.09                            3
+k-means++      10           2398.51           2398.71                           18
+max_iter =   1: n_iter_ = 1, inertia = 3379.91
+max_iter =   2: n_iter_ = 2, inertia = 3365.88
+max_iter =   5: n_iter_ = 5, inertia = 3358.04
+max_iter = 300: n_iter_ = 6, inertia = 3358.04
+ linkage    metric  ARI acuan ukuran kelompok
+    ward euclidean      0.425       [98, 202]
+complete euclidean      0.607      [137, 163]
+complete manhattan      0.597      [116, 184]
+ average euclidean      0.576      [114, 186]
+ average    cosine      0.425      [134, 166]
+  single euclidean      1.000      [150, 150]
+covariance_type  ARI acuan
+      spherical      0.947
+           diag      0.982
+           tied      1.000
+           full      1.000
+reg_covar = 1e-06: ARI acuan = 1.000
+reg_covar = 0.001: ARI acuan = 1.000
+reg_covar = 0.1: ARI acuan = 1.000
+reg_covar = 1: ARI acuan = 0.942
+n_components = 2: ARI acuan = 0.571
+n_components = 3: ARI acuan = 1.000
+n_components = 4: ARI acuan = 0.874
+n_components = 6: ARI acuan = 0.582
+estimate_bandwidth(quantile=0.2): 1.878
+ bandwidth  jumlah kelompok  ARI acuan
+       0.5               69      0.085
+       1.0                7      0.916
+       2.0                3      1.000
+       4.0                3      1.000
+       8.0                2      0.569
+bin_seeding = False, min_bin_freq =  1: 3 kelompok, ARI acuan = 1.000
+bin_seeding = True , min_bin_freq =  1: 3 kelompok, ARI acuan = 1.000
+bin_seeding = True , min_bin_freq =  5: 3 kelompok, ARI acuan = 1.000
+bin_seeding = True , min_bin_freq = 20: 3 kelompok, ARI acuan = 1.000
+Jumlah kombinasi: 66
+Kombinasi dengan Silhouette bisa dihitung: 50 dari 66
+Dipilih dengan Silhouette tertinggi (tanpa batasan):
+ eps  min_samples  n_clusters  noise_fraction  silhouette  davies_bouldin  ari_reference
+0.40           30           2           0.637       0.843           0.231          0.129
+0.45           30           2           0.397       0.720           0.427          0.362
+0.20           15           3           0.843       0.705           0.416          0.020
+Dipilih dengan Davies-Bouldin terendah (tanpa batasan):
+ eps  min_samples  n_clusters  noise_fraction  silhouette  davies_bouldin  ari_reference
+0.40           30           2           0.637       0.843           0.231          0.129
+0.20           15           3           0.843       0.705           0.416          0.020
+0.45           30           2           0.397       0.720           0.427          0.362
+Kombinasi yang memenuhi batasan: 34 dari 50
+Dipilih dengan Silhouette tertinggi di antara yang memenuhi batasan:
+ eps  min_samples  n_clusters  noise_fraction  silhouette  davies_bouldin  ari_reference
+0.60           30           2           0.037       0.418           0.941          0.916
+0.35           15           2           0.013       0.397           0.992          0.974
+0.45           20           2           0.010       0.395           0.998          0.980
+Dari kombinasi yang memenuhi batasan, ARI acuan terbesar adalah: 1.0
+ seed sampler   eps  min_samples  silhouette  ARI acuan
+            0 0.292            9       0.391      0.987
+            1 0.584           25       0.386      0.993
+            2 0.389           17       0.401      0.967
+            3 0.479           19       0.389      0.993
+            4 0.457           21       0.395      0.980
+    Silhouette  Davies-Bouldin  Calinski-Harabasz  ARI acuan
+K                                                           
+2        0.498           0.922            549.895      0.331
+3        0.653           0.458           1557.313      0.463
+4        0.602           0.530           1956.613      0.655
+5        0.543           0.658           1889.006      0.725
+6        0.489           0.747           1853.456      0.718
+7        0.461           0.803           1710.481      0.651
+8        0.437           0.897           1613.578      0.597
+9        0.367           1.038           1551.070      0.523
+10       0.343           1.036           1519.103      0.500
+K terbaik menurut Silhouette        : 3
+K terbaik menurut Davies-Bouldin    : 3
+K terbaik menurut Calinski-Harabasz : 4
+KMeans                   punya predict(): True
+GaussianMixture          punya predict(): True
+MeanShift                punya predict(): True
+DBSCAN                   punya predict(): False
+AgglomerativeClustering  punya predict(): False
+Hasil pencarian grid disimpan: 66 baris
+[gambar disimpan: docs/assets/level-6/03-sensitivitas-eps.png]
+[gambar disimpan: docs/assets/level-6/03-peta-pemilihan.png]

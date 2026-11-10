@@ -1,0 +1,32 @@
+Kelompok jelas            bentuk data: (300, 2)
+Kelompok tumpang tindih   bentuk data: (300, 2)
+Tanpa kelompok alami      bentuk data: (300, 2)
+Kelompok jelas            ukuran kelompok: [100, 100, 100]
+Kelompok tumpang tindih   ukuran kelompok: [103, 98, 99]
+Tanpa kelompok alami      ukuran kelompok: [94, 105, 101]
+                         Silhouette  Davies-Bouldin  Calinski-Harabasz
+Dataset                                                               
+Kelompok jelas                0.908           0.128          14321.247
+Kelompok tumpang tindih       0.577           0.596            647.906
+Tanpa kelompok alami          0.401           0.847            251.661
+[gambar disimpan: docs/assets/level-5/01-tiga-dataset.png]
+   Silhouette
+K            
+2       0.736
+3       0.908
+4       0.704
+5       0.518
+6       0.327
+7       0.357
+K dengan Silhouette tertinggi: 3
+   Silhouette
+K            
+2       0.378
+3       0.401
+4       0.418
+5       0.402
+[gambar disimpan: docs/assets/level-5/01-skor-tiap-k.png]
+Ukuran kelompok: [81, 39, 22, 35, 23]
+Silhouette        : 0.555
+Davies-Bouldin    : 0.572
+Calinski-Harabasz : 248.6

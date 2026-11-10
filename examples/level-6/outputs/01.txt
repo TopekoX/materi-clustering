@@ -1,0 +1,30 @@
+pertanyaan          : Apakah cara menyamakan skala mengubah pengelompokan pelanggan Mall Customers?
+variabel_bebas      : perlakuan skala fitur (4 kondisi)
+variabel_terkontrol : algoritma K-Means, K = 5, n_init = 10, seed = 42, dua fitur yang sama
+variabel_terikat    : kesamaan pengelompokan dengan baseline (ARI), ukuran kelompok, Silhouette di ruang bersama
+baseline            : StandardScaler
+Jumlah pelanggan : 200
+Fitur dipakai    : ['Annual Income (k$)', 'Spending Score (1-100)']
+      Annual Income (k$)  Spending Score (1-100)
+min                15.00                    1.00
+max               137.00                   99.00
+mean               60.56                   50.20
+std                26.26                   25.82
+Ukuran kelompok baseline: [81, 39, 35, 23, 22]
+ARI baseline seed 0 vs seed 1..9, terkecil: 1.0
+ARI baseline seed 0 vs seed 1..9, terbesar: 1.0
+A. StandardScaler (baseline)               ukuran kelompok: [81, 39, 35, 23, 22]
+B. MinMaxScaler                            ukuran kelompok: [81, 39, 35, 23, 22]
+C. Tanpa skala (k$)                        ukuran kelompok: [81, 39, 35, 23, 22]
+D. Tanpa skala (pendapatan dalam dolar)    ukuran kelompok: [56, 50, 42, 32, 20]
+                                         ARI vs baseline  Silhouette (ruang sendiri)  Silhouette (ruang bersama)
+Kondisi                                                                                                         
+A. StandardScaler (baseline)                       1.000                       0.555                       0.555
+B. MinMaxScaler                                    1.000                       0.559                       0.555
+C. Tanpa skala (k$)                                1.000                       0.554                       0.555
+D. Tanpa skala (pendapatan dalam dolar)            0.427                       0.584                       0.157
+[gambar disimpan: docs/assets/level-6/01-empat-kondisi-skala.png]
+A. StandardScaler (baseline)               ARI = 1.000 -> praktis sama dengan baseline
+B. MinMaxScaler                            ARI = 1.000 -> praktis sama dengan baseline
+C. Tanpa skala (k$)                        ARI = 1.000 -> praktis sama dengan baseline
+D. Tanpa skala (pendapatan dalam dolar)    ARI = 0.427 -> berbeda dari baseline

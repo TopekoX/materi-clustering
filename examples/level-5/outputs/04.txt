@@ -1,0 +1,42 @@
+    4 gerombol jelas  4 gerombol tumpang tindih  Tanpa kelompok alami
+K                                                                    
+1            26979.6                    32218.4               26919.6
+2            12508.7                    17293.5               15695.4
+3             2615.7                     6784.4               10284.7
+4              490.6                     4404.9                6396.5
+5              442.4                     3918.8                5230.7
+6              400.2                     3479.6                4348.5
+7              354.7                     3047.1                3614.3
+8              311.9                     2703.2                3100.5
+9              283.6                     2371.5                2760.9
+10             253.0                     2079.5                2446.6
+    4 gerombol jelas  4 gerombol tumpang tindih  Tanpa kelompok alami
+K                                                                    
+1                NaN                        NaN                   NaN
+2               53.6                       46.3                  41.7
+3               79.1                       60.8                  34.5
+4               81.2                       35.1                  37.8
+5                9.8                       11.0                  18.2
+6                9.5                       11.2                  16.9
+7               11.4                       12.4                  16.9
+8               12.0                       11.3                  14.2
+9                9.1                       12.3                  11.0
+10              10.8                       12.3                  11.4
+[gambar disimpan: docs/assets/level-5/04-tiga-kurva-elbow.png]
+4 gerombol jelas            siku heuristik: K = 3   (jarak terbesar 0.487, kedua 0.465)
+4 gerombol tumpang tindih   siku heuristik: K = 3   (jarak terbesar 0.440, kedua 0.417)
+Tanpa kelompok alami        siku heuristik: K = 4   (jarak terbesar 0.357, kedua 0.324)
+Rentang K      Dataset                     Siku heuristik
+1 sampai 6     4 gerombol jelas            K = 3
+1 sampai 6     4 gerombol tumpang tindih   K = 3
+1 sampai 6     Tanpa kelompok alami        K = 3
+1 sampai 10    4 gerombol jelas            K = 3
+1 sampai 10    4 gerombol tumpang tindih   K = 3
+1 sampai 10    Tanpa kelompok alami        K = 4
+1 sampai 15    4 gerombol jelas            K = 4
+1 sampai 15    4 gerombol tumpang tindih   K = 4
+1 sampai 15    Tanpa kelompok alami        K = 4
+Siku heuristik Mall Customers: K = 5
+Silhouette tertinggi pada K = 5 (0.555)
+{2: 0.321, 3: 0.467, 4: 0.494, 5: 0.555, 6: 0.54, 7: 0.528, 8: 0.455, 9: 0.457, 10: 0.443}
+[gambar disimpan: docs/assets/level-5/04-elbow-mall.png]

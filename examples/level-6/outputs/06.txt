@@ -1,0 +1,54 @@
+Matriks kovarians:
+ [[3.5    3.4   ]
+ [3.4    3.3667]]
+Nilai eigen          : [6.834  0.0327]
+Rasio varians manual : [0.9952 0.0048]
+Vektor eigen pertama : [-0.714  -0.7001]
+explained_variance_        : [6.834  0.0327]
+explained_variance_ratio_  : [0.9952 0.0048]
+components_[0] (komponen 1): [0.714  0.7001] (tanda boleh terbalik)
+Varians skor komponen 1    : 6.834
+Rasio varians 6 komponen pertama: [0.362 0.192 0.111 0.071 0.066 0.049]
+Kumulatif 6 komponen pertama    : [0.362 0.554 0.665 0.736 0.802 0.851]
+Komponen minimum untuk >= 80% varians: 5 dari 13
+Komponen minimum untuk >= 90% varians: 8 dari 13
+Komponen minimum untuk >= 95% varians: 10 dari 13
+Tanpa penskalaan: rasio varians komponen 1 dan 2 = [0.9981 0.0017]
+Dengan penskalaan: rasio varians komponen 1 dan 2 = [0.362  0.1921]
+Lima fitur dengan |bobot| terbesar pada PC1:
+flavanoids                      0.423
+total_phenols                   0.395
+od280/od315_of_diluted_wines    0.376
+proanthocyanins                 0.313
+nonflavanoid_phenols           -0.299
+Lima fitur dengan |bobot| terbesar pada PC2:
+color_intensity    0.530
+alcohol            0.484
+proline            0.365
+ash                0.316
+magnesium          0.300
+Cluster di 13 dimensi: ARI acuan = 0.897, Silhouette (13D) = 0.285
+Label yang sama, dihitung di ruang 2D proyeksi: Silhouette (2D) = 0.558
+Varians yang dipertahankan oleh 2 komponen: 55.4%
+ n_components  varians dipertahankan (%)  ARI acuan  ARI vs cluster 13D
+            2                     55.406      0.895               0.932
+            3                     66.530      0.880               0.982
+            5                     80.162      0.897               1.000
+            8                     92.018      0.897               1.000
+           13                    100.000      0.897               1.000
+Digits: (1797, 64) | jumlah kelas: 10
+Varians dipertahankan: 2 komponen = 28.5 %, 10 = 73.8 %, 30 = 95.9 %
+Komponen minimum untuk >= 90% varians: 21 dari 64
+          ruang  ARI acuan  NMI acuan  ARI vs cluster 64D
+64 dimensi asli      0.667      0.739               1.000
+ PCA 2 komponen      0.388      0.527               0.412
+PCA 10 komponen      0.654      0.729               0.940
+PCA 20 komponen      0.670      0.744               0.976
+PCA 30 komponen      0.668      0.745               0.977
+Silhouette label digit asli di 64D : 0.163
+Silhouette label digit asli di 2D  : 0.105
+Silhouette cluster 64D di 64D      : 0.182
+Silhouette cluster 64D di 2D       : 0.143
+[gambar disimpan: docs/assets/level-6/06-scree-wine.png]
+[gambar disimpan: docs/assets/level-6/06-proyeksi-wine.png]
+[gambar disimpan: docs/assets/level-6/06-digits-pca.png]

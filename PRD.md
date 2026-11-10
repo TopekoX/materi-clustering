@@ -66,7 +66,20 @@ Folder: `docs/fundamental-clustering/`. Algoritma clustering tidak dibahas menda
 
 Folder: `docs/clustering-algorithms/`. Struktur bab tetap 14 bagian standar (keputusan 2026-11-10). Metrik evaluasi formal tidak dibahas (itu Level 5). `scipy` ditambahkan ke `requirements-notebooks.txt` untuk dendrogram.
 
-Level 5–7 di luar lingkup sampai Level 4 disetujui.
+### Level 5 (disetujui dikerjakan, 2026-11-10): Clustering Evaluation — 8 bab
+
+1. Introduction to Clustering Evaluation
+2. Internal Clustering Evaluation
+3. Inertia and WCSS
+4. Elbow Method
+5. Silhouette Score
+6. Davies-Bouldin Index
+7. Calinski-Harabasz Index
+8. External Evaluation and Metric Comparison
+
+Folder: `docs/clustering-evaluation/`. Struktur bab tetap 14 bagian standar (keputusan 2026-11-10). Setiap potongan kode diikuti penjelasan, bahasa untuk pemula. Desain eksperimen, pencarian parameter, dan uji stabilitas yang mendalam tidak dibahas (itu Level 6). Tidak ada dependensi baru.
+
+Level 6–7 di luar lingkup sampai Level 5 disetujui.
 
 ## 4. Standar isi bab (wajib)
 

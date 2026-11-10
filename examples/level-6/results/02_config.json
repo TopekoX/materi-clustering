@@ -1,0 +1,15 @@
+{
+  "seed": 42,
+  "datasets": {
+    "blobs": "make_blobs(n_samples=300, centers=3, cluster_std=1.2)",
+    "moons": "make_moons(n_samples=300, noise=0.06)"
+  },
+  "preprocessing": "StandardScaler",
+  "designs": {
+    "KM": "ubah n_clusters",
+    "DB-E": "ubah eps",
+    "DB-M": "ubah min_samples",
+    "HC": "ubah linkage",
+    "DB-F": "grid eps x min_samples"
+  }
+}

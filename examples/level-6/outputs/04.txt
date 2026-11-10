@@ -1,0 +1,89 @@
+Jelas              bentuk (450, 2), kelas acuan: [150, 150, 150], sidik jari 4bba185c7c68
+Tumpang tindih     bentuk (450, 2), kelas acuan: [150, 150, 150], sidik jari 0635866a1edc
+Bulan sabit        bentuk (450, 2), kelas acuan: [225, 225], sidik jari 9fc42919fd31
+Kepadatan berbeda  bentuk (450, 2), kelas acuan: [200, 150, 100], sidik jari 84bcb7b35821
+Dengan noise       bentuk (450, 2), kelas acuan: [134, 133, 133, 50], sidik jari bcafeda2d46e
+Miring (elips)     bentuk (450, 2), kelas acuan: [150, 150, 150], sidik jari a6a0e9b4e77e
+   Algoritma                                                         Konfigurasi                            Cara menentukan
+     K-Means                          n_clusters = K acuan, n_init = 10, seed 42                             diberi K acuan
+Hierarchical                                n_clusters = K acuan, linkage = ward                             diberi K acuan
+         GMM n_components = K acuan, covariance_type = full, n_init = 3, seed 42                             diberi K acuan
+      DBSCAN                              eps dan min_samples dicari dengan grid dipilih TANPA label (batasan + Silhouette)
+  Mean Shift                                        bandwidth dicari dengan grid dipilih TANPA label (batasan + Silhouette)
+Praproses sama untuk semua: StandardScaler. Seed = 42. Label acuan hanya untuk menilai.
+Jumlah catatan: 30 (6 dataset x 5 algoritma)
+          dataset  algorithm                           params
+            Jelas     DBSCAN  {"eps": 0.1, "min_samples": 10}
+            Jelas Mean Shift               {"bandwidth": 0.3}
+   Tumpang tindih     DBSCAN {"eps": 0.25, "min_samples": 10}
+   Tumpang tindih Mean Shift               {"bandwidth": 0.7}
+      Bulan sabit     DBSCAN  {"eps": 0.2, "min_samples": 10}
+      Bulan sabit Mean Shift               {"bandwidth": 1.5}
+Kepadatan berbeda     DBSCAN {"eps": 0.25, "min_samples": 10}
+Kepadatan berbeda Mean Shift               {"bandwidth": 0.7}
+     Dengan noise     DBSCAN  {"eps": 0.1, "min_samples": 10}
+     Dengan noise Mean Shift               {"bandwidth": 1.0}
+   Miring (elips)     DBSCAN  {"eps": 0.1, "min_samples": 10}
+   Miring (elips) Mean Shift               {"bandwidth": 1.0}
+Jumlah kelompok yang ditemukan (kelas acuan: 3, 3, 2, 3, 3, 3):
+algorithm          K-Means  Hierarchical  GMM  DBSCAN  Mean Shift
+dataset                                                          
+Jelas                    3             3    3       3           3
+Tumpang tindih           3             3    3       2           3
+Bulan sabit              2             2    2       2           2
+Kepadatan berbeda        3             3    3       3           3
+Dengan noise             3             3    3       3           4
+Miring (elips)           3             3    3       3           2
+
+Proporsi noise (hanya DBSCAN yang punya noise):
+algorithm          K-Means  Hierarchical  GMM  DBSCAN  Mean Shift
+dataset                                                          
+Jelas                  0.0           0.0  0.0   0.049         0.0
+Tumpang tindih         0.0           0.0  0.0   0.087         0.0
+Bulan sabit            0.0           0.0  0.0   0.020         0.0
+Kepadatan berbeda      0.0           0.0  0.0   0.140         0.0
+Dengan noise           0.0           0.0  0.0   0.138         0.0
+Miring (elips)         0.0           0.0  0.0   0.084         0.0
+
+Silhouette (noise dikeluarkan):
+algorithm          K-Means  Hierarchical    GMM  DBSCAN  Mean Shift
+dataset                                                            
+Jelas                0.892         0.892  0.892   0.899       0.892
+Tumpang tindih       0.661         0.653  0.661   0.612       0.661
+Bulan sabit          0.492         0.443  0.492   0.389       0.492
+Kepadatan berbeda    0.784         0.784  0.784   0.837       0.784
+Dengan noise         0.826         0.799  0.826   0.912       0.794
+Miring (elips)       0.734         0.735  0.735   0.776       0.763
+
+ARI terhadap label acuan:
+algorithm          K-Means  Hierarchical    GMM  DBSCAN  Mean Shift
+dataset                                                            
+Jelas                1.000         1.000  1.000   0.926       1.000
+Tumpang tindih       0.987         0.961  0.987   0.492       0.987
+Bulan sabit          0.486         0.524  0.498   0.960       0.492
+Kepadatan berbeda    1.000         1.000  1.000   0.903       1.000
+Dengan noise         0.825         0.825  0.825   0.928       0.858
+Miring (elips)       0.993         1.000  1.000   0.868       0.570
+
+NMI terhadap label acuan:
+algorithm          K-Means  Hierarchical    GMM  DBSCAN  Mean Shift
+dataset                                                            
+Jelas                1.000         1.000  1.000   0.898       1.000
+Tumpang tindih       0.978         0.949  0.978   0.587       0.978
+Bulan sabit          0.388         0.535  0.399   0.925       0.393
+Kepadatan berbeda    1.000         1.000  1.000   0.871       1.000
+Dengan noise         0.806         0.806  0.806   0.895       0.829
+Miring (elips)       0.988         1.000  1.000   0.840       0.734
+                         Silhouette tertinggi                DBI terendah               CHI tertinggi                              ARI tertinggi
+Dataset                                                                                                                                         
+Jelas                                  DBSCAN                      DBSCAN                      DBSCAN  K-Means / Hierarchical / GMM / Mean Shift
+Tumpang tindih     K-Means / GMM / Mean Shift  K-Means / GMM / Mean Shift  K-Means / GMM / Mean Shift                 K-Means / GMM / Mean Shift
+Bulan sabit        K-Means / GMM / Mean Shift                         GMM                     K-Means                                     DBSCAN
+Kepadatan berbeda                      DBSCAN                      DBSCAN                      DBSCAN  K-Means / Hierarchical / GMM / Mean Shift
+Dengan noise                           DBSCAN                      DBSCAN                      DBSCAN                                     DBSCAN
+Miring (elips)                         DBSCAN                  Mean Shift                      DBSCAN                         Hierarchical / GMM
+Benchmark skala selesai: 20 pengukuran (waktu dan memori disimpan di CSV, tidak dicetak karena berubah tiap eksekusi)
+Disimpan: 04_benchmark.csv, 04_scaling.csv, 04_protocol.json
+[gambar disimpan: docs/assets/level-6/04-hasil-semua-kombinasi.png]
+[gambar disimpan: docs/assets/level-6/04-peta-panas-metrik.png]
+[gambar disimpan: docs/assets/level-6/04-waktu-dan-memori.png]
