@@ -125,6 +125,7 @@ nav:
       - Bab 4 — DBSCAN Clustering: clustering-algorithms/04-dbscan-clustering.md
       - Bab 5 — Gaussian Mixture Models: clustering-algorithms/05-gaussian-mixture-models.md
       - Bab 6 — Mean Shift Clustering: clustering-algorithms/06-mean-shift-clustering.md
+      - Bab 7 — Comparison of Clustering Algorithms: clustering-algorithms/07-comparison-of-clustering-algorithms.md
 
 # --- Plugins ----------------------------------------------------------------
 plugins:

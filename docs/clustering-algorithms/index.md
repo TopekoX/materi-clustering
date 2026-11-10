@@ -17,9 +17,7 @@ Bab-bab memakai **data sintetis kecil** (`make_blobs`, `make_moons`, dan sejenis
 | 4 | [DBSCAN Clustering](04-dbscan-clustering.md) | Siap ditinjau |
 | 5 | [Gaussian Mixture Models (GMM)](05-gaussian-mixture-models.md) | Siap ditinjau |
 | 6 | [Mean Shift Clustering](06-mean-shift-clustering.md) | Siap ditinjau |
-| 7 | Comparison of Clustering Algorithms | Direncanakan |
-
-Bab yang belum siap akan ditautkan saat selesai.
+| 7 | [Comparison of Clustering Algorithms](07-comparison-of-clustering-algorithms.md) | Siap ditinjau |
 
 ## Prasyarat
 

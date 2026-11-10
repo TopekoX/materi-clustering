@@ -60,6 +60,6 @@ Laporan QA: `LEVEL3_QA_REPORT.md`.
 | 4 | `04-dbscan-clustering.md` | `04_dbscan_clustering.py` | ✅ dieksekusi | Siap ditinjau |
 | 5 | `05-gaussian-mixture-models.md` | `05_gaussian_mixture_models.py` | ✅ dieksekusi | Siap ditinjau |
 | 6 | `06-mean-shift-clustering.md` | `06_mean_shift_clustering.py` | ✅ dieksekusi | Siap ditinjau |
-| 7 | `07-comparison-of-clustering-algorithms.md` | — | — | Direncanakan |
+| 7 | `07-comparison-of-clustering-algorithms.md` | `07_comparison_of_clustering_algorithms.py` | ✅ dieksekusi | Siap ditinjau |
 
-Satu bab per iterasi; QA report (`LEVEL4_QA_REPORT.md`) dibuat setelah Bab 7.
+Laporan QA: `LEVEL4_QA_REPORT.md`.

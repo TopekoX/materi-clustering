@@ -9,7 +9,7 @@ Kurikulum terdiri dari tujuh level. Setiap level berisi beberapa bab, dan setiap
 | 1 | Machine Learning Fundamentals | 2 | Siap ditinjau |
 | 2 | Data Exploration and Preprocessing | 12 | Siap ditinjau |
 | 3 | Fundamental Clustering | 7 | Siap ditinjau |
-| 4 | Clustering Algorithms | — | Direncanakan |
+| 4 | Clustering Algorithms | 7 | Siap ditinjau |
 | 5 | Clustering Evaluation | — | Direncanakan |
 | 6 | Experimentation and Interpretation | — | Direncanakan |
 | 7 | Research Project | — | Direncanakan |
@@ -303,7 +303,7 @@ Fondasi clustering sebelum mempelajari algoritma. Tujuh bab sudah siap ditinjau.
 
 ## [Level 4 — Clustering Algorithms](../clustering-algorithms/index.md)
 
-Lima algoritma clustering inti dan perbandingannya. Dikerjakan bertahap: Bab 1 siap ditinjau, Bab 2–7 direncanakan.
+Lima algoritma clustering inti dan perbandingannya. Tujuh bab sudah siap ditinjau.
 
 1. [Introduction to Clustering Algorithms](../clustering-algorithms/01-introduction-to-clustering-algorithms.md)
 2. [K-Means Clustering](../clustering-algorithms/02-k-means-clustering.md)
@@ -311,7 +311,7 @@ Lima algoritma clustering inti dan perbandingannya. Dikerjakan bertahap: Bab 1 s
 4. [DBSCAN Clustering](../clustering-algorithms/04-dbscan-clustering.md)
 5. [Gaussian Mixture Models (GMM)](../clustering-algorithms/05-gaussian-mixture-models.md)
 6. [Mean Shift Clustering](../clustering-algorithms/06-mean-shift-clustering.md)
-7. Comparison of Clustering Algorithms *(direncanakan)*
+7. [Comparison of Clustering Algorithms](../clustering-algorithms/07-comparison-of-clustering-algorithms.md)
 
 ## Level 5–7
 

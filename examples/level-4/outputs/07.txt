@@ -1,0 +1,73 @@
+{'blobs': (300, 2), 'moons': (300, 2), 'circles': (300, 2), 'noisy': (300, 2), 'density': (300, 2), 'overlap': (300, 2)}
+         K (K-Means/Ward/GMM)  eps DBSCAN  bandwidth Mean Shift
+blobs                       3         0.3                 0.266
+moons                       2         0.3                 0.952
+circles                     2         0.4                 1.038
+noisy                       3         0.3                 0.349
+density                     3         0.4                 0.795
+overlap                     3         0.2                 0.851
+dataset K-Means Hierarchical (Ward)          DBSCAN   GMM Mean Shift
+  blobs   3 kel               3 kel           3 kel 3 kel      3 kel
+  moons   2 kel               2 kel           2 kel 2 kel      3 kel
+circles   2 kel               2 kel           2 kel 2 kel      4 kel
+  noisy   3 kel               3 kel 3 kel, 21 noise 3 kel     16 kel
+density   3 kel               3 kel  3 kel, 5 noise 3 kel      3 kel
+overlap   3 kel               3 kel 3 kel, 80 noise 3 kel      3 kel
+[gambar disimpan: docs/assets/level-4/07-perbandingan-algoritma.png]
+          Algoritma  labels_  predict  predict_proba  pusat kelompok
+            K-Means     True     True          False            True
+Hierarchical (Ward)     True    False          False           False
+             DBSCAN     True    False          False           False
+                GMM    False     True           True            True
+         Mean Shift     True     True          False            True
+Peluang tiga titik pertama dataset overlap (GMM):
+     p_0    p_1    p_2
+0  0.000  0.009  0.991
+1  0.000  0.006  0.994
+2  0.157  0.843  0.000
+
+Titik dengan peluang tertinggi < 0.9 : 131 dari 300
+Titik dengan peluang tertinggi < 0.6 : 24 dari 300
+Pada K-Means, Ward, DBSCAN, dan Mean Shift: tidak ada predict_proba (hanya satu label per titik).
+Waktu fit (detik); angka bergantung mesin dan bisa berbeda tiap eksekusi:
+                 K-Means  Hierarchical (Ward)  DBSCAN    GMM  Mean Shift
+n (jumlah data)                                                         
+500                0.059                0.010   0.006  0.014       3.102
+1000               0.073                0.036   0.013  0.017       6.504
+2000               0.025                0.097   0.022  0.016      14.698
+4000               0.023                0.465   0.055  0.021      29.456
+
+Rasio waktu saat n naik 4000/1000 (4 kali lipat data):
+K-Means                 0.3
+Hierarchical (Ward)    12.9
+DBSCAN                  4.2
+GMM                     1.2
+Mean Shift              4.5
+[gambar disimpan: docs/assets/level-4/07-skalabilitas.png]
+K-Means              5 kelompok, ukuran [81, 39, 35, 23, 22], noise 0
+Hierarchical (Ward)  5 kelompok, ukuran [85, 39, 32, 23, 21], noise 0
+DBSCAN               5 kelompok, ukuran [95, 30, 24, 14, 12], noise 25
+GMM                  5 kelompok, ukuran [84, 39, 33, 23, 21], noise 0
+Mean Shift           5 kelompok, ukuran [78, 39, 38, 23, 22], noise 0
+GMM       0   1   2   3   4
+K-Means                    
+0        81   0   0   0   0
+1         0  39   0   0   0
+2         1   0  21   0   0
+3         2   0   0  33   0
+4         0   0   0   0  23
+[gambar disimpan: docs/assets/level-4/07-mall-perbandingan.png]
+Segmentasi pelanggan, 200 baris, kelompok bulat, K kira-kira 5
+   - K-Means: cepat, mudah dijelaskan, cocok untuk kelompok bulat
+   - Hierarchical (Ward): dendrogram membantu memilih jumlah kelompok
+Titik GPS 50.000 baris, bentuk bebas, ada titik tersesat
+   - DBSCAN: mengikuti bentuk bebas dan menandai noise
+   - (catatan): data besar: hindari Hierarchical dan Mean Shift tanpa bin_seeding; K-Means dan DBSCAN lebih skalabel
+Data pengukuran, elips tumpang tindih, butuh peluang
+   - GMM: satu-satunya yang memberi peluang keanggotaan (soft clustering)
+   - GMM (covariance_type='full'): memodelkan elips berbagai ukuran dan kemiringan
+   - K-Means: cepat, mudah dijelaskan, cocok untuk kelompok bulat
+   - Hierarchical (Ward): dendrogram membantu memilih jumlah kelompok
+Data eksplorasi 800 baris, K tidak diketahui, kelompok bulat
+   - Hierarchical (Ward): dendrogram membantu memilih jumlah kelompok
+   - Mean Shift: jumlah kelompok mengikuti puncak kepadatan (pilih bandwidth dengan hati-hati)
