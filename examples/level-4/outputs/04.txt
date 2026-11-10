@@ -1,0 +1,80 @@
+A: 3 tetangga ['A', 'B', 'C'] -> inti
+B: 3 tetangga ['A', 'B', 'D'] -> inti
+C: 3 tetangga ['A', 'C', 'D'] -> inti
+D: 4 tetangga ['B', 'C', 'D', 'E'] -> inti
+E: 2 tetangga ['D', 'E'] -> tepi
+F: 1 tetangga ['F'] -> noise
+G: 3 tetangga ['G', 'H', 'I'] -> inti
+H: 3 tetangga ['G', 'H', 'I'] -> inti
+I: 3 tetangga ['G', 'H', 'I'] -> inti
+
+labels_              : [0, 0, 0, 0, 0, -1, 1, 1, 1]
+core_sample_indices_ : [0, 1, 2, 3, 6, 7, 8]
+Sama dengan hitungan manual? True
+[gambar disimpan: docs/assets/level-4/04-titik-kecil.png]
+Bentuk X: (315, 2)
+Label unik: [-1, 0, 1]
+Jumlah kelompok: 2
+Jumlah noise (label -1): 7
+Ukuran tiap kelompok: [155, 153]
+Titik inti: 303, tepi: 5, noise: 7
+[gambar disimpan: docs/assets/level-4/04-core-border-noise.png]
+persentil   0: jarak ke-5 = 0.035
+persentil  50: jarak ke-5 = 0.090
+persentil  75: jarak ke-5 = 0.114
+persentil  90: jarak ke-5 = 0.146
+persentil  95: jarak ke-5 = 0.174
+persentil  98: jarak ke-5 = 0.274
+persentil 100: jarak ke-5 = 0.841
+[gambar disimpan: docs/assets/level-4/04-k-distance.png]
+ eps  min_samples  kelompok  noise
+0.05            5         4    292
+0.10            5        10     58
+0.15            5         2     11
+0.20            5         2      7
+0.30            5         2      5
+0.50            5         1      2
+0.20            3         2      7
+0.20            5         2      7
+0.20           10         2      7
+0.20           20         7    148
+0.20           30         0    315
+[gambar disimpan: docs/assets/level-4/04-pengaruh-parameter.png]
+eps = 0.25: 3 kelompok, ukuran [116, 199, 5], noise 80
+eps = 0.5: 2 kelompok, ukuran [190, 203], noise 7
+eps = 0.8: 1 kelompok, ukuran [399], noise 1
+[gambar disimpan: docs/assets/level-4/04-kepadatan-berbeda.png]
+algorithm=auto      leaf_size=10 -> label sama dengan bawaan? True
+algorithm=ball_tree leaf_size=10 -> label sama dengan bawaan? True
+algorithm=kd_tree   leaf_size=10 -> label sama dengan bawaan? True
+algorithm=brute     leaf_size=10 -> label sama dengan bawaan? True
+metric=euclidean -> 2 kelompok, 7 noise
+metric=manhattan -> 2 kelompok, 10 noise
+Label unik: [-1, 0, 1, 2, 3, 4]
+Jumlah per label:
+Cluster
+-1    25
+ 0    14
+ 1    12
+ 2    95
+ 3    30
+ 4    24
+Name: count, dtype: int64
+
+Rata-rata tiap kelompok (noise = -1):
+         Annual Income (k$)  Spending Score (1-100)
+Cluster                                            
+-1                     83.0                    60.5
+ 0                     23.6                    76.4
+ 1                     24.6                     9.6
+ 2                     53.3                    47.8
+ 3                     79.5                    83.1
+ 4                     81.9                    13.0
+       min_samples=4    min_samples=5     min_samples=8
+eps                                                    
+0.2  5 kel, 73 noise  7 kel, 77 noise  2 kel, 116 noise
+0.3  8 kel, 23 noise  7 kel, 35 noise   5 kel, 72 noise
+0.4  3 kel, 14 noise  4 kel, 15 noise   5 kel, 25 noise
+0.5   2 kel, 8 noise   2 kel, 8 noise   2 kel, 15 noise
+Tanpa penyamaan skala, eps=0.3 -> 0 kelompok, 200 noise dari 200 titik
+[gambar disimpan: docs/assets/level-4/04-mall-customers.png]

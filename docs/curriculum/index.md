@@ -301,13 +301,24 @@ Fondasi clustering sebelum mempelajari algoritma. Tujuh bab sudah siap ditinjau.
 6. [Feature Space and Dimensionality](../fundamental-clustering/06-feature-space-and-dimensionality.md)
 7. [Clustering Workflow](../fundamental-clustering/07-clustering-workflow.md)
 
-## Level 4–7
+## [Level 4 — Clustering Algorithms](../clustering-algorithms/index.md)
+
+Lima algoritma clustering inti dan perbandingannya. Dikerjakan bertahap: Bab 1 siap ditinjau, Bab 2–7 direncanakan.
+
+1. [Introduction to Clustering Algorithms](../clustering-algorithms/01-introduction-to-clustering-algorithms.md)
+2. [K-Means Clustering](../clustering-algorithms/02-k-means-clustering.md)
+3. [Hierarchical Clustering](../clustering-algorithms/03-hierarchical-clustering.md)
+4. [DBSCAN Clustering](../clustering-algorithms/04-dbscan-clustering.md)
+5. [Gaussian Mixture Models (GMM)](../clustering-algorithms/05-gaussian-mixture-models.md)
+6. [Mean Shift Clustering](../clustering-algorithms/06-mean-shift-clustering.md)
+7. Comparison of Clustering Algorithms *(direncanakan)*
+
+## Level 5–7
 
 Judul level sudah ditetapkan, tetapi daftar bab dan sub-babnya belum disusun. Daftar ini akan ditambahkan setelah level sebelumnya disetujui.
 
 | Level | Topik | Status |
 |---|---|---|
-| 4 | Clustering Algorithms | Direncanakan |
 | 5 | Clustering Evaluation | Direncanakan |
 | 6 | Experimentation and Interpretation | Direncanakan |
 | 7 | Research Project | Direncanakan |

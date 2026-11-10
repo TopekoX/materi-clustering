@@ -1,6 +1,6 @@
 # CLAUDE.md — Materi Clustering
 
-Situs dokumentasi berbahasa Indonesia tentang Clustering Machine Learning, di atas template MkDocs + Material yang sudah ada. Lingkup saat ini: **Level 2 — Data Exploration and Preprocessing** (12 bab) dan **Level 3 — Fundamental Clustering** (7 bab, dikerjakan bertahap). Lihat `PRD.md`, `IMPLEMENTATION_PLAN.md`, `PROJECT_AUDIT.md`.
+Situs dokumentasi berbahasa Indonesia tentang Clustering Machine Learning, di atas template MkDocs + Material yang sudah ada. Lingkup saat ini: **Level 2 — Data Exploration and Preprocessing** (12 bab), **Level 3 — Fundamental Clustering** (7 bab), dan **Level 4 — Clustering Algorithms** (7 bab, dikerjakan bertahap, disetujui 2026-11-10; evaluasi formal tetap milik Level 5). Lihat `PRD.md`, `IMPLEMENTATION_PLAN.md`, `PROJECT_AUDIT.md`.
 
 ## Aturan keras
 
@@ -32,7 +32,7 @@ Learning Objectives, Introduction, Fundamental Concepts, Detailed Explanation, M
 Aturan: setiap level berada langsung di bawah `docs/`, dalam folder bernama sesuai topik level (slug Inggris, huruf kecil). Jangan menaruh level di dalam `docs/curriculum/`; folder itu hanya berisi `index.md` (roadmap).
 
 ```
-docs/<topik-level>/index.md, NN-slug.md     contoh: docs/data-exploration-and-preprocessing/ (Level 2), docs/fundamental-clustering/ (Level 3)
+docs/<topik-level>/index.md, NN-slug.md     contoh: docs/data-exploration-and-preprocessing/ (Level 2), docs/fundamental-clustering/ (Level 3), docs/clustering-algorithms/ (Level 4)
 docs/assets/level-2/          gambar
 data/mall_customers.csv
 notebooks/level-2/NN-slug.ipynb

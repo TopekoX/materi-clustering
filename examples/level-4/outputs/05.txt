@@ -1,0 +1,95 @@
+N(3 | mean=1, var=4) = 0.12099
+N(3 | mean=8, var=4) = 0.00876
+Sigma = I, selisih (1, 1): 0.05855
+Sigma = diag(4, 1), selisih (2, 1): jarak Mahalanobis kuadrat = 2.0
+[gambar disimpan: docs/assets/level-4/05-gaussian-kovarians.png]
+Iterasi 1: log-likelihood = -15.0389 | means = [2.0899, 7.2403] | variances = [1.1061, 2.0747] | weights = [0.4997, 0.5003]
+  Tanggung jawab (kolom: komponen 1, komponen 2) pada iterasi 1:
+        r_1     r_2
+1.0  0.9978  0.0022
+2.0  0.9876  0.0124
+3.0  0.9325  0.0675
+6.0  0.0675  0.9325
+7.0  0.0124  0.9876
+9.0  0.0004  0.9996
+Iterasi 2: log-likelihood = -12.9475 | means = [1.9981, 7.3125] | variances = [0.6757, 1.6437] | weights = [0.4979, 0.5021]
+Iterasi 3: log-likelihood = -12.7250 | means = [1.9984, 7.3263] | variances = [0.6663, 1.5838] | weights = [0.4992, 0.5008]
+Iterasi 4: log-likelihood = -12.7235 | means = [1.9988, 7.3278] | variances = [0.6664, 1.5778] | weights = [0.4994, 0.5006]
+Iterasi 5: log-likelihood = -12.7235 | means = [1.9988, 7.3279] | variances = [0.6664, 1.5772] | weights = [0.4994, 0.5006]
+Iterasi 6: log-likelihood = -12.7235 | means = [1.9988, 7.3279] | variances = [0.6664, 1.5771] | weights = [0.4994, 0.5006]
+Iterasi 7: log-likelihood = -12.7235 | means = [1.9988, 7.328] | variances = [0.6664, 1.5771] | weights = [0.4994, 0.5006]
+Iterasi 8: log-likelihood = -12.7235 | means = [1.9988, 7.328] | variances = [0.6664, 1.5771] | weights = [0.4994, 0.5006]
+[gambar disimpan: docs/assets/level-4/05-em-1d.png]
+scikit-learn means    : [1.9988, 7.328]
+scikit-learn variances: [0.6664, 1.5771]
+scikit-learn weights  : [0.4994, 0.5006]
+scikit-learn log-likelihood total: -12.7235
+Bentuk X: (600, 2)
+Konvergen?          : True
+Iterasi (n_iter_)   : 7
+weights_            : [0.201, 0.442, 0.357]
+means_ (bentuk)     : (3, 2)
+covariances_ (bentuk): (3, 2, 2)
+Rata-rata log-likelihood per titik: -3.63
+
+Bobot sebenarnya   : [0.45, 0.2, 0.35]
+Bobot hasil GMM    : [0.442, 0.201, 0.357]
+Rata-rata sebenarnya:
+ [[0.  0. ]
+ [1.5 4.5]
+ [4.5 0.5]]
+Rata-rata hasil GMM :
+ [[-0.04 -0.04]
+ [ 1.45  4.44]
+ [ 4.52  0.52]]
+Ukuran tiap komponen: [122, 264, 214]
+
+Peluang lima titik pertama (tiap baris berjumlah 1):
+   p_0    p_1    p_2
+0  0.0  1.000  0.000
+1  0.0  1.000  0.000
+2  0.0  0.147  0.853
+3  0.0  1.000  0.000
+4  0.0  1.000  0.000
+Jumlah tiap baris: [1.0, 1.0, 1.0, 1.0, 1.0]
+
+label = argmax(peluang) untuk semua titik? True
+Titik dengan peluang tertinggi < 0.9: 51 dari 600
+Titik dengan peluang tertinggi < 0.6: 19 dari 600
+Selisih terbesar dengan predict_proba: 9.71445146547012e-16
+max_iter -> n_iter_, konvergen?, rata-rata log-likelihood per titik (tol sangat kecil)
+max_iter = 1   -> n_iter_ = 1   konvergen = False log-likelihood = -3.6633
+max_iter = 2   -> n_iter_ = 2   konvergen = False log-likelihood = -3.6477
+max_iter = 3   -> n_iter_ = 3   konvergen = False log-likelihood = -3.6376
+max_iter = 5   -> n_iter_ = 5   konvergen = False log-likelihood = -3.6309
+max_iter = 10  -> n_iter_ = 10  konvergen = False log-likelihood = -3.6298
+max_iter = 20  -> n_iter_ = 20  konvergen = False log-likelihood = -3.6297
+max_iter = 50  -> n_iter_ = 27  konvergen = True  log-likelihood = -3.6297
+full       covariances_ bentuk = (3, 2, 2)  parameter kovarians = 9  ukuran komponen = [122, 264, 214]
+tied       covariances_ bentuk = (2, 2)     parameter kovarians = 3  ukuran komponen = [147, 237, 216]
+diag       covariances_ bentuk = (3, 2)     parameter kovarians = 6  ukuran komponen = [237, 211, 152]
+spherical  covariances_ bentuk = (3,)       parameter kovarians = 3  ukuran komponen = [240, 208, 152]
+[gambar disimpan: docs/assets/level-4/05-tipe-kovarians.png]
+Ukuran K-Means: [235, 211, 154] | Ukuran GMM (full): [122, 264, 214]
+[gambar disimpan: docs/assets/level-4/05-kmeans-vs-gmm.png]
+Konvergen?: True | iterasi: 5
+Bobot komponen: [0.413, 0.197, 0.104, 0.166, 0.121]
+Ukuran komponen: [84, 39, 21, 33, 23]
+Pusat dalam satuan asli:
+   Annual Income (k$)  Spending Score (1-100)
+0                55.7                    49.4
+1                86.2                    82.0
+2                25.1                    80.1
+3                88.8                    16.1
+4                27.0                    22.2
+Pelanggan dengan peluang tertinggi < 0.9: 8 dari 200
+
+Peluang tiga pelanggan paling tidak pasti:
+              p_0  p_1  p_2    p_3    p_4
+CustomerID                               
+125         0.497  0.0  0.0  0.503  0.000
+49          0.611  0.0  0.0  0.000  0.388
+50          0.611  0.0  0.0  0.000  0.388
+Peluang pelanggan baru (pendapatan 60, skor 50): [[1.0, 0.0, 0.0, 0.0, 0.0]]
+Label: [0]
+[gambar disimpan: docs/assets/level-4/05-mall-customers.png]

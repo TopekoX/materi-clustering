@@ -117,6 +117,14 @@ nav:
       - Bab 5 — Distance Metrics: fundamental-clustering/05-distance-metrics.md
       - Bab 6 — Feature Space and Dimensionality: fundamental-clustering/06-feature-space-and-dimensionality.md
       - Bab 7 — Clustering Workflow: fundamental-clustering/07-clustering-workflow.md
+  - Level 4 — Clustering Algorithms:
+      - clustering-algorithms/index.md
+      - Bab 1 — Introduction to Clustering Algorithms: clustering-algorithms/01-introduction-to-clustering-algorithms.md
+      - Bab 2 — K-Means Clustering: clustering-algorithms/02-k-means-clustering.md
+      - Bab 3 — Hierarchical Clustering: clustering-algorithms/03-hierarchical-clustering.md
+      - Bab 4 — DBSCAN Clustering: clustering-algorithms/04-dbscan-clustering.md
+      - Bab 5 — Gaussian Mixture Models: clustering-algorithms/05-gaussian-mixture-models.md
+      - Bab 6 — Mean Shift Clustering: clustering-algorithms/06-mean-shift-clustering.md
 
 # --- Plugins ----------------------------------------------------------------
 plugins:

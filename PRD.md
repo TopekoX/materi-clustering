@@ -54,7 +54,19 @@ Pendekatan belajar: Konsep → Fondasi Matematika → Implementasi Python → La
 
 Folder: `docs/fundamental-clustering/`. Algoritma clustering tidak dibahas mendalam (itu Level 4); K-Means hanya disebut sebagai alat bantu.
 
-Level 4–7 di luar lingkup sampai Level 3 disetujui.
+### Level 4 (disetujui dikerjakan, 2026-11-10): Clustering Algorithms — 7 bab
+
+1. Introduction to Clustering Algorithms
+2. K-Means Clustering
+3. Hierarchical Clustering
+4. DBSCAN Clustering
+5. Gaussian Mixture Models (GMM)
+6. Mean Shift Clustering
+7. Comparison of Clustering Algorithms
+
+Folder: `docs/clustering-algorithms/`. Struktur bab tetap 14 bagian standar (keputusan 2026-11-10). Metrik evaluasi formal tidak dibahas (itu Level 5). `scipy` ditambahkan ke `requirements-notebooks.txt` untuk dendrogram.
+
+Level 5–7 di luar lingkup sampai Level 4 disetujui.
 
 ## 4. Standar isi bab (wajib)
 

@@ -1,0 +1,74 @@
+bandwidth = 0.15 -> jumlah puncak kepadatan = 5
+bandwidth = 0.6  -> jumlah puncak kepadatan = 2
+bandwidth = 2.5  -> jumlah puncak kepadatan = 1
+[gambar disimpan: docs/assets/level-4/06-kde-bandwidth.png]
+Mulai dari 5.0
+  langkah 1: tetangga = [2.0, 3.0, 4.0], rata-rata = 3.0, pergeseran = -2.00
+  langkah 2: tetangga = [1.0, 2.0, 3.0, 4.0], rata-rata = 2.5, pergeseran = -0.50
+  langkah 3: tetangga = [1.0, 2.0, 3.0, 4.0], rata-rata = 2.5, pergeseran = +0.00
+  -> berhenti di puncak 2.5
+
+Mulai dari 10.0
+  langkah 1: tetangga = [10.0, 11.0, 12.0], rata-rata = 11.0, pergeseran = +1.00
+  langkah 2: tetangga = [10.0, 11.0, 12.0], rata-rata = 11.0, pergeseran = +0.00
+  -> berhenti di puncak 11.0
+
+estimate_bandwidth(quantile=0.2) = 1.8612
+Hitungan manual (rata-rata jarak ke tetangga ke-60) = 1.8612
+seed  10: 7 langkah, dari [-3.11, 10.87] ke puncak [-2.68, 8.94]
+seed 148: 5 langkah, dari [5.92, 1.38] ke puncak [4.74, 2.0]
+seed 259: 5 langkah, dari [-2.22, 8.3] ke puncak [-2.68, 8.94]
+seed 242: 4 langkah, dari [5.8, 2.76] ke puncak [4.74, 2.0]
+seed 280: 4 langkah, dari [3.87, 1.74] ke puncak [4.7, 2.04]
+seed 136: 4 langkah, dari [4.39, 0.73] ke puncak [4.74, 2.0]
+seed  74: 6 langkah, dari [-2.9, 7.55] ke puncak [-2.68, 8.94]
+seed  42: 5 langkah, dari [-7.37, -7.31] ke puncak [-6.91, -7.06]
+seed 126: 5 langkah, dari [-6.27, -6.12] ke puncak [-6.87, -7.05]
+seed 219: 6 langkah, dari [-7.15, -9.18] ke puncak [-6.83, -7.08]
+seed  92: 4 langkah, dari [-6.4, -6.55] ke puncak [-6.83, -7.08]
+seed 277: 5 langkah, dari [-3.62, 7.82] ke puncak [-2.68, 8.94]
+[gambar disimpan: docs/assets/level-4/06-jalur-pergeseran.png]
+Jumlah kelompok : 3
+Ukuran kelompok : [100, 100, 100]
+cluster_centers_:
+ [[-2.685  8.945]
+ [ 4.736  2.003]
+ [-6.834 -7.077]]
+n_iter_         : 7
+
+Dengan bandwidth hasil estimate_bandwidth (1.861): 4 kelompok, ukuran [100, 98, 100, 2]
+Versi buatan sendiri: jumlah kelompok = 3 | ukuran = [100, 100, 100]
+Selisih terbesar antar pusat: 0.0366
+[gambar disimpan: docs/assets/level-4/06-pusat-kelompok.png]
+ bandwidth  kelompok ukuran terbesar (maks. 5)
+       0.5        65      [18, 17, 16, 14, 12]
+       1.0         8       [97, 93, 56, 38, 6]
+       1.5         4         [100, 100, 98, 2]
+       2.0         3           [100, 100, 100]
+       3.0         3           [100, 100, 100]
+       5.0         3           [100, 100, 100]
+       8.0         2                [200, 100]
+[gambar disimpan: docs/assets/level-4/06-pengaruh-bandwidth.png]
+Jumlah seed: semua titik = 310, bin_seeding=True dengan min_bin_freq=5 = 12
+
+bin_seeding=False, cluster_all=True : 9 pusat, label -1 = 0, ukuran = [101, 100, 102, 2, 1, 1, 1, 1, 1]
+bin_seeding=True,  min_bin_freq=5, cluster_all=True : 3 pusat, label -1 = 0, ukuran = [101, 102, 107]
+bin_seeding=True,  min_bin_freq=5, cluster_all=False: 3 pusat, label -1 = 19, ukuran = [98, 97, 96]
+Bulan sabit: bandwidth = 0.668 -> 3 kelompok, ukuran [70, 122, 108]
+ quantile  bandwidth  kelompok                     ukuran
+     0.10      0.649         7 [79, 34, 31, 23, 23, 5, 5]
+     0.15      0.858         5       [78, 38, 39, 23, 22]
+     0.20      1.047         3              [121, 41, 38]
+     0.30      1.255         1                      [200]
+
+Dipakai: quantile = 0.15, bandwidth = 0.858, 5 kelompok
+Pusat dalam satuan asli:
+   Annual Income (k$)  Spending Score (1-100)
+0                54.2                    49.7
+1                82.3                    17.5
+2                79.8                    82.5
+3                29.9                    72.9
+4                27.3                    19.1
+Ukuran kelompok: [78, 38, 39, 23, 22]
+Label pelanggan baru: [3, 0, 1]
+[gambar disimpan: docs/assets/level-4/06-mall-customers.png]

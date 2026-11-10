@@ -1,0 +1,36 @@
+Bentuk X_blobs: (300, 2)
+Bentuk X_moons: (300, 2)
+
+Lima baris pertama X_blobs:
+      x1     x2
+0 -7.247 -7.560
+1 -7.568 -7.188
+2 -1.851  8.038
+3  4.466  2.852
+4 -8.510 -7.687
+[gambar disimpan: docs/assets/level-4/01-dua-dataset.png]
+Bandwidth Mean Shift (hasil estimate_bandwidth): 1.489
+
+K-Means              label unik: [0, 1, 2]  jumlah anggota: [100, 100, 100]
+Hierarchical (Ward)  label unik: [0, 1, 2]  jumlah anggota: [100, 100, 100]
+DBSCAN               label unik: [-1, 0, 1, 2]  jumlah anggota: [8, 98, 98, 96]
+GMM                  label unik: [0, 1, 2]  jumlah anggota: [100, 100, 100]
+Mean Shift           label unik: [0, 1, 2, 3]  jumlah anggota: [100, 98, 100, 2]
+          Algoritma  punya labels_  punya predict()  punya predict_proba()  punya pusat
+            K-Means           True             True                  False         True
+Hierarchical (Ward)           True            False                  False        False
+             DBSCAN           True            False                  False        False
+                GMM          False             True                   True         True
+         Mean Shift           True             True                  False         True
+Jumlah kelompok (tanpa noise) dan jumlah noise per algoritma:
+blobs  K-Means              kelompok: 3  noise: 0
+blobs  Hierarchical (Ward)  kelompok: 3  noise: 0
+blobs  DBSCAN               kelompok: 3  noise: 8
+blobs  GMM                  kelompok: 3  noise: 0
+blobs  Mean Shift           kelompok: 4  noise: 0
+moons  K-Means              kelompok: 2  noise: 0
+moons  Hierarchical (Ward)  kelompok: 2  noise: 0
+moons  DBSCAN               kelompok: 2  noise: 0
+moons  GMM                  kelompok: 2  noise: 0
+moons  Mean Shift           kelompok: 3  noise: 0
+[gambar disimpan: docs/assets/level-4/01-lima-algoritma-dua-dataset.png]

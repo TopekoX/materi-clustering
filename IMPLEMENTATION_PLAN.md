@@ -49,3 +49,17 @@ Urutan sama dengan daftar di `PRD.md`. Setiap iterasi: tulis bab → tulis kode 
 | 7 | `07-clustering-workflow.md` | `07_clustering_workflow.py` | ✅ dieksekusi | Siap ditinjau |
 
 Laporan QA: `LEVEL3_QA_REPORT.md`.
+
+## Status Level 4 — Clustering Algorithms (2026-11-10)
+
+| Bab | Bab (file) | Skrip | Notebook | Status |
+|---|---|---|---|---|
+| 1 | `01-introduction-to-clustering-algorithms.md` | `01_introduction_to_clustering_algorithms.py` | ✅ dieksekusi | Siap ditinjau |
+| 2 | `02-k-means-clustering.md` | `02_k_means_clustering.py` | ✅ dieksekusi | Siap ditinjau |
+| 3 | `03-hierarchical-clustering.md` | `03_hierarchical_clustering.py` | ✅ dieksekusi | Siap ditinjau |
+| 4 | `04-dbscan-clustering.md` | `04_dbscan_clustering.py` | ✅ dieksekusi | Siap ditinjau |
+| 5 | `05-gaussian-mixture-models.md` | `05_gaussian_mixture_models.py` | ✅ dieksekusi | Siap ditinjau |
+| 6 | `06-mean-shift-clustering.md` | `06_mean_shift_clustering.py` | ✅ dieksekusi | Siap ditinjau |
+| 7 | `07-comparison-of-clustering-algorithms.md` | — | — | Direncanakan |
+
+Satu bab per iterasi; QA report (`LEVEL4_QA_REPORT.md`) dibuat setelah Bab 7.
