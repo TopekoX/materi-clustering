@@ -1,0 +1,12 @@
+{
+  "seed": 42,
+  "sources": [
+    "07_cluster_profile.csv",
+    "09_stability_by_k.csv",
+    "09_cluster_jaccard.csv",
+    "04_benchmark.csv",
+    "09_config.json"
+  ],
+  "permutations": 2000,
+  "wording_checked": true
+}

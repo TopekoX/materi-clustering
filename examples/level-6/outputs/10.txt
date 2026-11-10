@@ -1,0 +1,33 @@
+07_cluster_profile.csv: 5 baris
+09_stability_by_k.csv: 7 baris
+09_cluster_jaccard.csv: 5 baris
+04_benchmark.csv: 30 baris
+09_config.json: ['algorithm', 'bootstrap_repeats', 'dataset', 'dataset_fingerprint', 'environment', 'features', 'preprocessing', 'seed', 'seed_runs', 'stability_measure', 'subsample_fractions', 'subsample_repeats']
+{'n': 200, 'kolom': ['CustomerID', 'Gender', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)'], 'kosong': 0, 'perempuan': 112, 'laki': 88, 'pendapatan': (15, 137), 'skor': (1, 99), 'umur': (18, 70)}
+Sidik jari data (cocok dengan konfigurasi Bab 9): edb2a3858344
+Umur: selisih rata-rata antar kelompok 19.945 tahun | batas acak 95% 9.890 | p = 0.0005
+ K Silhouette Kestabilan (rata-rata) Kestabilan (minimum)
+ 2      0,321                  0,313               -0,013
+ 3      0,467                  1,000                1,000
+ 4      0,494                  0,776                0,547
+ 5      0,555                  0,987                0,927
+ 6      0,540                  0,947                0,840
+ 7      0,528                  0,895                0,612
+ 8      0,455                  0,895                0,697
+Kelompok  Ukuran Pendapatan (k$), rata-rata Skor belanja, rata-rata Umur, median Jaccard (kestabilan)
+       A      81                       55,3                    49,5         46,0                0,979
+       B      39                       86,5                    82,1         32,0                1,000
+       C      35                       88,2                    17,1         42,0                0,970
+       D      23                       26,3                    20,9         46,0                0,980
+       E      22                       25,7                    79,4         23,5                0,990
+           silhouette  davies_bouldin  ari_reference
+algorithm                                           
+K-Means         0.492           0.816          0.486
+DBSCAN          0.389           1.016          0.960
+Dipilih menurut Silhouette: K-Means | dipilih menurut ARI terhadap label acuan: DBSCAN
+DITANDAI ['membuktikan', 'benar-benar']: Hasil ini membuktikan bahwa lima segmen pelanggan benar-benar ada.
+DITANDAI ['pasti']: Kelompok E pasti boros karena umurnya muda.
+DITANDAI ['terbaik']: K = 5 adalah pilihan terbaik.
+Laporan: 61 baris, 617 kata. Kalimat berisiko ditandai: 0
+Laporan tersimpan: examples/level-6/results/10_report.md
+[gambar disimpan: docs/assets/level-6/10-gambar-laporan.png]

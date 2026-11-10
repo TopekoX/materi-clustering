@@ -1,0 +1,53 @@
+Data: (200, 2) | fitur: ['Annual Income (k$)', 'Spending Score (1-100)']
+ID kelompok identik (cara naif)   : 19.5% titik
+ARI (tidak bergantung pada ID)    : 1.0
+Tabel silang ID eksekusi A (baris) vs B (kolom):
+col_0   0   1   2   3   4
+row_0                    
+0       0   0  81   0   0
+1       0  39   0   0   0
+2      35   0   0   0   0
+3       0   0   0   0  23
+4       0   0   0  22   0
+n_init= 1: inertia 65.2406 sampai 98.3137 | ARI antar seed: rata-rata 0.921, min 0.506, maks 1.000
+n_init=10: inertia 65.2406 sampai 65.2406 | ARI antar seed: rata-rata 1.000, min 1.000, maks 1.000
+z-score (baseline)  : ukuran kelompok [81, 39, 35, 23, 22] | ARI terhadap baseline 1.000
+min-max             : ukuran kelompok [81, 39, 35, 23, 22] | ARI terhadap baseline 1.000
+tanpa penskalaan    : ukuran kelompok [81, 39, 35, 23, 22] | ARI terhadap baseline 1.000
+Wine, z-score (baseline)  : ukuran kelompok [65, 62, 51] | ARI terhadap baseline 1.000
+Wine, min-max             : ukuran kelompok [62, 61, 55] | ARI terhadap baseline 0.918
+Wine, tanpa penskalaan    : ukuran kelompok [69, 62, 47] | ARI terhadap baseline 0.354
+init=k-means++: 16 dari 30 seed mencapai inertia terbaik (65.2406) | ARI antar seed: rata-rata 0.921, min 0.506
+init=random   : 9 dari 30 seed mencapai inertia terbaik (65.2406) | ARI antar seed: rata-rata 0.782, min 0.464
+K=5, sampel 90%, 50 kali: ARI rata-rata 0.993 | min 0.983 | maks 1.000
+K=5, sampel 80%, 50 kali: ARI rata-rata 0.987 | min 0.927 | maks 1.000
+K=5, sampel 60%, 50 kali: ARI rata-rata 0.977 | min 0.906 | maks 1.000
+K=5, sampel 40%, 50 kali: ARI rata-rata 0.966 | min 0.823 | maks 1.000
+ k  silhouette  stability_mean  stability_min
+ 2       0.321           0.313         -0.013
+ 3       0.467           1.000          1.000
+ 4       0.494           0.776          0.547
+ 5       0.555           0.987          0.927
+ 6       0.540           0.947          0.840
+ 7       0.528           0.895          0.612
+ 8       0.455           0.895          0.697
+K = 2, 50 sampel 80%: dua kelompok memisah menurut {'pendapatan': 21, 'skor belanja': 29}
+   ukuran  jaccard_rata
+A      81         0.979
+B      39         1.000
+C      35         0.970
+D      23         0.980
+E      22         0.990
+Data acak seragam, K=5: Silhouette 0.414 (Mall Customers: 0.555)
+  sampel 90%: ARI rata-rata 0.971 | min 0.785  (Mall: 0.993 | 0.983)
+  sampel 80%: ARI rata-rata 0.958 | min 0.574  (Mall: 0.987 | 0.927)
+  sampel 60%: ARI rata-rata 0.837 | min 0.501  (Mall: 0.977 | 0.906)
+  sampel 40%: ARI rata-rata 0.735 | min 0.357  (Mall: 0.966 | 0.823)
+Seed sama (7 dan 7): label identik = True | sidik jari label: 674866d4cc5a 674866d4cc5a
+Seed beda (7 dan 8): label identik = False | ARI = 0.703
+Sidik jari data: edb2a3858344 = edb2a3858344
+Lingkungan: {'python': '3.14.10', 'os': 'Windows', 'numpy': '2.5.2', 'pandas': '3.0.5', 'scikit-learn': '1.9.0', 'scipy': '1.18.1', 'matplotlib': '3.11.1'}
+Hasil dan konfigurasi tersimpan.
+[gambar disimpan: docs/assets/level-6/09-stabilitas-seed.png]
+[gambar disimpan: docs/assets/level-6/09-stabilitas-k-dan-kelompok.png]
+[gambar disimpan: docs/assets/level-6/09-stabilitas-sampel.png]

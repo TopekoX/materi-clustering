@@ -79,7 +79,22 @@ Folder: `docs/clustering-algorithms/`. Struktur bab tetap 14 bagian standar (kep
 
 Folder: `docs/clustering-evaluation/`. Struktur bab tetap 14 bagian standar (keputusan 2026-11-10). Setiap potongan kode diikuti penjelasan, bahasa untuk pemula. Desain eksperimen, pencarian parameter, dan uji stabilitas yang mendalam tidak dibahas (itu Level 6). Tidak ada dependensi baru.
 
-Level 6–7 di luar lingkup sampai Level 5 disetujui.
+### Level 6 (disetujui dikerjakan, 2026-11-10): Experimentation and Interpretation — 10 bab
+
+1. Introduction to Clustering Experiments
+2. Experimental Design and Configuration
+3. Hyperparameter Tuning and Optimization
+4. Algorithm Comparison and Benchmarking
+5. Feature Selection and Impact Analysis
+6. Dimensionality Reduction and PCA
+7. Cluster Interpretation and Profiling
+8. Cluster Visualization and Analysis
+9. Cluster Stability and Reproducibility
+10. Experimental Reporting and Interpretation
+
+Folder: `docs/experimentation-and-interpretation/`. Hasil eksperimen disimpan sebagai CSV/JSON di `examples/level-6/results/` tanpa platform pelacakan eksperimen. Tidak ada dependensi baru. Proyek riset penuh (tinjauan pustaka, celah riset, makalah) tetap milik Level 7.
+
+Level 7 di luar lingkup sampai Level 6 disetujui.
 
 ## 4. Standar isi bab (wajib)
 

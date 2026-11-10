@@ -402,7 +402,7 @@ Selisih rata-rata umur antar kelompok (E sekitar 25,3 tahun sampai D sekitar 45,
 - Titik perwakilan dan rata-rata menyederhanakan. Laporkan median, sebaran, dan ukuran kelompok.
 - Asosiasi tidak sama dengan sebab. Hasil ini berlaku untuk 200 pelanggan, K = 5, dan satu seed.
 
-**Bab berikutnya:** Bab 8 membahas kestabilan hasil: apakah kelompok yang kita tafsirkan bertahan ketika seed, sampel data, atau K berubah.
+**Bab berikutnya:** Bab 8 membahas cara menggambar hasil clustering dengan jujur (visualisasi dan batasnya). Kestabilan hasil terhadap seed, sampel data, atau K dibahas di Bab 9.
 
 ## References
 

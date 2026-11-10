@@ -1,0 +1,29 @@
+Data sintetis: (300, 2) | 270 titik kelompok + 30 titik noise
+K-Means: 3 kelompok, noise 0 | DBSCAN: 3 kelompok, noise 46 titik
+Dari 30 noise sebenarnya, DBSCAN menandai 26 sebagai noise
+Dari 270 titik kelompok, DBSCAN ikut menandai 20 sebagai noise
+Titik kelompok yang ditandai noise, per gerombol asal: {'gerombol 0 (std 0.7)': 2, 'gerombol 1 (std 1.1)': 17, 'gerombol 2 (std 0.6)': 1}
+Silhouette rata-rata (tumpang tindih): 0.408
+Titik dengan silhouette < 0,1: 17 dari 300 (5.7%)
+Titik dengan silhouette < 0: 3
+Ukuran kelompok Wine: {'A': 65, 'B': 62, 'C': 51}
+Silhouette (13 fitur terstandar): 0.285
+ARI terhadap label cultivar (hanya untuk evaluasi, bukan masukan): 0.897
+Pemisahan kelompok per fitur (z): {'alcohol': 1.76, 'flavanoids': 2.19, 'color_intensity': 1.84, 'proline': 1.88}
+Urutan fitur menurut pemisahan kelompok: ['flavanoids', 'od280/od315_of_diluted_wines', 'proline', 'total_phenols', 'color_intensity'] ... ['alcalinity_of_ash', 'magnesium', 'ash']
+                                 A     B     C
+flavanoids                    0.02  0.98 -1.22
+od280/od315_of_diluted_wines  0.27  0.78 -1.29
+proline                      -0.75  1.13 -0.41
+total_phenols                -0.08  0.89 -0.98
+color_intensity              -0.90  0.17  0.94
+Varians yang ditangkap PC1 dan PC2: 55.4%
+Silhouette di 13 fitur   : 0.285
+Silhouette di bidang PCA : 0.558
+Silhouette di alcohol dan ash: 0.087
+Hasil dan konfigurasi tersimpan.
+[gambar disimpan: docs/assets/level-6/08-tiga-panel-dasar.png]
+[gambar disimpan: docs/assets/level-6/08-tumpang-tindih.png]
+[gambar disimpan: docs/assets/level-6/08-pair-plot-wine.png]
+[gambar disimpan: docs/assets/level-6/08-peta-panas-dan-paralel.png]
+[gambar disimpan: docs/assets/level-6/08-irisan-2d.png]

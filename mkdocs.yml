@@ -145,6 +145,9 @@ nav:
       - Bab 5 — Feature Selection and Impact Analysis: experimentation-and-interpretation/05-feature-selection-and-impact-analysis.md
       - Bab 6 — Dimensionality Reduction and PCA: experimentation-and-interpretation/06-dimensionality-reduction-and-pca.md
       - Bab 7 — Cluster Interpretation and Profiling: experimentation-and-interpretation/07-cluster-interpretation-and-profiling.md
+      - Bab 8 — Cluster Visualization and Analysis: experimentation-and-interpretation/08-cluster-visualization-and-analysis.md
+      - Bab 9 — Cluster Stability and Reproducibility: experimentation-and-interpretation/09-cluster-stability-and-reproducibility.md
+      - Bab 10 — Experimental Reporting and Interpretation: experimentation-and-interpretation/10-experimental-reporting-and-interpretation.md
 
 # --- Plugins ----------------------------------------------------------------
 plugins:

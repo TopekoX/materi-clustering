@@ -11,7 +11,7 @@ Kurikulum terdiri dari tujuh level. Setiap level berisi beberapa bab, dan setiap
 | 3 | Fundamental Clustering | 7 | Siap ditinjau |
 | 4 | Clustering Algorithms | 7 | Siap ditinjau |
 | 5 | Clustering Evaluation | — | Direncanakan |
-| 6 | Experimentation and Interpretation | — | Direncanakan |
+| 6 | Experimentation and Interpretation | 10 | Siap ditinjau |
 | 7 | Research Project | — | Direncanakan |
 
 ## Level 1 — Machine Learning Fundamentals
@@ -326,11 +326,25 @@ Alat untuk menilai hasil clustering: metrik internal, Elbow Method, dan metrik e
 7. [Calinski-Harabasz Index](../clustering-evaluation/07-calinski-harabasz-index.md)
 8. [External Evaluation and Metric Comparison](../clustering-evaluation/08-external-evaluation-and-metric-comparison.md)
 
-## Level 6–7
+## [Level 6 — Experimentation and Interpretation](../experimentation-and-interpretation/index.md)
+
+Cara bekerja secara sistematis dengan clustering: merancang eksperimen, menyetel dan membandingkan algoritma, memahami dampak fitur dan PCA, menggambar, menafsirkan, menguji kestabilan, lalu melaporkan hasil. Sepuluh bab sudah siap ditinjau.
+
+1. [Introduction to Clustering Experiments](../experimentation-and-interpretation/01-introduction-to-clustering-experiments.md)
+2. [Experimental Design and Configuration](../experimentation-and-interpretation/02-experimental-design-and-configuration.md)
+3. [Hyperparameter Tuning and Optimization](../experimentation-and-interpretation/03-hyperparameter-tuning-and-optimization.md)
+4. [Algorithm Comparison and Benchmarking](../experimentation-and-interpretation/04-algorithm-comparison-and-benchmarking.md)
+5. [Feature Selection and Impact Analysis](../experimentation-and-interpretation/05-feature-selection-and-impact-analysis.md)
+6. [Dimensionality Reduction and PCA](../experimentation-and-interpretation/06-dimensionality-reduction-and-pca.md)
+7. [Cluster Interpretation and Profiling](../experimentation-and-interpretation/07-cluster-interpretation-and-profiling.md)
+8. [Cluster Visualization and Analysis](../experimentation-and-interpretation/08-cluster-visualization-and-analysis.md)
+9. [Cluster Stability and Reproducibility](../experimentation-and-interpretation/09-cluster-stability-and-reproducibility.md)
+10. [Experimental Reporting and Interpretation](../experimentation-and-interpretation/10-experimental-reporting-and-interpretation.md)
+
+## Level 7
 
 Judul level sudah ditetapkan, tetapi daftar bab dan sub-babnya belum disusun. Daftar ini akan ditambahkan setelah level sebelumnya disetujui.
 
 | Level | Topik | Status |
 |---|---|---|
-| 6 | Experimentation and Interpretation | Direncanakan |
 | 7 | Research Project | Direncanakan |

@@ -1,0 +1,30 @@
+{
+  "seed": 42,
+  "dataset": "data/mall_customers.csv",
+  "dataset_fingerprint": "edb2a3858344",
+  "features": [
+    "Annual Income (k$)",
+    "Spending Score (1-100)"
+  ],
+  "preprocessing": "z-score per kolom",
+  "algorithm": "KMeans n_clusters=5 n_init=10",
+  "seed_runs": 30,
+  "subsample_fractions": [
+    0.9,
+    0.8,
+    0.6,
+    0.4
+  ],
+  "subsample_repeats": 50,
+  "bootstrap_repeats": 100,
+  "stability_measure": "ARI (sampel), Jaccard (kelompok)",
+  "environment": {
+    "python": "3.14.10",
+    "os": "Windows",
+    "numpy": "2.5.2",
+    "pandas": "3.0.5",
+    "scikit-learn": "1.9.0",
+    "scipy": "1.18.1",
+    "matplotlib": "3.11.1"
+  }
+}

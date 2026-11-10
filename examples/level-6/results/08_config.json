@@ -1,0 +1,24 @@
+{
+  "seed": 42,
+  "datasets": [
+    "sintetis make_blobs + noise (270+30)",
+    "sklearn load_wine (178 x 13)"
+  ],
+  "preprocessing": "StandardScaler (Wine)",
+  "algorithms": [
+    "KMeans k=3",
+    "DBSCAN eps=0.6 min_samples=5"
+  ],
+  "palette": [
+    "#0072B2",
+    "#E69F00",
+    "#009E73",
+    "#CC79A7",
+    "#D55E00",
+    "#56B4E9"
+  ],
+  "noise_color": "#7f7f7f",
+  "silhouette_13d": 0.2848589191898987,
+  "silhouette_pca2d": 0.5583363740907525,
+  "silhouette_alcohol_ash": 0.08730273842691316
+}
