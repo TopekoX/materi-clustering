@@ -1,0 +1,4912 @@
+
+<!doctype html>
+<html lang="id" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Clustering pada Machine Learning">
+      
+      
+      
+        <link rel="canonical" href="https://topekox.github.io/materi-clustering/experimentation-and-interpretation/07-cluster-interpretation-and-profiling/">
+      
+      
+        <link rel="prev" href="../06-dimensionality-reduction-and-pca/">
+      
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Bab 7 — Cluster Interpretation and Profiling - Materi Clustering</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bab-7-cluster-interpretation-and-profiling" class="md-skip">
+          Lewati ke isi
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Materi Clustering" class="md-header__button md-logo" aria-label="Materi Clustering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Materi Clustering
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bab 7 — Cluster Interpretation and Profiling
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: system (click for light)"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Theme: system (click for light)" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: light (click for dark)"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Theme: light (click for dark)" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: dark (click for system)"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Theme: dark (click for system)" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cari" placeholder="Cari" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cari">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Kosongkan" aria-label="Kosongkan" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Mempersiapkan pencarian
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/topekox/materi-clustering" title="Ke repositori" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TopekoX/materi-clustering
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigasi" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Materi Clustering" class="md-nav__button md-logo" aria-label="Materi Clustering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Materi Clustering
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/topekox/materi-clustering" title="Ke repositori" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TopekoX/materi-clustering
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beranda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kurikulum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 — Machine Learning Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 — Machine Learning Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../introduction-to-machine-learning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bab 1 — Introduction to Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendahuluan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/02-definition-of-machine-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definisi Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/03-ai-ml-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI, ML, dan Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/04-traditional-programming-vs-ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pemrograman Tradisional vs ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/05-how-machine-learning-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bagaimana ML Bekerja
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/06-basic-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Komponen Dasar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/07-real-world-applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Penerapan di Dunia Nyata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/08-machine-learning-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/09-machine-learning-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenis Masalah ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/10-role-of-ml-in-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Peran ML dalam Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/11-hands-on-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Pertama
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/12-exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/13-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ringkasan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/14-references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referensi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../types-of-machine-learning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Types of Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bab 2 — Types of Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendahuluan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/02-labeled-and-unlabeled-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labeled dan Unlabeled Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/03-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/04-classification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/05-regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/06-unsupervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/07-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/08-dimensionality-reduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dimensionality Reduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/09-association-rule-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Association Rule Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/10-semi-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Semi-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/11-reinforcement-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/12-comparison-of-learning-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perbandingan Jenis ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/13-choosing-machine-learning-approach/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memilih Pendekatan ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/14-python-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/15-python-unsupervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/16-common-misconceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miskonsepsi Umum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/17-exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/18-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ringkasan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/19-references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referensi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../data-exploration-and-preprocessing/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 — Data Exploration and Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 — Data Exploration and Preprocessing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/01-introduction-to-data-exploration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Data Exploration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/02-understanding-data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Understanding Data Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/03-descriptive-statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Descriptive Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/04-exploratory-data-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Exploratory Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/05-missing-values-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Missing Values Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/06-duplicate-data-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Duplicate Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/07-outlier-detection-and-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Outlier Detection and Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/08-data-cleaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — Data Cleaning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/09-data-transformation-and-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 9 — Data Transformation and Encoding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/10-feature-scaling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 10 — Feature Scaling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/11-feature-selection-and-feature-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 11 — Feature Selection and Feature Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/12-dataset-preparation-for-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 12 — Dataset Preparation for Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../fundamental-clustering/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 — Fundamental Clustering
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 — Fundamental Clustering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/01-introduction-to-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/02-understanding-clusters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Understanding Clusters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/03-centroid-and-cluster-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Centroid and Cluster Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/04-similarity-and-dissimilarity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Similarity and Dissimilarity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/05-distance-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Distance Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/06-feature-space-and-dimensionality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Feature Space and Dimensionality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/07-clustering-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Clustering Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clustering-algorithms/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 — Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 — Clustering Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/01-introduction-to-clustering-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/02-k-means-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — K-Means Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/03-hierarchical-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Hierarchical Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/04-dbscan-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — DBSCAN Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/05-gaussian-mixture-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Gaussian Mixture Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/06-mean-shift-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Mean Shift Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/07-comparison-of-clustering-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Comparison of Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clustering-evaluation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 5 — Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 5 — Clustering Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/01-introduction-to-clustering-evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/02-internal-clustering-evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Internal Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/03-inertia-and-wcss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Inertia and WCSS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/04-elbow-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Elbow Method
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/05-silhouette-score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Silhouette Score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/06-davies-bouldin-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Davies-Bouldin Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/07-calinski-harabasz-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Calinski-Harabasz Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/08-external-evaluation-and-metric-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — External Evaluation and Metric Comparison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 6 — Experimentation and Interpretation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 6 — Experimentation and Interpretation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduction-to-clustering-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-experimental-design-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Experimental Design and Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-hyperparameter-tuning-and-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Hyperparameter Tuning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-algorithm-comparison-and-benchmarking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Algorithm Comparison and Benchmarking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-feature-selection-and-impact-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Feature Selection and Impact Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-dimensionality-reduction-and-pca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Dimensionality Reduction and PCA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Cluster Interpretation and Profiling
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Cluster Interpretation and Profiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Daftar isi">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Daftar isi
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Explanation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dari-label-ke-makna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dari label ke makna
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empat-pertanyaan-profil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Empat pertanyaan profil
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#satuan-asli-dan-satuan-terstandar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Satuan asli dan satuan terstandar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variabel-yang-dipakai-dan-yang-tidak-masalah-sirkularitas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variabel yang dipakai dan yang tidak: masalah sirkularitas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memberi-nama-kelompok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memberi nama kelompok
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#titik-perwakilan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Titik perwakilan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uji-permutasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uji permutasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keterbatasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keterbatasan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Foundation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profil-terstandar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profil terstandar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perhitungan-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perhitungan manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nilai-p-permutasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nilai-p permutasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimental-procedure-eksperimen-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experimental Procedure (Eksperimen D)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bagian-a-siapkan-alat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian A — Siapkan alat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-b-data-dan-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian B — Data dan clustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-c-ukuran-kelompok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian C — Ukuran kelompok
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-d-profil-dalam-satuan-asli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian D — Profil dalam satuan asli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-e-profil-terstandar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian E — Profil terstandar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-f-memberi-nama-berbasis-aturan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian F — Memberi nama berbasis aturan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-g-pelanggan-perwakilan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian G — Pelanggan perwakilan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-h-variabel-di-luar-clustering-dan-uji-permutasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian H — Variabel di luar clustering dan uji permutasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-i-menyimpan-profil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian I — Menyimpan profil
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-j-gambar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian J — Gambar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretasi-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretasi output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Application
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-on Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masalah-teknis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masalah teknis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Daftar isi">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Daftar isi
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Explanation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dari-label-ke-makna" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dari label ke makna
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#empat-pertanyaan-profil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Empat pertanyaan profil
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#satuan-asli-dan-satuan-terstandar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Satuan asli dan satuan terstandar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#variabel-yang-dipakai-dan-yang-tidak-masalah-sirkularitas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Variabel yang dipakai dan yang tidak: masalah sirkularitas
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#memberi-nama-kelompok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Memberi nama kelompok
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#titik-perwakilan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Titik perwakilan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#uji-permutasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Uji permutasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#keterbatasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Keterbatasan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Foundation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#profil-terstandar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Profil terstandar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#perhitungan-manual" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Perhitungan manual
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#nilai-p-permutasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Nilai-p permutasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#experimental-procedure-eksperimen-d" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Experimental Procedure (Eksperimen D)
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bagian-a-siapkan-alat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian A — Siapkan alat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-b-data-dan-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian B — Data dan clustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-c-ukuran-kelompok" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian C — Ukuran kelompok
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-d-profil-dalam-satuan-asli" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian D — Profil dalam satuan asli
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-e-profil-terstandar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian E — Profil terstandar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-f-memberi-nama-berbasis-aturan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian F — Memberi nama berbasis aturan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-g-pelanggan-perwakilan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian G — Pelanggan perwakilan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-h-variabel-di-luar-clustering-dan-uji-permutasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian H — Variabel di luar clustering dan uji permutasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-i-menyimpan-profil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian I — Menyimpan profil
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-j-gambar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian J — Gambar
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretasi-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretasi output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-application" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Application
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-on Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masalah-teknis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masalah teknis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigasi" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Beranda
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Level 6 — Experimentation and Interpretation
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/topekox/materi-clustering/edit/main/docs/experimentation-and-interpretation/07-cluster-interpretation-and-profiling.md" title="Ubah halaman ini" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="bab-7-cluster-interpretation-and-profiling">Bab 7 — Cluster Interpretation and Profiling<a class="headerlink" href="#bab-7-cluster-interpretation-and-profiling" title="Permanent link">&para;</a></h1>
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>Setelah mempelajari bab ini, kamu mampu:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menjelaskan bedanya <strong>menghasilkan</strong> kelompok dan <strong>menafsirkan</strong> kelompok.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menyusun <strong>profil</strong> tiap kelompok: ukuran, rata-rata, median, dan sebaran dalam satuan asli.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Membuat <strong>profil terstandar</strong> (selisih dari rata-rata keseluruhan) dan membacanya sebagai peta panas.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Membedakan variabel yang <strong>dipakai</strong> clustering dari variabel yang <strong>tidak dipakai</strong>, dan mengapa perbedaannya tidak berarti sama.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Memberi nama kelompok dengan aturan yang jelas, dan menyadari bahwa nama hanyalah label komunikasi.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Memakai <strong>uji permutasi</strong> untuk memeriksa apakah perbedaan pada variabel di luar clustering lebih besar daripada kebetulan.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menyebut kesalahan tafsir yang umum: menganggap kelompok sebagai "tipe orang" nyata, atau menafsirkan sebab-akibat.</li>
+</ul>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Bab 3 sampai 6 membahas cara <strong>menghasilkan</strong> dan menyetel kelompok. Hasil akhir clustering hanyalah <strong>kolom label</strong> (0, 1, 2, ...). Label itu tidak berarti apa-apa sampai kita menjawab: <strong>"Kelompok ini berisi siapa atau apa, dan apa yang membedakannya dari yang lain?"</strong></p>
+<p>Bab ini mengajarkan cara menjawabnya dengan hati-hati pada <strong>Mall Customers</strong>: 200 pelanggan dengan umur, gender, pendapatan tahunan, dan skor belanja. Kita men-cluster memakai pendapatan dan skor belanja (K = 5, seperti baseline Bab 5), lalu menafsirkan hasilnya.</p>
+<p>Ada satu sikap yang dipegang sepanjang bab: <strong>profil menggambarkan, bukan menjelaskan.</strong> Kita boleh mengatakan "kelompok E rata-rata berumur 25 tahun". Kita tidak boleh mengatakan "umur membuat mereka berbelanja banyak".</p>
+<div class="admonition note">
+<p class="admonition-title">Prasyarat</p>
+<p><a href="../05-feature-selection-and-impact-analysis/">Bab 5</a> Level 6 (pengaruh fitur, K-Means pada Mall Customers) dan <a href="../../clustering-evaluation/">Level 5</a> (Silhouette dan kualitas kelompok). Stabilitas hasil terhadap seed dan sampel bukan topik bab ini.</p>
+</div>
+<h2 id="fundamental-concepts">Fundamental Concepts<a class="headerlink" href="#fundamental-concepts" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Istilah</th>
+<th>Arti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Cluster profiling</strong></td>
+<td>Menggambarkan isi tiap kelompok lewat ringkasan statistik</td>
+</tr>
+<tr>
+<td><strong>Segment / persona</strong></td>
+<td>Nama dan deskripsi singkat sebuah kelompok untuk komunikasi</td>
+</tr>
+<tr>
+<td><strong>Centroid</strong></td>
+<td>Titik rata-rata sebuah kelompok pada fitur yang dipakai</td>
+</tr>
+<tr>
+<td><strong>Standardized profile</strong></td>
+<td>Selisih rata-rata kelompok dari rata-rata seluruh data, dalam satuan simpangan baku</td>
+</tr>
+<tr>
+<td><strong>Variabel yang dipakai</strong></td>
+<td>Fitur yang masuk ke clustering (di sini pendapatan dan skor belanja)</td>
+</tr>
+<tr>
+<td><strong>Variabel di luar clustering</strong></td>
+<td>Kolom lain yang tidak dipakai (di sini umur dan gender)</td>
+</tr>
+<tr>
+<td><strong>Representative point</strong></td>
+<td>Titik nyata yang paling dekat dengan pusat kelompok</td>
+</tr>
+<tr>
+<td><strong>Permutation test</strong></td>
+<td>Mengacak label kelompok berkali-kali untuk melihat seberapa besar perbedaan yang bisa muncul karena kebetulan</td>
+</tr>
+<tr>
+<td><strong>Circularity</strong></td>
+<td>Menguji perbedaan pada variabel yang justru dipakai membentuk kelompok</td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-explanation">Detailed Explanation<a class="headerlink" href="#detailed-explanation" title="Permanent link">&para;</a></h2>
+<h3 id="dari-label-ke-makna">Dari label ke makna<a class="headerlink" href="#dari-label-ke-makna" title="Permanent link">&para;</a></h3>
+<p>Setelah K-Means selesai kita hanya punya angka kelompok. Nomor kelompok K-Means bersifat <strong>acak</strong> (kelompok 0 pada satu eksekusi bisa menjadi kelompok 3 pada eksekusi lain). Karena itu kita memberi huruf (A sampai E) menurut <strong>ukuran</strong> kelompok, terbesar dulu, supaya hasil bisa dibaca dan diulang.</p>
+<h3 id="empat-pertanyaan-profil">Empat pertanyaan profil<a class="headerlink" href="#empat-pertanyaan-profil" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Seberapa besar</strong> tiap kelompok? (ukuran dan persentase)</li>
+<li><strong>Seperti apa</strong> kelompok itu pada variabel yang dipakai? (rata-rata, sebaran)</li>
+<li><strong>Apa lagi</strong> yang membedakannya pada variabel yang <strong>tidak</strong> dipakai? (umur, gender)</li>
+<li><strong>Seberapa yakin</strong> kita bahwa perbedaan itu bukan kebetulan?</li>
+</ol>
+<h3 id="satuan-asli-dan-satuan-terstandar">Satuan asli dan satuan terstandar<a class="headerlink" href="#satuan-asli-dan-satuan-terstandar" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Satuan asli</strong> (k<span class="arithmatex">\(, poin skor, tahun) mudah dipahami oleh orang non-teknis: "rata-rata pendapatan 86,5 k\)</span>".</li>
+<li><strong>Satuan terstandar</strong> membuat variabel berbeda skala bisa dibandingkan dalam satu tabel atau peta panas: "pendapatan kelompok B kira-kira 1 simpangan baku di atas rata-rata".</li>
+</ul>
+<p>Gunakan keduanya. Laporkan juga <strong>median</strong> dan <strong>simpangan baku</strong>, bukan hanya rata-rata, karena rata-rata bisa menutupi sebaran lebar.</p>
+<h3 id="variabel-yang-dipakai-dan-yang-tidak-masalah-sirkularitas">Variabel yang dipakai dan yang tidak: masalah sirkularitas<a class="headerlink" href="#variabel-yang-dipakai-dan-yang-tidak-masalah-sirkularitas" title="Permanent link">&para;</a></h3>
+<p>Kelompok dibentuk agar anggotanya mirip pada pendapatan dan skor belanja. Jadi <strong>pasti</strong> rata-rata pendapatan berbeda antar kelompok, itu hasil <strong>konstruksi</strong>, bukan temuan. Uji statistik pada variabel yang dipakai clustering hampir selalu "signifikan" dan tidak berarti apa-apa. Variabel yang layak diuji adalah yang <strong>tidak dipakai</strong>, seperti umur dan gender. Jika kelompok yang dibentuk dari pendapatan dan skor belanja juga berbeda pada umur, itu informasi baru.</p>
+<h3 id="memberi-nama-kelompok">Memberi nama kelompok<a class="headerlink" href="#memberi-nama-kelompok" title="Permanent link">&para;</a></h3>
+<p>Nama membantu komunikasi, tetapi berbahaya jika dianggap kebenaran. Prinsipnya:</p>
+<ol>
+<li><strong>Gunakan aturan tertulis</strong> (misalnya ambang pada profil terstandar), bukan kesan sesaat.</li>
+<li><strong>Nama deskriptif</strong>, bukan penilaian ("pendapatan tinggi, belanja rendah", bukan "pelit").</li>
+<li><strong>Nyatakan bahwa nama bergantung pada ambang.</strong> Mengubah ambang bisa mengubah nama (lihat latihan).</li>
+<li><strong>Hindari stereotip</strong> pada umur atau gender.</li>
+</ol>
+<h3 id="titik-perwakilan">Titik perwakilan<a class="headerlink" href="#titik-perwakilan" title="Permanent link">&para;</a></h3>
+<p>Titik nyata terdekat dengan pusat kelompok memberi gambaran konkret. Tetapi <strong>satu orang tidak mewakili seluruh kelompok</strong> pada variabel yang tidak dipakai. Ia hanya dekat pada variabel yang dipakai clustering.</p>
+<h3 id="uji-permutasi">Uji permutasi<a class="headerlink" href="#uji-permutasi" title="Permanent link">&para;</a></h3>
+<p>Pertanyaan: "Apakah perbedaan umur antar lima kelompok ini lebih besar dari yang bisa muncul bila kelompok dibentuk acak?" Caranya:</p>
+<ol>
+<li>Hitung ukuran perbedaan pada data asli (selisih rata-rata umur terbesar dan terkecil antar kelompok).</li>
+<li>Acak label kelompok (jumlah anggota tiap kelompok tetap), hitung ukuran yang sama. Ulangi ribuan kali.</li>
+<li>Hitung seberapa sering hasil acak setidaknya sebesar hasil asli.</li>
+</ol>
+<p>Metode ini tidak mengandaikan sebaran data tertentu, dan mudah dibaca.</p>
+<h3 id="keterbatasan">Keterbatasan<a class="headerlink" href="#keterbatasan" title="Permanent link">&para;</a></h3>
+<ul>
+<li><strong>Profil adalah deskripsi satu hasil clustering.</strong> Seed atau K yang berbeda bisa mengubah kelompoknya.</li>
+<li><strong>Rata-rata menyembunyikan sebaran.</strong> Anggota satu kelompok bisa sangat beragam.</li>
+<li><strong>Asosiasi, bukan sebab.</strong> Kelompok yang muda dan berbelanja banyak tidak berarti umur penyebabnya.</li>
+<li><strong>Nama menyederhanakan.</strong> Orang nyata tidak sesederhana label.</li>
+<li><strong>Dataset ini kecil</strong> (200 pelanggan), jadi kelompok kecil rentan berubah.</li>
+</ul>
+<h3 id="kesalahan-umum">Kesalahan umum<a class="headerlink" href="#kesalahan-umum" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Menguji variabel yang dipakai clustering</strong> lalu melaporkan "perbedaan signifikan".</li>
+<li><strong>Hanya melaporkan rata-rata.</strong></li>
+<li><strong>Menganggap nama sebagai fakta</strong> ("pelanggan hemat").</li>
+<li><strong>Menafsirkan sebab-akibat</strong> dari profil.</li>
+<li><strong>Menganggap satu titik perwakilan mewakili semuanya.</strong></li>
+<li><strong>Menyimpulkan dari kelompok kecil</strong> tanpa memeriksa ukurannya.</li>
+<li><strong>Lupa bahwa nomor kelompok bersifat acak</strong> dan membandingkan "kelompok 2" antar eksekusi.</li>
+</ol>
+<h2 id="mathematical-foundation">Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Permanent link">&para;</a></h2>
+<h3 id="profil-terstandar">Profil terstandar<a class="headerlink" href="#profil-terstandar" title="Permanent link">&para;</a></h3>
+<p>Untuk variabel <span class="arithmatex">\( v \)</span>, rata-rata keseluruhan <span class="arithmatex">\( \bar{v} \)</span> dan simpangan baku keseluruhan <span class="arithmatex">\( s_v \)</span>, serta rata-rata kelompok <span class="arithmatex">\( k \)</span> sebesar <span class="arithmatex">\( \bar{v}_k \)</span>:</p>
+<div class="arithmatex">\[
+z_{k,v} = \frac{\bar{v}_k - \bar{v}}{s_v}
+\]</div>
+<p>Nilai positif berarti kelompok <span class="arithmatex">\( k \)</span> berada di atas rata-rata seluruh data pada variabel <span class="arithmatex">\( v \)</span>, negatif di bawahnya. Satuannya simpangan baku, sehingga umur dan pendapatan bisa disandingkan.</p>
+<h3 id="perhitungan-manual">Perhitungan manual<a class="headerlink" href="#perhitungan-manual" title="Permanent link">&para;</a></h3>
+<p>Dari data: pendapatan rata-rata keseluruhan 60,56 dengan simpangan baku 26,2647, skor belanja 50,20 dengan simpangan baku 25,8235, dan umur 38,85 dengan simpangan baku 13,969.</p>
+<ul>
+<li>Pendapatan kelompok E: <span class="arithmatex">\( (25{,}73 - 60{,}56) / 26{,}26 = -1{,}33 \)</span></li>
+<li>Skor belanja kelompok B: <span class="arithmatex">\( (82{,}13 - 50{,}20) / 25{,}82 = +1{,}24 \)</span></li>
+<li>Umur kelompok E: <span class="arithmatex">\( (25{,}27 - 38{,}85) / 13{,}97 = -0{,}97 \)</span></li>
+</ul>
+<p>Ketiganya akan kita cocokkan dengan keluaran kode.</p>
+<h3 id="nilai-p-permutasi">Nilai-p permutasi<a class="headerlink" href="#nilai-p-permutasi" title="Permanent link">&para;</a></h3>
+<p>Misalkan <span class="arithmatex">\( T_{\text{obs}} \)</span> adalah ukuran perbedaan pada data asli dan <span class="arithmatex">\( T_1, \dots, T_B \)</span> ukuran pada <span class="arithmatex">\( B \)</span> pengacakan label. Nilai-p:</p>
+<div class="arithmatex">\[
+p = \frac{1 + \#\{ b : T_b \ge T_{\text{obs}} \}}{B + 1}
+\]</div>
+<p>Angka 1 pada pembilang dan penyebut memastikan nilai-p tidak pernah nol: dengan <span class="arithmatex">\( B = 2000 \)</span>, nilai terkecil yang mungkin adalah <span class="arithmatex">\( 1/2001 \approx 0{,}0005 \)</span>. Nilai-p kecil berarti perbedaan sebesar itu <strong>jarang</strong> muncul bila kelompok dibentuk acak. Ia tidak menyatakan seberapa <strong>penting</strong> perbedaannya.</p>
+<h2 id="experimental-procedure-eksperimen-d">Experimental Procedure (Eksperimen D)<a class="headerlink" href="#experimental-procedure-eksperimen-d" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Tujuan:</strong> menafsirkan satu hasil clustering secara terstruktur dan jujur.</li>
+<li><strong>Dataset (alasan):</strong> <strong>Mall Customers</strong> (<code>data/mall_customers.csv</code>), 200 pelanggan. Dipilih karena ada variabel yang bisa dipisahkan menjadi "dipakai" (pendapatan dan skor belanja) dan "tidak dipakai" (umur dan gender).</li>
+<li><strong>Praproses:</strong> z-score per kolom pada dua variabel yang dipakai. Seed 42.</li>
+<li><strong>Algoritma:</strong> K-Means, K = 5, <code>n_init=10</code> (baseline Bab 5).</li>
+<li><strong>Langkah penafsiran:</strong> ukuran kelompok, profil satuan asli, profil terstandar, nama berbasis aturan, titik perwakilan, dan uji permutasi (2000 kali) untuk umur dan gender.</li>
+<li><strong>Hasil disimpan:</strong> <code>examples/level-6/results/07_cluster_profile.csv</code> dan <code>07_config.json</code>.</li>
+</ol>
+<h2 id="python-implementation">Python Implementation<a class="headerlink" href="#python-implementation" title="Permanent link">&para;</a></h2>
+<p>Skrip lengkapnya ada di <code>examples/level-6/07_cluster_interpretation_and_profiling.py</code>, dan notebook-nya di <code>notebooks/level-6/07-cluster-interpretation-and-profiling.ipynb</code>. <strong>Setiap potongan kode diikuti penjelasannya.</strong></p>
+<p><strong>Konteks masalah:</strong> sebuah toko ingin memahami segmen pelanggannya dari hasil clustering.</p>
+<p><strong>Tujuan eksperimen:</strong> membaca kelompok tanpa menafsirkan melebihi bukti.</p>
+<p><strong>Pustaka:</strong> NumPy, pandas, Matplotlib, scikit-learn (<code>KMeans</code>), dan alat pencatat <code>_experiment.py</code>.</p>
+<h3 id="bagian-a-siapkan-alat">Bagian A — Siapkan alat<a class="headerlink" href="#bagian-a-siapkan-alat" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">import</span><span class="w"> </span><span class="nn">_experiment</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">ex</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="n">SEED</span> <span class="o">=</span> <span class="mi">42</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>_experiment</code> adalah modul pencatat dari bab-bab sebelumnya; di bab ini hanya dipakai untuk menyimpan hasil.</p>
+<h3 id="bagian-b-data-dan-clustering">Bagian B — Data dan clustering<a class="headerlink" href="#bagian-b-data-dan-clustering" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/mall_customers.csv"</span><span class="p">)</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">df</span><span class="p">[</span><span class="s2">"Male"</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Gender"</span><span class="p">]</span> <span class="o">==</span> <span class="s2">"Male"</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>           <span class="c1"># 1 = laki-laki, 0 = perempuan</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">used</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"Spending Score (1-100)"</span><span class="p">]</span>     <span class="c1"># fitur yang DIPAKAI clustering</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="n">unused</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"Male"</span><span class="p">]</span>                                   <span class="c1"># variabel yang TIDAK dipakai clustering</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">X</span> <span class="o">=</span> <span class="p">((</span><span class="n">df</span><span class="p">[</span><span class="n">used</span><span class="p">]</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">used</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="n">used</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">())</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>   <span class="c1"># z-score per kolom</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="n">model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a><span class="c1"># Nomor kelompok K-Means bersifat acak. Kita beri huruf A sampai E menurut ukuran (terbesar dulu)</span>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a><span class="n">order</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="o">-</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">labels_</span><span class="p">),</span> <span class="n">kind</span><span class="o">=</span><span class="s2">"stable"</span><span class="p">)</span>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="n">letter</span> <span class="o">=</span> <span class="p">{</span><span class="nb">int</span><span class="p">(</span><span class="n">old</span><span class="p">):</span> <span class="s2">"ABCDE"</span><span class="p">[</span><span class="n">new</span><span class="p">]</span> <span class="k">for</span> <span class="n">new</span><span class="p">,</span> <span class="n">old</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">order</span><span class="p">)}</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">letter</span><span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">c</span><span class="p">)]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">model</span><span class="o">.</span><span class="n">labels_</span><span class="p">]</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a><span class="n">centers_z</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">[</span><span class="n">order</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ABCDE"</span><span class="p">),</span> <span class="n">columns</span><span class="o">=</span><span class="n">used</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan baris demi baris:</strong></p>
+<ul>
+<li><code>df["Male"] = (df["Gender"] == "Male").astype(int)</code> mengubah gender menjadi 0 atau 1 agar rata-ratanya bisa dibaca sebagai <strong>porsi laki-laki</strong>.</li>
+<li><code>used</code> dan <code>unused</code> memisahkan variabel yang dipakai dan tidak dipakai clustering sejak awal. Pemisahan ini menjadi inti penafsiran.</li>
+<li><code>X</code> adalah dua kolom yang sudah dijadikan z-score, dan K-Means hanya melihat <code>X</code>.</li>
+<li><code>np.bincount(model.labels_)</code> menghitung ukuran kelompok, <code>np.argsort(-...)</code> mengurutkannya dari yang terbesar, dan <code>"ABCDE"[new]</code> memberi huruf. <code>kind="stable"</code> menjaga urutan bila ada ukuran yang sama.</li>
+<li><code>centers_z</code> adalah centroid dalam ruang terstandar, dengan urutan huruf yang baru.</li>
+</ul>
+<h3 id="bagian-c-ukuran-kelompok">Bagian C — Ukuran kelompok<a class="headerlink" href="#bagian-c-ukuran-kelompok" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">sizes</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran kelompok:"</span><span class="p">,</span> <span class="n">sizes</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Persentase:"</span><span class="p">,</span> <span class="p">(</span><span class="n">sizes</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">df</span><span class="p">)</span> <span class="o">*</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>value_counts()</code> menghitung anggota tiap huruf, <code>sort_index()</code> mengurutkan A sampai E. Persentase dihitung dari 200 pelanggan.</p>
+<h3 id="bagian-d-profil-dalam-satuan-asli">Bagian D — Profil dalam satuan asli<a class="headerlink" href="#bagian-d-profil-dalam-satuan-asli" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">profile</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Cluster"</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">(</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">n</span><span class="o">=</span><span class="p">(</span><span class="s2">"Cluster"</span><span class="p">,</span> <span class="s2">"size"</span><span class="p">),</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">pendapatan_rata</span><span class="o">=</span><span class="p">(</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>    <span class="n">pendapatan_sd</span><span class="o">=</span><span class="p">(</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">),</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>    <span class="n">skor_rata</span><span class="o">=</span><span class="p">(</span><span class="s2">"Spending Score (1-100)"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>    <span class="n">skor_sd</span><span class="o">=</span><span class="p">(</span><span class="s2">"Spending Score (1-100)"</span><span class="p">,</span> <span class="s2">"std"</span><span class="p">),</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>    <span class="n">umur_median</span><span class="o">=</span><span class="p">(</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"median"</span><span class="p">),</span>
+</span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>    <span class="n">umur_rata</span><span class="o">=</span><span class="p">(</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>
+</span><span id="__span-3-9"><a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a>    <span class="n">porsi_laki</span><span class="o">=</span><span class="p">(</span><span class="s2">"Male"</span><span class="p">,</span> <span class="s2">"mean"</span><span class="p">),</span>
+</span><span id="__span-3-10"><a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="p">)</span>
+</span><span id="__span-3-11"><a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="nb">print</span><span class="p">(</span><span class="n">profile</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</span><span id="__span-3-12"><a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Seluruh pelanggan: pendapatan"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">used</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"| skor"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">used</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-3-13"><a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a>      <span class="s2">"| umur"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">2</span><span class="p">),</span> <span class="s2">"| porsi laki-laki"</span><span class="p">,</span> <span class="nb">round</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Male"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="mi">3</span><span class="p">))</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>groupby("Cluster").agg(...)</code> menghitung beberapa ringkasan sekaligus per kelompok. Setiap argumen berbentuk <code>nama_kolom_hasil=("kolom_asal", "fungsi")</code>. Kita mengambil jumlah, rata-rata, dan simpangan baku untuk dua variabel yang dipakai, serta median dan rata-rata umur dan porsi laki-laki. Baris terakhir mencetak rata-rata seluruh pelanggan sebagai pembanding.</p>
+<h3 id="bagian-e-profil-terstandar">Bagian E — Profil terstandar<a class="headerlink" href="#bagian-e-profil-terstandar" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Selisih rata-rata kelompok terhadap rata-rata seluruh data, dinyatakan dalam simpangan baku seluruh data</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">variables</span> <span class="o">=</span> <span class="n">used</span> <span class="o">+</span> <span class="n">unused</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="n">z_profile</span> <span class="o">=</span> <span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Cluster"</span><span class="p">)[</span><span class="n">variables</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span> <span class="o">-</span> <span class="n">df</span><span class="p">[</span><span class="n">variables</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">df</span><span class="p">[</span><span class="n">variables</span><span class="p">]</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a><span class="n">z_profile</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"pendapatan"</span><span class="p">,</span> <span class="s2">"skor belanja"</span><span class="p">,</span> <span class="s2">"umur"</span><span class="p">,</span> <span class="s2">"laki-laki"</span><span class="p">]</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">z_profile</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>df.groupby("Cluster")[variables].mean()</code> memberi rata-rata tiap kelompok, dikurangi rata-rata seluruh data dan dibagi simpangan baku seluruh data. Pandas mencocokkan baris dan kolom otomatis. Nama kolom kemudian diganti dengan nama yang mudah dibaca. Inilah rumus <span class="arithmatex">\( z_{k,v} \)</span>.</p>
+<h3 id="bagian-f-memberi-nama-berbasis-aturan">Bagian F — Memberi nama berbasis aturan<a class="headerlink" href="#bagian-f-memberi-nama-berbasis-aturan" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">describe</span><span class="p">(</span><span class="n">z_income</span><span class="p">,</span> <span class="n">z_score</span><span class="p">):</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">"""Nama berbasis aturan: |z| &lt; 0,5 disebut menengah. Ini label komunikasi, bukan kebenaran tentang orangnya."""</span>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">level</span> <span class="o">=</span> <span class="k">lambda</span> <span class="n">z</span><span class="p">,</span> <span class="n">hi</span><span class="p">,</span> <span class="n">lo</span><span class="p">:</span> <span class="n">hi</span> <span class="k">if</span> <span class="n">z</span> <span class="o">&gt;=</span> <span class="mf">0.5</span> <span class="k">else</span> <span class="n">lo</span> <span class="k">if</span> <span class="n">z</span> <span class="o">&lt;=</span> <span class="o">-</span><span class="mf">0.5</span> <span class="k">else</span> <span class="s2">"menengah"</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a>    <span class="k">return</span> <span class="sa">f</span><span class="s2">"pendapatan </span><span class="si">{</span><span class="n">level</span><span class="p">(</span><span class="n">z_income</span><span class="p">,</span><span class="w"> </span><span class="s1">'tinggi'</span><span class="p">,</span><span class="w"> </span><span class="s1">'rendah'</span><span class="p">)</span><span class="si">}</span><span class="s2">, belanja </span><span class="si">{</span><span class="n">level</span><span class="p">(</span><span class="n">z_score</span><span class="p">,</span><span class="w"> </span><span class="s1">'tinggi'</span><span class="p">,</span><span class="w"> </span><span class="s1">'rendah'</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="n">names</span> <span class="o">=</span> <span class="p">{</span><span class="n">c</span><span class="p">:</span> <span class="n">describe</span><span class="p">(</span><span class="n">z_profile</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="s2">"pendapatan"</span><span class="p">],</span> <span class="n">z_profile</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">c</span><span class="p">,</span> <span class="s2">"skor belanja"</span><span class="p">])</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">z_profile</span><span class="o">.</span><span class="n">index</span><span class="p">}</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">names</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Kelompok </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">sizes</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="si">}</span><span class="s2"> pelanggan): </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>level</code> adalah fungsi kecil: bila <span class="arithmatex">\( z \ge 0{,}5 \)</span> disebut tinggi, bila <span class="arithmatex">\( z \le -0{,}5 \)</span> disebut rendah, selain itu menengah. <code>describe</code> merangkai kalimat dari dua variabel yang dipakai. Docstring-nya menyatakan bahwa nama hanya label. Aturan ditulis di kode, sehingga siapa pun bisa memeriksanya.</p>
+<h3 id="bagian-g-pelanggan-perwakilan">Bagian G — Pelanggan perwakilan<a class="headerlink" href="#bagian-g-pelanggan-perwakilan" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Pelanggan nyata yang paling dekat dengan pusat kelompok (di ruang terstandar yang dipakai clustering)</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">"ABCDE"</span><span class="p">:</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>    <span class="n">members</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">member_x</span> <span class="o">=</span> <span class="n">X</span><span class="p">[</span><span class="n">members</span><span class="o">.</span><span class="n">index</span><span class="p">]</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">nearest</span> <span class="o">=</span> <span class="n">members</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(((</span><span class="n">member_x</span> <span class="o">-</span> <span class="n">centers_z</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))]</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">({</span><span class="s2">"Kelompok"</span><span class="p">:</span> <span class="n">c</span><span class="p">,</span> <span class="s2">"CustomerID"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nearest</span><span class="p">,</span> <span class="s2">"CustomerID"</span><span class="p">]),</span> <span class="s2">"Gender"</span><span class="p">:</span> <span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nearest</span><span class="p">,</span> <span class="s2">"Gender"</span><span class="p">],</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>                 <span class="s2">"Age"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nearest</span><span class="p">,</span> <span class="s2">"Age"</span><span class="p">]),</span> <span class="s2">"Income"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nearest</span><span class="p">,</span> <span class="n">used</span><span class="p">[</span><span class="mi">0</span><span class="p">]]),</span> <span class="s2">"Score"</span><span class="p">:</span> <span class="nb">int</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">nearest</span><span class="p">,</span> <span class="n">used</span><span class="p">[</span><span class="mi">1</span><span class="p">]])})</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a><span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> untuk tiap kelompok, kita ambil anggotanya, hitung jarak kuadrat tiap anggota ke centroid (<code>((member_x - centroid) ** 2).sum(axis=1)</code>), lalu <code>argmin</code> memilih yang terdekat. Hasilnya adalah satu baris data nyata per kelompok. Perhatikan bahwa jarak dihitung di ruang yang dipakai clustering, jadi umur dan gender <strong>tidak ikut</strong> menentukan siapa yang terpilih.</p>
+<h3 id="bagian-h-variabel-di-luar-clustering-dan-uji-permutasi">Bagian H — Variabel di luar clustering dan uji permutasi<a class="headerlink" href="#bagian-h-variabel-di-luar-clustering-dan-uji-permutasi" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="c1"># Apakah perbedaan umur antar kelompok lebih besar daripada yang wajar bila kelompok dibentuk acak?</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="n">SEED</span><span class="p">)</span>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="k">def</span><span class="w"> </span><span class="nf">spread</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">labels</span><span class="p">):</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="w">    </span><span class="sd">"""Selisih rata-rata terbesar dan terkecil antar kelompok."""</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a>    <span class="n">means</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">values</span><span class="p">)</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>    <span class="k">return</span> <span class="n">means</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">means</span><span class="o">.</span><span class="n">min</span><span class="p">()</span>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="k">for</span> <span class="n">variable</span> <span class="ow">in</span> <span class="n">unused</span><span class="p">:</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>    <span class="n">values</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">variable</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(</span><span class="nb">float</span><span class="p">)</span>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a>    <span class="n">observed</span> <span class="o">=</span> <span class="n">spread</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">())</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a>    <span class="n">shuffled</span> <span class="o">=</span> <span class="p">[</span><span class="n">spread</span><span class="p">(</span><span class="n">values</span><span class="p">,</span> <span class="n">rng</span><span class="o">.</span><span class="n">permutation</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()))</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2000</span><span class="p">)]</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="n">p_value</span> <span class="o">=</span> <span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">s</span> <span class="o">&gt;=</span> <span class="n">observed</span> <span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">shuffled</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">shuffled</span><span class="p">)</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">variable</span><span class="si">:</span><span class="s2">5s</span><span class="si">}</span><span class="s2">: selisih rata-rata antar kelompok = </span><span class="si">{</span><span class="n">observed</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | "</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>          <span class="sa">f</span><span class="s2">"rentang acak 95% = </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">percentile</span><span class="p">(</span><span class="n">shuffled</span><span class="p">,</span><span class="w"> </span><span class="mi">95</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2"> | p (permutasi, 2000 kali) = </span><span class="si">{</span><span class="n">p_value</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>spread(values, labels)</code> mengelompokkan nilai menurut label dan mengembalikan selisih rata-rata terbesar dan terkecil.</li>
+<li><code>rng.permutation(labels)</code> mengacak urutan label. Jumlah anggota tiap kelompok tetap, hanya penugasannya acak.</li>
+<li><code>shuffled</code> berisi 2000 hasil acak. <code>np.percentile(shuffled, 95)</code> memberi batas yang hanya dilewati 5% hasil acak.</li>
+<li><code>p_value</code> mengikuti rumus <span class="arithmatex">\( (1 + \#) / (B + 1) \)</span>.</li>
+<li>Perulangan dijalankan untuk umur dan untuk gender.</li>
+</ul>
+<h3 id="bagian-i-menyimpan-profil">Bagian I — Menyimpan profil<a class="headerlink" href="#bagian-i-menyimpan-profil" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">out</span> <span class="o">=</span> <span class="n">profile</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">out</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"nama"</span><span class="p">,</span> <span class="p">[</span><span class="n">names</span><span class="p">[</span><span class="n">c</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">out</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">out</span> <span class="o">=</span> <span class="n">out</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">z_profile</span><span class="o">.</span><span class="n">add_prefix</span><span class="p">(</span><span class="s2">"z_"</span><span class="p">))</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="n">out</span><span class="o">.</span><span class="n">to_csv</span><span class="p">(</span><span class="n">ex</span><span class="o">.</span><span class="n">RESULTS_DIR</span> <span class="o">/</span> <span class="s2">"07_cluster_profile.csv"</span><span class="p">)</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="n">ex</span><span class="o">.</span><span class="n">save_json</span><span class="p">({</span><span class="s2">"seed"</span><span class="p">:</span> <span class="n">SEED</span><span class="p">,</span> <span class="s2">"dataset"</span><span class="p">:</span> <span class="s2">"data/mall_customers.csv"</span><span class="p">,</span> <span class="s2">"algorithm"</span><span class="p">:</span> <span class="s2">"KMeans n_clusters=5 n_init=10"</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>              <span class="s2">"features_used"</span><span class="p">:</span> <span class="n">used</span><span class="p">,</span> <span class="s2">"variables_not_used"</span><span class="p">:</span> <span class="n">unused</span><span class="p">,</span> <span class="s2">"preprocessing"</span><span class="p">:</span> <span class="s2">"z-score per kolom"</span><span class="p">,</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>              <span class="s2">"naming_rule"</span><span class="p">:</span> <span class="s2">"|z| &lt; 0.5 = menengah"</span><span class="p">,</span> <span class="s2">"permutations"</span><span class="p">:</span> <span class="mi">2000</span><span class="p">},</span> <span class="s2">"07_config"</span><span class="p">)</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Profil dan konfigurasi tersimpan."</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> profil satuan asli, nama, dan profil terstandar digabung dalam satu tabel CSV. Konfigurasi, aturan penamaan, dan jumlah permutasi disimpan dalam JSON.</p>
+<h3 id="bagian-j-gambar">Bagian J — Gambar<a class="headerlink" href="#bagian-j-gambar" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">7.2</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">image</span> <span class="o">=</span> <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">z_profile</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"RdBu_r"</span><span class="p">,</span> <span class="n">vmin</span><span class="o">=-</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="s2">"auto"</span><span class="p">)</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="p">[</span><span class="s2">"pendapatan</span><span class="se">\n</span><span class="s2">(dipakai)"</span><span class="p">,</span> <span class="s2">"skor belanja</span><span class="se">\n</span><span class="s2">(dipakai)"</span><span class="p">,</span> <span class="s2">"umur</span><span class="se">\n</span><span class="s2">(tidak dipakai)"</span><span class="p">,</span> <span class="s2">"laki-laki</span><span class="se">\n</span><span class="s2">(tidak dipakai)"</span><span class="p">])</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span> <span class="p">[</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2"> (n=</span><span class="si">{</span><span class="n">sizes</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="si">}</span><span class="s2">)"</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="n">z_profile</span><span class="o">.</span><span class="n">index</span><span class="p">])</span>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">4</span><span class="p">):</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>        <span class="n">value</span> <span class="o">=</span> <span class="n">z_profile</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>        <span class="n">ax</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">value</span><span class="si">:</span><span class="s2">+.2f</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"white"</span> <span class="k">if</span> <span class="nb">abs</span><span class="p">(</span><span class="n">value</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mf">0.9</span> <span class="k">else</span> <span class="s2">"black"</span><span class="p">)</span>
+</span><span id="__span-9-9"><a id="__codelineno-9-9" name="__codelineno-9-9" href="#__codelineno-9-9"></a><span class="n">ax</span><span class="o">.</span><span class="n">axvline</span><span class="p">(</span><span class="mf">1.5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"black"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">1.5</span><span class="p">)</span>
+</span><span id="__span-9-10"><a id="__codelineno-9-10" name="__codelineno-9-10" href="#__codelineno-9-10"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Profil terstandar tiap kelompok (selisih dari rata-rata, dalam simpangan baku)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">9</span><span class="p">)</span>
+</span><span id="__span-9-11"><a id="__codelineno-9-11" name="__codelineno-9-11" href="#__codelineno-9-11"></a><span class="n">fig</span><span class="o">.</span><span class="n">colorbar</span><span class="p">(</span><span class="n">image</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"z"</span><span class="p">)</span>
+</span><span id="__span-9-12"><a id="__codelineno-9-12" name="__codelineno-9-12" href="#__codelineno-9-12"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-9-13"><a id="__codelineno-9-13" name="__codelineno-9-13" href="#__codelineno-9-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">palette</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"A"</span><span class="p">:</span> <span class="s2">"#0072B2"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">:</span> <span class="s2">"#E69F00"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">:</span> <span class="s2">"#009E73"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">:</span> <span class="s2">"#CC79A7"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">:</span> <span class="s2">"#D55E00"</span><span class="p">}</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mf">4.6</span><span class="p">),</span> <span class="n">gridspec_kw</span><span class="o">=</span><span class="p">{</span><span class="s2">"width_ratios"</span><span class="p">:</span> <span class="p">[</span><span class="mf">1.3</span><span class="p">,</span> <span class="mi">1</span><span class="p">]})</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">"ABCDE"</span><span class="p">:</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">part</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">]</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">part</span><span class="p">[</span><span class="n">used</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">part</span><span class="p">[</span><span class="n">used</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">s</span><span class="o">=</span><span class="mi">24</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">names</span><span class="p">[</span><span class="n">c</span><span class="p">]</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a>    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="n">part</span><span class="p">[</span><span class="n">used</span><span class="p">[</span><span class="mi">0</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">part</span><span class="p">[</span><span class="n">used</span><span class="p">[</span><span class="mi">1</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">c</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">13</span><span class="p">,</span> <span class="n">fontweight</span><span class="o">=</span><span class="s2">"bold"</span><span class="p">,</span> <span class="n">ha</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span> <span class="n">va</span><span class="o">=</span><span class="s2">"center"</span><span class="p">,</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>                 <span class="n">bbox</span><span class="o">=</span><span class="p">{</span><span class="s2">"boxstyle"</span><span class="p">:</span> <span class="s2">"round"</span><span class="p">,</span> <span class="s2">"facecolor"</span><span class="p">:</span> <span class="s2">"white"</span><span class="p">,</span> <span class="s2">"alpha"</span><span class="p">:</span> <span class="mf">0.85</span><span class="p">})</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Pendapatan tahunan (k$)"</span><span class="p">)</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Skor belanja (1-100)"</span><span class="p">)</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Peta kelompok (dua variabel yang dipakai clustering)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="s2">"upper center"</span><span class="p">,</span> <span class="n">bbox_to_anchor</span><span class="o">=</span><span class="p">(</span><span class="mf">0.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">),</span> <span class="n">ncol</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
+</span><span id="__span-10-12"><a id="__codelineno-10-12" name="__codelineno-10-12" href="#__codelineno-10-12"></a>
+</span><span id="__span-10-13"><a id="__codelineno-10-13" name="__codelineno-10-13" href="#__codelineno-10-13"></a><span class="n">groups</span> <span class="o">=</span> <span class="p">[</span><span class="n">df</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span><span class="p">,</span> <span class="s2">"Age"</span><span class="p">]</span> <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="s2">"ABCDE"</span><span class="p">]</span>
+</span><span id="__span-10-14"><a id="__codelineno-10-14" name="__codelineno-10-14" href="#__codelineno-10-14"></a><span class="n">box</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">groups</span><span class="p">,</span> <span class="n">tick_labels</span><span class="o">=</span><span class="nb">list</span><span class="p">(</span><span class="s2">"ABCDE"</span><span class="p">),</span> <span class="n">patch_artist</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">medianprops</span><span class="o">=</span><span class="p">{</span><span class="s2">"color"</span><span class="p">:</span> <span class="s2">"black"</span><span class="p">})</span>
+</span><span id="__span-10-15"><a id="__codelineno-10-15" name="__codelineno-10-15" href="#__codelineno-10-15"></a><span class="k">for</span> <span class="n">patch</span><span class="p">,</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">box</span><span class="p">[</span><span class="s2">"boxes"</span><span class="p">],</span> <span class="s2">"ABCDE"</span><span class="p">):</span>
+</span><span id="__span-10-16"><a id="__codelineno-10-16" name="__codelineno-10-16" href="#__codelineno-10-16"></a>    <span class="n">patch</span><span class="o">.</span><span class="n">set_facecolor</span><span class="p">(</span><span class="n">palette</span><span class="p">[</span><span class="n">c</span><span class="p">])</span>
+</span><span id="__span-10-17"><a id="__codelineno-10-17" name="__codelineno-10-17" href="#__codelineno-10-17"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">color</span><span class="o">=</span><span class="s2">"gray"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">"rata-rata semua"</span><span class="p">)</span>
+</span><span id="__span-10-18"><a id="__codelineno-10-18" name="__codelineno-10-18" href="#__codelineno-10-18"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Kelompok"</span><span class="p">)</span>
+</span><span id="__span-10-19"><a id="__codelineno-10-19" name="__codelineno-10-19" href="#__codelineno-10-19"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Umur (tahun), tidak dipakai clustering"</span><span class="p">)</span>
+</span><span id="__span-10-20"><a id="__codelineno-10-20" name="__codelineno-10-20" href="#__codelineno-10-20"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Sebaran umur tiap kelompok"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-10-21"><a id="__codelineno-10-21" name="__codelineno-10-21" href="#__codelineno-10-21"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span id="__span-10-22"><a id="__codelineno-10-22" name="__codelineno-10-22" href="#__codelineno-10-22"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-10-23"><a id="__codelineno-10-23" name="__codelineno-10-23" href="#__codelineno-10-23"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> gambar pertama adalah peta panas profil terstandar dengan angka di tiap sel. Garis tebal memisahkan variabel yang dipakai dan yang tidak. <code>vmin</code> dan <code>vmax</code> dikunci pada -1,5 sampai 1,5 agar warna tidak berubah menurut data. Gambar kedua berisi peta pendapatan terhadap skor belanja (kiri) dan diagram kotak umur (kanan). Diagram kotak menampilkan <strong>sebaran</strong>, bukan hanya rata-rata.</p>
+<h2 id="code-explanation">Code Explanation<a class="headerlink" href="#code-explanation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Bagian kode</th>
+<th>Peran</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>used</code> dan <code>unused</code></td>
+<td>Memisahkan variabel yang dipakai dan tidak dipakai clustering</td>
+</tr>
+<tr>
+<td><code>np.argsort(-np.bincount(...))</code></td>
+<td>Memberi huruf kelompok menurut ukuran</td>
+</tr>
+<tr>
+<td><code>groupby("Cluster").agg(...)</code></td>
+<td>Ringkasan statistik per kelompok</td>
+</tr>
+<tr>
+<td><code>z_profile</code></td>
+<td>Profil terstandar <span class="arithmatex">\( z_{k,v} \)</span></td>
+</tr>
+<tr>
+<td><code>describe(...)</code></td>
+<td>Nama berbasis aturan</td>
+</tr>
+<tr>
+<td><code>spread</code> dan <code>rng.permutation</code></td>
+<td>Uji permutasi</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Mengapa tidak memakai ANOVA atau uji-t?</p>
+<p>Uji klasik juga bisa dipakai pada variabel di luar clustering. Uji permutasi dipilih di bab ini karena ide dasarnya terlihat langsung di kode (acak lalu bandingkan) dan tidak mengandaikan sebaran data tertentu.</p>
+</div>
+<h2 id="how-to-run">How to Run<a class="headerlink" href="#how-to-run" title="Permanent link">&para;</a></h2>
+<p>Dari folder utama proyek (setelah mengaktifkan lingkungan virtual):</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements-notebooks</span><span class="p">.</span><span class="n">txt</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">python</span> <span class="n">examples</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">6</span><span class="p">/</span><span class="n">07_cluster_interpretation_and_profiling</span><span class="p">.</span><span class="n">py</span>
+</span></code></pre></div>
+<p>Skrip mencetak output ke terminal, menyimpan dua gambar ke <code>docs/assets/level-6/</code>, dan hasil ke <code>examples/level-6/results/</code>. Notebook interaktifnya:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">jupyter</span> <span class="n">notebook</span> <span class="n">notebooks</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">6</span><span class="p">/</span><span class="n">07-cluster-interpretation</span><span class="o">-and</span><span class="n">-profiling</span><span class="p">.</span><span class="n">ipynb</span>
+</span></code></pre></div>
+<p>Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.</p>
+<h2 id="expected-output">Expected Output<a class="headerlink" href="#expected-output" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a>Ukuran kelompok: {'A': 81, 'B': 39, 'C': 35, 'D': 23, 'E': 22}
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>Persentase: {'A': 40.5, 'B': 19.5, 'C': 17.5, 'D': 11.5, 'E': 11.0}
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>          n  pendapatan_rata  pendapatan_sd  skor_rata  skor_sd  umur_median  umur_rata  porsi_laki
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>Cluster                                                                                            
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>A        81            55.30           8.99      49.52     6.53         46.0      42.72        0.41
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>B        39            86.54          16.31      82.13     9.36         32.0      32.69        0.46
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>C        35            88.20          16.40      17.11     9.95         42.0      41.11        0.54
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>D        23            26.30           7.89      20.91    13.02         46.0      45.22        0.39
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a>E        22            25.73           7.57      79.36    10.50         23.5      25.27        0.41
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>Seluruh pelanggan: pendapatan 60.56 | skor 50.2 | umur 38.85 | porsi laki-laki 0.44
+</span><span id="__span-13-12"><a id="__codelineno-13-12" name="__codelineno-13-12" href="#__codelineno-13-12"></a>         pendapatan  skor belanja  umur  laki-laki
+</span><span id="__span-13-13"><a id="__codelineno-13-13" name="__codelineno-13-13" href="#__codelineno-13-13"></a>Cluster                                           
+</span><span id="__span-13-14"><a id="__codelineno-13-14" name="__codelineno-13-14" href="#__codelineno-13-14"></a>A             -0.20         -0.03  0.28      -0.07
+</span><span id="__span-13-15"><a id="__codelineno-13-15" name="__codelineno-13-15" href="#__codelineno-13-15"></a>B              0.99          1.24 -0.44       0.04
+</span><span id="__span-13-16"><a id="__codelineno-13-16" name="__codelineno-13-16" href="#__codelineno-13-16"></a>C              1.05         -1.28  0.16       0.21
+</span><span id="__span-13-17"><a id="__codelineno-13-17" name="__codelineno-13-17" href="#__codelineno-13-17"></a>D             -1.30         -1.13  0.46      -0.10
+</span><span id="__span-13-18"><a id="__codelineno-13-18" name="__codelineno-13-18" href="#__codelineno-13-18"></a>E             -1.33          1.13 -0.97      -0.06
+</span><span id="__span-13-19"><a id="__codelineno-13-19" name="__codelineno-13-19" href="#__codelineno-13-19"></a>Kelompok A (81 pelanggan): pendapatan menengah, belanja menengah
+</span><span id="__span-13-20"><a id="__codelineno-13-20" name="__codelineno-13-20" href="#__codelineno-13-20"></a>Kelompok B (39 pelanggan): pendapatan tinggi, belanja tinggi
+</span><span id="__span-13-21"><a id="__codelineno-13-21" name="__codelineno-13-21" href="#__codelineno-13-21"></a>Kelompok C (35 pelanggan): pendapatan tinggi, belanja rendah
+</span><span id="__span-13-22"><a id="__codelineno-13-22" name="__codelineno-13-22" href="#__codelineno-13-22"></a>Kelompok D (23 pelanggan): pendapatan rendah, belanja rendah
+</span><span id="__span-13-23"><a id="__codelineno-13-23" name="__codelineno-13-23" href="#__codelineno-13-23"></a>Kelompok E (22 pelanggan): pendapatan rendah, belanja tinggi
+</span><span id="__span-13-24"><a id="__codelineno-13-24" name="__codelineno-13-24" href="#__codelineno-13-24"></a>Kelompok  CustomerID Gender  Age  Income  Score
+</span><span id="__span-13-25"><a id="__codelineno-13-25" name="__codelineno-13-25" href="#__codelineno-13-25"></a>       A          81   Male   57      54     51
+</span><span id="__span-13-26"><a id="__codelineno-13-26" name="__codelineno-13-26" href="#__codelineno-13-26"></a>       B         176 Female   30      88     86
+</span><span id="__span-13-27"><a id="__codelineno-13-27" name="__codelineno-13-27" href="#__codelineno-13-27"></a>       C         177   Male   58      88     15
+</span><span id="__span-13-28"><a id="__codelineno-13-28" name="__codelineno-13-28" href="#__codelineno-13-28"></a>       D          25 Female   54      28     14
+</span><span id="__span-13-29"><a id="__codelineno-13-29" name="__codelineno-13-29" href="#__codelineno-13-29"></a>       E          26   Male   29      28     82
+</span><span id="__span-13-30"><a id="__codelineno-13-30" name="__codelineno-13-30" href="#__codelineno-13-30"></a>Age  : selisih rata-rata antar kelompok = 19.945 | rentang acak 95% = 9.890 | p (permutasi, 2000 kali) = 0.0005
+</span><span id="__span-13-31"><a id="__codelineno-13-31" name="__codelineno-13-31" href="#__codelineno-13-31"></a>Male : selisih rata-rata antar kelompok = 0.152 | rentang acak 95% = 0.339 | p (permutasi, 2000 kali) = 0.7426
+</span><span id="__span-13-32"><a id="__codelineno-13-32" name="__codelineno-13-32" href="#__codelineno-13-32"></a>Profil dan konfigurasi tersimpan.
+</span><span id="__span-13-33"><a id="__codelineno-13-33" name="__codelineno-13-33" href="#__codelineno-13-33"></a>[gambar disimpan: docs/assets/level-6/07-profil-kelompok.png]
+</span><span id="__span-13-34"><a id="__codelineno-13-34" name="__codelineno-13-34" href="#__codelineno-13-34"></a>[gambar disimpan: docs/assets/level-6/07-peta-dan-umur.png]
+</span></code></pre></div>
+<p>Gambar yang dihasilkan:</p>
+<p><img alt="Peta panas profil terstandar lima kelompok pada empat variabel: pendapatan dan skor belanja (dipakai) dengan nilai z antara -1,33 dan +1,24, serta umur dan laki-laki (tidak dipakai) dengan nilai z yang lebih kecil. Kelompok E paling muda (-0,97)" src="../../assets/level-6/07-profil-kelompok.png" /></p>
+<p><img alt="Kiri: peta pendapatan terhadap skor belanja dengan lima kelompok berwarna dan huruf di pusat tiap kelompok. Kanan: diagram kotak umur tiap kelompok dengan garis putus-putus untuk rata-rata semua. Kelompok E paling muda, kelompok B dan E punya sebaran umur paling sempit" src="../../assets/level-6/07-peta-dan-umur.png" /></p>
+<h3 id="interpretasi-output">Interpretasi output<a class="headerlink" href="#interpretasi-output" title="Permanent link">&para;</a></h3>
+<p><strong>1. Ukuran.</strong> A <strong>81</strong> (40,5%), B <strong>39</strong> (19,5%), C <strong>35</strong> (17,5%), D <strong>23</strong> (11,5%), E <strong>22</strong> (11,0%). Kelompok terbesar hampir empat kali kelompok terkecil. Dua kelompok terkecil masing-masing sekitar 22 sampai 23 orang, jadi angka rata-rata mereka bergantung pada sedikit data.</p>
+<p><strong>2. Profil satuan asli.</strong> Rata-rata seluruh pelanggan: pendapatan 60,56, skor 50,20, umur 38,85, porsi laki-laki 0,44.</p>
+<table>
+<thead>
+<tr>
+<th>Kelompok</th>
+<th>n</th>
+<th>Pendapatan (rata ± SD)</th>
+<th>Skor (rata ± SD)</th>
+<th>Umur (median)</th>
+<th>Porsi laki-laki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>81</td>
+<td>55,30 ± 8,99</td>
+<td>49,52 ± 6,53</td>
+<td>46,0</td>
+<td>0,41</td>
+</tr>
+<tr>
+<td>B</td>
+<td>39</td>
+<td>86,54 ± 16,31</td>
+<td>82,13 ± 9,36</td>
+<td>32,0</td>
+<td>0,46</td>
+</tr>
+<tr>
+<td>C</td>
+<td>35</td>
+<td>88,20 ± 16,40</td>
+<td>17,11 ± 9,95</td>
+<td>42,0</td>
+<td>0,54</td>
+</tr>
+<tr>
+<td>D</td>
+<td>23</td>
+<td>26,30 ± 7,89</td>
+<td>20,91 ± 13,02</td>
+<td>46,0</td>
+<td>0,39</td>
+</tr>
+<tr>
+<td>E</td>
+<td>22</td>
+<td>25,73 ± 7,57</td>
+<td>79,36 ± 10,50</td>
+<td>23,5</td>
+<td>0,41</td>
+</tr>
+</tbody>
+</table>
+<p>Sebaran pendapatan kelompok B dan C (SD sekitar 16) hampir dua kali kelompok A (8,99). Pada peta, kelompok B dan C membentang dari sekitar 70 sampai di atas 130 k$. "Rata-rata 86,5" bagi B tidak menggambarkan semua anggotanya sama baik.</p>
+<p><strong>3. Profil terstandar cocok dengan hitungan manual.</strong> Pendapatan E <strong>-1,33</strong>, skor belanja B <strong>+1,24</strong>, umur E <strong>-0,97</strong>: persis seperti hitungan tangan. Seluruh tabel:</p>
+<table>
+<thead>
+<tr>
+<th>Kelompok</th>
+<th>pendapatan</th>
+<th>skor belanja</th>
+<th>umur</th>
+<th>laki-laki</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>A</td>
+<td>-0,20</td>
+<td>-0,03</td>
+<td>+0,28</td>
+<td>-0,07</td>
+</tr>
+<tr>
+<td>B</td>
+<td>+0,99</td>
+<td>+1,24</td>
+<td>-0,44</td>
+<td>+0,04</td>
+</tr>
+<tr>
+<td>C</td>
+<td>+1,05</td>
+<td>-1,28</td>
+<td>+0,16</td>
+<td>+0,21</td>
+</tr>
+<tr>
+<td>D</td>
+<td>-1,30</td>
+<td>-1,13</td>
+<td>+0,46</td>
+<td>-0,10</td>
+</tr>
+<tr>
+<td>E</td>
+<td>-1,33</td>
+<td>+1,13</td>
+<td>-0,97</td>
+<td>-0,06</td>
+</tr>
+</tbody>
+</table>
+<p>Dua kolom pertama (variabel yang dipakai) memiliki nilai besar <strong>karena clustering dibuat begitu</strong>. Dua kolom terakhir tidak dipakai, dan di sanalah informasi baru berada: umur E sangat rendah (-0,97), umur D agak tinggi (+0,46), sedangkan porsi laki-laki hampir tidak bergeser (di bawah 0,25 di semua kelompok).</p>
+<p><strong>4. Nama berbasis aturan (ambang |z| = 0,5).</strong> A: pendapatan menengah, belanja menengah. B: pendapatan tinggi, belanja tinggi. C: pendapatan tinggi, belanja rendah. D: pendapatan rendah, belanja rendah. E: pendapatan rendah, belanja tinggi. Nama-nama itu mengikuti empat sudut peta ditambah satu kelompok tengah. Itu deskripsi posisi, bukan sifat orangnya.</p>
+<p><strong>5. Pelanggan perwakilan.</strong> A: pelanggan 81 (laki-laki, 57 tahun, pendapatan 54, skor 51). B: 176 (perempuan, 30 tahun, 88, 86). C: 177 (laki-laki, 58 tahun, 88, 15). D: 25 (perempuan, 54 tahun, 28, 14). E: 26 (laki-laki, 29 tahun, 28, 82). Perwakilan kelompok A berumur 57 tahun, padahal umur median kelompok itu 46. Titik ini dekat pada pendapatan dan skor (yang dipakai), tetapi tidak harus tipikal pada umur. Pelanggan perwakilan bagus untuk ilustrasi, bukan sebagai pengganti profil.</p>
+<p><strong>6. Uji permutasi.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Variabel</th>
+<th>Selisih rata-rata antar kelompok</th>
+<th>Batas acak 95%</th>
+<th>Nilai-p</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Umur</td>
+<td>19,945 tahun</td>
+<td>9,890</td>
+<td><strong>0,0005</strong></td>
+</tr>
+<tr>
+<td>Laki-laki</td>
+<td>0,152</td>
+<td>0,339</td>
+<td><strong>0,7426</strong></td>
+</tr>
+</tbody>
+</table>
+<p>Selisih rata-rata umur antar kelompok (E sekitar 25,3 tahun sampai D sekitar 45,2 tahun) kira-kira <strong>dua kali</strong> batas yang bisa dicapai pengacakan, dan nilai-p berada di batas bawah yang mungkin (0,0005). Untuk gender, selisih 0,152 <strong>lebih kecil</strong> dari batas acak (0,339) dan nilai-p 0,74: tidak ada bukti bahwa porsi laki-laki berbeda antar kelompok. Jadi "kelompok C didominasi laki-laki" (0,54) <strong>tidak didukung</strong>, walau angkanya tampak lebih tinggi dari 0,44.</p>
+<div class="admonition warning">
+<p class="admonition-title">Yang boleh dan tidak boleh disimpulkan</p>
+<p><strong>Boleh:</strong> pada 200 pelanggan ini, kelompok yang dibentuk dari pendapatan dan skor belanja berbeda dalam umur lebih dari yang diharapkan secara acak, dengan kelompok pendapatan rendah dan skor tinggi (E) paling muda. <strong>Tidak boleh:</strong> menyimpulkan bahwa umur menyebabkan perilaku belanja, bahwa semua pelanggan muda berbelanja banyak, atau bahwa pola ini berlaku di toko lain. Hasil ini juga hanya untuk satu seed dan K = 5.</p>
+</div>
+<p><strong>7. Penyimpanan.</strong> Profil dan konfigurasi tersimpan di <code>07_cluster_profile.csv</code> dan <code>07_config.json</code>.</p>
+<h2 id="practical-application">Practical Application<a class="headerlink" href="#practical-application" title="Permanent link">&para;</a></h2>
+<p><strong>Laporan segmentasi.</strong> Tim pemasaran menerima tabel profil, peta panas, dan nama berbasis aturan. Setiap nama disertai ukuran kelompok dan catatan bahwa itu label, bukan tipe orang.</p>
+<p><strong>Memilih tindakan.</strong> Kelompok C (pendapatan tinggi, belanja rendah, 35 orang) mungkin cocok untuk uji promosi. Kelompok kecil seperti D dan E berisiko, karena ukurannya sekitar 22 orang. Tindakan sebaiknya diuji dulu pada sampel kecil.</p>
+<p><strong>Menguji variabel baru.</strong> Variabel lain yang tidak dipakai (misalnya kota atau kanal pembelian) dapat diperiksa dengan uji permutasi yang sama.</p>
+<p><strong>Dokumentasi.</strong> Simpan profil beserta K, seed, praproses, dan aturan penamaan, agar orang lain bisa memeriksa dan mengulangnya.</p>
+<h2 id="hands-on-exercises">Hands-on Exercises<a class="headerlink" href="#hands-on-exercises" title="Permanent link">&para;</a></h2>
+<ol>
+<li>Ubah ambang penamaan dari 0,5 menjadi 0,2 dan menjadi 1,1. Bagaimana nama kelompok berubah?</li>
+<li>Jalankan K-Means dengan K = 6 pada data yang sama. Kelompok mana yang terpecah, dan berapa ARI terhadap hasil K = 5?</li>
+<li>Ulangi uji permutasi dengan <code>default_rng(7)</code>. Apakah kesimpulan untuk umur dan gender berubah?</li>
+<li>Mengapa rata-rata umur kelompok A (42,72) berbeda dari mediannya (46,0)?</li>
+<li>Mengapa tidak bermakna menguji apakah pendapatan berbeda antar kelompok?</li>
+<li>Apa yang ditunjukkan bahwa pelanggan perwakilan kelompok A berumur 57 tahun, padahal median umurnya 46?</li>
+<li>Seorang rekan ingin menamai kelompok E "anak muda boros". Apa keberatanmu, dan nama apa yang kamu usulkan?</li>
+</ol>
+<details class="question">
+<summary>Jawaban</summary>
+<p>Hasil nomor 1 sampai 3 berasal dari eksekusi nyata.</p>
+<ol>
+<li>Ambang <strong>0,2</strong>: kelompok A menjadi "pendapatan <strong>rendah</strong>, belanja menengah" (z pendapatan -0,20 melewati ambang), yang lain tetap. Ambang <strong>1,1</strong>: B menjadi pendapatan <strong>menengah</strong> dan belanja tinggi, C menjadi pendapatan <strong>menengah</strong> dan belanja rendah (z pendapatan 0,99 dan 1,05 tidak mencapai 1,1), sedangkan D dan E tetap. Nama bergantung pada ambang, dan ambang 1,1 menyebut pelanggan berpendapatan sekitar 87 k$ sebagai "menengah", yang tidak masuk akal bagi pembaca. Karena itu ambang harus dinyatakan dan diperiksa.</li>
+<li>Kelompok <strong>B</strong> (39 pelanggan) terpecah menjadi 29 pelanggan (pendapatan rata-rata 78,6, skor 82,2) dan 10 pelanggan (pendapatan rata-rata 109,7, skor 82,0). Ukuran dan rata-rata keempat kelompok lain sama persis. ARI K = 5 terhadap K = 6 adalah <strong>0,961</strong>. Jadi pembagian K = 5 hampir sepenuhnya terkandung dalam K = 6. Pecahan baru kecil (10 orang), dan membedakannya hanya pada pendapatan yang sangat tinggi.</li>
+<li>Umur: selisih 19,945, batas acak 95% 9,713, nilai-p <strong>0,0005</strong>. Gender: selisih 0,152, batas acak 0,340, nilai-p <strong>0,7086</strong>. Kesimpulan sama: umur berbeda antar kelompok, gender tidak. Nilai-p gender berubah dari 0,7426 ke 0,7086 karena pengacakan berbeda, dan kesimpulannya tetap.</li>
+<li>Median lebih besar dari rata-rata berarti ada anggota yang jauh lebih muda yang menarik rata-rata ke bawah. Itu sesuai diagram kotak: umur kelompok A membentang dari sekitar 18 sampai 70, sangat lebar. Satu angka rata-rata tidak cukup untuk melukiskan kelompok ini.</li>
+<li>Kelompok dibentuk dari pendapatan (dan skor belanja), sehingga perbedaannya pasti ada karena cara pembentukannya, bukan karena temuan (sirkularitas). Uji yang bermakna adalah pada variabel yang tidak dipakai.</li>
+<li>Satu pelanggan nyata dipilih berdasarkan kedekatan pada pendapatan dan skor saja, jadi umur dan gender-nya tidak dijamin tipikal. Ia berguna sebagai contoh konkret, tetapi tidak menggantikan ringkasan statistik seluruh anggota.</li>
+<li>"Boros" adalah penilaian, bukan deskripsi, dan "anak muda" menyiratkan semua anggotanya muda. Padahal umur E bervariasi (batas bawah dan atas terlihat di diagram kotak) dan variabel yang dipakai hanya skor belanja, bukan sifat boros. Usulan: "pendapatan rendah, belanja tinggi" (nama berbasis aturan), dengan catatan terpisah bahwa rata-rata umurnya 25,3 tahun.</li>
+</ol>
+</details>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="masalah-teknis">Masalah teknis<a class="headerlink" href="#masalah-teknis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Masalah</th>
+<th>Penyebab</th>
+<th>Solusi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>KeyError</code> pada <code>groupby</code></td>
+<td>Nama kolom salah ketik</td>
+<td>Periksa <code>df.columns</code></td>
+</tr>
+<tr>
+<td>Nomor kelompok berbeda dari bab</td>
+<td>Nomor K-Means acak</td>
+<td>Beri huruf menurut ukuran (seperti di kode)</td>
+</tr>
+<tr>
+<td>Nilai-p berubah sedikit tiap eksekusi</td>
+<td>Seed pengacakan tidak tetap</td>
+<td>Tetapkan <code>default_rng(SEED)</code></td>
+</tr>
+<tr>
+<td>Peta panas berwarna tidak konsisten</td>
+<td>Skala warna otomatis</td>
+<td>Tetapkan <code>vmin</code> dan <code>vmax</code></td>
+</tr>
+<tr>
+<td>Kelompok kecil menghasilkan rata-rata tidak stabil</td>
+<td>Anggota terlalu sedikit</td>
+<td>Laporkan ukuran dan sebaran, jangan hanya rata-rata</td>
+</tr>
+<tr>
+<td>Nama kelompok berubah ketika data berubah</td>
+<td>Ambang pada z dekat batas</td>
+<td>Nyatakan ambang, dan periksa kepekaannya</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kesalahan-umum_1">Kesalahan umum<a class="headerlink" href="#kesalahan-umum_1" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Menguji variabel yang dipakai clustering</strong> (sirkularitas).</li>
+<li><strong>Hanya melaporkan rata-rata</strong>, tanpa median dan sebaran.</li>
+<li><strong>Menganggap nama sebagai kebenaran</strong> atau memberi nama yang menghakimi.</li>
+<li><strong>Menafsirkan sebab-akibat</strong> dari profil.</li>
+<li><strong>Memakai satu titik perwakilan</strong> sebagai gambaran seluruh kelompok.</li>
+<li><strong>Mengabaikan ukuran kelompok.</strong></li>
+<li><strong>Membandingkan nomor kelompok antar eksekusi.</strong></li>
+</ol>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Profil menggambarkan, bukan menjelaskan.</strong> Empat pertanyaan: seberapa besar, seperti apa pada variabel yang dipakai, apa lagi pada variabel yang tidak dipakai, dan seberapa yakin bukan kebetulan.</li>
+<li>Pada Mall Customers (K = 5): ukuran 81, 39, 35, 23, dan 22. Profil terstandar cocok dengan hitungan manual (pendapatan E -1,33, skor belanja B +1,24, umur E -0,97).</li>
+<li>Perbedaan pada variabel yang <strong>dipakai</strong> adalah hasil konstruksi. Variabel yang layak diuji adalah yang <strong>tidak dipakai</strong>.</li>
+<li>Uji permutasi (2000 kali): umur berbeda antar kelompok (selisih 19,9 tahun vs batas acak 9,9; p = 0,0005), gender tidak (p = 0,74).</li>
+<li>Nama berbasis aturan hanya label dan bergantung pada ambang (ambang 0,2 dan 1,1 mengubah nama).</li>
+<li>Titik perwakilan dan rata-rata menyederhanakan. Laporkan median, sebaran, dan ukuran kelompok.</li>
+<li>Asosiasi tidak sama dengan sebab. Hasil ini berlaku untuk 200 pelanggan, K = 5, dan satu seed.</li>
+</ul>
+<p><strong>Bab berikutnya:</strong> Bab 8 membahas kestabilan hasil: apakah kelompok yang kita tafsirkan bertahan ketika seed, sampel data, atau K berubah.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Hennig, C. (2015). What are the true clusters? <em>Pattern Recognition Letters</em>, 64, 53–62.</li>
+<li>Hennig, C. (2007). Cluster-wise assessment of cluster stability. <em>Computational Statistics &amp; Data Analysis</em>, 52(1), 258–271.</li>
+<li>Everitt, B. S., Landau, S., Leese, M., &amp; Stahl, D. (2011). <em>Cluster Analysis</em> (5th ed.). Wiley.</li>
+<li>Phipson, B., &amp; Smyth, G. K. (2010). Permutation p-values should never be zero: calculating exact p-values when permutations are randomly drawn. <em>Statistical Applications in Genetics and Molecular Biology</em>, 9(1), Article 39.</li>
+<li>Pandas documentation: <a href="https://pandas.pydata.org/docs/user_guide/groupby.html"><em>Group by: split-apply-combine</em></a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Kembali ke atas
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../06-dimensionality-reduction-and-pca/" class="md-footer__link md-footer__link--prev" aria-label="Sebelumnya: Bab 6 — Dimensionality Reduction and PCA">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Sebelumnya
+              </span>
+              <div class="md-ellipsis">
+                Bab 6 — Dimensionality Reduction and PCA
+              </div>
+            </div>
+          </a>
+        
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "navigation.path", "navigation.footer", "navigation.top", "navigation.tracking", "toc.follow", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.action.edit"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Tersalin ke clipboard", "clipboard.copy": "Salin ke clipboard", "search.result.more.one": "1 lagi di halaman ini", "search.result.more.other": "# lagi di halaman ini", "search.result.none": "Tidak ada dokumen yang sesuai", "search.result.one": "1 dokumen ditemukan", "search.result.other": "# dokumen ditemukan", "search.result.placeholder": "Ketik untuk mulai pencarian", "search.result.term.missing": "Tidak ada", "select.version": "Pilih versi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../assets/vendor/mermaid/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid-config.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>

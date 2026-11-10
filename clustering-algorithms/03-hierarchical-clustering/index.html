@@ -1,0 +1,5129 @@
+
+<!doctype html>
+<html lang="id" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Clustering pada Machine Learning">
+      
+      
+      
+        <link rel="canonical" href="https://topekox.github.io/materi-clustering/clustering-algorithms/03-hierarchical-clustering/">
+      
+      
+        <link rel="prev" href="../02-k-means-clustering/">
+      
+      
+        <link rel="next" href="../04-dbscan-clustering/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Bab 3 — Hierarchical Clustering - Materi Clustering</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bab-3-hierarchical-clustering" class="md-skip">
+          Lewati ke isi
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Materi Clustering" class="md-header__button md-logo" aria-label="Materi Clustering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Materi Clustering
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bab 3 — Hierarchical Clustering
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: system (click for light)"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Theme: system (click for light)" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: light (click for dark)"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Theme: light (click for dark)" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: dark (click for system)"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Theme: dark (click for system)" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cari" placeholder="Cari" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cari">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Kosongkan" aria-label="Kosongkan" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Mempersiapkan pencarian
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/topekox/materi-clustering" title="Ke repositori" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TopekoX/materi-clustering
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigasi" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Materi Clustering" class="md-nav__button md-logo" aria-label="Materi Clustering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Materi Clustering
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/topekox/materi-clustering" title="Ke repositori" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TopekoX/materi-clustering
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beranda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kurikulum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 — Machine Learning Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 — Machine Learning Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../introduction-to-machine-learning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bab 1 — Introduction to Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendahuluan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/02-definition-of-machine-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definisi Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/03-ai-ml-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI, ML, dan Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/04-traditional-programming-vs-ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pemrograman Tradisional vs ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/05-how-machine-learning-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bagaimana ML Bekerja
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/06-basic-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Komponen Dasar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/07-real-world-applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Penerapan di Dunia Nyata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/08-machine-learning-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/09-machine-learning-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenis Masalah ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/10-role-of-ml-in-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Peran ML dalam Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/11-hands-on-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Pertama
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/12-exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/13-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ringkasan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/14-references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referensi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../types-of-machine-learning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Types of Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bab 2 — Types of Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendahuluan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/02-labeled-and-unlabeled-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labeled dan Unlabeled Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/03-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/04-classification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/05-regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/06-unsupervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/07-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/08-dimensionality-reduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dimensionality Reduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/09-association-rule-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Association Rule Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/10-semi-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Semi-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/11-reinforcement-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/12-comparison-of-learning-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perbandingan Jenis ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/13-choosing-machine-learning-approach/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memilih Pendekatan ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/14-python-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/15-python-unsupervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/16-common-misconceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miskonsepsi Umum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/17-exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/18-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ringkasan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/19-references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referensi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../data-exploration-and-preprocessing/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 — Data Exploration and Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 — Data Exploration and Preprocessing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/01-introduction-to-data-exploration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Data Exploration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/02-understanding-data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Understanding Data Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/03-descriptive-statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Descriptive Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/04-exploratory-data-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Exploratory Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/05-missing-values-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Missing Values Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/06-duplicate-data-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Duplicate Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/07-outlier-detection-and-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Outlier Detection and Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/08-data-cleaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — Data Cleaning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/09-data-transformation-and-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 9 — Data Transformation and Encoding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/10-feature-scaling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 10 — Feature Scaling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/11-feature-selection-and-feature-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 11 — Feature Selection and Feature Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/12-dataset-preparation-for-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 12 — Dataset Preparation for Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../fundamental-clustering/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 — Fundamental Clustering
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 — Fundamental Clustering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/01-introduction-to-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/02-understanding-clusters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Understanding Clusters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/03-centroid-and-cluster-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Centroid and Cluster Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/04-similarity-and-dissimilarity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Similarity and Dissimilarity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/05-distance-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Distance Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/06-feature-space-and-dimensionality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Feature Space and Dimensionality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/07-clustering-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Clustering Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 — Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 — Clustering Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../01-introduction-to-clustering-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-k-means-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — K-Means Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Hierarchical Clustering
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Hierarchical Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Daftar isi">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Daftar isi
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Explanation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dua-pendekatan-agglomerative-dan-divisive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dua pendekatan: agglomerative dan divisive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algoritma-agglomerative-langkah-demi-langkah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algoritma agglomerative langkah demi langkah
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contoh-manual-lima-titik-pada-satu-garis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh manual: lima titik pada satu garis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#membaca-dendrogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Membaca dendrogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metode-linkage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metode linkage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-agglomerativeclustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter AgglomerativeClustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pertimbangan-komputasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pertimbangan komputasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kelebihan-dan-keterbatasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kelebihan dan keterbatasan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Foundation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jarak-antar-kelompok-linkage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jarak antar kelompok (linkage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linkage-ward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linkage Ward
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengapa-single-linkage-bisa-merantai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengapa single linkage bisa "merantai"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kompleksitas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kompleksitas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bagian-a-siapkan-alat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian A — Siapkan alat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-b-lima-titik-dan-matriks-jarak" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian B — Lima titik dan matriks jarak
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-c-matriks-linkage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian C — Matriks linkage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-d-dendrogram-kecil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian D — Dendrogram kecil
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-e-agglomerativeclustering-pada-data-blobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian E — AgglomerativeClustering pada data blobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-f-linkage-pada-bentuk-data-yang-berbeda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian F — Linkage pada bentuk data yang berbeda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-g-dendrogram-mall-customers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian G — Dendrogram Mall Customers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-h-parameter-metric-dan-biaya-memori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian H — Parameter metric dan biaya memori
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretasi-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretasi output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-on Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masalah-teknis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masalah teknis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-dbscan-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — DBSCAN Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-gaussian-mixture-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Gaussian Mixture Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-mean-shift-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Mean Shift Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-comparison-of-clustering-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Comparison of Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clustering-evaluation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 5 — Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 5 — Clustering Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/01-introduction-to-clustering-evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/02-internal-clustering-evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Internal Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/03-inertia-and-wcss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Inertia and WCSS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/04-elbow-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Elbow Method
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/05-silhouette-score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Silhouette Score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/06-davies-bouldin-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Davies-Bouldin Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/07-calinski-harabasz-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Calinski-Harabasz Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/08-external-evaluation-and-metric-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — External Evaluation and Metric Comparison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../experimentation-and-interpretation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 6 — Experimentation and Interpretation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 6 — Experimentation and Interpretation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/01-introduction-to-clustering-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/02-experimental-design-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Experimental Design and Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/03-hyperparameter-tuning-and-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Hyperparameter Tuning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/04-algorithm-comparison-and-benchmarking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Algorithm Comparison and Benchmarking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/05-feature-selection-and-impact-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Feature Selection and Impact Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/06-dimensionality-reduction-and-pca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Dimensionality Reduction and PCA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/07-cluster-interpretation-and-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Cluster Interpretation and Profiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Daftar isi">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Daftar isi
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Explanation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#dua-pendekatan-agglomerative-dan-divisive" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Dua pendekatan: agglomerative dan divisive
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#algoritma-agglomerative-langkah-demi-langkah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Algoritma agglomerative langkah demi langkah
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contoh-manual-lima-titik-pada-satu-garis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh manual: lima titik pada satu garis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#membaca-dendrogram" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Membaca dendrogram
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#metode-linkage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Metode linkage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#parameter-agglomerativeclustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Parameter AgglomerativeClustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pertimbangan-komputasi" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pertimbangan komputasi
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kelebihan-dan-keterbatasan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kelebihan dan keterbatasan
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Foundation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Mathematical Foundation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#jarak-antar-kelompok-linkage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Jarak antar kelompok (linkage)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#linkage-ward" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Linkage Ward
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mengapa-single-linkage-bisa-merantai" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mengapa single linkage bisa "merantai"
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kompleksitas" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kompleksitas
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bagian-a-siapkan-alat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian A — Siapkan alat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-b-lima-titik-dan-matriks-jarak" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian B — Lima titik dan matriks jarak
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-c-matriks-linkage" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian C — Matriks linkage
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-d-dendrogram-kecil" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian D — Dendrogram kecil
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-e-agglomerativeclustering-pada-data-blobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian E — AgglomerativeClustering pada data blobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-f-linkage-pada-bentuk-data-yang-berbeda" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian F — Linkage pada bentuk data yang berbeda
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-g-dendrogram-mall-customers" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian G — Dendrogram Mall Customers
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-h-parameter-metric-dan-biaya-memori" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian H — Parameter metric dan biaya memori
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretasi-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretasi output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-on Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masalah-teknis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masalah teknis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigasi" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Beranda
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Level 4 — Clustering Algorithms
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/topekox/materi-clustering/edit/main/docs/clustering-algorithms/03-hierarchical-clustering.md" title="Ubah halaman ini" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="bab-3-hierarchical-clustering">Bab 3 — Hierarchical Clustering<a class="headerlink" href="#bab-3-hierarchical-clustering" title="Permanent link">&para;</a></h1>
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>Setelah mempelajari bab ini, kamu mampu:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menjelaskan ide <em>hierarchical clustering</em> dan perbedaannya dengan K-Means.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Membedakan pendekatan <em>agglomerative</em> (bottom-up) dan <em>divisive</em> (top-down).</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Membaca <em>dendrogram</em> dan menentukan jumlah kelompok dengan memotongnya.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menjelaskan empat metode <em>linkage</em>: single, complete, average, dan Ward, lengkap dengan rumusnya.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menghitung matriks jarak dan langkah penggabungan secara manual pada data kecil.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Memakai <code>AgglomerativeClustering</code> dengan parameter <code>n_clusters</code>, <code>linkage</code>, <code>metric</code>, dan <code>distance_threshold</code>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Membuat dan menafsirkan dendrogram dengan SciPy.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menjelaskan mengapa metode linkage menghasilkan bentuk kelompok yang berbeda.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Mengenali biaya komputasi dan keterbatasan hierarchical clustering.</li>
+</ul>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Bayangkan kamu menyusun silsilah keluarga. Dua saudara kandung digabung dulu menjadi satu keluarga kecil. Keluarga kecil itu lalu digabung dengan keluarga lain menjadi keluarga besar, dan seterusnya sampai semua orang masuk satu pohon keluarga. Kamu bisa "memotong" pohon itu di tingkat mana pun: tingkat keluarga inti, keluarga besar, atau seluruh marga.</p>
+<p><strong>Hierarchical clustering</strong> bekerja seperti itu. Berbeda dengan K-Means (<a href="../02-k-means-clustering/">Bab 2</a>) yang langsung menghasilkan <strong>satu pembagian</strong> dengan K ditentukan di awal, hierarchical clustering menghasilkan <strong>seluruh pohon penggabungan</strong>. Setelah pohon jadi, kamu memilih berapa kelompok yang kamu mau dengan memotong pohon di tinggi tertentu. Pohon itu digambar sebagai <strong>dendrogram</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Prasyarat</p>
+<p>Bab ini memakai <a href="../../fundamental-clustering/05-distance-metrics/">jarak dan matriks jarak</a> dari Level 3. Ringkasan perbedaan dengan K-Means ada di <a href="../02-k-means-clustering/">Bab 2</a>.</p>
+</div>
+<h2 id="fundamental-concepts">Fundamental Concepts<a class="headerlink" href="#fundamental-concepts" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Istilah</th>
+<th>Arti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Hierarchical clustering</strong></td>
+<td>Clustering yang menghasilkan hierarki (pohon) kelompok, bukan satu pembagian tunggal</td>
+</tr>
+<tr>
+<td><strong>Agglomerative</strong></td>
+<td>Pendekatan <em>bottom-up</em>: mulai dari tiap titik sebagai kelompok sendiri, lalu menggabungkan dua kelompok terdekat berulang kali</td>
+</tr>
+<tr>
+<td><strong>Divisive</strong></td>
+<td>Pendekatan <em>top-down</em>: mulai dari satu kelompok berisi semua titik, lalu memecahnya berulang kali</td>
+</tr>
+<tr>
+<td><strong>Dendrogram</strong></td>
+<td>Diagram pohon yang menunjukkan urutan dan jarak tiap penggabungan</td>
+</tr>
+<tr>
+<td><strong>Distance matrix</strong></td>
+<td>Tabel jarak antar semua pasangan titik</td>
+</tr>
+<tr>
+<td><strong>Linkage</strong></td>
+<td>Aturan menghitung <strong>jarak antar dua kelompok</strong> (bukan antar dua titik)</td>
+</tr>
+<tr>
+<td><strong>Single / Complete / Average / Ward</strong></td>
+<td>Empat jenis linkage yang kita pelajari</td>
+</tr>
+<tr>
+<td><strong>Merge height</strong></td>
+<td>Jarak antar dua kelompok pada saat keduanya digabung. Menjadi tinggi cabang di dendrogram</td>
+</tr>
+<tr>
+<td><strong>Cut (potongan)</strong></td>
+<td>Garis horizontal pada dendrogram. Jumlah garis vertikal yang dipotongnya adalah jumlah kelompok</td>
+</tr>
+<tr>
+<td><strong>Linkage matrix</strong></td>
+<td>Tabel <code>(n - 1)</code> baris yang mencatat tiap penggabungan. Dipakai SciPy untuk menggambar dendrogram</td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-explanation">Detailed Explanation<a class="headerlink" href="#detailed-explanation" title="Permanent link">&para;</a></h2>
+<h3 id="dua-pendekatan-agglomerative-dan-divisive">Dua pendekatan: agglomerative dan divisive<a class="headerlink" href="#dua-pendekatan-agglomerative-dan-divisive" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    subgraph AGG[Agglomerative: bottom-up]
+        direction LR
+        A1[Tiap titik&lt;br/&gt;kelompok sendiri] --&gt; A2[Gabung dua&lt;br/&gt;kelompok terdekat] --&gt; A3[... ulangi ...] --&gt; A4[Satu kelompok&lt;br/&gt;berisi semua]
+    end
+    subgraph DIV[Divisive: top-down]
+        direction LR
+        D1[Satu kelompok&lt;br/&gt;berisi semua] --&gt; D2[Pecah menjadi&lt;br/&gt;dua kelompok] --&gt; D3[... ulangi ...] --&gt; D4[Tiap titik&lt;br/&gt;kelompok sendiri]
+    end</code></pre>
+<p><strong>Agglomerative</strong> adalah pendekatan yang paling umum dan satu-satunya yang disediakan scikit-learn lewat <code>AgglomerativeClustering</code>.</p>
+<p><strong>Divisive</strong> dibahas di sini <strong>hanya secara konseptual</strong>. Scikit-learn <strong>tidak</strong> menyediakan estimator divisive clustering umum. Alasan divisive jarang dipakai: memecah satu kelompok berisi <span class="arithmatex">\( n \)</span> titik menjadi dua bagian punya <span class="arithmatex">\( 2^{n-1} - 1 \)</span> kemungkinan. Untuk <span class="arithmatex">\( n = 5 \)</span> ada 15 kemungkinan, tetapi untuk <span class="arithmatex">\( n = 30 \)</span> sudah ada <strong>536.870.911</strong>. Algoritma divisive praktis memakai heuristik (misalnya DIANA, atau pemecahan berulang dengan K-Means) untuk menghindari pemeriksaan semua kemungkinan.</p>
+<div class="admonition note">
+<p class="admonition-title">Soal <code>BisectingKMeans</code></p>
+<p>Scikit-learn memang memiliki <code>BisectingKMeans</code> yang bekerja top-down dengan membelah kelompok memakai K-Means. Namun itu varian K-Means, bukan divisive clustering umum, dan tidak kita bahas. Di Level 4 kita memakai agglomerative untuk praktik dan menjelaskan divisive sebagai konsep.</p>
+</div>
+<h3 id="algoritma-agglomerative-langkah-demi-langkah">Algoritma agglomerative langkah demi langkah<a class="headerlink" href="#algoritma-agglomerative-langkah-demi-langkah" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Mulai</strong>: tiap dari <span class="arithmatex">\( n \)</span> titik adalah satu kelompok. Ada <span class="arithmatex">\( n \)</span> kelompok.</li>
+<li><strong>Hitung</strong> jarak antar semua pasangan kelompok (memakai aturan linkage).</li>
+<li><strong>Gabung</strong> dua kelompok dengan jarak terkecil menjadi satu. Catat jarak penggabungannya (<em>merge height</em>). Jumlah kelompok berkurang satu.</li>
+<li><strong>Ulangi</strong> langkah 2 dan 3 sampai tinggal satu kelompok. Total ada <span class="arithmatex">\( n - 1 \)</span> penggabungan.</li>
+<li><strong>Potong</strong> pohon di tinggi yang kamu pilih untuk mendapat jumlah kelompok yang diinginkan.</li>
+</ol>
+<p>Perhatikan bahwa K-Means tidak dijalankan berulang-ulang untuk tiap K. Pohonnya dibangun <strong>sekali</strong>, lalu K bisa dipilih belakangan.</p>
+<h3 id="contoh-manual-lima-titik-pada-satu-garis">Contoh manual: lima titik pada satu garis<a class="headerlink" href="#contoh-manual-lima-titik-pada-satu-garis" title="Permanent link">&para;</a></h3>
+<p>Lima titik dengan satu fitur: A = 0, B = 1, C = 3,5, D = 7, E = 9.</p>
+<p><strong>Langkah 0: matriks jarak.</strong> Jarak antar dua titik pada satu dimensi adalah selisih mutlaknya:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>A</th>
+<th>B</th>
+<th>C</th>
+<th>D</th>
+<th>E</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>A</strong></td>
+<td>0</td>
+<td>1</td>
+<td>3,5</td>
+<td>7</td>
+<td>9</td>
+</tr>
+<tr>
+<td><strong>B</strong></td>
+<td>1</td>
+<td>0</td>
+<td>2,5</td>
+<td>6</td>
+<td>8</td>
+</tr>
+<tr>
+<td><strong>C</strong></td>
+<td>3,5</td>
+<td>2,5</td>
+<td>0</td>
+<td>3,5</td>
+<td>5,5</td>
+</tr>
+<tr>
+<td><strong>D</strong></td>
+<td>7</td>
+<td>6</td>
+<td>3,5</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr>
+<td><strong>E</strong></td>
+<td>9</td>
+<td>8</td>
+<td>5,5</td>
+<td>2</td>
+<td>0</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Penggabungan 1.</strong> Jarak terkecil adalah A–B = 1. Gabung menjadi {A, B} pada tinggi 1. (Untuk dua titik tunggal, keempat linkage memberi jarak yang sama.)</p>
+<p><strong>Penggabungan 2.</strong> Di antara jarak yang tersisa, D–E = 2 terkecil. Gabung menjadi {D, E} pada tinggi 2.</p>
+<p><strong>Penggabungan 3.</strong> Kini ada tiga kelompok: {A, B}, {C}, {D, E}. Di sini linkage <strong>mulai berpengaruh</strong>, karena kita harus mengukur jarak antar kelompok yang berisi lebih dari satu titik. Jarak {A, B} ke C:</p>
+<ul>
+<li><em>single</em>: yang <strong>terkecil</strong> dari pasangan titik: <span class="arithmatex">\( \min(3{,}5;\ 2{,}5) = 2{,}5 \)</span>.</li>
+<li><em>complete</em>: yang <strong>terbesar</strong>: <span class="arithmatex">\( \max(3{,}5;\ 2{,}5) = 3{,}5 \)</span>.</li>
+<li><em>average</em>: <strong>rata-rata</strong>: <span class="arithmatex">\( \frac{3{,}5 + 2{,}5}{2} = 3{,}0 \)</span>.</li>
+</ul>
+<p>Jarak C ke {D, E} lebih besar pada semua linkage, jadi yang digabung adalah {A, B} dengan C, pada tinggi 2,5 (single), 3,5 (complete), atau 3,0 (average).</p>
+<p><strong>Penggabungan 4.</strong> Terakhir {A, B, C} digabung dengan {D, E}. Keenam pasangan jaraknya adalah 7, 9, 6, 8, 3,5, 5,5:</p>
+<ul>
+<li><em>single</em>: <span class="arithmatex">\( \min = 3{,}5 \)</span> (pasangan C–D).</li>
+<li><em>complete</em>: <span class="arithmatex">\( \max = 9 \)</span> (pasangan A–E).</li>
+<li><em>average</em>: <span class="arithmatex">\( \frac{7 + 9 + 6 + 8 + 3{,}5 + 5{,}5}{6} = \frac{39}{6} = 6{,}5 \)</span>.</li>
+</ul>
+<p>Hasil ini cocok dengan output kode di bagian Python Implementation. Kelompok dan urutan penggabungannya sama pada ketiga linkage, tetapi <strong>tingginya berbeda</strong>, dan itu terlihat pada dendrogram.</p>
+<h3 id="membaca-dendrogram">Membaca dendrogram<a class="headerlink" href="#membaca-dendrogram" title="Permanent link">&para;</a></h3>
+<p>Cara membaca (lihat gambar dendrogram di bagian Expected Output):</p>
+<ol>
+<li><strong>Tiap daun di bawah adalah satu titik.</strong> Sumbu vertikal adalah <strong>jarak saat penggabungan</strong>.</li>
+<li><strong>Garis horizontal</strong> menunjukkan dua cabang yang digabung. <strong>Tingginya</strong> adalah jarak penggabungan.</li>
+<li><strong>Urutan kiri-kanan daun tidak bermakna.</strong> Cabang boleh ditukar posisinya tanpa mengubah arti. Yang bermakna hanya siapa bergabung dengan siapa, dan pada tinggi berapa.</li>
+<li><strong>Potong</strong> dengan garis horizontal. Jumlah garis vertikal yang dipotong adalah jumlah kelompok.</li>
+<li><strong>Celah vertikal yang panjang</strong> (tinggi penggabungan yang melompat jauh) menandakan dua kelompok yang jauh terpisah. Memotong di dalam celah itu adalah pilihan yang alami.</li>
+</ol>
+<h3 id="metode-linkage">Metode linkage<a class="headerlink" href="#metode-linkage" title="Permanent link">&para;</a></h3>
+<p>Setelah kelompok berisi lebih dari satu titik, kita perlu aturan untuk "jarak antar dua kelompok". Itulah <strong>linkage</strong>. Misalkan dua kelompok <span class="arithmatex">\( A \)</span> dan <span class="arithmatex">\( B \)</span>:</p>
+<table>
+<thead>
+<tr>
+<th>Linkage</th>
+<th>Jarak antar kelompok</th>
+<th>Intuisi</th>
+<th>Kecenderungan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Single</strong></td>
+<td>Jarak antara <strong>pasangan titik terdekat</strong> (satu dari A, satu dari B)</td>
+<td>"Cukup satu jembatan"</td>
+<td>Bisa mengikuti bentuk memanjang, tetapi rentan terhadap <em>chaining</em> (kelompok tersambung lewat rantai titik) dan noise</td>
+</tr>
+<tr>
+<td><strong>Complete</strong></td>
+<td>Jarak antara <strong>pasangan titik terjauh</strong></td>
+<td>"Semua anggota harus berdekatan"</td>
+<td>Menghasilkan kelompok kompak, tetapi peka terhadap outlier</td>
+</tr>
+<tr>
+<td><strong>Average</strong></td>
+<td><strong>Rata-rata</strong> jarak semua pasangan titik</td>
+<td>Kompromi single dan complete</td>
+<td>Cukup seimbang</td>
+</tr>
+<tr>
+<td><strong>Ward</strong></td>
+<td>Kenaikan WCSS saat dua kelompok digabung</td>
+<td>"Gabung yang paling sedikit merusak kekompakan"</td>
+<td>Menghasilkan kelompok bulat berukuran mirip, seperti K-Means. Hanya untuk jarak Euclidean</td>
+</tr>
+</tbody>
+</table>
+<h3 id="parameter-agglomerativeclustering">Parameter <code>AgglomerativeClustering</code><a class="headerlink" href="#parameter-agglomerativeclustering" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Parameter</th>
+<th>Bawaan</th>
+<th>Arti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>n_clusters</code></td>
+<td>2</td>
+<td>Jumlah kelompok akhir. Harus <code>None</code> jika memakai <code>distance_threshold</code></td>
+</tr>
+<tr>
+<td><code>linkage</code></td>
+<td><code>"ward"</code></td>
+<td><code>"ward"</code>, <code>"complete"</code>, <code>"average"</code>, atau <code>"single"</code></td>
+</tr>
+<tr>
+<td><code>metric</code></td>
+<td><code>"euclidean"</code></td>
+<td>Ukuran jarak antar titik, misalnya <code>"manhattan"</code> atau <code>"cosine"</code>. <code>"ward"</code> hanya mendukung <code>"euclidean"</code></td>
+</tr>
+<tr>
+<td><code>distance_threshold</code></td>
+<td><code>None</code></td>
+<td>Ambang jarak: kelompok <strong>tidak digabung</strong> bila jaraknya sudah sebesar atau di atas ambang. Jika diisi, <code>n_clusters</code> harus <code>None</code></td>
+</tr>
+<tr>
+<td><code>compute_distances</code></td>
+<td><code>False</code></td>
+<td>Jika <code>True</code>, jarak penggabungan disimpan di <code>distances_</code> (berguna untuk dendrogram), dengan biaya memori tambahan</td>
+</tr>
+</tbody>
+</table>
+<p>Atribut setelah <code>fit</code>:</p>
+<table>
+<thead>
+<tr>
+<th>Atribut</th>
+<th>Isi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>labels_</code></td>
+<td>Label tiap titik</td>
+</tr>
+<tr>
+<td><code>n_clusters_</code></td>
+<td>Jumlah kelompok akhir</td>
+</tr>
+<tr>
+<td><code>n_leaves_</code></td>
+<td>Jumlah daun pohon (sama dengan jumlah titik)</td>
+</tr>
+<tr>
+<td><code>children_</code></td>
+<td>Pasangan yang digabung pada tiap langkah. Nomor <code>&lt; n</code> adalah titik asli, nomor <code>≥ n</code> adalah kelompok hasil penggabungan sebelumnya</td>
+</tr>
+<tr>
+<td><code>distances_</code></td>
+<td>Jarak (tinggi) tiap penggabungan, ada jika <code>distance_threshold</code> diisi atau <code>compute_distances=True</code></td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title"><code>metric</code>, bukan <code>affinity</code></p>
+<p>Pada tutorial lama kamu mungkin menemukan parameter <code>affinity</code>. Parameter itu sudah diganti dengan <code>metric</code> pada scikit-learn versi baru.</p>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Scikit-learn tidak menggambar dendrogram</p>
+<p><code>AgglomerativeClustering</code> menghasilkan label, bukan gambar. Untuk dendrogram kita memakai <code>linkage</code> dan <code>dendrogram</code> dari <strong>SciPy</strong> (<code>scipy.cluster.hierarchy</code>), yang sudah terpasang bersama scikit-learn. Inilah satu-satunya alasan SciPy dipakai di Level 4.</p>
+</div>
+<h3 id="pertimbangan-komputasi">Pertimbangan komputasi<a class="headerlink" href="#pertimbangan-komputasi" title="Permanent link">&para;</a></h3>
+<p>Agar bisa memilih pasangan terdekat, algoritma harus mengetahui jarak antar pasangan titik. Untuk <span class="arithmatex">\( n \)</span> titik ada <span class="arithmatex">\( \frac{n(n-1)}{2} \)</span> pasangan. Memori yang dibutuhkan tumbuh <strong>kuadratik</strong> terhadap <span class="arithmatex">\( n \)</span>, dan waktu komputasi umumnya juga minimal kuadratik. Dengan 100.000 titik dan angka <code>float64</code> (8 byte), matriks jaraknya sendiri mencapai puluhan gigabyte (lihat output). Karena itu hierarchical clustering cocok untuk data <strong>ribuan</strong> titik, bukan jutaan.</p>
+<h3 id="kelebihan-dan-keterbatasan">Kelebihan dan keterbatasan<a class="headerlink" href="#kelebihan-dan-keterbatasan" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Kelebihan</th>
+<th>Keterbatasan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tidak perlu menentukan K di awal</td>
+<td>Mahal untuk data besar (memori dan waktu kuadratik)</td>
+</tr>
+<tr>
+<td>Dendrogram memberi gambaran struktur bertingkat</td>
+<td>Penggabungan <strong>tidak bisa dibatalkan</strong>: keputusan awal yang buruk terbawa sampai akhir</td>
+</tr>
+<tr>
+<td>Bisa mengikuti bentuk non-bulat (single linkage)</td>
+<td>Hasil sangat bergantung pada pilihan linkage</td>
+</tr>
+<tr>
+<td>Hasilnya deterministik (tanpa <code>random_state</code>)</td>
+<td>Peka terhadap outlier dan noise (terutama single dan complete)</td>
+</tr>
+<tr>
+<td>Bisa memakai berbagai ukuran jarak (kecuali Ward)</td>
+<td>Tidak punya <code>predict</code> untuk data baru</td>
+</tr>
+</tbody>
+</table>
+<h2 id="mathematical-foundation">Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Permanent link">&para;</a></h2>
+<h3 id="jarak-antar-kelompok-linkage">Jarak antar kelompok (linkage)<a class="headerlink" href="#jarak-antar-kelompok-linkage" title="Permanent link">&para;</a></h3>
+<p>Untuk dua kelompok <span class="arithmatex">\( A \)</span> dan <span class="arithmatex">\( B \)</span>, dengan <span class="arithmatex">\( d(a, b) \)</span> jarak antara titik <span class="arithmatex">\( a \in A \)</span> dan <span class="arithmatex">\( b \in B \)</span>:</p>
+<div class="arithmatex">\[
+d_{\text{single}}(A, B) = \min_{a \in A,\ b \in B} d(a, b)
+\qquad
+d_{\text{complete}}(A, B) = \max_{a \in A,\ b \in B} d(a, b)
+\]</div>
+<div class="arithmatex">\[
+d_{\text{average}}(A, B) = \frac{1}{\lvert A \rvert \, \lvert B \rvert} \sum_{a \in A} \sum_{b \in B} d(a, b)
+\]</div>
+<p>Penjelasan simbol:</p>
+<ul>
+<li><span class="arithmatex">\( \lvert A \rvert \)</span> dan <span class="arithmatex">\( \lvert B \rvert \)</span>: jumlah anggota kelompok <span class="arithmatex">\( A \)</span> dan <span class="arithmatex">\( B \)</span>.</li>
+<li><span class="arithmatex">\( \min \)</span> dan <span class="arithmatex">\( \max \)</span>: nilai terkecil dan terbesar dari semua pasangan <span class="arithmatex">\( (a, b) \)</span>.</li>
+<li><span class="arithmatex">\( \sum_{a \in A} \sum_{b \in B} \)</span>: jumlahkan jarak <strong>semua</strong> pasangan, satu titik dari tiap kelompok. Pembaginya adalah jumlah pasangan <span class="arithmatex">\( \lvert A \rvert \lvert B \rvert \)</span>, sehingga hasilnya rata-rata.</li>
+</ul>
+<p><strong>Contoh angka</strong> (dari contoh manual): <span class="arithmatex">\( A = \{A, B, C\} \)</span> dan <span class="arithmatex">\( B = \{D, E\} \)</span> punya <span class="arithmatex">\( 3 \times 2 = 6 \)</span> pasangan dengan jarak 7; 9; 6; 8; 3,5; 5,5. Maka single = 3,5, complete = 9, dan average <span class="arithmatex">\( = 39 / 6 = 6{,}5 \)</span>.</p>
+<h3 id="linkage-ward">Linkage Ward<a class="headerlink" href="#linkage-ward" title="Permanent link">&para;</a></h3>
+<p>Ward memilih penggabungan yang <strong>paling sedikit menaikkan WCSS</strong> (<a href="../02-k-means-clustering/">Bab 2</a>). Kenaikan itu dihitung dengan:</p>
+<div class="arithmatex">\[
+\Delta(A, B) = \frac{\lvert A \rvert \, \lvert B \rvert}{\lvert A \rvert + \lvert B \rvert} \; \lVert \mu_A - \mu_B \rVert^2
+\]</div>
+<p>dengan <span class="arithmatex">\( \mu_A \)</span> dan <span class="arithmatex">\( \mu_B \)</span> centroid (rata-rata) kelompok <span class="arithmatex">\( A \)</span> dan <span class="arithmatex">\( B \)</span>, dan <span class="arithmatex">\( \lVert \cdot \rVert \)</span> jarak Euclidean. Ada dua hal yang dihukum: <strong>jarak antar centroid</strong> (makin jauh makin mahal) dan <strong>ukuran kelompok</strong> (menggabungkan kelompok besar lebih mahal).</p>
+<p><strong>Contoh angka.</strong> Gabung <span class="arithmatex">\( \{A, B\} \)</span> (rata-rata 0,5) dengan <span class="arithmatex">\( \{C\} \)</span> (rata-rata 3,5):</p>
+<div class="arithmatex">\[
+\Delta = \frac{2 \times 1}{2 + 1} \times (3{,}5 - 0{,}5)^2 = \frac{2}{3} \times 9 = 6
+\]</div>
+<p>Periksa dengan definisi WCSS: sebelum digabung, WCSS <span class="arithmatex">\( \{A, B\} \)</span> adalah <span class="arithmatex">\( 0{,}25 + 0{,}25 = 0{,}5 \)</span> dan C sendirian 0. Sesudah digabung, rata-rata <span class="arithmatex">\( \{A, B, C\} \)</span> adalah <span class="arithmatex">\( 1{,}5 \)</span> dan WCSS <span class="arithmatex">\( = 2{,}25 + 0{,}25 + 4 = 6{,}5 \)</span>. Kenaikannya <span class="arithmatex">\( 6{,}5 - 0{,}5 = 6 \)</span>, sama dengan rumus.</p>
+<p><strong>Catatan tentang tinggi di dendrogram.</strong> SciPy menggambar penggabungan Ward pada tinggi <span class="arithmatex">\( \sqrt{2\,\Delta} \)</span>. Pada contoh di atas, tingginya <span class="arithmatex">\( \sqrt{2 \times 6} = \sqrt{12} \approx 3{,}464 \)</span>, sesuai output. Untuk dua titik tunggal, <span class="arithmatex">\( \Delta = d^2 / 2 \)</span>, sehingga tingginya sama dengan jarak biasa antar dua titik itu.</p>
+<p>Untuk penggabungan terakhir, <span class="arithmatex">\( \{A, B, C\} \)</span> (rata-rata 1,5) dengan <span class="arithmatex">\( \{D, E\} \)</span> (rata-rata 8):</p>
+<div class="arithmatex">\[
+\Delta = \frac{3 \times 2}{3 + 2} \times (8 - 1{,}5)^2 = 1{,}2 \times 42{,}25 = 50{,}7
+\qquad
+\text{tinggi} = \sqrt{2 \times 50{,}7} \approx 10{,}07
+\]</div>
+<h3 id="mengapa-single-linkage-bisa-merantai">Mengapa single linkage bisa "merantai"<a class="headerlink" href="#mengapa-single-linkage-bisa-merantai" title="Permanent link">&para;</a></h3>
+<p>Pada single linkage, dua kelompok dianggap dekat jika <strong>satu pasangan</strong> titiknya dekat. Jika ada titik-titik di antara dua kelompok yang membentuk "jembatan" dengan jarak antar titik kecil, kedua kelompok akan tersambung rantai itu dan tergabung, walau sebagian besar anggotanya berjauhan. Itulah <em>chaining effect</em>. Contohnya muncul pada bagian Expected Output.</p>
+<h3 id="kompleksitas">Kompleksitas<a class="headerlink" href="#kompleksitas" title="Permanent link">&para;</a></h3>
+<p>Matriks jarak berukuran <span class="arithmatex">\( n \times n \)</span> sehingga memori sebanding dengan <span class="arithmatex">\( n^2 \)</span>. Implementasi umum memerlukan waktu minimal sebanding <span class="arithmatex">\( n^2 \)</span> dan, untuk beberapa linkage, bisa mencapai <span class="arithmatex">\( n^2 \log n \)</span> atau lebih, bergantung pada algoritma yang dipakai. Intinya: biaya naik cepat bersama jumlah data.</p>
+<h2 id="python-implementation">Python Implementation<a class="headerlink" href="#python-implementation" title="Permanent link">&para;</a></h2>
+<p>Skrip lengkapnya ada di <code>examples/level-4/03_hierarchical_clustering.py</code>, dan versi notebook-nya di <code>notebooks/level-4/03-hierarchical-clustering.ipynb</code>.</p>
+<p><strong>Konteks masalah:</strong> memahami bagaimana pohon penggabungan dibangun, bagaimana linkage memengaruhi hasil, dan bagaimana memotong dendrogram.</p>
+<p><strong>Dataset:</strong></p>
+<ul>
+<li><code>X_line</code>: lima titik satu dimensi untuk hitungan manual.</li>
+<li><code>make_blobs</code> (150 titik, 3 gerombol): untuk <code>AgglomerativeClustering</code> dasar.</li>
+<li><code>make_moons</code> (200 titik) dan data "dua gerombol dengan jembatan": untuk membandingkan linkage pada bentuk berbeda.</li>
+<li>Mall Customers (200 pelanggan, terskala): contoh tabular nyata.</li>
+</ul>
+<p><strong>Pustaka:</strong> NumPy, pandas, Matplotlib, scikit-learn, dan SciPy (untuk dendrogram).</p>
+<h3 id="bagian-a-siapkan-alat">Bagian A — Siapkan alat<a class="headerlink" href="#bagian-a-siapkan-alat" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">AgglomerativeClustering</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">make_blobs</span><span class="p">,</span> <span class="n">make_moons</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.cluster.hierarchy</span><span class="w"> </span><span class="kn">import</span> <span class="n">linkage</span><span class="p">,</span> <span class="n">dendrogram</span><span class="p">,</span> <span class="n">fcluster</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a><span class="kn">from</span><span class="w"> </span><span class="nn">scipy.spatial.distance</span><span class="w"> </span><span class="kn">import</span> <span class="n">pdist</span><span class="p">,</span> <span class="n">squareform</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>AgglomerativeClustering</code> adalah algoritma dari scikit-learn. <code>linkage</code>, <code>dendrogram</code>, dan <code>fcluster</code> dari SciPy masing-masing membangun pohon, menggambarnya, dan memotongnya. <code>pdist</code> dan <code>squareform</code> menghitung matriks jarak.</p>
+<h3 id="bagian-b-lima-titik-dan-matriks-jarak">Bagian B — Lima titik dan matriks jarak<a class="headerlink" href="#bagian-b-lima-titik-dan-matriks-jarak" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># Lima titik pada satu garis (satu fitur), diberi nama A sampai E</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">X_line</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">0.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">1.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">3.5</span><span class="p">],</span> <span class="p">[</span><span class="mf">7.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">9.0</span><span class="p">]])</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="n">names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"A"</span><span class="p">,</span> <span class="s2">"B"</span><span class="p">,</span> <span class="s2">"C"</span><span class="p">,</span> <span class="s2">"D"</span><span class="p">,</span> <span class="s2">"E"</span><span class="p">]</span>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="c1"># pdist menghitung jarak semua pasangan, squareform mengubahnya menjadi matriks persegi</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="n">dist_matrix</span> <span class="o">=</span> <span class="n">squareform</span><span class="p">(</span><span class="n">pdist</span><span class="p">(</span><span class="n">X_line</span><span class="p">))</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a><span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">dist_matrix</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">names</span><span class="p">))</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>X_line</code> adalah array <code>(5, 1)</code>: lima baris, satu kolom. Kita beri nama A sampai E.</li>
+<li><code>pdist(X_line)</code> menghitung jarak semua pasangan dan mengembalikannya sebagai daftar pendek (hanya separuh segitiga, tanpa diagonal). <code>squareform(...)</code> mengubah daftar itu menjadi <strong>matriks persegi</strong> simetris 5 × 5.</li>
+<li><code>pd.DataFrame(..., index=names, columns=names)</code> memberi nama baris dan kolom supaya mudah dibaca. Hasilnya sama dengan tabel manual.</li>
+</ul>
+<h3 id="bagian-c-matriks-linkage">Bagian C — Matriks linkage<a class="headerlink" href="#bagian-c-matriks-linkage" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"single"</span><span class="p">,</span> <span class="s2">"complete"</span><span class="p">,</span> <span class="s2">"average"</span><span class="p">,</span> <span class="s2">"ward"</span><span class="p">]:</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>    <span class="n">Z</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">X_line</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Linkage: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a>    <span class="nb">print</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">"klaster_1"</span><span class="p">,</span> <span class="s2">"klaster_2"</span><span class="p">,</span> <span class="s2">"jarak_gabung"</span><span class="p">,</span> <span class="s2">"ukuran"</span><span class="p">])</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>linkage(X_line, method=method)</code> membangun pohon dan mengembalikan <strong>matriks linkage</strong> dengan <code>n - 1 = 4</code> baris. Tiap baris adalah satu penggabungan, dengan empat kolom: nomor kelompok pertama, nomor kelompok kedua, <strong>jarak penggabungan (tinggi)</strong>, dan ukuran kelompok hasil.</li>
+<li><strong>Penomoran:</strong> nomor <code>0</code> sampai <code>4</code> adalah titik A sampai E. Kelompok baru diberi nomor berikutnya: penggabungan pertama menghasilkan nomor <code>5</code>, yang kedua nomor <code>6</code>, dan seterusnya. Jadi baris <code>[2, 5, 2.5, 3]</code> berarti "gabungkan titik 2 (C) dengan kelompok 5 ({A, B}) pada tinggi 2,5, menghasilkan kelompok berukuran 3".</li>
+<li>Perulangan <code>for</code> menjalankan empat linkage dan mencetak tiap matriks dalam tabel pandas.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="c1"># Rumus Ward (tinggi gabung di SciPy): sqrt(2 * nA * nB / (nA + nB)) * jarak antar-rata-rata</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">A</span> <span class="o">=</span> <span class="n">X_line</span><span class="p">[[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">]]</span>   <span class="c1"># klaster {A, B, C}</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="n">B</span> <span class="o">=</span> <span class="n">X_line</span><span class="p">[[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]]</span>      <span class="c1"># klaster {D, E}</span>
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="n">nA</span><span class="p">,</span> <span class="n">nB</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">A</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">B</span><span class="p">)</span>
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="n">ward_height</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">nA</span> <span class="o">*</span> <span class="n">nB</span> <span class="o">/</span> <span class="p">(</span><span class="n">nA</span> <span class="o">+</span> <span class="n">nB</span><span class="p">))</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">linalg</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">A</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">-</span> <span class="n">B</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Rata-rata A,B,C = </span><span class="si">{</span><span class="n">A</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">; rata-rata D,E = </span><span class="si">{</span><span class="n">B</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Tinggi gabung Ward terakhir (rumus) = </span><span class="si">{</span><span class="n">ward_height</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> kita menghitung sendiri tinggi penggabungan Ward terakhir dengan rumus <span class="arithmatex">\( \sqrt{2 \cdot n_A n_B / (n_A + n_B)} \cdot \lVert \mu_A - \mu_B \rVert \)</span>. <code>A.mean(axis=0)</code> adalah rata-rata kolom (centroid), dan <code>np.linalg.norm(...)</code> menghitung jarak antar centroid. Hasilnya harus sama dengan baris terakhir matriks linkage Ward.</p>
+<h3 id="bagian-d-dendrogram-kecil">Bagian D — Dendrogram kecil<a class="headerlink" href="#bagian-d-dendrogram-kecil" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">16</span><span class="p">,</span> <span class="mf">3.8</span><span class="p">),</span> <span class="n">sharey</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="nb">zip</span><span class="p">(</span><span class="n">axes</span><span class="p">,</span> <span class="p">[</span><span class="s2">"single"</span><span class="p">,</span> <span class="s2">"complete"</span><span class="p">,</span> <span class="s2">"average"</span><span class="p">,</span> <span class="s2">"ward"</span><span class="p">]):</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="n">Z</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">X_line</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="n">method</span><span class="p">)</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="n">dendrogram</span><span class="p">(</span><span class="n">Z</span><span class="p">,</span> <span class="n">labels</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color_threshold</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">above_threshold_color</span><span class="o">=</span><span class="s2">"#0072B2"</span><span class="p">)</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Linkage: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Titik"</span><span class="p">)</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Jarak saat digabung"</span><span class="p">)</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-4-9"><a id="__codelineno-4-9" name="__codelineno-4-9" href="#__codelineno-4-9"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>dendrogram(Z, labels=names, ax=ax, ...)</code> menggambar pohon dari matriks linkage <code>Z</code> pada bidang <code>ax</code>. <code>labels</code> memberi nama daun.</li>
+<li><code>color_threshold=0</code> mematikan pewarnaan otomatis per cabang, dan <code>above_threshold_color</code> menentukan satu warna untuk semua cabang. Dengan begitu gambarnya sederhana.</li>
+<li>Perulangan menggambar satu panel untuk tiap linkage. Sumbu vertikal tiap panel berbeda skala karena tinggi penggabungannya berbeda.</li>
+</ul>
+<h3 id="bagian-e-agglomerativeclustering-pada-data-blobs">Bagian E — <code>AgglomerativeClustering</code> pada data blobs<a class="headerlink" href="#bagian-e-agglomerativeclustering-pada-data-blobs" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">X</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="n">agg</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s2">"ward"</span><span class="p">,</span> <span class="n">compute_distances</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-5-4"><a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="n">labels</span> <span class="o">=</span> <span class="n">agg</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span id="__span-5-5"><a id="__codelineno-5-5" name="__codelineno-5-5" href="#__codelineno-5-5"></a>
+</span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran kelompok:"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">labels</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"n_clusters_ :"</span><span class="p">,</span> <span class="n">agg</span><span class="o">.</span><span class="n">n_clusters_</span><span class="p">)</span>
+</span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"n_leaves_   :"</span><span class="p">,</span> <span class="n">agg</span><span class="o">.</span><span class="n">n_leaves_</span><span class="p">)</span>
+</span><span id="__span-5-9"><a id="__codelineno-5-9" name="__codelineno-5-9" href="#__codelineno-5-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"children_ (3 baris pertama, pasangan yang digabung):"</span><span class="p">)</span>
+</span><span id="__span-5-10"><a id="__codelineno-5-10" name="__codelineno-5-10" href="#__codelineno-5-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">agg</span><span class="o">.</span><span class="n">children_</span><span class="p">[:</span><span class="mi">3</span><span class="p">])</span>
+</span><span id="__span-5-11"><a id="__codelineno-5-11" name="__codelineno-5-11" href="#__codelineno-5-11"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"distances_ (3 pertama dan 2 terakhir):"</span><span class="p">,</span> <span class="n">agg</span><span class="o">.</span><span class="n">distances_</span><span class="p">[:</span><span class="mi">3</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">(),</span> <span class="n">agg</span><span class="o">.</span><span class="n">distances_</span><span class="p">[</span><span class="o">-</span><span class="mi">2</span><span class="p">:]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>AgglomerativeClustering(n_clusters=3, linkage="ward", compute_distances=True)</code> membuat model. <code>compute_distances=True</code> menyimpan jarak penggabungan di <code>distances_</code>.</li>
+<li><code>fit_predict(X)</code> membangun pohon lalu memotongnya menjadi 3 kelompok.</li>
+<li><code>agg.children_[:3]</code> menampilkan tiga penggabungan pertama. Tiap baris adalah sepasang nomor. Nomor di bawah 150 adalah titik asli (data punya 150 titik), sedangkan nomor 150 ke atas merujuk kelompok hasil penggabungan sebelumnya.</li>
+<li><code>agg.distances_</code> adalah tinggi tiap penggabungan, dari yang paling rendah. Kita mencetak tiga yang pertama dan dua yang terakhir.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="k">for</span> <span class="n">threshold</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">30</span><span class="p">]:</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">distance_threshold</span><span class="o">=</span><span class="n">threshold</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s2">"ward"</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"distance_threshold = </span><span class="si">{</span><span class="n">threshold</span><span class="si">:</span><span class="s2">&lt;3</span><span class="si">}</span><span class="s2"> -&gt; n_clusters_ = </span><span class="si">{</span><span class="n">model</span><span class="o">.</span><span class="n">n_clusters_</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> alih-alih menyebut jumlah kelompok, kita memberi <strong>ambang jarak</strong>. <code>n_clusters=None</code> wajib saat memakai <code>distance_threshold</code>. Penggabungan hanya dilakukan jika jaraknya di bawah ambang. Jumlah kelompok yang dihasilkan terbaca dari <code>n_clusters_</code>.</p>
+<h3 id="bagian-f-linkage-pada-bentuk-data-yang-berbeda">Bagian F — Linkage pada bentuk data yang berbeda<a class="headerlink" href="#bagian-f-linkage-pada-bentuk-data-yang-berbeda" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">X_moons</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.06</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="c1"># Dua gerombol bulat yang "dijembatani" enam titik di antaranya</span>
+</span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="n">X_two</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">make_blobs</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">150</span><span class="p">,</span> <span class="n">centers</span><span class="o">=</span><span class="p">[[</span><span class="o">-</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">]],</span> <span class="n">cluster_std</span><span class="o">=</span><span class="mf">0.7</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
+</span><span id="__span-7-5"><a id="__codelineno-7-5" name="__codelineno-7-5" href="#__codelineno-7-5"></a><span class="n">bridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">column_stack</span><span class="p">([</span><span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">1.2</span><span class="p">,</span> <span class="mf">1.2</span><span class="p">,</span> <span class="mi">6</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="mi">6</span><span class="p">)])</span>
+</span><span id="__span-7-6"><a id="__codelineno-7-6" name="__codelineno-7-6" href="#__codelineno-7-6"></a><span class="n">X_bridge</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">X_two</span><span class="p">,</span> <span class="n">bridge</span><span class="p">])</span>
+</span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>
+</span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a><span class="n">datasets</span> <span class="o">=</span> <span class="p">{</span><span class="s2">"moons"</span><span class="p">:</span> <span class="n">X_moons</span><span class="p">,</span> <span class="s2">"bridge"</span><span class="p">:</span> <span class="n">X_bridge</span><span class="p">}</span>
+</span><span id="__span-7-9"><a id="__codelineno-7-9" name="__codelineno-7-9" href="#__codelineno-7-9"></a><span class="n">linkages</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"single"</span><span class="p">,</span> <span class="s2">"complete"</span><span class="p">,</span> <span class="s2">"average"</span><span class="p">,</span> <span class="s2">"ward"</span><span class="p">]</span>
+</span><span id="__span-7-10"><a id="__codelineno-7-10" name="__codelineno-7-10" href="#__codelineno-7-10"></a>
+</span><span id="__span-7-11"><a id="__codelineno-7-11" name="__codelineno-7-11" href="#__codelineno-7-11"></a><span class="n">shape_labels</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-7-12"><a id="__codelineno-7-12" name="__codelineno-7-12" href="#__codelineno-7-12"></a><span class="k">for</span> <span class="n">data_name</span><span class="p">,</span> <span class="n">data</span> <span class="ow">in</span> <span class="n">datasets</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-7-13"><a id="__codelineno-7-13" name="__codelineno-7-13" href="#__codelineno-7-13"></a>    <span class="k">for</span> <span class="n">method</span> <span class="ow">in</span> <span class="n">linkages</span><span class="p">:</span>
+</span><span id="__span-7-14"><a id="__codelineno-7-14" name="__codelineno-7-14" href="#__codelineno-7-14"></a>        <span class="n">lab</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="n">method</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+</span><span id="__span-7-15"><a id="__codelineno-7-15" name="__codelineno-7-15" href="#__codelineno-7-15"></a>        <span class="n">shape_labels</span><span class="p">[(</span><span class="n">data_name</span><span class="p">,</span> <span class="n">method</span><span class="p">)]</span> <span class="o">=</span> <span class="n">lab</span>
+</span><span id="__span-7-16"><a id="__codelineno-7-16" name="__codelineno-7-16" href="#__codelineno-7-16"></a>        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">data_name</span><span class="si">:</span><span class="s2">&lt;7</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">method</span><span class="si">:</span><span class="s2">&lt;9</span><span class="si">}</span><span class="s2"> ukuran kelompok: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">lab</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>make_moons(n_samples=200, noise=0.06, ...)</code> adalah dua bulan sabit.</li>
+<li>Data kedua kita rakit sendiri. <code>make_blobs(..., centers=[[-3, 0], [3, 0]], ...)</code> membuat dua gerombol di kiri dan kanan. <code>np.linspace(-1.2, 1.2, 6)</code> menghasilkan enam bilangan sama jarak dari −1,2 sampai 1,2, dan <code>np.column_stack([..., np.zeros(6)])</code> menjadikannya enam titik <code>(x, 0)</code> yang membentang di antara kedua gerombol: <strong>jembatan</strong>. <code>np.vstack</code> menumpuk data gerombol dan jembatan.</li>
+<li>Perulangan dua tingkat menjalankan 4 linkage × 2 dataset, lalu mencetak ukuran kelompok.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#0072B2"</span><span class="p">,</span> <span class="s2">"#E69F00"</span><span class="p">,</span> <span class="s2">"#009E73"</span><span class="p">,</span> <span class="s2">"#CC79A7"</span><span class="p">,</span> <span class="s2">"#D55E00"</span><span class="p">,</span> <span class="s2">"#56B4E9"</span><span class="p">]</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mf">6.5</span><span class="p">))</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="k">for</span> <span class="n">row</span><span class="p">,</span> <span class="p">(</span><span class="n">data_name</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">datasets</span><span class="o">.</span><span class="n">items</span><span class="p">()):</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>    <span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">method</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">linkages</span><span class="p">):</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>        <span class="n">ax</span> <span class="o">=</span> <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>        <span class="n">lab</span> <span class="o">=</span> <span class="n">shape_labels</span><span class="p">[(</span><span class="n">data_name</span><span class="p">,</span> <span class="n">method</span><span class="p">)]</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>        <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">lab</span><span class="p">)):</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>            <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">data</span><span class="p">[</span><span class="n">lab</span> <span class="o">==</span> <span class="n">k</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">data</span><span class="p">[</span><span class="n">lab</span> <span class="o">==</span> <span class="n">k</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">14</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">[</span><span class="n">k</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">palette</span><span class="p">)])</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>        <span class="k">if</span> <span class="n">row</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a>            <span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Linkage: </span><span class="si">{</span><span class="n">method</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a>        <span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">([])</span>
+</span><span id="__span-8-13"><a id="__codelineno-8-13" name="__codelineno-8-13" href="#__codelineno-8-13"></a>        <span class="n">ax</span><span class="o">.</span><span class="n">set_yticks</span><span class="p">([])</span>
+</span><span id="__span-8-14"><a id="__codelineno-8-14" name="__codelineno-8-14" href="#__codelineno-8-14"></a>    <span class="n">axes</span><span class="p">[</span><span class="n">row</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">data_name</span><span class="p">)</span>
+</span><span id="__span-8-15"><a id="__codelineno-8-15" name="__codelineno-8-15" href="#__codelineno-8-15"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-8-16"><a id="__codelineno-8-16" name="__codelineno-8-16" href="#__codelineno-8-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> grid 2 baris × 4 kolom. Setiap titik diwarnai menurut kelompok hasil linkage tersebut. Sumbu disembunyikan agar yang terlihat hanya bentuk pengelompokan.</p>
+<h3 id="bagian-g-dendrogram-mall-customers">Bagian G — Dendrogram Mall Customers<a class="headerlink" href="#bagian-g-dendrogram-mall-customers" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/mall_customers.csv"</span><span class="p">)</span>
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"Spending Score (1-100)"</span><span class="p">]</span>
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">X_mall</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">features</span><span class="p">])</span>
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="n">Z_mall</span> <span class="o">=</span> <span class="n">linkage</span><span class="p">(</span><span class="n">X_mall</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">"ward"</span><span class="p">)</span>
+</span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Bentuk matriks linkage:"</span><span class="p">,</span> <span class="n">Z_mall</span><span class="o">.</span><span class="n">shape</span><span class="p">,</span> <span class="s2">"(n - 1 baris, 4 kolom)"</span><span class="p">)</span>
+</span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Tinggi gabung 5 langkah terakhir:"</span><span class="p">,</span> <span class="n">Z_mall</span><span class="p">[</span><span class="o">-</span><span class="mi">5</span><span class="p">:,</span> <span class="mi">2</span><span class="p">]</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li>Dua fitur (pendapatan dan skor belanja) diskalakan dengan <code>StandardScaler</code>, seperti pada Bab 2.</li>
+<li><code>linkage(X_mall, method="ward")</code> membangun pohon dengan Ward. Bentuknya <code>(199, 4)</code>: 200 titik berarti 199 penggabungan.</li>
+<li><code>Z_mall[-5:, 2]</code> mengambil kolom ketiga (tinggi) dari lima baris terakhir, yaitu lima penggabungan paling tinggi.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">cut_height</span> <span class="o">=</span> <span class="mf">7.0</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.5</span><span class="p">))</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">dendrogram</span><span class="p">(</span><span class="n">Z_mall</span><span class="p">,</span> <span class="n">truncate_mode</span><span class="o">=</span><span class="s2">"lastp"</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mi">16</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">,</span> <span class="n">color_threshold</span><span class="o">=</span><span class="n">cut_height</span><span class="p">,</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>           <span class="n">above_threshold_color</span><span class="o">=</span><span class="s2">"#444444"</span><span class="p">,</span> <span class="n">show_leaf_counts</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="n">ax</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">cut_height</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">"#D55E00"</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">"--"</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Garis potong (tinggi = </span><span class="si">{</span><span class="n">cut_height</span><span class="si">}</span><span class="s2">)"</span><span class="p">)</span>
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">"Cabang (angka dalam kurung = jumlah pelanggan)"</span><span class="p">)</span>
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">"Jarak Ward saat digabung"</span><span class="p">)</span>
+</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Dendrogram Mall Customers (dipangkas ke 16 cabang terakhir)"</span><span class="p">)</span>
+</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-10-11"><a id="__codelineno-10-11" name="__codelineno-10-11" href="#__codelineno-10-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li>Dendrogram untuk 200 titik terlalu padat, jadi <code>truncate_mode="lastp"</code> dan <code>p=16</code> memangkasnya menjadi <strong>16 cabang terakhir</strong>. Angka dalam kurung adalah jumlah pelanggan di cabang itu (<code>show_leaf_counts=True</code>).</li>
+<li><code>color_threshold=cut_height</code> mewarnai cabang di bawah garis potong secara berbeda, dan <code>ax.axhline(...)</code> menggambar garis potongnya.</li>
+</ul>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">for</span> <span class="n">height</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">7</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]:</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>    <span class="n">cut_labels</span> <span class="o">=</span> <span class="n">fcluster</span><span class="p">(</span><span class="n">Z_mall</span><span class="p">,</span> <span class="n">t</span><span class="o">=</span><span class="n">height</span><span class="p">,</span> <span class="n">criterion</span><span class="o">=</span><span class="s2">"distance"</span><span class="p">)</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Potong di tinggi </span><span class="si">{</span><span class="n">height</span><span class="si">:</span><span class="s2">&lt;2</span><span class="si">}</span><span class="s2"> -&gt; </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">cut_labels</span><span class="p">))</span><span class="si">}</span><span class="s2"> kelompok"</span><span class="p">)</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a><span class="n">agg5</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s2">"ward"</span><span class="p">)</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span> <span class="o">=</span> <span class="n">agg5</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_mall</span><span class="p">)</span>
+</span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Ukuran 5 kelompok (urut):"</span><span class="p">,</span> <span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()))</span>
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Cluster"</span><span class="p">)[</span><span class="n">features</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">))</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>fcluster(Z_mall, t=height, criterion="distance")</code> memotong pohon pada tinggi <code>height</code> dan mengembalikan label tiap titik. <code>len(set(...))</code> menghitung jumlah kelompoknya.</li>
+<li><code>AgglomerativeClustering(n_clusters=5, ...)</code> menghasilkan lima kelompok untuk dibaca profil rata-ratanya dengan <code>groupby</code>.</li>
+</ul>
+<h3 id="bagian-h-parameter-metric-dan-biaya-memori">Bagian H — Parameter <code>metric</code> dan biaya memori<a class="headerlink" href="#bagian-h-parameter-metric-dan-biaya-memori" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="k">for</span> <span class="n">metric</span> <span class="ow">in</span> <span class="p">[</span><span class="s2">"euclidean"</span><span class="p">,</span> <span class="s2">"manhattan"</span><span class="p">,</span> <span class="s2">"cosine"</span><span class="p">]:</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>    <span class="n">model</span> <span class="o">=</span> <span class="n">AgglomerativeClustering</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">linkage</span><span class="o">=</span><span class="s2">"average"</span><span class="p">,</span> <span class="n">metric</span><span class="o">=</span><span class="n">metric</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">X_mall</span><span class="p">)</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"linkage=average, metric=</span><span class="si">{</span><span class="n">metric</span><span class="si">:</span><span class="s2">&lt;9</span><span class="si">}</span><span class="s2"> -&gt; ukuran kelompok: </span><span class="si">{</span><span class="nb">sorted</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">labels_</span><span class="p">)</span><span class="o">.</span><span class="n">tolist</span><span class="p">())</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> kita menjalankan linkage <code>average</code> dengan tiga ukuran jarak (<code>euclidean</code>, <code>manhattan</code>, <code>cosine</code>) dan membandingkan ukuran kelompok. Hanya <code>ward</code> yang dibatasi pada Euclidean, <code>average</code> bebas.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="s1">'n (jumlah data)'</span><span class="si">:</span><span class="s2">&gt;16</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'pasangan n(n-1)/2'</span><span class="si">:</span><span class="s2">&gt;20</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="s1">'memori (GiB, float64)'</span><span class="si">:</span><span class="s2">&gt;22</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a><span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">200</span><span class="p">,</span> <span class="mi">10_000</span><span class="p">,</span> <span class="mi">100_000</span><span class="p">]:</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="n">pairs</span> <span class="o">=</span> <span class="n">n</span> <span class="o">*</span> <span class="p">(</span><span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">//</span> <span class="mi">2</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="n">gib</span> <span class="o">=</span> <span class="n">pairs</span> <span class="o">*</span> <span class="mi">8</span> <span class="o">/</span> <span class="mi">1024</span><span class="o">**</span><span class="mi">3</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">n</span><span class="si">:</span><span class="s2">&gt;16,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">pairs</span><span class="si">:</span><span class="s2">&gt;20,</span><span class="si">}</span><span class="s2"> </span><span class="si">{</span><span class="n">gib</span><span class="si">:</span><span class="s2">&gt;22.4f</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> perhitungan murni: jumlah pasangan <span class="arithmatex">\( n(n-1)/2 \)</span>, dikali 8 byte per angka <code>float64</code>, dibagi <span class="arithmatex">\( 1024^3 \)</span> untuk mendapat gibibyte. <code>//</code> adalah pembagian bulat dan <code>{n:&gt;16,}</code> memformat angka rata kanan dengan pemisah ribuan. Ini <strong>perkiraan matriks jarak</strong>, bukan pengukuran memori nyata.</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mf">6.5</span><span class="p">,</span> <span class="mi">5</span><span class="p">))</span>
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>    <span class="n">members</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span> <span class="o">==</span> <span class="n">k</span><span class="p">]</span>
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">members</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">]],</span> <span class="n">members</span><span class="p">[</span><span class="n">features</span><span class="p">[</span><span class="mi">1</span><span class="p">]],</span> <span class="n">s</span><span class="o">=</span><span class="mi">22</span><span class="p">,</span>
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>               <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">[</span><span class="n">k</span> <span class="o">%</span> <span class="nb">len</span><span class="p">(</span><span class="n">palette</span><span class="p">)],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"Kelompok </span><span class="si">{</span><span class="n">k</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">features</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-14-8"><a id="__codelineno-14-8" name="__codelineno-14-8" href="#__codelineno-14-8"></a><span class="n">ax</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"Agglomerative (Ward, 5 kelompok) pada Mall Customers"</span><span class="p">)</span>
+</span><span id="__span-14-9"><a id="__codelineno-14-9" name="__codelineno-14-9" href="#__codelineno-14-9"></a><span class="n">ax</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span id="__span-14-10"><a id="__codelineno-14-10" name="__codelineno-14-10" href="#__codelineno-14-10"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-14-11"><a id="__codelineno-14-11" name="__codelineno-14-11" href="#__codelineno-14-11"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> scatter plot Mall Customers dengan lima kelompok hasil Ward.</p>
+<h2 id="code-explanation">Code Explanation<a class="headerlink" href="#code-explanation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Bagian kode</th>
+<th>Peran</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>squareform(pdist(X))</code></td>
+<td>Matriks jarak persegi dari data</td>
+</tr>
+<tr>
+<td><code>linkage(X, method=...)</code></td>
+<td>Membangun pohon, menghasilkan matriks linkage <code>(n-1, 4)</code></td>
+</tr>
+<tr>
+<td><code>dendrogram(Z, ...)</code></td>
+<td>Menggambar pohon</td>
+</tr>
+<tr>
+<td><code>fcluster(Z, t, criterion="distance")</code></td>
+<td>Memotong pohon pada tinggi tertentu</td>
+</tr>
+<tr>
+<td><code>AgglomerativeClustering(...)</code></td>
+<td>Versi scikit-learn: langsung menghasilkan label</td>
+</tr>
+<tr>
+<td><code>distance_threshold</code></td>
+<td>Memotong berdasarkan ambang jarak, bukan jumlah kelompok</td>
+</tr>
+<tr>
+<td><code>compute_distances=True</code></td>
+<td>Menyimpan tinggi penggabungan di <code>distances_</code></td>
+</tr>
+</tbody>
+</table>
+<h2 id="how-to-run">How to Run<a class="headerlink" href="#how-to-run" title="Permanent link">&para;</a></h2>
+<p>Dari folder utama proyek (setelah mengaktifkan lingkungan virtual):</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements-notebooks</span><span class="p">.</span><span class="n">txt</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">python</span> <span class="n">examples</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">4</span><span class="p">/</span><span class="n">03_hierarchical_clustering</span><span class="p">.</span><span class="n">py</span>
+</span></code></pre></div>
+<p>Skrip mencetak output ke terminal dan menyimpan empat gambar ke <code>docs/assets/level-4/</code>. Notebook interaktifnya:</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-16-1"><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="n">jupyter</span> <span class="n">notebook</span> <span class="n">notebooks</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">4</span><span class="p">/</span><span class="n">03-hierarchical-clustering</span><span class="p">.</span><span class="n">ipynb</span>
+</span></code></pre></div>
+<p>Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, SciPy 1.18.1, dan Matplotlib 3.11.1.</p>
+<h2 id="expected-output">Expected Output<a class="headerlink" href="#expected-output" title="Permanent link">&para;</a></h2>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-17-1"><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a>     A    B    C    D    E
+</span><span id="__span-17-2"><a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a>A  0.0  1.0  3.5  7.0  9.0
+</span><span id="__span-17-3"><a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a>B  1.0  0.0  2.5  6.0  8.0
+</span><span id="__span-17-4"><a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a>C  3.5  2.5  0.0  3.5  5.5
+</span><span id="__span-17-5"><a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a>D  7.0  6.0  3.5  0.0  2.0
+</span><span id="__span-17-6"><a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a>E  9.0  8.0  5.5  2.0  0.0
+</span><span id="__span-17-7"><a id="__codelineno-17-7" name="__codelineno-17-7" href="#__codelineno-17-7"></a>
+</span><span id="__span-17-8"><a id="__codelineno-17-8" name="__codelineno-17-8" href="#__codelineno-17-8"></a>Linkage: single
+</span><span id="__span-17-9"><a id="__codelineno-17-9" name="__codelineno-17-9" href="#__codelineno-17-9"></a>   klaster_1  klaster_2  jarak_gabung  ukuran
+</span><span id="__span-17-10"><a id="__codelineno-17-10" name="__codelineno-17-10" href="#__codelineno-17-10"></a>0        0.0        1.0           1.0     2.0
+</span><span id="__span-17-11"><a id="__codelineno-17-11" name="__codelineno-17-11" href="#__codelineno-17-11"></a>1        3.0        4.0           2.0     2.0
+</span><span id="__span-17-12"><a id="__codelineno-17-12" name="__codelineno-17-12" href="#__codelineno-17-12"></a>2        2.0        5.0           2.5     3.0
+</span><span id="__span-17-13"><a id="__codelineno-17-13" name="__codelineno-17-13" href="#__codelineno-17-13"></a>3        6.0        7.0           3.5     5.0
+</span><span id="__span-17-14"><a id="__codelineno-17-14" name="__codelineno-17-14" href="#__codelineno-17-14"></a>
+</span><span id="__span-17-15"><a id="__codelineno-17-15" name="__codelineno-17-15" href="#__codelineno-17-15"></a>Linkage: complete
+</span><span id="__span-17-16"><a id="__codelineno-17-16" name="__codelineno-17-16" href="#__codelineno-17-16"></a>   klaster_1  klaster_2  jarak_gabung  ukuran
+</span><span id="__span-17-17"><a id="__codelineno-17-17" name="__codelineno-17-17" href="#__codelineno-17-17"></a>0        0.0        1.0           1.0     2.0
+</span><span id="__span-17-18"><a id="__codelineno-17-18" name="__codelineno-17-18" href="#__codelineno-17-18"></a>1        3.0        4.0           2.0     2.0
+</span><span id="__span-17-19"><a id="__codelineno-17-19" name="__codelineno-17-19" href="#__codelineno-17-19"></a>2        2.0        5.0           3.5     3.0
+</span><span id="__span-17-20"><a id="__codelineno-17-20" name="__codelineno-17-20" href="#__codelineno-17-20"></a>3        6.0        7.0           9.0     5.0
+</span><span id="__span-17-21"><a id="__codelineno-17-21" name="__codelineno-17-21" href="#__codelineno-17-21"></a>
+</span><span id="__span-17-22"><a id="__codelineno-17-22" name="__codelineno-17-22" href="#__codelineno-17-22"></a>Linkage: average
+</span><span id="__span-17-23"><a id="__codelineno-17-23" name="__codelineno-17-23" href="#__codelineno-17-23"></a>   klaster_1  klaster_2  jarak_gabung  ukuran
+</span><span id="__span-17-24"><a id="__codelineno-17-24" name="__codelineno-17-24" href="#__codelineno-17-24"></a>0        0.0        1.0           1.0     2.0
+</span><span id="__span-17-25"><a id="__codelineno-17-25" name="__codelineno-17-25" href="#__codelineno-17-25"></a>1        3.0        4.0           2.0     2.0
+</span><span id="__span-17-26"><a id="__codelineno-17-26" name="__codelineno-17-26" href="#__codelineno-17-26"></a>2        2.0        5.0           3.0     3.0
+</span><span id="__span-17-27"><a id="__codelineno-17-27" name="__codelineno-17-27" href="#__codelineno-17-27"></a>3        6.0        7.0           6.5     5.0
+</span><span id="__span-17-28"><a id="__codelineno-17-28" name="__codelineno-17-28" href="#__codelineno-17-28"></a>
+</span><span id="__span-17-29"><a id="__codelineno-17-29" name="__codelineno-17-29" href="#__codelineno-17-29"></a>Linkage: ward
+</span><span id="__span-17-30"><a id="__codelineno-17-30" name="__codelineno-17-30" href="#__codelineno-17-30"></a>   klaster_1  klaster_2  jarak_gabung  ukuran
+</span><span id="__span-17-31"><a id="__codelineno-17-31" name="__codelineno-17-31" href="#__codelineno-17-31"></a>0        0.0        1.0         1.000     2.0
+</span><span id="__span-17-32"><a id="__codelineno-17-32" name="__codelineno-17-32" href="#__codelineno-17-32"></a>1        3.0        4.0         2.000     2.0
+</span><span id="__span-17-33"><a id="__codelineno-17-33" name="__codelineno-17-33" href="#__codelineno-17-33"></a>2        2.0        5.0         3.464     3.0
+</span><span id="__span-17-34"><a id="__codelineno-17-34" name="__codelineno-17-34" href="#__codelineno-17-34"></a>3        6.0        7.0        10.070     5.0
+</span><span id="__span-17-35"><a id="__codelineno-17-35" name="__codelineno-17-35" href="#__codelineno-17-35"></a>Rata-rata A,B,C = 1.500; rata-rata D,E = 8.000
+</span><span id="__span-17-36"><a id="__codelineno-17-36" name="__codelineno-17-36" href="#__codelineno-17-36"></a>Tinggi gabung Ward terakhir (rumus) = 10.070
+</span><span id="__span-17-37"><a id="__codelineno-17-37" name="__codelineno-17-37" href="#__codelineno-17-37"></a>[gambar disimpan: docs/assets/level-4/03-dendrogram-kecil.png]
+</span><span id="__span-17-38"><a id="__codelineno-17-38" name="__codelineno-17-38" href="#__codelineno-17-38"></a>Ukuran kelompok: [50, 50, 50]
+</span><span id="__span-17-39"><a id="__codelineno-17-39" name="__codelineno-17-39" href="#__codelineno-17-39"></a>n_clusters_ : 3
+</span><span id="__span-17-40"><a id="__codelineno-17-40" name="__codelineno-17-40" href="#__codelineno-17-40"></a>n_leaves_   : 150
+</span><span id="__span-17-41"><a id="__codelineno-17-41" name="__codelineno-17-41" href="#__codelineno-17-41"></a>children_ (3 baris pertama, pasangan yang digabung):
+</span><span id="__span-17-42"><a id="__codelineno-17-42" name="__codelineno-17-42" href="#__codelineno-17-42"></a>[[ 24  52]
+</span><span id="__span-17-43"><a id="__codelineno-17-43" name="__codelineno-17-43" href="#__codelineno-17-43"></a> [ 72 117]
+</span><span id="__span-17-44"><a id="__codelineno-17-44" name="__codelineno-17-44" href="#__codelineno-17-44"></a> [ 74 124]]
+</span><span id="__span-17-45"><a id="__codelineno-17-45" name="__codelineno-17-45" href="#__codelineno-17-45"></a>distances_ (3 pertama dan 2 terakhir): [0.01, 0.039, 0.046] [70.406, 119.406]
+</span><span id="__span-17-46"><a id="__codelineno-17-46" name="__codelineno-17-46" href="#__codelineno-17-46"></a>distance_threshold = 1   -&gt; n_clusters_ = 39
+</span><span id="__span-17-47"><a id="__codelineno-17-47" name="__codelineno-17-47" href="#__codelineno-17-47"></a>distance_threshold = 3   -&gt; n_clusters_ = 13
+</span><span id="__span-17-48"><a id="__codelineno-17-48" name="__codelineno-17-48" href="#__codelineno-17-48"></a>distance_threshold = 8   -&gt; n_clusters_ = 3
+</span><span id="__span-17-49"><a id="__codelineno-17-49" name="__codelineno-17-49" href="#__codelineno-17-49"></a>distance_threshold = 30  -&gt; n_clusters_ = 3
+</span><span id="__span-17-50"><a id="__codelineno-17-50" name="__codelineno-17-50" href="#__codelineno-17-50"></a>moons   single    ukuran kelompok: [100, 100]
+</span><span id="__span-17-51"><a id="__codelineno-17-51" name="__codelineno-17-51" href="#__codelineno-17-51"></a>moons   complete  ukuran kelompok: [121, 79]
+</span><span id="__span-17-52"><a id="__codelineno-17-52" name="__codelineno-17-52" href="#__codelineno-17-52"></a>moons   average   ukuran kelompok: [127, 73]
+</span><span id="__span-17-53"><a id="__codelineno-17-53" name="__codelineno-17-53" href="#__codelineno-17-53"></a>moons   ward      ukuran kelompok: [132, 68]
+</span><span id="__span-17-54"><a id="__codelineno-17-54" name="__codelineno-17-54" href="#__codelineno-17-54"></a>bridge  single    ukuran kelompok: [155, 1]
+</span><span id="__span-17-55"><a id="__codelineno-17-55" name="__codelineno-17-55" href="#__codelineno-17-55"></a>bridge  complete  ukuran kelompok: [81, 75]
+</span><span id="__span-17-56"><a id="__codelineno-17-56" name="__codelineno-17-56" href="#__codelineno-17-56"></a>bridge  average   ukuran kelompok: [78, 78]
+</span><span id="__span-17-57"><a id="__codelineno-17-57" name="__codelineno-17-57" href="#__codelineno-17-57"></a>bridge  ward      ukuran kelompok: [80, 76]
+</span><span id="__span-17-58"><a id="__codelineno-17-58" name="__codelineno-17-58" href="#__codelineno-17-58"></a>[gambar disimpan: docs/assets/level-4/03-linkage-bentuk.png]
+</span><span id="__span-17-59"><a id="__codelineno-17-59" name="__codelineno-17-59" href="#__codelineno-17-59"></a>Bentuk matriks linkage: (199, 4) (n - 1 baris, 4 kolom)
+</span><span id="__span-17-60"><a id="__codelineno-17-60" name="__codelineno-17-60" href="#__codelineno-17-60"></a>Tinggi gabung 5 langkah terakhir: [4.35, 9.45, 10.14, 15.19, 15.62]
+</span><span id="__span-17-61"><a id="__codelineno-17-61" name="__codelineno-17-61" href="#__codelineno-17-61"></a>[gambar disimpan: docs/assets/level-4/03-dendrogram-mall.png]
+</span><span id="__span-17-62"><a id="__codelineno-17-62" name="__codelineno-17-62" href="#__codelineno-17-62"></a>Potong di tinggi 3  -&gt; 9 kelompok
+</span><span id="__span-17-63"><a id="__codelineno-17-63" name="__codelineno-17-63" href="#__codelineno-17-63"></a>Potong di tinggi 5  -&gt; 5 kelompok
+</span><span id="__span-17-64"><a id="__codelineno-17-64" name="__codelineno-17-64" href="#__codelineno-17-64"></a>Potong di tinggi 7  -&gt; 5 kelompok
+</span><span id="__span-17-65"><a id="__codelineno-17-65" name="__codelineno-17-65" href="#__codelineno-17-65"></a>Potong di tinggi 10 -&gt; 4 kelompok
+</span><span id="__span-17-66"><a id="__codelineno-17-66" name="__codelineno-17-66" href="#__codelineno-17-66"></a>Potong di tinggi 20 -&gt; 1 kelompok
+</span><span id="__span-17-67"><a id="__codelineno-17-67" name="__codelineno-17-67" href="#__codelineno-17-67"></a>
+</span><span id="__span-17-68"><a id="__codelineno-17-68" name="__codelineno-17-68" href="#__codelineno-17-68"></a>Ukuran 5 kelompok (urut): [21, 23, 32, 39, 85]
+</span><span id="__span-17-69"><a id="__codelineno-17-69" name="__codelineno-17-69" href="#__codelineno-17-69"></a>         Annual Income (k$)  Spending Score (1-100)
+</span><span id="__span-17-70"><a id="__codelineno-17-70" name="__codelineno-17-70" href="#__codelineno-17-70"></a>Cluster                                            
+</span><span id="__span-17-71"><a id="__codelineno-17-71" name="__codelineno-17-71" href="#__codelineno-17-71"></a>0                      89.4                    15.6
+</span><span id="__span-17-72"><a id="__codelineno-17-72" name="__codelineno-17-72" href="#__codelineno-17-72"></a>1                      86.5                    82.1
+</span><span id="__span-17-73"><a id="__codelineno-17-73" name="__codelineno-17-73" href="#__codelineno-17-73"></a>2                      55.8                    49.1
+</span><span id="__span-17-74"><a id="__codelineno-17-74" name="__codelineno-17-74" href="#__codelineno-17-74"></a>3                      25.1                    80.0
+</span><span id="__span-17-75"><a id="__codelineno-17-75" name="__codelineno-17-75" href="#__codelineno-17-75"></a>4                      26.3                    20.9
+</span><span id="__span-17-76"><a id="__codelineno-17-76" name="__codelineno-17-76" href="#__codelineno-17-76"></a>linkage=average, metric=euclidean -&gt; ukuran kelompok: [3, 21, 36, 38, 102]
+</span><span id="__span-17-77"><a id="__codelineno-17-77" name="__codelineno-17-77" href="#__codelineno-17-77"></a>linkage=average, metric=manhattan -&gt; ukuran kelompok: [20, 23, 38, 39, 80]
+</span><span id="__span-17-78"><a id="__codelineno-17-78" name="__codelineno-17-78" href="#__codelineno-17-78"></a>linkage=average, metric=cosine    -&gt; ukuran kelompok: [11, 43, 47, 48, 51]
+</span><span id="__span-17-79"><a id="__codelineno-17-79" name="__codelineno-17-79" href="#__codelineno-17-79"></a> n (jumlah data)    pasangan n(n-1)/2  memori (GiB, float64)
+</span><span id="__span-17-80"><a id="__codelineno-17-80" name="__codelineno-17-80" href="#__codelineno-17-80"></a>             200               19,900                 0.0001
+</span><span id="__span-17-81"><a id="__codelineno-17-81" name="__codelineno-17-81" href="#__codelineno-17-81"></a>          10,000           49,995,000                 0.3725
+</span><span id="__span-17-82"><a id="__codelineno-17-82" name="__codelineno-17-82" href="#__codelineno-17-82"></a>         100,000        4,999,950,000                37.2525
+</span><span id="__span-17-83"><a id="__codelineno-17-83" name="__codelineno-17-83" href="#__codelineno-17-83"></a>[gambar disimpan: docs/assets/level-4/03-hasil-mall.png]
+</span></code></pre></div>
+<p>Gambar yang dihasilkan:</p>
+<p><img alt="Empat dendrogram untuk lima titik A sampai E dengan linkage single, complete, average, dan ward; tinggi penggabungan terakhir berbeda di tiap panel" src="../../assets/level-4/03-dendrogram-kecil.png" /></p>
+<p><img alt="Grid 2 baris kali 4 kolom: hasil pengelompokan pada data moons (atas) dan data dua gerombol dengan jembatan (bawah) memakai linkage single, complete, average, dan ward" src="../../assets/level-4/03-linkage-bentuk.png" /></p>
+<p><img alt="Dendrogram Mall Customers yang dipangkas ke 16 cabang terakhir dengan garis potong horizontal di tinggi 7" src="../../assets/level-4/03-dendrogram-mall.png" /></p>
+<p><img alt="Scatter plot Mall Customers dengan lima kelompok hasil Ward" src="../../assets/level-4/03-hasil-mall.png" /></p>
+<h3 id="interpretasi-output">Interpretasi output<a class="headerlink" href="#interpretasi-output" title="Permanent link">&para;</a></h3>
+<p><strong>1. Matriks jarak dan linkage kecil.</strong> Matriks jarak sama dengan tabel manual. Pada matriks linkage, baris pertama <span class="arithmatex">\( [0, 1, 1{,}0, 2] \)</span> menggabungkan A dan B pada tinggi 1, dan baris kedua <span class="arithmatex">\( [3, 4, 2{,}0, 2] \)</span> menggabungkan D dan E pada tinggi 2. Baris ketiga dan keempat <strong>berbeda tingginya antar linkage</strong>:</p>
+<table>
+<thead>
+<tr>
+<th>Linkage</th>
+<th>Tinggi penggabungan 3 ({A,B} + C)</th>
+<th>Tinggi penggabungan 4 (terakhir)</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>single</td>
+<td>2,5</td>
+<td>3,5</td>
+</tr>
+<tr>
+<td>complete</td>
+<td>3,5</td>
+<td>9,0</td>
+</tr>
+<tr>
+<td>average</td>
+<td>3,0</td>
+<td>6,5</td>
+</tr>
+<tr>
+<td>ward</td>
+<td>3,464</td>
+<td>10,070</td>
+</tr>
+</tbody>
+</table>
+<p>Semuanya sama dengan hitungan manual. Tinggi Ward terakhir dari rumus adalah <strong>10,070</strong>, sama dengan output matriks linkage.</p>
+<p><strong>2. Dendrogram kecil.</strong> Urutan penggabungan sama pada keempat panel (A–B, lalu D–E, lalu C, lalu semuanya), tetapi sumbu vertikalnya berbeda: tinggi akhir 3,5 pada single dan 10,07 pada Ward. Single linkage menghasilkan pohon yang paling "rendah" karena hanya memakai jarak terdekat, sedangkan complete dan Ward menghasilkan pohon yang tinggi.</p>
+<p><strong>3. <code>AgglomerativeClustering</code> pada blobs.</strong> Tiga kelompok berukuran 50, 50, 50, dengan <code>n_leaves_ = 150</code>. Baris <code>children_</code> seperti <code>[24, 52]</code> berarti titik nomor 24 dan 52 digabung. Tinggi penggabungan naik dari 0,01 untuk pasangan terdekat sampai <strong>70,406</strong> dan <strong>119,406</strong> untuk dua penggabungan terakhir. Lompatan besar di dua penggabungan terakhir menandakan ada tiga gerombol yang terpisah jauh.</p>
+<p><strong>4. <code>distance_threshold</code>.</strong> Ambang 1 menghasilkan 39 kelompok, ambang 3 menghasilkan 13, dan ambang 8 maupun 30 menghasilkan 3. Makin kecil ambang, makin sedikit penggabungan yang diizinkan sehingga makin banyak kelompok. Kelompok bertahan di angka 3 untuk rentang ambang yang lebar (dari 8 sampai 30), tanda struktur tiga gerombol yang jelas.</p>
+<p><strong>5. Linkage pada bentuk berbeda.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Dataset</th>
+<th>single</th>
+<th>complete</th>
+<th>average</th>
+<th>ward</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>moons</td>
+<td>100, 100</td>
+<td>121, 79</td>
+<td>127, 73</td>
+<td>132, 68</td>
+</tr>
+<tr>
+<td>bridge</td>
+<td><strong>155, 1</strong></td>
+<td>81, 75</td>
+<td>78, 78</td>
+<td>80, 76</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>Moons:</strong> hanya <strong>single linkage</strong> menghasilkan dua kelompok yang mengikuti kedua bulan sabit (masing-masing 100 titik). Complete, average, dan Ward memotong bulan sabit menjadi bagian yang kompak, mirip K-Means. Single linkage berhasil karena titik-titik pada satu bulan sabit saling berantai dengan jarak antar-titik kecil.</li>
+<li><strong>Bridge:</strong> kebalikannya. <strong>Single linkage gagal</strong>: ia memisahkan <strong>satu titik</strong> dan menyatukan sisanya (155 dan 1), karena enam titik jembatan merantai kedua gerombol. Complete, average, dan Ward membagi dua gerombol bulat dengan ukuran hampir sama.</li>
+</ul>
+<p>Jadi tidak ada linkage yang unggul di semua data: single cocok untuk bentuk memanjang yang bersih tetapi rapuh terhadap jembatan atau noise, sedangkan Ward cocok untuk gerombol bulat.</p>
+<p><strong>6. Dendrogram Mall Customers.</strong> Lima penggabungan paling tinggi ada pada 4,35, 9,45, 10,14, 15,19, dan 15,62. Dari 4,35 tinggi penggabungan melompat ke 9,45. Garis potong di tinggi 7 memotong <strong>5 cabang</strong>. Pada tabel pemotongan: tinggi 3 menghasilkan 9 kelompok, tinggi 5 dan 7 menghasilkan <strong>5 kelompok</strong>, tinggi 10 menghasilkan 4, dan tinggi 20 menghasilkan 1. Pemotongan di antara tinggi 4,35 dan 9,45 selalu menghasilkan 5 kelompok, tanda celah vertikal yang cukup panjang.</p>
+<p><strong>7. Lima kelompok Ward pada Mall Customers.</strong> Ukurannya (diurutkan) 21, 23, 32, 39, 85. Profil rata-rata: <span class="arithmatex">\( (89{,}4;\ 15{,}6) \)</span>, <span class="arithmatex">\( (86{,}5;\ 82{,}1) \)</span>, <span class="arithmatex">\( (55{,}8;\ 49{,}1) \)</span>, <span class="arithmatex">\( (25{,}1;\ 80{,}0) \)</span>, <span class="arithmatex">\( (26{,}3;\ 20{,}9) \)</span> untuk (pendapatan, skor belanja). Pola lima kelompok ini mirip hasil K-Means di Bab 2 (22, 23, 35, 39, 81), tetapi tidak identik, karena kedua algoritma memakai kriteria berbeda.</p>
+<p><strong>8. <code>metric</code> pada linkage average.</strong> Ukuran kelompok berubah menurut jarak yang dipakai: euclidean memberi <span class="arithmatex">\( [3, 21, 36, 38, 102] \)</span>, manhattan <span class="arithmatex">\( [20, 23, 38, 39, 80] \)</span>, dan cosine <span class="arithmatex">\( [11, 43, 47, 48, 51] \)</span>. Pilihan jarak memengaruhi hasil. (Cosine mengukur sudut dari titik asal. Pada data yang sudah dipusatkan itu belum tentu bermakna, jadi pakai jarak ini hanya jika masuk akal untuk datamu.)</p>
+<p><strong>9. Biaya memori matriks jarak.</strong> Untuk 200 titik: 19.900 pasangan, sekitar 0,0001 GiB. Untuk 10.000 titik: sekitar 50 juta pasangan, 0,3725 GiB. Untuk 100.000 titik: hampir 5 miliar pasangan, sekitar <strong>37,25 GiB</strong>. Data naik 10 kali lipat, memori naik sekitar 100 kali. Inilah alasan hierarchical clustering tidak dipakai untuk data sangat besar.</p>
+<h2 id="practical-examples">Practical Examples<a class="headerlink" href="#practical-examples" title="Permanent link">&para;</a></h2>
+<p><strong>Taksonomi dan biologi.</strong> Mengelompokkan spesies atau gen berdasarkan kemiripan, dengan dendrogram sebagai "pohon kekerabatan". Peneliti membaca struktur bertingkatnya, bukan hanya satu pembagian.</p>
+<p><strong>Segmentasi pelanggan yang fleksibel.</strong> Dendrogram Mall Customers memberi pilihan: potong di tinggi 7 untuk 5 segmen utama, atau di tinggi 3 untuk 9 segmen yang lebih rinci. Tim pemasaran memilih tingkat detail yang sesuai.</p>
+<p><strong>Pengelompokan dokumen atau produk.</strong> Item yang mirip digabung bertahap sehingga menghasilkan kategori dan subkategori alami.</p>
+<p><strong>Mengikuti bentuk memanjang.</strong> Single linkage pada data bulan sabit (seperti di atas), asalkan data bersih dari noise.</p>
+<div class="admonition tip">
+<p class="admonition-title">Memilih linkage</p>
+<p>Mulailah dengan <strong>Ward</strong> jika kamu mengharapkan kelompok bulat dan berukuran mirip dengan jarak Euclidean. Coba <strong>average</strong> sebagai alternatif yang seimbang. Pakai <strong>single</strong> hanya jika bentuknya memanjang dan datanya bersih. Pakai <strong>complete</strong> jika kamu ingin kelompok yang kompak dan tidak ada outlier ekstrem.</p>
+</div>
+<h2 id="hands-on-exercises">Hands-on Exercises<a class="headerlink" href="#hands-on-exercises" title="Permanent link">&para;</a></h2>
+<ol>
+<li><strong>Hitung manual:</strong> empat titik satu dimensi 0, 2, 5, 11. Tuliskan matriks jaraknya, lalu hitung tinggi tiap penggabungan untuk linkage single, complete, dan average. Cocokkan dengan <code>linkage</code>.</li>
+<li>Pada data blobs, jalankan <code>AgglomerativeClustering</code> dengan <code>n_clusters=2</code> dan <code>n_clusters=4</code>. Berapa ukuran kelompoknya?</li>
+<li>Pada data blobs, pakai <code>distance_threshold=60</code>, <code>100</code>, dan <code>130</code>. Berapa <code>n_clusters_</code> tiap ambang? Kaitkan dengan dua tinggi penggabungan terakhir (70,406 dan 119,406).</li>
+<li>Naikkan <code>noise</code> pada <code>make_moons</code> dari 0,06 menjadi 0,2. Bagaimana hasil single linkage dan Ward dengan <code>n_clusters=2</code>?</li>
+<li>Pada Mall Customers (terskala), jalankan Ward dengan 3, 4, dan 6 kelompok. Berapa ukuran kelompoknya? Coba juga single linkage dan complete linkage dengan 5 kelompok.</li>
+<li>Hitung perkiraan memori matriks jarak untuk 20.000 titik (<code>float64</code>).</li>
+<li>Berapa banyak cara memecah 30 titik menjadi dua kelompok tak-kosong? Apa artinya bagi divisive clustering?</li>
+<li>Jelaskan perbedaan cara menentukan jumlah kelompok pada K-Means dan hierarchical clustering.</li>
+</ol>
+<details class="question">
+<summary>Jawaban</summary>
+<p>Hasil nomor 1 sampai 6 berasal dari eksekusi nyata.</p>
+<ol>
+<li>Jarak: 0–2 = 2, 0–5 = 5, 0–11 = 11, 2–5 = 3, 2–11 = 9, 5–11 = 6. Penggabungan pertama selalu 0 dan 2 pada tinggi 2. <em>Single</em>: {0,2}–5 = min(5, 3) = 3, lalu terakhir dengan 11 = min(11, 9, 6) = 6, jadi tinggi <strong>2, 3, 6</strong>. <em>Complete</em>: {0,2}–5 = max(5, 3) = 5 (lebih kecil dari 5–11 = 6, jadi digabung dulu), lalu terakhir max(11, 9, 6) = 11, jadi tinggi <strong>2, 5, 11</strong>. <em>Average</em>: {0,2}–5 = (5+3)/2 = 4, lalu terakhir (11+9+6)/3 = 26/3 ≈ 8,667, jadi tinggi <strong>2, 4, 8,667</strong>. Hasil <code>linkage</code> identik. (Untuk Ward, tingginya 2; 4,619; 10,614.)</li>
+<li><code>n_clusters=2</code>: ukuran <strong>100 dan 50</strong> (dua gerombol digabung). <code>n_clusters=4</code>: ukuran <strong>50, 28, 50, 22</strong> (satu gerombol terbelah).</li>
+<li>Ambang 60: <strong>3</strong> kelompok (penggabungan di 70,406 dan 119,406 tidak dilakukan karena keduanya di atas 60). Ambang 100: <strong>2</strong> kelompok (penggabungan di 70,406 dilakukan, yang 119,406 tidak). Ambang 130: <strong>1</strong> kelompok (semua penggabungan di bawah 130 dilakukan).</li>
+<li>Pada <code>noise=0.2</code>, single linkage menghasilkan ukuran <strong>195 dan 5</strong>: noise memutus rantai dan satu kelompok kecil terpisah, sehingga bentuk bulan sabit tidak lagi terpisah dengan baik. Ward menghasilkan <strong>116 dan 84</strong>. (Pada <code>noise=0.06</code>: single 100, 100; Ward 132, 68.) Single linkage hanya bagus pada data yang bersih.</li>
+<li>Ward dengan 3 kelompok: <strong>32, 39, 129</strong>. Dengan 4 kelompok: <strong>21, 32, 39, 108</strong>. Dengan 6 kelompok: <strong>9, 21, 23, 23, 39, 85</strong>. Single linkage dengan 5 kelompok: <strong>1, 1, 1, 2, 195</strong>, yaitu hampir semua titik di satu kelompok dan sisanya titik tunggal (chaining). Complete dengan 5 kelompok: <strong>21, 23, 38, 39, 79</strong>.</li>
+<li><span class="arithmatex">\( 20.000 \times 19.999 / 2 = 199.990.000 \)</span> pasangan, <span class="arithmatex">\( \times 8 \)</span> byte <span class="arithmatex">\( \approx 1{,}49 \)</span> GiB.</li>
+<li><span class="arithmatex">\( 2^{29} - 1 = 536.870.911 \)</span> cara. Memeriksa semua kemungkinan tidak praktis bahkan untuk 30 titik, sehingga algoritma divisive memakai heuristik.</li>
+<li>Pada K-Means, K harus dipilih <strong>sebelum</strong> menjalankan algoritma (dan diulang untuk tiap K). Pada hierarchical clustering, pohon dibangun <strong>sekali</strong>, lalu jumlah kelompok dipilih <strong>sesudahnya</strong> dengan memotong dendrogram atau menetapkan <code>distance_threshold</code>.</li>
+</ol>
+</details>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="masalah-teknis">Masalah teknis<a class="headerlink" href="#masalah-teknis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Masalah</th>
+<th>Penyebab</th>
+<th>Solusi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ValueError: manhattan was provided as metric. Ward can only work with euclidean distances</code></td>
+<td><code>linkage="ward"</code> hanya mendukung jarak Euclidean</td>
+<td>Pakai <code>metric="euclidean"</code> atau pilih linkage lain (average, complete, single)</td>
+</tr>
+<tr>
+<td><code>ValueError: Exactly one of n_clusters and distance_threshold has to be set, and the other needs to be None</code></td>
+<td>Keduanya diisi, atau keduanya <code>None</code></td>
+<td>Isi salah satu saja, yang lain <code>None</code></td>
+</tr>
+<tr>
+<td><code>TypeError: ... unexpected keyword argument 'affinity'</code></td>
+<td><code>affinity</code> sudah diganti <code>metric</code></td>
+<td>Ganti <code>affinity=</code> dengan <code>metric=</code></td>
+</tr>
+<tr>
+<td><code>MemoryError</code> atau komputer menjadi lambat</td>
+<td>Jumlah data terlalu besar untuk matriks jarak</td>
+<td>Kurangi data (sampel), atau pakai algoritma yang lebih skalabel seperti K-Means</td>
+</tr>
+<tr>
+<td><code>AttributeError: ... has no attribute 'distances_'</code></td>
+<td><code>distance_threshold</code> tidak diisi dan <code>compute_distances</code> bernilai <code>False</code></td>
+<td>Set <code>compute_distances=True</code></td>
+</tr>
+<tr>
+<td><code>AttributeError: 'AgglomerativeClustering' object has no attribute 'predict'</code></td>
+<td>Estimator ini tidak punya <code>predict</code></td>
+<td>Pakai <code>fit_predict</code>, atau latih classifier terpisah pada hasilnya</td>
+</tr>
+<tr>
+<td>Dendrogram terlalu padat</td>
+<td>Terlalu banyak titik</td>
+<td>Pakai <code>truncate_mode="lastp"</code> dengan <code>p</code> kecil</td>
+</tr>
+<tr>
+<td>Label berbeda antara <code>fcluster</code> dan <code>AgglomerativeClustering</code></td>
+<td>Penomoran berbeda (<code>fcluster</code> mulai dari 1)</td>
+<td>Bandingkan ukuran dan keanggotaan kelompok, bukan nomornya</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kesalahan-umum">Kesalahan umum<a class="headerlink" href="#kesalahan-umum" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Menganggap urutan daun dendrogram bermakna.</strong> Hanya struktur penggabungan dan tinggi yang bermakna, bukan posisi kiri-kanan.</li>
+<li><strong>Memotong dendrogram sembarangan.</strong> Cari celah vertikal yang panjang, dan padukan dengan pemahaman domain.</li>
+<li><strong>Memilih linkage tanpa memikirkan bentuk data.</strong> Single merantai, Ward cenderung bulat. Coba beberapa linkage.</li>
+<li><strong>Memakai Ward dengan jarak selain Euclidean.</strong> Tidak didukung dan secara matematis tidak sah.</li>
+<li><strong>Lupa menyamakan skala.</strong> Seperti K-Means, hierarchical clustering peka terhadap skala fitur.</li>
+<li><strong>Menjalankan pada data sangat besar.</strong> Memori dan waktu naik kuadratik.</li>
+<li><strong>Mengira scikit-learn menyediakan divisive clustering.</strong> Yang tersedia hanya agglomerative.</li>
+<li><strong>Menafsirkan tinggi Ward sebagai jarak biasa.</strong> Tinggi Ward di SciPy adalah <span class="arithmatex">\( \sqrt{2\Delta} \)</span>, bukan jarak antar centroid.</li>
+</ol>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Hierarchical clustering</strong> menghasilkan pohon penggabungan (dendrogram), dan jumlah kelompok dipilih <strong>sesudahnya</strong> dengan memotong pohon.</li>
+<li><strong>Agglomerative</strong> (bottom-up) menggabungkan dua kelompok terdekat berulang sebanyak <span class="arithmatex">\( n - 1 \)</span> kali. <strong>Divisive</strong> (top-down) hanya dibahas secara konseptual karena scikit-learn tidak menyediakannya.</li>
+<li><strong>Linkage</strong> adalah aturan jarak antar kelompok: <strong>single</strong> (terdekat), <strong>complete</strong> (terjauh), <strong>average</strong> (rata-rata), dan <strong>Ward</strong> (kenaikan WCSS, tinggi di SciPy <span class="arithmatex">\( \sqrt{2\Delta} \)</span>).</li>
+<li>Dendrogram dibaca dari tinggi penggabungan. Urutan kiri-kanan tidak bermakna, dan celah vertikal panjang menandai tempat memotong.</li>
+<li>Pada Mall Customers, dendrogram Ward memberi 5 kelompok pada tinggi potong 5 sampai 7.</li>
+<li>Linkage menentukan bentuk hasil: single mengikuti bulan sabit tetapi gagal pada data berjembatan (155 dan 1), sedangkan Ward cocok untuk gerombol bulat.</li>
+<li>Biaya memori naik kuadratik: 100.000 titik butuh sekitar 37,25 GiB hanya untuk matriks jaraknya.</li>
+<li>Parameter penting: <code>n_clusters</code>, <code>linkage</code>, <code>metric</code>, dan <code>distance_threshold</code>. Estimator ini tidak punya <code>predict</code>.</li>
+</ul>
+<p><strong>Bab berikutnya:</strong> Bab 4 membahas <strong>DBSCAN</strong>, algoritma berbasis kepadatan yang bisa menemukan kelompok berbentuk bebas dan menandai titik noise dengan label <code>-1</code>.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>Scikit-learn documentation: <a href="https://scikit-learn.org/stable/modules/clustering.html#hierarchical-clustering"><em>Hierarchical clustering</em></a> dan <a href="https://scikit-learn.org/stable/modules/generated/sklearn.cluster.AgglomerativeClustering.html"><code>AgglomerativeClustering</code></a>.</li>
+<li>SciPy documentation: <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.linkage.html"><code>scipy.cluster.hierarchy.linkage</code></a> dan <a href="https://docs.scipy.org/doc/scipy/reference/generated/scipy.cluster.hierarchy.dendrogram.html"><code>dendrogram</code></a>.</li>
+<li>Ward, J. H. (1963). Hierarchical grouping to optimize an objective function. <em>Journal of the American Statistical Association</em>, 58(301), 236–244.</li>
+<li>Kaufman, L., &amp; Rousseeuw, P. J. (1990). <em>Finding Groups in Data: An Introduction to Cluster Analysis</em>. Wiley. (Memuat DIANA, algoritma divisive.)</li>
+<li>Murtagh, F., &amp; Contreras, P. (2012). Algorithms for hierarchical clustering: an overview. <em>WIREs Data Mining and Knowledge Discovery</em>, 2(1), 86–97.</li>
+<li>Hastie, T., Tibshirani, R., &amp; Friedman, J. (2009). <em>The Elements of Statistical Learning</em> (2nd ed.), Bab 14.3.12: Hierarchical clustering. Springer.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Kembali ke atas
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../02-k-means-clustering/" class="md-footer__link md-footer__link--prev" aria-label="Sebelumnya: Bab 2 — K-Means Clustering">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Sebelumnya
+              </span>
+              <div class="md-ellipsis">
+                Bab 2 — K-Means Clustering
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../04-dbscan-clustering/" class="md-footer__link md-footer__link--next" aria-label="Selanjutnya: Bab 4 — DBSCAN Clustering">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Selanjutnya
+              </span>
+              <div class="md-ellipsis">
+                Bab 4 — DBSCAN Clustering
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "navigation.path", "navigation.footer", "navigation.top", "navigation.tracking", "toc.follow", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.action.edit"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Tersalin ke clipboard", "clipboard.copy": "Salin ke clipboard", "search.result.more.one": "1 lagi di halaman ini", "search.result.more.other": "# lagi di halaman ini", "search.result.none": "Tidak ada dokumen yang sesuai", "search.result.one": "1 dokumen ditemukan", "search.result.other": "# dokumen ditemukan", "search.result.placeholder": "Ketik untuk mulai pencarian", "search.result.term.missing": "Tidak ada", "select.version": "Pilih versi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../assets/vendor/mermaid/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid-config.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
