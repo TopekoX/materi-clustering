@@ -1,0 +1,5354 @@
+
+<!doctype html>
+<html lang="id" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="Clustering pada Machine Learning">
+      
+      
+      
+        <link rel="canonical" href="https://topekox.github.io/materi-clustering/research-project/01-introduction-to-clustering-research/">
+      
+      
+        <link rel="prev" href="../">
+      
+      
+        <link rel="next" href="../02-research-problem-formulation/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.1">
+    
+    
+      
+        <title>Bab 1 — Introduction to Clustering Research - Materi Clustering</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../../stylesheets/extra.css">
+    
+    <script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#bab-1-introduction-to-clustering-research" class="md-skip">
+          Lewati ke isi
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href="../.." title="Materi Clustering" class="md-header__button md-logo" aria-label="Materi Clustering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            Materi Clustering
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Bab 1 — Introduction to Clustering Research
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: system (click for light)"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Theme: system (click for light)" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m14.3 16-.7-2h-3.2l-.7 2H7.8L11 7h2l3.2 9zM20 8.69V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12zm-9.15 3.96h2.3L12 9z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: light (click for dark)"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Theme: light (click for dark)" for="__palette_2" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Theme: dark (click for system)"  type="radio" name="__palette" id="__palette_2">
+    
+      <label class="md-header__button md-icon" title="Theme: dark (click for system)" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Cari" placeholder="Cari" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Cari">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Kosongkan" aria-label="Kosongkan" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Mempersiapkan pencarian
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/topekox/materi-clustering" title="Ke repositori" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TopekoX/materi-clustering
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigasi" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="../.." title="Materi Clustering" class="md-nav__button md-logo" aria-label="Materi Clustering" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    Materi Clustering
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/topekox/materi-clustering" title="Ke repositori" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    TopekoX/materi-clustering
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../.." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Beranda
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../curriculum/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Kurikulum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" >
+        
+          
+          <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+            
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 — Machine Learning Fundamentals
+  
+
+    
+  </span>
+  
+  
+
+            <span class="md-nav__icon md-icon"></span>
+          </label>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 — Machine Learning Fundamentals
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_1" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../introduction-to-machine-learning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_1" id="__nav_3_1_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_1_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_1">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bab 1 — Introduction to Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendahuluan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/02-definition-of-machine-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Definisi Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/03-ai-ml-deep-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    AI, ML, dan Deep Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/04-traditional-programming-vs-ml/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pemrograman Tradisional vs ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/05-how-machine-learning-works/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bagaimana ML Bekerja
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/06-basic-components/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Komponen Dasar
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/07-real-world-applications/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Penerapan di Dunia Nyata
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/08-machine-learning-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Workflow Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/09-machine-learning-problems/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Jenis Masalah ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/10-role-of-ml-in-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Peran ML dalam Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/11-hands-on-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Pertama
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/12-exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/13-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ringkasan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../introduction-to-machine-learning/14-references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referensi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3_2" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../types-of-machine-learning/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Types of Machine Learning
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_3_2" id="__nav_3_2_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_3_2_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_3_2">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Bab 2 — Types of Machine Learning
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/01-introduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Pendahuluan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/02-labeled-and-unlabeled-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Labeled dan Unlabeled Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/03-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/04-classification/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Classification
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/05-regression/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Regression
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/06-unsupervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/07-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/08-dimensionality-reduction/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Dimensionality Reduction
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/09-association-rule-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Association Rule Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/10-semi-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Semi-Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/11-reinforcement-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Reinforcement Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/12-comparison-of-learning-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Perbandingan Jenis ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/13-choosing-machine-learning-approach/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Memilih Pendekatan ML
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/14-python-supervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Supervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/15-python-unsupervised-learning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Praktik Unsupervised Learning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/16-common-misconceptions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Miskonsepsi Umum
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/17-exercises/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Latihan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/18-summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Ringkasan
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../types-of-machine-learning/19-references/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Referensi
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../data-exploration-and-preprocessing/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 — Data Exploration and Preprocessing
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 — Data Exploration and Preprocessing
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/01-introduction-to-data-exploration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Data Exploration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/02-understanding-data-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Understanding Data Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/03-descriptive-statistics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Descriptive Statistics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/04-exploratory-data-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Exploratory Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/05-missing-values-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Missing Values Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/06-duplicate-data-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Duplicate Data Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/07-outlier-detection-and-handling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Outlier Detection and Handling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/08-data-cleaning/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — Data Cleaning
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/09-data-transformation-and-encoding/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 9 — Data Transformation and Encoding
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/10-feature-scaling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 10 — Feature Scaling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/11-feature-selection-and-feature-engineering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 11 — Feature Selection and Feature Engineering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../data-exploration-and-preprocessing/12-dataset-preparation-for-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 12 — Dataset Preparation for Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../fundamental-clustering/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 — Fundamental Clustering
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 — Fundamental Clustering
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/01-introduction-to-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/02-understanding-clusters/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Understanding Clusters
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/03-centroid-and-cluster-representation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Centroid and Cluster Representation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/04-similarity-and-dissimilarity/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Similarity and Dissimilarity
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/05-distance-metrics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Distance Metrics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/06-feature-space-and-dimensionality/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Feature Space and Dimensionality
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../fundamental-clustering/07-clustering-workflow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Clustering Workflow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clustering-algorithms/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 — Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 — Clustering Algorithms
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/01-introduction-to-clustering-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/02-k-means-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — K-Means Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/03-hierarchical-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Hierarchical Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/04-dbscan-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — DBSCAN Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/05-gaussian-mixture-models/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Gaussian Mixture Models
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/06-mean-shift-clustering/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Mean Shift Clustering
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-algorithms/07-comparison-of-clustering-algorithms/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Comparison of Clustering Algorithms
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../clustering-evaluation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 5 — Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 5 — Clustering Evaluation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/01-introduction-to-clustering-evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/02-internal-clustering-evaluation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Internal Clustering Evaluation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/03-inertia-and-wcss/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Inertia and WCSS
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/04-elbow-method/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Elbow Method
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/05-silhouette-score/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Silhouette Score
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/06-davies-bouldin-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Davies-Bouldin Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/07-calinski-harabasz-index/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Calinski-Harabasz Index
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../clustering-evaluation/08-external-evaluation-and-metric-comparison/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — External Evaluation and Metric Comparison
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_8" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../../experimentation-and-interpretation/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 6 — Experimentation and Interpretation
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_8" id="__nav_8_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_8_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_8">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 6 — Experimentation and Interpretation
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/01-introduction-to-clustering-experiments/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Experiments
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/02-experimental-design-and-configuration/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Experimental Design and Configuration
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/03-hyperparameter-tuning-and-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Hyperparameter Tuning and Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/04-algorithm-comparison-and-benchmarking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Algorithm Comparison and Benchmarking
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/05-feature-selection-and-impact-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Feature Selection and Impact Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/06-dimensionality-reduction-and-pca/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Dimensionality Reduction and PCA
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/07-cluster-interpretation-and-profiling/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Cluster Interpretation and Profiling
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/08-cluster-visualization-and-analysis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — Cluster Visualization and Analysis
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/09-cluster-stability-and-reproducibility/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 9 — Cluster Stability and Reproducibility
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../experimentation-and-interpretation/10-experimental-reporting-and-interpretation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 10 — Experimental Reporting and Interpretation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+    
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+      
+        
+        
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_9" checked>
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 7 — Research Project
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_9" id="__nav_9_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_9_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_9">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 7 — Research Project
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Research
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 1 — Introduction to Clustering Research
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Daftar isi">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Daftar isi
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Explanation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#peran-clustering-dalam-penelitian-ilmiah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Peran clustering dalam penelitian ilmiah
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mempelajari-menjalankan-dan-meneliti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mempelajari, menjalankan, dan meneliti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciri-penelitian-dengan-unsupervised-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciri penelitian dengan unsupervised learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contoh-penelitian-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh penelitian clustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pertanyaan-data-algoritma-dan-evaluasi-saling-terkait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pertanyaan, data, algoritma, dan evaluasi saling terkait
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alur-penelitian-clustering-dari-awal-sampai-akhir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alur penelitian clustering dari awal sampai akhir
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-7-tidak-mengulang-level-1-sampai-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 7 tidak mengulang Level 1 sampai 6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum-pemula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum pemula
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Foundation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bagian-a-siapkan-alat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian A — Siapkan alat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-b-mengenal-data-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian B — Mengenal data penelitian
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-c-tiga-pertanyaan-riset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian C — Tiga pertanyaan riset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-d-satu-protokol-untuk-tiap-pertanyaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian D — Satu protokol untuk tiap pertanyaan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-e-evaluasi-internal-dan-validasi-eksternal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian E — Evaluasi internal dan validasi eksternal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-f-membandingkan-pengelompokan-antar-pertanyaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian F — Membandingkan pengelompokan antar pertanyaan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-g-menggambar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian G — Menggambar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-h-catatan-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian H — Catatan penelitian
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretasi-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretasi output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-on Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masalah-teknis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masalah teknis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../02-research-problem-formulation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 2 — Research Problem Formulation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../03-literature-review-and-research-gap/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 3 — Literature Review and Research Gap
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../04-dataset-selection-and-research-data-preparation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 4 — Dataset Selection and Research Data Preparation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../05-research-methodology-and-experimental-protocol/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 5 — Research Methodology and Experimental Protocol
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../06-research-implementation-with-python/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 6 — Research Implementation with Python
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../07-results-presentation-and-discussion/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 7 — Results Presentation and Discussion
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../08-scientific-research-writing/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 8 — Scientific Research Writing
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../09-reproducibility-and-research-documentation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 9 — Reproducibility and Research Documentation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../10-final-clustering-research-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Bab 10 — Final Clustering Research Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Daftar isi">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Daftar isi
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#learning-objectives" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Learning Objectives
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#introduction" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Introduction
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#fundamental-concepts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Fundamental Concepts
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#detailed-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Detailed Explanation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Detailed Explanation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#peran-clustering-dalam-penelitian-ilmiah" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Peran clustering dalam penelitian ilmiah
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#mempelajari-menjalankan-dan-meneliti" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mempelajari, menjalankan, dan meneliti
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#ciri-penelitian-dengan-unsupervised-learning" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Ciri penelitian dengan unsupervised learning
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#contoh-penelitian-clustering" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Contoh penelitian clustering
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#pertanyaan-data-algoritma-dan-evaluasi-saling-terkait" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Pertanyaan, data, algoritma, dan evaluasi saling terkait
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#alur-penelitian-clustering-dari-awal-sampai-akhir" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Alur penelitian clustering dari awal sampai akhir
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#level-7-tidak-mengulang-level-1-sampai-6" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 7 tidak mengulang Level 1 sampai 6
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum-pemula" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum pemula
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mathematical-foundation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mathematical Foundation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#python-implementation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Python Implementation
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Python Implementation">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#bagian-a-siapkan-alat" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian A — Siapkan alat
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-b-mengenal-data-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian B — Mengenal data penelitian
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-c-tiga-pertanyaan-riset" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian C — Tiga pertanyaan riset
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-d-satu-protokol-untuk-tiap-pertanyaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian D — Satu protokol untuk tiap pertanyaan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-e-evaluasi-internal-dan-validasi-eksternal" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian E — Evaluasi internal dan validasi eksternal
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-f-membandingkan-pengelompokan-antar-pertanyaan" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian F — Membandingkan pengelompokan antar pertanyaan
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-g-menggambar" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian G — Menggambar
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#bagian-h-catatan-penelitian" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Bagian H — Catatan penelitian
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-explanation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Code Explanation
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-to-run" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How to Run
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#expected-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Expected Output
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Expected Output">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#interpretasi-output" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Interpretasi output
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical Examples
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#hands-on-exercises" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Hands-on Exercises
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#troubleshooting" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Troubleshooting
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Troubleshooting">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#masalah-teknis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Masalah teknis
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#kesalahan-umum" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Kesalahan umum
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#summary" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Summary
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#references" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        References
+      
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+  <nav class="md-path" aria-label="Navigasi" >
+    <ol class="md-path__list">
+      
+        
+  
+  
+    <li class="md-path__item">
+      <a href="../.." class="md-path__link">
+        
+  <span class="md-ellipsis">
+    Beranda
+  </span>
+
+      </a>
+    </li>
+  
+
+      
+      
+        
+  
+  
+    
+    
+      <li class="md-path__item">
+        <a href="../" class="md-path__link">
+          
+  <span class="md-ellipsis">
+    Level 7 — Research Project
+  </span>
+
+        </a>
+      </li>
+    
+  
+
+      
+    </ol>
+  </nav>
+
+              
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+  
+    <a href="https://github.com/topekox/materi-clustering/edit/main/docs/research-project/01-introduction-to-clustering-research.md" title="Ubah halaman ini" class="md-content__button md-icon" rel="edit">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4zm10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1z"/></svg>
+    </a>
+  
+  
+
+
+<h1 id="bab-1-introduction-to-clustering-research">Bab 1 — Introduction to Clustering Research<a class="headerlink" href="#bab-1-introduction-to-clustering-research" title="Permanent link">&para;</a></h1>
+<h2 id="learning-objectives">Learning Objectives<a class="headerlink" href="#learning-objectives" title="Permanent link">&para;</a></h2>
+<p>Setelah mempelajari bab ini, kamu mampu:</p>
+<ul class="task-list">
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menjelaskan peran clustering dalam penelitian ilmiah.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Membedakan <em>mempelajari</em> clustering, <em>menjalankan</em> clustering, dan <em>meneliti</em> dengan clustering.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menyebutkan ciri khas penelitian yang memakai <em>unsupervised learning</em>.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Mengenali contoh penelitian clustering di berbagai bidang.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menjelaskan hubungan antara pertanyaan riset, data, algoritma, dan evaluasi.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menggambarkan alur penelitian clustering dari awal sampai akhir, dan menunjuk bab mana di Level 7 yang membahas tiap tahap.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Menjalankan satu demonstrasi kecil dengan Python yang menunjukkan bahwa pertanyaan riset menentukan hasil.</li>
+<li class="task-list-item"><label class="task-list-control"><input type="checkbox" disabled checked/><span class="task-list-indicator"></span></label> Mengenali kesalahan umum pemula dalam penelitian clustering.</li>
+</ul>
+<h2 id="introduction">Introduction<a class="headerlink" href="#introduction" title="Permanent link">&para;</a></h2>
+<p>Kamu sudah menempuh enam level. Kamu tahu cara menyiapkan data (Level 2), memahami konsep kelompok dan jarak (Level 3), memakai algoritma (Level 4), menilai hasilnya (Level 5), dan bereksperimen secara sistematis (Level 6). Level 7 mengajukan pertanyaan yang berbeda:</p>
+<blockquote>
+<p><strong>Bagaimana semua itu dirangkai menjadi sebuah penelitian yang bisa dipertanggungjawabkan?</strong></p>
+</blockquote>
+<p>Bayangkan dua mahasiswa dengan data yang sama. Mahasiswa pertama menulis, "Saya menjalankan K-Means pada data ini dan mendapat dua kelompok." Mahasiswa kedua menulis, "Saya ingin tahu apakah profil morfologi inti sel punya struktur kelompok yang stabil. Saya merumuskan pertanyaan itu, memilih data dan fitur yang sesuai, memeriksa penelitian sebelumnya, menetapkan protokol sebelum menjalankan apa pun, lalu melaporkan hasil beserta keterbatasannya."</p>
+<p>Hasil teknis keduanya bisa persis sama, yaitu dua kelompok dari K-Means. Bedanya ada pada <strong>pertanggungjawaban</strong>: mahasiswa kedua bisa menjelaskan <em>mengapa</em> ia melakukan analisis itu, <em>seberapa jauh</em> hasilnya boleh dipercaya, dan <em>apa yang tidak bisa disimpulkan</em>. Itulah inti penelitian.</p>
+<div class="admonition note">
+<p class="admonition-title">Prasyarat</p>
+<ul>
+<li><a href="../../fundamental-clustering/07-clustering-workflow/">Level 3 Bab 7 — Clustering Workflow</a>: alur kerja clustering.</li>
+<li><a href="../../clustering-evaluation/08-external-evaluation-and-metric-comparison/">Level 5 Bab 8 — External Evaluation and Metric Comparison</a>: ARI dan NMI.</li>
+<li><a href="../../experimentation-and-interpretation/01-introduction-to-clustering-experiments/">Level 6 Bab 1 — Introduction to Clustering Experiments</a>: eksperimen, variabel, dan baseline. Bab ini tidak mengulangnya, hanya memakainya.</li>
+</ul>
+</div>
+<h2 id="fundamental-concepts">Fundamental Concepts<a class="headerlink" href="#fundamental-concepts" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Istilah</th>
+<th>Arti</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><strong>Research</strong> (penelitian)</td>
+<td>Penyelidikan terencana untuk menjawab pertanyaan, dengan cara yang bisa diperiksa dan diulang orang lain</td>
+</tr>
+<tr>
+<td><strong>Research problem</strong></td>
+<td>Masalah atau ketidaktahuan yang ingin dijawab. Dibahas di Bab 2</td>
+</tr>
+<tr>
+<td><strong>Research question</strong></td>
+<td>Pertanyaan spesifik yang diturunkan dari masalah tersebut</td>
+</tr>
+<tr>
+<td><strong>Research gap</strong></td>
+<td>Hal yang belum dijawab oleh penelitian sebelumnya. Dibahas di Bab 3</td>
+</tr>
+<tr>
+<td><strong>Contribution</strong></td>
+<td>Apa yang ditambahkan penelitianmu pada pengetahuan yang sudah ada</td>
+</tr>
+<tr>
+<td><strong>Methodology</strong></td>
+<td>Cara penelitian dilakukan: data, praproses, algoritma, evaluasi, dan pembanding</td>
+</tr>
+<tr>
+<td><strong>Protocol</strong></td>
+<td>Versi rinci dari metodologi yang ditulis <em>sebelum</em> eksperimen berjalan, sehingga orang lain bisa mengulanginya. Dibahas di Bab 5</td>
+</tr>
+<tr>
+<td><strong>Internal evaluation</strong></td>
+<td>Menilai kelompok memakai data itu sendiri, misalnya Silhouette (Level 5)</td>
+</tr>
+<tr>
+<td><strong>External validation</strong></td>
+<td>Membandingkan kelompok dengan label atau pengetahuan di luar proses clustering, misalnya ARI atau NMI (Level 5 Bab 8)</td>
+</tr>
+<tr>
+<td><strong>Reproducibility</strong></td>
+<td>Kemampuan orang lain mengulang penelitian dan memperoleh hasil yang sama. Dibahas di Bab 9</td>
+</tr>
+</tbody>
+</table>
+<h2 id="detailed-explanation">Detailed Explanation<a class="headerlink" href="#detailed-explanation" title="Permanent link">&para;</a></h2>
+<h3 id="peran-clustering-dalam-penelitian-ilmiah">Peran clustering dalam penelitian ilmiah<a class="headerlink" href="#peran-clustering-dalam-penelitian-ilmiah" title="Permanent link">&para;</a></h3>
+<p>Clustering dipakai ketika peneliti ingin <strong>menemukan struktur</strong> dalam data yang belum diberi label. Beberapa peran umum:</p>
+<ol>
+<li><strong>Eksplorasi.</strong> "Apakah data ini punya kelompok alami?" Hasilnya sering menjadi pijakan untuk pertanyaan berikutnya, bukan kesimpulan akhir.</li>
+<li><strong>Pembentukan hipotesis.</strong> Kelompok yang muncul bisa memunculkan dugaan baru yang diuji dengan data atau metode lain.</li>
+<li><strong>Pengurangan kompleksitas.</strong> Ribuan objek diringkas menjadi beberapa kelompok yang lebih mudah dipelajari.</li>
+<li><strong>Pembanding metode.</strong> Penelitian metodologis membandingkan algoritma atau praproses pada data yang sama (Level 6 Bab 4).</li>
+<li><strong>Langkah pada alur yang lebih besar.</strong> Misalnya sebagai tahap awal sebelum analisis lanjutan.</li>
+</ol>
+<div class="admonition warning">
+<p class="admonition-title">Clustering menemukan pola, bukan menjelaskan sebab</p>
+<p>Clustering memberi tahu bahwa titik-titik tertentu <em>mirip menurut fitur yang dipakai</em>. Ia tidak memberi tahu <em>mengapa</em> mereka mirip, dan tidak membuktikan hubungan sebab-akibat. Prinsip ini akan berulang di setiap bab Level 7.</p>
+</div>
+<h3 id="mempelajari-menjalankan-dan-meneliti">Mempelajari, menjalankan, dan meneliti<a class="headerlink" href="#mempelajari-menjalankan-dan-meneliti" title="Permanent link">&para;</a></h3>
+<p>Tiga kegiatan ini sering tercampur, padahal tujuannya berbeda.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Mempelajari clustering</th>
+<th>Menjalankan clustering</th>
+<th>Meneliti dengan clustering</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Tujuan</td>
+<td>Memahami konsep dan algoritma</td>
+<td>Mendapat pengelompokan dari data</td>
+<td>Menjawab pertanyaan yang belum terjawab</td>
+</tr>
+<tr>
+<td>Titik awal</td>
+<td>Materi atau tutorial</td>
+<td>Data dan sebuah algoritma</td>
+<td>Masalah dan pertanyaan riset</td>
+</tr>
+<tr>
+<td>Pilihan data</td>
+<td>Disediakan</td>
+<td>Yang tersedia</td>
+<td>Dipilih karena cocok dengan pertanyaan, dan didokumentasikan sumber serta lisensinya</td>
+</tr>
+<tr>
+<td>Pilihan metode</td>
+<td>Mengikuti contoh</td>
+<td>Yang familiar</td>
+<td>Dijustifikasi, dibandingkan dengan alternatif</td>
+</tr>
+<tr>
+<td>Pembanding</td>
+<td>Tidak wajib</td>
+<td>Biasanya tidak ada</td>
+<td>Wajib: baseline dan penelitian terdahulu</td>
+</tr>
+<tr>
+<td>Keluaran</td>
+<td>Pemahaman</td>
+<td>Label kelompok</td>
+<td>Temuan yang dilaporkan beserta keterbatasan</td>
+</tr>
+<tr>
+<td>Pembaca</td>
+<td>Diri sendiri</td>
+<td>Diri sendiri atau tim</td>
+<td>Komunitas ilmiah yang bisa memeriksa dan mengulang</td>
+</tr>
+</tbody>
+</table>
+<p>Level 1 sampai 6 melatih dua kolom pertama. Level 7 melatih kolom ketiga.</p>
+<h3 id="ciri-penelitian-dengan-unsupervised-learning">Ciri penelitian dengan <em>unsupervised learning</em><a class="headerlink" href="#ciri-penelitian-dengan-unsupervised-learning" title="Permanent link">&para;</a></h3>
+<p>Penelitian dengan <em>supervised learning</em> punya ukuran keberhasilan yang jelas: akurasi pada data uji. Pada <em>unsupervised learning</em> keadaannya berbeda, dan ini memengaruhi cara kamu merancang penelitian.</p>
+<ol>
+<li><strong>Tidak ada jawaban benar yang otomatis tersedia.</strong> Kamu tidak bisa menghitung "akurasi" kelompok. Evaluasi harus dirancang dan dijustifikasi.</li>
+<li><strong>Hasil bergantung pada banyak pilihan.</strong> Fitur, skala, algoritma, K atau <code>eps</code>, seed, dan sampel semuanya memengaruhi hasil (Level 6). Penelitian harus menunjukkan seberapa peka kesimpulannya terhadap pilihan itu.</li>
+<li><strong>Algoritma selalu menghasilkan kelompok.</strong> K-Means akan membagi data menjadi K kelompok bahkan pada data tanpa struktur. Adanya kelompok bukan bukti adanya struktur.</li>
+<li><strong>"Kelompok yang benar" tergantung tujuan.</strong> Ini yang membedakan clustering dari klasifikasi. von Luxburg dkk. (2012) membahasnya dengan judul "Clustering: Science or Art?": cara menilai clustering perlu disesuaikan dengan tujuan pemakaiannya.</li>
+<li><strong>Makna kelompok bukan keluaran algoritma.</strong> Memberi nama pada kelompok adalah penafsiran peneliti. Penafsiran itu harus ditandai sebagai penafsiran dan dibatasi pada bukti yang ada.</li>
+</ol>
+<h3 id="contoh-penelitian-clustering">Contoh penelitian clustering<a class="headerlink" href="#contoh-penelitian-clustering" title="Permanent link">&para;</a></h3>
+<p>Contoh berikut adalah <strong>ilustrasi jenis pertanyaan</strong>, bukan kutipan dari publikasi tertentu.</p>
+<table>
+<thead>
+<tr>
+<th>Bidang</th>
+<th>Contoh pertanyaan riset</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Kesehatan (data publik, tanpa data pribadi)</td>
+<td>Apakah profil pengukuran sel punya struktur kelompok yang stabil, dan seberapa selaras dengan diagnosis yang tercatat?</td>
+</tr>
+<tr>
+<td>Pemasaran</td>
+<td>Apakah segmen pelanggan stabil bila fitur perilaku diganti dengan fitur demografis?</td>
+</tr>
+<tr>
+<td>Pendidikan</td>
+<td>Adakah pola belajar mahasiswa yang konsisten antar-semester?</td>
+</tr>
+<tr>
+<td>Lingkungan</td>
+<td>Apakah stasiun pengukuran bisa dikelompokkan menurut pola musiman?</td>
+</tr>
+<tr>
+<td>Metodologi</td>
+<td>Algoritma mana yang paling tahan terhadap noise pada data berbentuk tidak bulat?</td>
+</tr>
+</tbody>
+</table>
+<p>Perhatikan bahwa semuanya berupa <strong>pertanyaan</strong>, bukan "saya akan menjalankan K-Means". Algoritma adalah alat untuk menjawab, bukan tujuan.</p>
+<h3 id="pertanyaan-data-algoritma-dan-evaluasi-saling-terkait">Pertanyaan, data, algoritma, dan evaluasi saling terkait<a class="headerlink" href="#pertanyaan-data-algoritma-dan-evaluasi-saling-terkait" title="Permanent link">&para;</a></h3>
+<p>Inilah ide pusat bab ini. Keempat unsur itu tidak dipilih terpisah. <strong>Pertanyaan riset menentukan yang lain.</strong></p>
+<pre class="mermaid"><code>flowchart TD
+    Q[Pertanyaan riset] --&gt; D[Data dan fitur&lt;br/&gt;yang relevan]
+    Q --&gt; A[Algoritma dan&lt;br/&gt;asumsi bentuk kelompok]
+    Q --&gt; E[Cara evaluasi&lt;br/&gt;dan pembanding]
+    D --&gt; R[Hasil]
+    A --&gt; R
+    E --&gt; R
+    R --&gt; I[Tafsir yang dibatasi&lt;br/&gt;oleh pertanyaan]</code></pre>
+<p>Contoh: pertanyaan "Apakah <em>ukuran</em> inti sel membentuk kelompok?" mengharuskan fitur ukuran. Pertanyaan "Apakah <em>tekstur</em> inti sel membentuk kelompok?" mengharuskan fitur tekstur. Jika kamu memakai fitur yang sama untuk kedua pertanyaan, jawabanmu tidak menjawab salah satunya dengan tepat. Bagian kode di bab ini menunjukkan hal ini dengan data nyata.</p>
+<h3 id="alur-penelitian-clustering-dari-awal-sampai-akhir">Alur penelitian clustering dari awal sampai akhir<a class="headerlink" href="#alur-penelitian-clustering-dari-awal-sampai-akhir" title="Permanent link">&para;</a></h3>
+<pre class="mermaid"><code>flowchart LR
+    A["1. Masalah dan&lt;br/&gt;pertanyaan riset&lt;br/&gt;(Bab 2)"] --&gt; B["2. Tinjauan pustaka&lt;br/&gt;dan celah riset&lt;br/&gt;(Bab 3)"]
+    B --&gt; C["3. Pemilihan dan&lt;br/&gt;persiapan data&lt;br/&gt;(Bab 4)"]
+    C --&gt; D["4. Metodologi dan&lt;br/&gt;protokol eksperimen&lt;br/&gt;(Bab 5)"]
+    D --&gt; E["5. Implementasi&lt;br/&gt;dan eksperimen&lt;br/&gt;(Bab 6)"]
+    E --&gt; F["6. Hasil dan&lt;br/&gt;pembahasan&lt;br/&gt;(Bab 7)"]
+    F --&gt; G["7. Penulisan&lt;br/&gt;laporan ilmiah&lt;br/&gt;(Bab 8)"]
+    G --&gt; H["8. Reproduksibilitas&lt;br/&gt;(Bab 9)"]</code></pre>
+<table>
+<thead>
+<tr>
+<th>Tahap</th>
+<th>Pertanyaan pemandu</th>
+<th>Bab</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1. Masalah dan pertanyaan</td>
+<td>Apa yang ingin diketahui, dan mengapa penting?</td>
+<td>2</td>
+</tr>
+<tr>
+<td>2. Pustaka dan celah</td>
+<td>Apa yang sudah dilakukan orang lain, dan apa yang belum?</td>
+<td>3</td>
+</tr>
+<tr>
+<td>3. Data</td>
+<td>Data apa yang cocok, dari mana, boleh dipakai untuk apa?</td>
+<td>4</td>
+</tr>
+<tr>
+<td>4. Metodologi</td>
+<td>Bagaimana kita akan menjawab, dan apa pembandingnya?</td>
+<td>5</td>
+</tr>
+<tr>
+<td>5. Implementasi</td>
+<td>Bagaimana menjalankannya dengan benar dan tercatat?</td>
+<td>6</td>
+</tr>
+<tr>
+<td>6. Hasil dan pembahasan</td>
+<td>Apa temuannya, apa maknanya, apa yang tidak boleh disimpulkan?</td>
+<td>7</td>
+</tr>
+<tr>
+<td>7. Penulisan</td>
+<td>Bagaimana menyampaikannya sebagai tulisan ilmiah?</td>
+<td>8</td>
+</tr>
+<tr>
+<td>8. Reproduksibilitas</td>
+<td>Bagaimana orang lain mengulanginya?</td>
+<td>9</td>
+</tr>
+</tbody>
+</table>
+<p>Bab 10 menjalankan seluruh alur ini pada satu proyek akhir.</p>
+<div class="admonition note">
+<p class="admonition-title">Alur ini tidak selalu lurus</p>
+<p>Pada praktiknya kamu sering kembali ke tahap sebelumnya. Misalnya, saat menyusun protokol kamu sadar pertanyaanmu terlalu luas, lalu kembali ke tahap 1. Itu wajar. Yang tidak wajar adalah mengubah pertanyaan <strong>setelah melihat hasil</strong> supaya cocok dengan hasil, tanpa mengatakannya.</p>
+</div>
+<h3 id="level-7-tidak-mengulang-level-1-sampai-6">Level 7 tidak mengulang Level 1 sampai 6<a class="headerlink" href="#level-7-tidak-mengulang-level-1-sampai-6" title="Permanent link">&para;</a></h3>
+<p>Level ini <strong>memakai</strong> pengetahuan sebelumnya. Bila konsep sudah dibahas, kita menautkannya. Pembagian peran terhadap Level 6:</p>
+<table>
+<thead>
+<tr>
+<th>Topik</th>
+<th>Level 6</th>
+<th>Level 7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Pencatatan konfigurasi dan seed</td>
+<td>Bab 2 dan 9</td>
+<td>Bab 9: struktur proyek, Git, dan paket reproduksi</td>
+</tr>
+<tr>
+<td>Struktur laporan eksperimen</td>
+<td>Bab 10</td>
+<td>Bab 8: format makalah ilmiah</td>
+</tr>
+<tr>
+<td>Merumuskan pertanyaan eksperimen</td>
+<td>Bab 1</td>
+<td>Bab 2: pertanyaan riset yang berakar pada masalah dan pustaka</td>
+</tr>
+<tr>
+<td>Membandingkan algoritma secara adil</td>
+<td>Bab 4</td>
+<td>Bab 5: perbandingan sebagai bagian dari protokol penelitian</td>
+</tr>
+</tbody>
+</table>
+<h3 id="kesalahan-umum-pemula">Kesalahan umum pemula<a class="headerlink" href="#kesalahan-umum-pemula" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Memulai dari algoritma, bukan dari pertanyaan.</strong> "Saya mau pakai K-Means" bukan pertanyaan riset.</li>
+<li><strong>Memilih data lalu mencari pertanyaan yang cocok</strong> tanpa menyadari keterbatasan data itu.</li>
+<li><strong>Menganggap adanya kelompok sebagai bukti adanya struktur.</strong></li>
+<li><strong>Memberi nama kelompok seolah fakta</strong>, misalnya "pelanggan loyal", tanpa dasar selain intuisi.</li>
+<li><strong>Memakai label untuk melatih lalu mengklaim clustering "berhasil".</strong> Label hanya boleh dipakai untuk validasi (lihat demonstrasi di bawah).</li>
+<li><strong>Memilih hasil terbaik dari banyak percobaan</strong> dan melaporkannya seolah satu percobaan.</li>
+<li><strong>Tidak mencatat konfigurasi</strong>, sehingga hasil tidak bisa diulang.</li>
+<li><strong>Menarik kesimpulan sebab-akibat</strong> dari kelompok.</li>
+</ol>
+<h2 id="mathematical-foundation">Mathematical Foundation<a class="headerlink" href="#mathematical-foundation" title="Permanent link">&para;</a></h2>
+<p>Bab ini hanya memakai dua ukuran yang sudah dibahas di Level 5 Bab 8. Berikut ringkasannya agar kamu bisa membaca output nanti.</p>
+<p><strong>Adjusted Rand Index (ARI)</strong> membandingkan dua pengelompokan <span class="arithmatex">\( U \)</span> dan <span class="arithmatex">\( V \)</span> dengan mengoreksi kemiripan yang terjadi karena kebetulan:</p>
+<div class="arithmatex">\[
+\mathrm{ARI} = \frac{\mathrm{RI} - \mathbb{E}[\mathrm{RI}]}{\max(\mathrm{RI}) - \mathbb{E}[\mathrm{RI}]}
+\]</div>
+<p>Di sini <span class="arithmatex">\( \mathrm{RI} \)</span> adalah <em>Rand Index</em>, yaitu proporsi pasangan titik yang diperlakukan sama oleh kedua pengelompokan (sama-sama satu kelompok, atau sama-sama beda kelompok). <span class="arithmatex">\( \mathbb{E}[\mathrm{RI}] \)</span> adalah nilai harapannya bila pengelompokan acak. Nilai 1 berarti identik, nilai sekitar 0 berarti tidak lebih mirip daripada kebetulan. ARI tidak peduli pada nomor kelompok.</p>
+<p><strong>Normalized Mutual Information (NMI)</strong> mengukur seberapa banyak informasi yang dibagi dua pengelompokan:</p>
+<div class="arithmatex">\[
+\mathrm{NMI}(U, V) = \frac{I(U; V)}{\tfrac{1}{2}\left(H(U) + H(V)\right)}
+\]</div>
+<p>dengan <span class="arithmatex">\( I(U;V) \)</span> informasi bersama dan <span class="arithmatex">\( H \)</span> entropi. Penyebut memakai rata-rata aritmetika, yang merupakan pengaturan bawaan scikit-learn. Nilainya antara 0 dan 1.</p>
+<p>Keduanya dipakai di sini sebagai <strong>validasi eksternal</strong>: membandingkan kelompok dengan diagnosis yang tercatat. Mereka tidak menjadi tujuan optimasi.</p>
+<h2 id="python-implementation">Python Implementation<a class="headerlink" href="#python-implementation" title="Permanent link">&para;</a></h2>
+<p>Skrip lengkapnya ada di <code>examples/level-7/01_introduction_to_clustering_research.py</code>, dengan helper bersama di <code>examples/level-7/_research.py</code>. Bab ini bersifat konseptual, jadi tidak punya notebook. <strong>Setiap potongan kode diikuti penjelasannya.</strong></p>
+<p><strong>Konteks masalah:</strong> satu dataset yang sama, tiga pertanyaan riset berbeda. Kita ingin melihat bahwa pertanyaan menentukan fitur, dan fitur menentukan pengelompokan.</p>
+<p><strong>Dataset:</strong> Breast Cancer Wisconsin (Diagnostic), dari UCI Machine Learning Repository. Berisi 569 sampel dan 30 fitur numerik hasil pengukuran citra inti sel. Lisensinya CC BY 4.0 menurut halaman dataset di UCI (DOI 10.24432/C5DW2B). Dokumentasi lengkap sumber dan lisensi ada di Bab 4.</p>
+<div class="admonition warning">
+<p class="admonition-title">Bukan alat diagnosis</p>
+<p>Dataset ini bersifat medis, tetapi tujuan kita <strong>hanya belajar metodologi penelitian clustering</strong>. Tidak ada klaim klinis. Hasil di bab ini tidak boleh dipakai untuk menilai pasien. Label diagnosis dipakai hanya sebagai pembanding setelah clustering selesai.</p>
+</div>
+<p><strong>Pustaka:</strong> NumPy, pandas, Matplotlib, scikit-learn.</p>
+<h3 id="bagian-a-siapkan-alat">Bagian A — Siapkan alat<a class="headerlink" href="#bagian-a-siapkan-alat" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.cluster</span><span class="w"> </span><span class="kn">import</span> <span class="n">KMeans</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.decomposition</span><span class="w"> </span><span class="kn">import</span> <span class="n">PCA</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.metrics</span><span class="w"> </span><span class="kn">import</span> <span class="n">adjusted_rand_score</span><span class="p">,</span> <span class="n">normalized_mutual_info_score</span><span class="p">,</span> <span class="n">silhouette_score</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">StandardScaler</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>
+</span><span id="__span-0-9"><a id="__codelineno-0-9" name="__codelineno-0-9" href="#__codelineno-0-9"></a><span class="kn">import</span><span class="w"> </span><span class="nn">_research</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">rs</span>
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>KMeans</code> adalah algoritma yang kita pakai (Level 4 Bab 2). <code>StandardScaler</code> menyamakan skala fitur (Level 2 Bab 10). <code>PCA</code> hanya dipakai untuk menggambar data berdimensi tinggi dalam dua sumbu (Level 6 Bab 6). <code>silhouette_score</code> adalah metrik internal. <code>adjusted_rand_score</code> dan <code>normalized_mutual_info_score</code> adalah validasi eksternal. <code>_research</code> adalah modul bantu kita, isinya ada di bawah.</p>
+<p>Isi modul bantu <code>_research.py</code>:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">hashlib</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="kn">from</span><span class="w"> </span><span class="nn">pathlib</span><span class="w"> </span><span class="kn">import</span> <span class="n">Path</span>
+</span><span id="__span-1-3"><a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a>
+</span><span id="__span-1-4"><a id="__codelineno-1-4" name="__codelineno-1-4" href="#__codelineno-1-4"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
+</span><span id="__span-1-5"><a id="__codelineno-1-5" name="__codelineno-1-5" href="#__codelineno-1-5"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
+</span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.datasets</span><span class="w"> </span><span class="kn">import</span> <span class="n">load_breast_cancer</span>
+</span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>
+</span><span id="__span-1-8"><a id="__codelineno-1-8" name="__codelineno-1-8" href="#__codelineno-1-8"></a><span class="n">RESULTS_DIR</span> <span class="o">=</span> <span class="n">Path</span><span class="p">(</span><span class="vm">__file__</span><span class="p">)</span><span class="o">.</span><span class="n">resolve</span><span class="p">()</span><span class="o">.</span><span class="n">parent</span> <span class="o">/</span> <span class="s2">"results"</span>
+</span><span id="__span-1-9"><a id="__codelineno-1-9" name="__codelineno-1-9" href="#__codelineno-1-9"></a>
+</span><span id="__span-1-10"><a id="__codelineno-1-10" name="__codelineno-1-10" href="#__codelineno-1-10"></a>
+</span><span id="__span-1-11"><a id="__codelineno-1-11" name="__codelineno-1-11" href="#__codelineno-1-11"></a><span class="k">def</span><span class="w"> </span><span class="nf">load_wdbc</span><span class="p">():</span>
+</span><span id="__span-1-12"><a id="__codelineno-1-12" name="__codelineno-1-12" href="#__codelineno-1-12"></a><span class="w">    </span><span class="sd">"""Mengembalikan (fitur, diagnosis). Diagnosis hanya untuk validasi, bukan untuk melatih."""</span>
+</span><span id="__span-1-13"><a id="__codelineno-1-13" name="__codelineno-1-13" href="#__codelineno-1-13"></a>    <span class="n">bunch</span> <span class="o">=</span> <span class="n">load_breast_cancer</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span><span id="__span-1-14"><a id="__codelineno-1-14" name="__codelineno-1-14" href="#__codelineno-1-14"></a>    <span class="n">diagnosis</span> <span class="o">=</span> <span class="n">bunch</span><span class="o">.</span><span class="n">target</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="mi">0</span><span class="p">:</span> <span class="s2">"malignant"</span><span class="p">,</span> <span class="mi">1</span><span class="p">:</span> <span class="s2">"benign"</span><span class="p">})</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">"diagnosis"</span><span class="p">)</span>
+</span><span id="__span-1-15"><a id="__codelineno-1-15" name="__codelineno-1-15" href="#__codelineno-1-15"></a>    <span class="k">return</span> <span class="n">bunch</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">diagnosis</span>
+</span><span id="__span-1-16"><a id="__codelineno-1-16" name="__codelineno-1-16" href="#__codelineno-1-16"></a>
+</span><span id="__span-1-17"><a id="__codelineno-1-17" name="__codelineno-1-17" href="#__codelineno-1-17"></a>
+</span><span id="__span-1-18"><a id="__codelineno-1-18" name="__codelineno-1-18" href="#__codelineno-1-18"></a><span class="k">def</span><span class="w"> </span><span class="nf">dataset_fingerprint</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
+</span><span id="__span-1-19"><a id="__codelineno-1-19" name="__codelineno-1-19" href="#__codelineno-1-19"></a><span class="w">    </span><span class="sd">"""Sidik jari data: 12 karakter pertama hash SHA-256 isi array."""</span>
+</span><span id="__span-1-20"><a id="__codelineno-1-20" name="__codelineno-1-20" href="#__codelineno-1-20"></a>    <span class="k">return</span> <span class="n">hashlib</span><span class="o">.</span><span class="n">sha256</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">ascontiguousarray</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">float</span><span class="p">))</span><span class="o">.</span><span class="n">tobytes</span><span class="p">())</span><span class="o">.</span><span class="n">hexdigest</span><span class="p">()[:</span><span class="mi">12</span><span class="p">]</span>
+</span></code></pre></div>
+<ul>
+<li><code>load_breast_cancer(as_frame=True)</code> memuat dataset sebagai tabel pandas. <code>bunch.data</code> berisi fitur, <code>bunch.target</code> berisi label (0 dan 1).</li>
+<li><code>.map({0: "malignant", 1: "benign"})</code> mengubah angka menjadi nama diagnosis. Pemetaan ini sesuai dokumentasi scikit-learn untuk dataset ini.</li>
+<li>Fungsi <code>load_wdbc</code> mengembalikan <strong>dua objek terpisah</strong>: fitur dan diagnosis. Memisahkannya sejak awal membantu kita tidak sengaja memasukkan diagnosis sebagai fitur.</li>
+<li><code>dataset_fingerprint</code> menghitung hash SHA-256 isi data. Dua dataset yang berbeda satu angka saja akan punya sidik jari berbeda (konsep dari Level 6 Bab 9).</li>
+</ul>
+<h3 id="bagian-b-mengenal-data-penelitian">Bagian B — Mengenal data penelitian<a class="headerlink" href="#bagian-b-mengenal-data-penelitian" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">X_all</span><span class="p">,</span> <span class="n">diagnosis</span> <span class="o">=</span> <span class="n">rs</span><span class="o">.</span><span class="n">load_wdbc</span><span class="p">()</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah baris (sampel) :"</span><span class="p">,</span> <span class="n">X_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah fitur          :"</span><span class="p">,</span> <span class="n">X_all</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Nilai hilang          :"</span><span class="p">,</span> <span class="nb">int</span><span class="p">(</span><span class="n">X_all</span><span class="o">.</span><span class="n">isna</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span><span class="o">.</span><span class="n">sum</span><span class="p">()))</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Diagnosis (hanya untuk validasi):"</span><span class="p">,</span> <span class="n">diagnosis</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">to_dict</span><span class="p">())</span>
+</span><span id="__span-2-7"><a id="__codelineno-2-7" name="__codelineno-2-7" href="#__codelineno-2-7"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Sidik jari data       :"</span><span class="p">,</span> <span class="n">rs</span><span class="o">.</span><span class="n">dataset_fingerprint</span><span class="p">(</span><span class="n">X_all</span><span class="p">))</span>
+</span><span id="__span-2-8"><a id="__codelineno-2-8" name="__codelineno-2-8" href="#__codelineno-2-8"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Contoh nama fitur     :"</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_all</span><span class="o">.</span><span class="n">columns</span><span class="p">[:</span><span class="mi">5</span><span class="p">]))</span>
+</span></code></pre></div>
+<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Jumlah baris (sampel) : 569
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Jumlah fitur          : 30
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Nilai hilang          : 0
+</span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Diagnosis (hanya untuk validasi): {'benign': 357, 'malignant': 212}
+</span><span id="__span-3-5"><a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a>Sidik jari data       : 6b202a2072f9
+</span><span id="__span-3-6"><a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a>Contoh nama fitur     : ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness']
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li><code>X_all.shape</code> mengembalikan (jumlah baris, jumlah kolom). Indeks <code>[0]</code> adalah baris, <code>[1]</code> adalah kolom.</li>
+<li><code>X_all.isna().sum().sum()</code> menghitung nilai hilang: <code>isna()</code> menandai sel kosong, <code>sum()</code> pertama menjumlah per kolom, <code>sum()</code> kedua menjumlah semuanya.</li>
+<li><code>diagnosis.value_counts().to_dict()</code> menghitung jumlah tiap diagnosis dan mengubahnya menjadi dictionary.</li>
+<li>Sidik jari dicetak agar kita bisa memastikan semua orang memakai data yang sama.</li>
+</ul>
+<h3 id="bagian-c-tiga-pertanyaan-riset">Bagian C — Tiga pertanyaan riset<a class="headerlink" href="#bagian-c-tiga-pertanyaan-riset" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="c1"># Setiap pertanyaan riset menentukan fitur yang relevan.</span>
+</span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">questions</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="s2">"Q1 ukuran inti sel"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"mean radius"</span><span class="p">,</span> <span class="s2">"mean perimeter"</span><span class="p">,</span> <span class="s2">"mean area"</span><span class="p">],</span>
+</span><span id="__span-4-4"><a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="s2">"Q2 tekstur dan kehalusan"</span><span class="p">:</span> <span class="p">[</span><span class="s2">"mean texture"</span><span class="p">,</span> <span class="s2">"mean smoothness"</span><span class="p">,</span> <span class="s2">"mean symmetry"</span><span class="p">,</span> <span class="s2">"mean fractal dimension"</span><span class="p">],</span>
+</span><span id="__span-4-5"><a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a>    <span class="s2">"Q3 seluruh profil morfologi"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">X_all</span><span class="o">.</span><span class="n">columns</span><span class="p">),</span>
+</span><span id="__span-4-6"><a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">}</span>
+</span><span id="__span-4-7"><a id="__codelineno-4-7" name="__codelineno-4-7" href="#__codelineno-4-7"></a><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">columns</span> <span class="ow">in</span> <span class="n">questions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-4-8"><a id="__codelineno-4-8" name="__codelineno-4-8" href="#__codelineno-4-8"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">30s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">columns</span><span class="p">)</span><span class="si">:</span><span class="s2">2d</span><span class="si">}</span><span class="s2"> fitur"</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Q1 ukuran inti sel            :  3 fitur
+</span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Q2 tekstur dan kehalusan      :  4 fitur
+</span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>Q3 seluruh profil morfologi   : 30 fitur
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> <code>questions</code> adalah dictionary: kunci berupa nama pertanyaan, nilai berupa daftar kolom yang relevan.</p>
+<ul>
+<li><strong>Q1</strong> bertanya tentang <em>ukuran</em> inti sel, jadi memakai radius, keliling, dan luas.</li>
+<li><strong>Q2</strong> bertanya tentang <em>tekstur dan kehalusan</em>, jadi memakai empat fitur lain.</li>
+<li><strong>Q3</strong> bertanya tentang <em>profil morfologi secara keseluruhan</em>, jadi memakai ke-30 fitur.</li>
+</ul>
+<p><code>list(X_all.columns)</code> mengambil semua nama kolom. Kalimat <code>f"{name:30s}"</code> memberi lebar 30 karakter agar output rapi.</p>
+<div class="admonition note">
+<p class="admonition-title">Ini ilustrasi, bukan rancangan penelitian lengkap</p>
+<p>Pengelompokan fitur di sini sengaja sederhana untuk keperluan demonstrasi. Pada penelitian sungguhan, pemilihan fitur harus dijustifikasi dan diuji (Level 6 Bab 5). Kita membahasnya di Bab 5 dan Bab 6.</p>
+</div>
+<h3 id="bagian-d-satu-protokol-untuk-tiap-pertanyaan">Bagian D — Satu protokol untuk tiap pertanyaan<a class="headerlink" href="#bagian-d-satu-protokol-untuk-tiap-pertanyaan" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="c1"># Protokol yang sama untuk semua pertanyaan: StandardScaler, K-Means, K = 2, n_init = 10, seed 42.</span>
+</span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">labels</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">spaces</span> <span class="o">=</span> <span class="p">{}</span>
+</span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">columns</span> <span class="ow">in</span> <span class="n">questions</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-6-5"><a id="__codelineno-6-5" name="__codelineno-6-5" href="#__codelineno-6-5"></a>    <span class="n">X_scaled</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X_all</span><span class="p">[</span><span class="n">columns</span><span class="p">])</span>
+</span><span id="__span-6-6"><a id="__codelineno-6-6" name="__codelineno-6-6" href="#__codelineno-6-6"></a>    <span class="n">spaces</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_scaled</span>
+</span><span id="__span-6-7"><a id="__codelineno-6-7" name="__codelineno-6-7" href="#__codelineno-6-7"></a>    <span class="n">labels</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
+</span><span id="__span-6-8"><a id="__codelineno-6-8" name="__codelineno-6-8" href="#__codelineno-6-8"></a>    <span class="n">sizes</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">name</span><span class="p">])</span><span class="o">.</span><span class="n">tolist</span><span class="p">()</span>
+</span><span id="__span-6-9"><a id="__codelineno-6-9" name="__codelineno-6-9" href="#__codelineno-6-9"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">:</span><span class="s2">30s</span><span class="si">}</span><span class="s2"> ukuran kelompok: </span><span class="si">{</span><span class="n">sizes</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a>Q1 ukuran inti sel             ukuran kelompok: [141, 428]
+</span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a>Q2 tekstur dan kehalusan       ukuran kelompok: [346, 223]
+</span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Q3 seluruh profil morfologi    ukuran kelompok: [375, 194]
+</span></code></pre></div>
+<p><strong>Penjelasan baris demi baris:</strong></p>
+<ul>
+<li>Semua yang <strong>bukan</strong> variabel bebas ditahan sama: <code>StandardScaler</code>, K-Means, <code>n_clusters=2</code>, <code>n_init=10</code>, dan <code>random_state=SEED</code> (42). Yang berubah hanya fitur. Ini prinsip variabel terkontrol dari Level 6 Bab 1.</li>
+<li><code>StandardScaler().fit_transform(X_all[columns])</code> memilih kolom pertanyaan itu lalu menstandarkannya. Hasilnya disimpan di <code>spaces</code> karena nanti dipakai untuk menghitung Silhouette dan menggambar.</li>
+<li><code>KMeans(...).fit_predict(X_scaled)</code> melatih model dan mengembalikan label kelompok untuk tiap sampel.</li>
+<li><code>np.bincount(labels[name])</code> menghitung ukuran tiap kelompok.</li>
+</ul>
+<div class="admonition warning">
+<p class="admonition-title">K = 2 adalah asumsi</p>
+<p>Kita memilih K = 2 karena dataset punya dua diagnosis. Itu keputusan <strong>untuk keperluan demonstrasi</strong>. Dalam penelitian, jumlah kelompok harus dijustifikasi dan diuji (Level 5 dan Level 6 Bab 3). Menetapkan K dari jumlah label membuat validasi eksternal tampak lebih baik daripada yang seharusnya.</p>
+</div>
+<h3 id="bagian-e-evaluasi-internal-dan-validasi-eksternal">Bagian E — Evaluasi internal dan validasi eksternal<a class="headerlink" href="#bagian-e-evaluasi-internal-dan-validasi-eksternal" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">rows</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">questions</span><span class="p">:</span>
+</span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>    <span class="n">rows</span><span class="o">.</span><span class="n">append</span><span class="p">(</span>
+</span><span id="__span-8-4"><a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a>        <span class="p">{</span>
+</span><span id="__span-8-5"><a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a>            <span class="s2">"Pertanyaan"</span><span class="p">:</span> <span class="n">name</span><span class="p">,</span>
+</span><span id="__span-8-6"><a id="__codelineno-8-6" name="__codelineno-8-6" href="#__codelineno-8-6"></a>            <span class="s2">"Silhouette (internal)"</span><span class="p">:</span> <span class="n">silhouette_score</span><span class="p">(</span><span class="n">spaces</span><span class="p">[</span><span class="n">name</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span>
+</span><span id="__span-8-7"><a id="__codelineno-8-7" name="__codelineno-8-7" href="#__codelineno-8-7"></a>            <span class="s2">"ARI vs diagnosis"</span><span class="p">:</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">diagnosis</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span>
+</span><span id="__span-8-8"><a id="__codelineno-8-8" name="__codelineno-8-8" href="#__codelineno-8-8"></a>            <span class="s2">"NMI vs diagnosis"</span><span class="p">:</span> <span class="n">normalized_mutual_info_score</span><span class="p">(</span><span class="n">diagnosis</span><span class="p">,</span> <span class="n">labels</span><span class="p">[</span><span class="n">name</span><span class="p">]),</span>
+</span><span id="__span-8-9"><a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>        <span class="p">}</span>
+</span><span id="__span-8-10"><a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>    <span class="p">)</span>
+</span><span id="__span-8-11"><a id="__codelineno-8-11" name="__codelineno-8-11" href="#__codelineno-8-11"></a><span class="n">evaluation</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">rows</span><span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">"Pertanyaan"</span><span class="p">)</span>
+</span><span id="__span-8-12"><a id="__codelineno-8-12" name="__codelineno-8-12" href="#__codelineno-8-12"></a><span class="nb">print</span><span class="p">(</span><span class="n">evaluation</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</span></code></pre></div>
+<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a>                             Silhouette (internal)  ARI vs diagnosis  NMI vs diagnosis
+</span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>Pertanyaan                                                                            
+</span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a>Q1 ukuran inti sel                           0.658             0.493             0.430
+</span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>Q2 tekstur dan kehalusan                     0.287             0.066             0.037
+</span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>Q3 seluruh profil morfologi                  0.343             0.654             0.532
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> untuk tiap pertanyaan kita menghitung tiga angka.</p>
+<ul>
+<li><code>silhouette_score(spaces[name], labels[name])</code>: kualitas kelompok <strong>menurut data itu sendiri</strong>, di ruang fitur pertanyaan tersebut.</li>
+<li><code>adjusted_rand_score(diagnosis, labels[name])</code> dan <code>normalized_mutual_info_score(...)</code>: kesesuaian kelompok dengan diagnosis. <strong>Diagnosis tidak pernah dipakai saat clustering.</strong> Ia baru dipakai di sini, sebagai pembanding.</li>
+</ul>
+<p><code>pd.DataFrame(rows).set_index("Pertanyaan")</code> menyusun daftar dictionary menjadi tabel dengan nama pertanyaan sebagai indeks baris.</p>
+<h3 id="bagian-f-membandingkan-pengelompokan-antar-pertanyaan">Bagian F — Membandingkan pengelompokan antar pertanyaan<a class="headerlink" href="#bagian-f-membandingkan-pengelompokan-antar-pertanyaan" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">questions</span><span class="p">)</span>
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">agreement</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="p">[[</span><span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">labels</span><span class="p">[</span><span class="n">a</span><span class="p">],</span> <span class="n">labels</span><span class="p">[</span><span class="n">b</span><span class="p">])</span> <span class="k">for</span> <span class="n">b</span> <span class="ow">in</span> <span class="n">names</span><span class="p">]</span> <span class="k">for</span> <span class="n">a</span> <span class="ow">in</span> <span class="n">names</span><span class="p">],</span> <span class="n">index</span><span class="o">=</span><span class="n">names</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">names</span>
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="p">)</span>
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="nb">print</span><span class="p">(</span><span class="n">agreement</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span><span class="o">.</span><span class="n">to_string</span><span class="p">())</span>
+</span></code></pre></div>
+<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>                             Q1 ukuran inti sel  Q2 tekstur dan kehalusan  Q3 seluruh profil morfologi
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>Q1 ukuran inti sel                        1.000                     0.014                        0.498
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Q2 tekstur dan kehalusan                  0.014                     1.000                        0.143
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>Q3 seluruh profil morfologi               0.498                     0.143                        1.000
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> daftar komprehensi bersarang membuat matriks: baris dan kolomnya adalah pertanyaan, isinya ARI antara dua pengelompokan. Kita memakai ARI dan <strong>bukan</strong> membandingkan nomor kelompok langsung, karena nomor kelompok bersifat sembarang (Level 6 Bab 9). Diagonal selalu 1,000 karena sebuah pengelompokan identik dengan dirinya.</p>
+<h3 id="bagian-g-menggambar">Bagian G — Menggambar<a class="headerlink" href="#bagian-g-menggambar" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">palette</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#0072B2"</span><span class="p">,</span> <span class="s2">"#E69F00"</span><span class="p">]</span>          <span class="c1"># kelompok (nomornya sembarang)</span>
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">diag_palette</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#009E73"</span><span class="p">,</span> <span class="s2">"#CC79A7"</span><span class="p">]</span>     <span class="c1"># diagnosis: warna lain agar tidak tertukar dengan kelompok</span>
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">markers</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"o"</span><span class="p">,</span> <span class="s2">"s"</span><span class="p">]</span>
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a><span class="n">pair</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>    <span class="s2">"Q1 ukuran inti sel"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"mean radius"</span><span class="p">,</span> <span class="s2">"mean area"</span><span class="p">),</span>
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>    <span class="s2">"Q2 tekstur dan kehalusan"</span><span class="p">:</span> <span class="p">(</span><span class="s2">"mean texture"</span><span class="p">,</span> <span class="s2">"mean smoothness"</span><span class="p">),</span>
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a><span class="p">}</span>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">15</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a><span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">names</span><span class="p">):</span>
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>    <span class="k">if</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">pair</span><span class="p">:</span>
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>        <span class="n">x_name</span><span class="p">,</span> <span class="n">y_name</span> <span class="o">=</span> <span class="n">pair</span><span class="p">[</span><span class="n">name</span><span class="p">]</span>
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>        <span class="n">xy</span> <span class="o">=</span> <span class="n">X_all</span><span class="p">[[</span><span class="n">x_name</span><span class="p">,</span> <span class="n">y_name</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>        <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="n">x_name</span><span class="p">,</span> <span class="n">y_name</span>
+</span><span id="__span-12-15"><a id="__codelineno-12-15" name="__codelineno-12-15" href="#__codelineno-12-15"></a>    <span class="k">else</span><span class="p">:</span>
+</span><span id="__span-12-16"><a id="__codelineno-12-16" name="__codelineno-12-16" href="#__codelineno-12-16"></a>        <span class="n">xy</span> <span class="o">=</span> <span class="n">PCA</span><span class="p">(</span><span class="n">n_components</span><span class="o">=</span><span class="mi">2</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">SEED</span><span class="p">)</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">spaces</span><span class="p">[</span><span class="n">name</span><span class="p">])</span>
+</span><span id="__span-12-17"><a id="__codelineno-12-17" name="__codelineno-12-17" href="#__codelineno-12-17"></a>        <span class="n">xlabel</span><span class="p">,</span> <span class="n">ylabel</span> <span class="o">=</span> <span class="s2">"komponen utama 1 (PCA)"</span><span class="p">,</span> <span class="s2">"komponen utama 2 (PCA)"</span>
+</span><span id="__span-12-18"><a id="__codelineno-12-18" name="__codelineno-12-18" href="#__codelineno-12-18"></a>    <span class="k">for</span> <span class="n">c</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span>
+</span><span id="__span-12-19"><a id="__codelineno-12-19" name="__codelineno-12-19" href="#__codelineno-12-19"></a>        <span class="n">mask</span> <span class="o">=</span> <span class="n">labels</span><span class="p">[</span><span class="n">name</span><span class="p">]</span> <span class="o">==</span> <span class="n">c</span>
+</span><span id="__span-12-20"><a id="__codelineno-12-20" name="__codelineno-12-20" href="#__codelineno-12-20"></a>        <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">palette</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="n">markers</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="sa">f</span><span class="s2">"kelompok </span><span class="si">{</span><span class="n">c</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span><span id="__span-12-21"><a id="__codelineno-12-21" name="__codelineno-12-21" href="#__codelineno-12-21"></a>    <span class="k">for</span> <span class="n">c</span><span class="p">,</span> <span class="n">diag</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">([</span><span class="s2">"benign"</span><span class="p">,</span> <span class="s2">"malignant"</span><span class="p">]):</span>
+</span><span id="__span-12-22"><a id="__codelineno-12-22" name="__codelineno-12-22" href="#__codelineno-12-22"></a>        <span class="n">mask</span> <span class="o">=</span> <span class="p">(</span><span class="n">diagnosis</span> <span class="o">==</span> <span class="n">diag</span><span class="p">)</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
+</span><span id="__span-12-23"><a id="__codelineno-12-23" name="__codelineno-12-23" href="#__codelineno-12-23"></a>        <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">xy</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">xy</span><span class="p">[</span><span class="n">mask</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">s</span><span class="o">=</span><span class="mi">12</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="n">diag_palette</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="n">markers</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">label</span><span class="o">=</span><span class="n">diag</span><span class="p">)</span>
+</span><span id="__span-12-24"><a id="__codelineno-12-24" name="__codelineno-12-24" href="#__codelineno-12-24"></a>    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="se">\n</span><span class="s2">warna = kelompok K-Means"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-12-25"><a id="__codelineno-12-25" name="__codelineno-12-25" href="#__codelineno-12-25"></a>    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">"tata letak sama, warna = diagnosis (hanya validasi)"</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</span><span id="__span-12-26"><a id="__codelineno-12-26" name="__codelineno-12-26" href="#__codelineno-12-26"></a>    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="n">xlabel</span><span class="p">)</span>
+</span><span id="__span-12-27"><a id="__codelineno-12-27" name="__codelineno-12-27" href="#__codelineno-12-27"></a>    <span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+</span><span id="__span-12-28"><a id="__codelineno-12-28" name="__codelineno-12-28" href="#__codelineno-12-28"></a>    <span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="n">col</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="n">ylabel</span><span class="p">)</span>
+</span><span id="__span-12-29"><a id="__codelineno-12-29" name="__codelineno-12-29" href="#__codelineno-12-29"></a><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span id="__span-12-30"><a id="__codelineno-12-30" name="__codelineno-12-30" href="#__codelineno-12-30"></a><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">legend</span><span class="p">(</span><span class="n">fontsize</span><span class="o">=</span><span class="mi">8</span><span class="p">)</span>
+</span><span id="__span-12-31"><a id="__codelineno-12-31" name="__codelineno-12-31" href="#__codelineno-12-31"></a><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span><span id="__span-12-32"><a id="__codelineno-12-32" name="__codelineno-12-32" href="#__codelineno-12-32"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></code></pre></div>
+<p><img alt="Dua baris tiga panel. Baris atas diwarnai menurut kelompok K-Means untuk tiga pertanyaan riset, baris bawah memakai tata letak yang sama diwarnai menurut diagnosis. Pada Q1 pembagian memisahkan sel berukuran besar dari yang kecil, pada Q2 kelompok terpisah menurut kehalusan sedangkan titik kedua diagnosis bercampur, pada Q3 pembagian tampak mengikuti sumbu komponen utama 1" src="../../assets/level-7/01-tiga-pertanyaan-tiga-pengelompokan.png" /></p>
+<p><strong>Penjelasan:</strong></p>
+<ul>
+<li>Dua baris, tiga kolom. <strong>Baris atas</strong> diwarnai menurut kelompok K-Means, <strong>baris bawah</strong> memakai tata letak yang sama tetapi diwarnai menurut diagnosis.</li>
+<li><code>pair</code> menentukan dua fitur yang digambar untuk Q1 dan Q2. Untuk Q3 yang berdimensi 30, kita memakai <code>PCA(n_components=2)</code> agar bisa digambar. PCA hanya untuk gambar, bukan untuk clustering.</li>
+<li>Warna kelompok (biru dan oranye) sengaja berbeda dari warna diagnosis (hijau dan merah muda), sehingga tidak ada yang mengira nomor kelompok sama dengan diagnosis. Penanda titik (lingkaran dan kotak) juga berbeda agar terbaca tanpa bergantung pada warna.</li>
+</ul>
+<h3 id="bagian-h-catatan-penelitian">Bagian H — Catatan penelitian<a class="headerlink" href="#bagian-h-catatan-penelitian" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">record</span> <span class="o">=</span> <span class="p">{</span>
+</span><span id="__span-13-2"><a id="__codelineno-13-2" name="__codelineno-13-2" href="#__codelineno-13-2"></a>    <span class="s2">"dataset"</span><span class="p">:</span> <span class="s2">"Breast Cancer Wisconsin (Diagnostic), UCI, CC BY 4.0"</span><span class="p">,</span>
+</span><span id="__span-13-3"><a id="__codelineno-13-3" name="__codelineno-13-3" href="#__codelineno-13-3"></a>    <span class="s2">"sidik_jari_data"</span><span class="p">:</span> <span class="n">rs</span><span class="o">.</span><span class="n">dataset_fingerprint</span><span class="p">(</span><span class="n">X_all</span><span class="p">),</span>
+</span><span id="__span-13-4"><a id="__codelineno-13-4" name="__codelineno-13-4" href="#__codelineno-13-4"></a>    <span class="s2">"algoritma"</span><span class="p">:</span> <span class="s2">"KMeans(n_clusters=2, n_init=10)"</span><span class="p">,</span>
+</span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>    <span class="s2">"praproses"</span><span class="p">:</span> <span class="s2">"StandardScaler"</span><span class="p">,</span>
+</span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>    <span class="s2">"seed"</span><span class="p">:</span> <span class="n">SEED</span><span class="p">,</span>
+</span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>    <span class="s2">"pertanyaan"</span><span class="p">:</span> <span class="nb">list</span><span class="p">(</span><span class="n">questions</span><span class="p">),</span>
+</span><span id="__span-13-8"><a id="__codelineno-13-8" name="__codelineno-13-8" href="#__codelineno-13-8"></a>    <span class="s2">"label_diagnosis"</span><span class="p">:</span> <span class="s2">"hanya untuk validasi eksternal, tidak dipakai melatih"</span><span class="p">,</span>
+</span><span id="__span-13-9"><a id="__codelineno-13-9" name="__codelineno-13-9" href="#__codelineno-13-9"></a><span class="p">}</span>
+</span><span id="__span-13-10"><a id="__codelineno-13-10" name="__codelineno-13-10" href="#__codelineno-13-10"></a><span class="k">for</span> <span class="n">key</span><span class="p">,</span> <span class="n">value</span> <span class="ow">in</span> <span class="n">record</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+</span><span id="__span-13-11"><a id="__codelineno-13-11" name="__codelineno-13-11" href="#__codelineno-13-11"></a>    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">key</span><span class="si">:</span><span class="s2">16s</span><span class="si">}</span><span class="s2">: </span><span class="si">{</span><span class="n">value</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a>dataset         : Breast Cancer Wisconsin (Diagnostic), UCI, CC BY 4.0
+</span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a>sidik_jari_data : 6b202a2072f9
+</span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>algoritma       : KMeans(n_clusters=2, n_init=10)
+</span><span id="__span-14-4"><a id="__codelineno-14-4" name="__codelineno-14-4" href="#__codelineno-14-4"></a>praproses       : StandardScaler
+</span><span id="__span-14-5"><a id="__codelineno-14-5" name="__codelineno-14-5" href="#__codelineno-14-5"></a>seed            : 42
+</span><span id="__span-14-6"><a id="__codelineno-14-6" name="__codelineno-14-6" href="#__codelineno-14-6"></a>pertanyaan      : ['Q1 ukuran inti sel', 'Q2 tekstur dan kehalusan', 'Q3 seluruh profil morfologi']
+</span><span id="__span-14-7"><a id="__codelineno-14-7" name="__codelineno-14-7" href="#__codelineno-14-7"></a>label_diagnosis : hanya untuk validasi eksternal, tidak dipakai melatih
+</span></code></pre></div>
+<p><strong>Penjelasan:</strong> kita menulis ringkasan keputusan dalam satu dictionary: dataset dan lisensinya, sidik jari data, algoritma, praproses, seed, daftar pertanyaan, dan pernyataan bahwa diagnosis hanya untuk validasi. Kebiasaan ini diperluas menjadi protokol penuh di Bab 5 dan paket reproduksi di Bab 9.</p>
+<h2 id="code-explanation">Code Explanation<a class="headerlink" href="#code-explanation" title="Permanent link">&para;</a></h2>
+<table>
+<thead>
+<tr>
+<th>Bagian kode</th>
+<th>Peran</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>rs.load_wdbc()</code></td>
+<td>Memisahkan fitur dan diagnosis sejak awal</td>
+</tr>
+<tr>
+<td><code>questions = {...}</code></td>
+<td>Pertanyaan riset menentukan fitur</td>
+</tr>
+<tr>
+<td><code>StandardScaler</code>, <code>KMeans(...)</code> identik untuk semua</td>
+<td>Variabel terkontrol</td>
+</tr>
+<tr>
+<td><code>silhouette_score</code></td>
+<td>Evaluasi internal</td>
+</tr>
+<tr>
+<td><code>adjusted_rand_score(diagnosis, ...)</code></td>
+<td>Validasi eksternal, bukan target optimasi</td>
+</tr>
+<tr>
+<td>matriks ARI antar pertanyaan</td>
+<td>Mengukur seberapa berbeda pengelompokan antar pertanyaan</td>
+</tr>
+<tr>
+<td><code>record = {...}</code></td>
+<td>Catatan keputusan, cikal bakal protokol</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title">Pelatihan, evaluasi, dan validasi</p>
+<p><code>fit_predict</code> adalah <strong>pelatihan</strong> (hanya melihat fitur). Silhouette adalah <strong>evaluasi internal</strong>. ARI dan NMI terhadap diagnosis adalah <strong>validasi eksternal</strong>. Menjaga ketiganya terpisah adalah praktik dasar penelitian clustering.</p>
+</div>
+<h2 id="how-to-run">How to Run<a class="headerlink" href="#how-to-run" title="Permanent link">&para;</a></h2>
+<p>Dari folder utama proyek (setelah mengaktifkan lingkungan virtual):</p>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-15-1"><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="n">pip</span> <span class="n">install</span> <span class="n">-r</span> <span class="n">requirements-notebooks</span><span class="p">.</span><span class="n">txt</span>
+</span><span id="__span-15-2"><a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a><span class="n">python</span> <span class="n">examples</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">7</span><span class="p">/</span><span class="n">01_introduction_to_clustering_research</span><span class="p">.</span><span class="n">py</span>
+</span></code></pre></div>
+<p>Skrip mencetak output ke terminal dan menyimpan satu gambar ke <code>docs/assets/level-7/</code>. Dataset dimuat dari scikit-learn, jadi tidak perlu mengunduh apa pun.</p>
+<p>Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.</p>
+<h2 id="expected-output">Expected Output<a class="headerlink" href="#expected-output" title="Permanent link">&para;</a></h2>
+<p>Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian <a href="#python-implementation">Python Implementation</a>.</p>
+<p>Gambar yang dihasilkan:</p>
+<p><img alt="Dua baris tiga panel. Baris atas diwarnai menurut kelompok K-Means untuk tiga pertanyaan riset, baris bawah memakai tata letak yang sama diwarnai menurut diagnosis. Pada Q1 pembagian memisahkan sel berukuran besar dari yang kecil, pada Q2 kelompok terpisah menurut kehalusan sedangkan titik kedua diagnosis bercampur, pada Q3 pembagian tampak mengikuti sumbu komponen utama 1" src="../../assets/level-7/01-tiga-pertanyaan-tiga-pengelompokan.png" /></p>
+<h3 id="interpretasi-output">Interpretasi output<a class="headerlink" href="#interpretasi-output" title="Permanent link">&para;</a></h3>
+<p><strong>1. Data.</strong> 569 sampel, 30 fitur, tanpa nilai hilang. Diagnosis tercatat 357 <em>benign</em> dan 212 <em>malignant</em>. Sidik jari data <code>6b202a2072f9</code>.</p>
+<p><strong>2. Tiga pertanyaan, tiga pengelompokan.</strong></p>
+<table>
+<thead>
+<tr>
+<th>Pertanyaan</th>
+<th>Fitur</th>
+<th>Ukuran kelompok</th>
+<th>Silhouette</th>
+<th>ARI vs diagnosis</th>
+<th>NMI vs diagnosis</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1 ukuran inti sel</td>
+<td>3</td>
+<td>141, 428</td>
+<td><strong>0,658</strong></td>
+<td>0,493</td>
+<td>0,430</td>
+</tr>
+<tr>
+<td>Q2 tekstur dan kehalusan</td>
+<td>4</td>
+<td>346, 223</td>
+<td>0,287</td>
+<td><strong>0,066</strong></td>
+<td>0,037</td>
+</tr>
+<tr>
+<td>Q3 seluruh profil morfologi</td>
+<td>30</td>
+<td>375, 194</td>
+<td>0,343</td>
+<td><strong>0,654</strong></td>
+<td>0,532</td>
+</tr>
+</tbody>
+</table>
+<p><strong>3. Pengelompokan berbeda antar pertanyaan.</strong> ARI antar pengelompokan:</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Q1</th>
+<th>Q2</th>
+<th>Q3</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Q1</td>
+<td>1,000</td>
+<td>0,014</td>
+<td>0,498</td>
+</tr>
+<tr>
+<td>Q2</td>
+<td>0,014</td>
+<td>1,000</td>
+<td>0,143</td>
+</tr>
+<tr>
+<td>Q3</td>
+<td>0,498</td>
+<td>0,143</td>
+<td>1,000</td>
+</tr>
+</tbody>
+</table>
+<p>Q1 dan Q2 punya ARI <strong>0,014</strong>, hampir tidak lebih mirip daripada kebetulan. Artinya, mengelompokkan sel menurut <em>ukuran</em> dan menurut <em>tekstur</em> menghasilkan dua pembagian yang nyaris tidak berkaitan. <strong>Pertanyaan yang berbeda memberi jawaban yang berbeda</strong>, bahkan pada data, algoritma, K, dan seed yang sama.</p>
+<p><strong>4. Silhouette tinggi tidak sama dengan selaras dengan diagnosis.</strong> Q1 punya Silhouette tertinggi (0,658), tetapi ARI terhadap diagnosis (0,493) lebih rendah daripada Q3 (0,654), yang Silhouette-nya hanya 0,343. Dua metrik ini menjawab pertanyaan berbeda: Silhouette menilai kepadatan dan keterpisahan kelompok di ruang fiturnya, sedangkan ARI menilai kesesuaian dengan label eksternal. Pada gambar baris atas panel Q1, pembagiannya memisahkan sel besar dari yang kecil sepanjang kurva radius dan luas. Kita tidak menyelidiki lebih jauh mengapa Silhouette-nya tinggi, jadi kita tidak menarik kesimpulan tentang sebabnya.</p>
+<p><strong>5. Q2 hampir tidak selaras dengan diagnosis.</strong> ARI 0,066 dan NMI 0,037. Pada gambar baris bawah panel Q2, titik dari kedua diagnosis bercampur. Ini bukan berarti fitur tekstur tidak berguna untuk hal lain. Artinya, <strong>pada pengaturan ini</strong> (K-Means, K = 2, empat fitur tekstur), pembagian yang ditemukan hampir tidak mengikuti diagnosis.</p>
+<div class="admonition warning">
+<p class="admonition-title">Batas kesimpulan</p>
+<p>Hasil ini berlaku untuk <strong>satu dataset, satu algoritma (K-Means), K = 2, dan pengelompokan fitur yang kita pilih sendiri untuk ilustrasi</strong>. Kita <strong>tidak</strong> menyimpulkan bahwa ukuran inti sel "menentukan" diagnosis, bahwa fitur tekstur "tidak penting", atau apa pun yang bersifat klinis. Pengelompokan fitur di Q1 sampai Q3 adalah contoh didaktik, bukan hasil seleksi fitur yang dijustifikasi. Angka-angka ini adalah <strong>hasil demonstrasi</strong>, bukan temuan penelitian.</p>
+</div>
+<h2 id="practical-examples">Practical Examples<a class="headerlink" href="#practical-examples" title="Permanent link">&para;</a></h2>
+<p><strong>Merumuskan proposal penelitian.</strong> Sebelum membuka data, tulis satu kalimat pertanyaan riset. Lalu tulis fitur apa yang relevan dan mengapa. Bila kamu sulit menjawab "mengapa", pertanyaanmu belum matang. Bab 2 membahasnya.</p>
+<p><strong>Menilai makalah orang lain.</strong> Saat membaca makalah clustering, tanyakan lima hal: (1) apa pertanyaannya, (2) data dari mana dan apa lisensinya, (3) apa baseline-nya, (4) apakah label dipakai untuk melatih atau hanya memvalidasi, (5) apakah hasil diuji terhadap perubahan pilihan. Makalah yang tidak menjawab kelimanya perlu dibaca dengan hati-hati.</p>
+<p><strong>Memeriksa pekerjaanmu sendiri.</strong> Sebelum melaporkan kelompok, uji apakah kesimpulanmu berubah bila fitur diganti. Pada demonstrasi di atas, ARI antar pertanyaan serendah 0,014. Itu peringatan bahwa klaim "data ini punya dua kelompok" hampir pasti bergantung pada fitur yang dipakai.</p>
+<h2 id="hands-on-exercises">Hands-on Exercises<a class="headerlink" href="#hands-on-exercises" title="Permanent link">&para;</a></h2>
+<p>Semua angka di jawaban berasal dari eksekusi nyata dengan pengaturan yang sama seperti skrip (<code>StandardScaler</code>, <code>KMeans</code>, <code>n_init=10</code>, <code>random_state=42</code>) pada ke-30 fitur kecuali disebut lain.</p>
+<ol>
+<li>Jalankan K-Means pada ke-30 fitur (Q3) dengan K = 2, 3, dan 4. Catat ukuran kelompok, Silhouette, dan ARI terhadap diagnosis. Apakah K = 2 memang yang terbaik menurut kedua ukuran itu?</li>
+<li>Gabungkan fitur Q1 dan Q2 (7 fitur) lalu lakukan clustering K = 2. Berapa ARI-nya terhadap pengelompokan Q3 dan terhadap diagnosis?</li>
+<li>Ulangi Q3 dengan seed 0 sampai 9 (<code>n_init=10</code>). Berapa ARI terkecil dan terbesar antara seed 0 dan seed lain? Lalu ulangi dengan <code>n_init=1</code>.</li>
+<li>Jalankan K-Means pada ke-30 fitur <strong>tanpa</strong> <code>StandardScaler</code>. Bagaimana ukuran kelompok dan ARI terhadap Q3 yang berskala?</li>
+<li>Tulis satu pertanyaan riset untuk dataset ini yang baik dan satu yang buruk, lalu jelaskan perbedaannya.</li>
+<li>Mengapa diagnosis tidak boleh dimasukkan sebagai fitur lalu hasilnya disebut "clustering yang akurat"?</li>
+</ol>
+<details class="question">
+<summary>Jawaban</summary>
+<p>Nomor 1 sampai 4 berasal dari eksekusi nyata.</p>
+<ol>
+<li>K = 2: ukuran 375 dan 194, Silhouette <strong>0,343</strong>, ARI <strong>0,654</strong>. K = 3: ukuran 110, 359, 100, Silhouette 0,314, ARI 0,511. K = 4: ukuran 345, 35, 97, 92, Silhouette 0,283, ARI 0,552. Pada pengaturan ini, K = 2 punya Silhouette tertinggi <strong>dan</strong> ARI tertinggi. Tetapi ingat, ARI membandingkan dengan dua label diagnosis, jadi K = 2 memang diuntungkan oleh pembanding itu. Untuk Silhouette saja, K = 2 tertinggi di antara tiga nilai yang dicoba.</li>
+<li>ARI terhadap Q3: <strong>0,563</strong>. ARI terhadap diagnosis: <strong>0,578</strong>. Ukuran kelompok 151 dan 418. Gabungan itu tidak sama dengan Q3 maupun Q1, menegaskan bahwa pemilihan fitur mengubah hasil.</li>
+<li>Dengan <code>n_init=10</code>: ARI seed 0 vs seed lain berkisar <strong>0,9647 sampai 1,0</strong>. Dengan <code>n_init=1</code>: <strong>0,9577 sampai 1,0</strong>. Jadi pada Q3, seed hampir tidak mengubah hasil, tetapi pada <code>n_init=10</code> pun belum persis 1,0 untuk semua seed. Kebisingan ini perlu dilaporkan sebagai bagian dari penelitian.</li>
+<li>Tanpa skala, ukuran kelompok 131 dan 438, ARI terhadap diagnosis <strong>0,491</strong>, dan ARI terhadap Q3 yang berskala <strong>0,496</strong>. Fitur dengan rentang nilai besar (misalnya luas, <code>area</code>) mendominasi jarak. Ini sejalan dengan <a href="../../data-exploration-and-preprocessing/10-feature-scaling/">Level 2 Bab 10</a>.</li>
+<li>Contoh yang baik: "Apakah pengelompokan K-Means pada fitur ukuran inti sel stabil bila seed dan sampel diubah, dan seberapa selaras dengan diagnosis yang tercatat?" Spesifik, terukur, dan terbatas. Contoh yang buruk: "Apakah clustering bisa mendiagnosis kanker?" Terlalu luas, mengandung klaim klinis, dan tidak bisa dijawab oleh eksperimen unsupervised pada dataset ini.</li>
+<li>Karena kelompok yang dihasilkan sudah "mengintip" jawaban. Kecocokannya dengan diagnosis jadi tidak membuktikan apa pun. Pada penelitian clustering, label hanya boleh dipakai setelah pengelompokan selesai, sebagai validasi eksternal.</li>
+</ol>
+</details>
+<h2 id="troubleshooting">Troubleshooting<a class="headerlink" href="#troubleshooting" title="Permanent link">&para;</a></h2>
+<h3 id="masalah-teknis">Masalah teknis<a class="headerlink" href="#masalah-teknis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Masalah</th>
+<th>Penyebab</th>
+<th>Solusi</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ModuleNotFoundError: _research</code></td>
+<td>Skrip dijalankan dari tempat yang salah atau <code>_research.py</code> terhapus</td>
+<td>Jalankan dari folder utama proyek. Skrip menambahkan foldernya ke <code>sys.path</code></td>
+</tr>
+<tr>
+<td><code>ModuleNotFoundError: sklearn</code></td>
+<td>Dependensi belum terpasang</td>
+<td><code>pip install -r requirements-notebooks.txt</code></td>
+</tr>
+<tr>
+<td>Angka berbeda dari output di bab</td>
+<td>Versi pustaka, <code>n_init</code>, atau <code>random_state</code> berbeda</td>
+<td>Samakan versi dan pengaturan. Periksa sidik jari data</td>
+</tr>
+<tr>
+<td>Gambar tidak muncul</td>
+<td>Skrip dijalankan tanpa layar (backend Agg)</td>
+<td>Gambar disimpan ke <code>docs/assets/level-7/</code>, bukan ditampilkan</td>
+</tr>
+<tr>
+<td>Label diagnosis terbalik</td>
+<td>Salah memetakan 0 dan 1</td>
+<td>Di dataset ini 0 = <em>malignant</em>, 1 = <em>benign</em></td>
+</tr>
+</tbody>
+</table>
+<h3 id="kesalahan-umum">Kesalahan umum<a class="headerlink" href="#kesalahan-umum" title="Permanent link">&para;</a></h3>
+<ol>
+<li><strong>Menyimpulkan klinis dari hasil demonstrasi.</strong> Bab ini tentang metodologi.</li>
+<li><strong>Memakai diagnosis sebagai fitur atau target optimasi.</strong></li>
+<li><strong>Membaca Silhouette tinggi sebagai bukti kelompok bermakna.</strong></li>
+<li><strong>Menganggap kelompok dari satu pertanyaan berlaku untuk pertanyaan lain.</strong></li>
+<li><strong>Menyamakan "K sama dengan jumlah label" dengan "K sudah dijustifikasi".</strong></li>
+<li><strong>Mengubah fitur dan K sekaligus</strong>, sehingga penyebab perbedaan tidak jelas.</li>
+<li><strong>Lupa mencatat sidik jari data dan seed.</strong></li>
+</ol>
+<h2 id="summary">Summary<a class="headerlink" href="#summary" title="Permanent link">&para;</a></h2>
+<ul>
+<li><strong>Penelitian dengan clustering</strong> berawal dari <strong>pertanyaan</strong>, bukan dari algoritma. Level 7 melatih kemampuan itu, sedangkan Level 1–6 melatih alat dan eksperimennya.</li>
+<li>Ciri penelitian <em>unsupervised</em>: tidak ada jawaban benar otomatis, hasil bergantung pada banyak pilihan, algoritma selalu menghasilkan kelompok, dan makna kelompok adalah penafsiran peneliti.</li>
+<li><strong>Pertanyaan riset menentukan data, fitur, algoritma, dan evaluasi.</strong> Pada demonstrasi, tiga pertanyaan pada data yang sama menghasilkan pengelompokan yang berbeda (ARI antar pertanyaan: 0,014 sampai 0,498).</li>
+<li><strong>Silhouette tinggi tidak sama dengan selaras dengan label</strong>: Q1 punya Silhouette 0,658 tetapi ARI terhadap diagnosis 0,493, sedangkan Q3 punya Silhouette 0,343 dan ARI 0,654.</li>
+<li><strong>Label hanya untuk validasi eksternal</strong>, tidak untuk melatih.</li>
+<li>Clustering menemukan pola, <strong>bukan sebab</strong>. Semua angka di bab ini adalah hasil demonstrasi pada satu dataset, bukan temuan klinis.</li>
+<li>Alur penelitian: masalah, pustaka, data, metodologi, implementasi, hasil, penulisan, reproduksibilitas. Bab 2 sampai 9 membahasnya, Bab 10 menjalankannya.</li>
+</ul>
+<p><strong>Bab berikutnya:</strong> Bab 2 membahas <strong>perumusan masalah penelitian</strong>: dari ide yang kabur menjadi tujuan, pertanyaan, dan ruang lingkup yang bisa dijawab.</p>
+<h2 id="references">References<a class="headerlink" href="#references" title="Permanent link">&para;</a></h2>
+<ul>
+<li>von Luxburg, U., Williamson, R. C., &amp; Guyon, I. (2012). Clustering: Science or Art? <em>Proceedings of ICML Workshop on Unsupervised and Transfer Learning, JMLR Workshop and Conference Proceedings</em>, 27, 65–79. <a href="https://proceedings.mlr.press/v27/luxburg12a.html">proceedings.mlr.press/v27/luxburg12a.html</a></li>
+<li>Jain, A. K. (2010). Data clustering: 50 years beyond K-means. <em>Pattern Recognition Letters</em>, 31(8), 651–666.</li>
+<li>Hennig, C. (2015). What are the true clusters? <em>Pattern Recognition Letters</em>, 64, 53–62.</li>
+<li>Wolberg, W., Mangasarian, O., Street, N., &amp; Street, W. (1993). <em>Breast Cancer Wisconsin (Diagnostic)</em> [Dataset]. UCI Machine Learning Repository. <a href="https://doi.org/10.24432/C5DW2B">doi.org/10.24432/C5DW2B</a>. Lisensi CC BY 4.0 menurut halaman dataset.</li>
+<li>Street, W. N., Wolberg, W. H., &amp; Mangasarian, O. L. (1993). Nuclear feature extraction for breast tumor diagnosis. <em>Electronic Imaging</em> (artikel pengantar dataset yang dicantumkan UCI).</li>
+<li>Scikit-learn documentation: <a href="https://scikit-learn.org/stable/modules/clustering.html#clustering-performance-evaluation"><em>Clustering performance evaluation</em></a>.</li>
+</ul>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+  <script>var tabs=__md_get("__tabs");if(Array.isArray(tabs))e:for(var set of document.querySelectorAll(".tabbed-set")){var labels=set.querySelector(".tabbed-labels");for(var tab of tabs)for(var label of labels.getElementsByTagName("label"))if(label.innerText.trim()===tab){var input=document.getElementById(label.htmlFor);input.checked=!0;continue e}}</script>
+
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Kembali ke atas
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../" class="md-footer__link md-footer__link--prev" aria-label="Sebelumnya: Level 7 — Research Project">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Sebelumnya
+              </span>
+              <div class="md-ellipsis">
+                Level 7 — Research Project
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../02-research-problem-formulation/" class="md-footer__link md-footer__link--next" aria-label="Selanjutnya: Bab 2 — Research Problem Formulation">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Selanjutnya
+              </span>
+              <div class="md-ellipsis">
+                Bab 2 — Research Problem Formulation
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "../..", "features": ["navigation.indexes", "navigation.path", "navigation.footer", "navigation.top", "navigation.tracking", "toc.follow", "search.highlight", "search.suggest", "content.code.copy", "content.code.annotate", "content.tabs.link", "content.action.edit"], "search": "../../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Tersalin ke clipboard", "clipboard.copy": "Salin ke clipboard", "search.result.more.one": "1 lagi di halaman ini", "search.result.more.other": "# lagi di halaman ini", "search.result.none": "Tidak ada dokumen yang sesuai", "search.result.one": "1 dokumen ditemukan", "search.result.other": "# dokumen ditemukan", "search.result.placeholder": "Ketik untuk mulai pencarian", "search.result.term.missing": "Tidak ada", "select.version": "Pilih versi"}, "version": null}</script>
+    
+    
+      <script src="../../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../../assets/vendor/mermaid/mermaid.min.js"></script>
+      
+        <script src="../../javascripts/mermaid-config.js"></script>
+      
+        <script src="../../javascripts/mathjax.js"></script>
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-mml-chtml.js"></script>
+      
+    
+  </body>
+</html>
