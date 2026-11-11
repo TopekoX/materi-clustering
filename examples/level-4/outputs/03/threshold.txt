@@ -1,0 +1,4 @@
+distance_threshold = 1   -> n_clusters_ = 39
+distance_threshold = 3   -> n_clusters_ = 13
+distance_threshold = 8   -> n_clusters_ = 3
+distance_threshold = 30  -> n_clusters_ = 3

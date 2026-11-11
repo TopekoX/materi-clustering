@@ -1,0 +1,11 @@
+Porsi varians (persen) setelah Min-Max:
+Age                       38.4
+Annual Income (k$)        24.7
+Spending Score (1-100)    36.9
+dtype: float64
+
+Porsi varians (persen) setelah Standardization:
+Age                       33.3
+Annual Income (k$)        33.3
+Spending Score (1-100)    33.3
+dtype: float64

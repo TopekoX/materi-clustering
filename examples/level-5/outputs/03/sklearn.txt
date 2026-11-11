@@ -1,0 +1,2 @@
+Label K-Means      : [0, 0, 0, 1, 1, 1]
+inertia_ scikit-learn = 2.667

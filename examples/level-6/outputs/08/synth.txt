@@ -1,0 +1,5 @@
+Data sintetis: (300, 2) | 270 titik kelompok + 30 titik noise
+K-Means: 3 kelompok, noise 0 | DBSCAN: 3 kelompok, noise 46 titik
+Dari 30 noise sebenarnya, DBSCAN menandai 26 sebagai noise
+Dari 270 titik kelompok, DBSCAN ikut menandai 20 sebagai noise
+Titik kelompok yang ditandai noise, per gerombol asal: {'gerombol 0 (std 0.7)': 2, 'gerombol 1 (std 1.1)': 17, 'gerombol 2 (std 0.6)': 1}

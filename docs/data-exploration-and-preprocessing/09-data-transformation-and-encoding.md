@@ -88,6 +88,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/09_transformation_encoding.py:binary"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/09/binary.txt"
+```
+
 **Penjelasan:**
 
 - `df.copy()` membuat salinan agar tabel asli tidak berubah.
@@ -99,6 +103,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/09_transformation_encoding.py:onehot"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/09/onehot.txt"
 ```
 
 **Penjelasan:**
@@ -114,6 +122,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/09_transformation_encoding.py:order"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/09/order.txt"
+```
+
 **Penjelasan:**
 
 - Ini demonstrasi kecil, **bukan dari data pelanggan**. Kita memberi kode 0, 1, 2 pada tiga kota.
@@ -124,6 +136,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/09_transformation_encoding.py:log"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/09/log.txt"
 ```
 
 **Penjelasan:**
@@ -138,6 +154,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/09_transformation_encoding.py:plot"
 ```
 
+![Histogram pendapatan sebelum dan sesudah log1p](../assets/level-2/09-log-transform.png)
+
 **Penjelasan:**
 
 - Dua histogram berdampingan: kiri sebelum, kanan sesudah transformasi.
@@ -148,6 +166,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/09_transformation_encoding.py:binning"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/09/binning.txt"
 ```
 
 **Penjelasan:**
@@ -186,11 +208,8 @@ jupyter notebook notebooks/level-2/09-data-transformation-and-encoding.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, numpy, matplotlib 3.11.2, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, numpy, matplotlib 3.11.2, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/09.txt"
-```
 
 ![Histogram pendapatan sebelum dan sesudah log1p](../assets/level-2/09-log-transform.png)
 

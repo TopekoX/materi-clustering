@@ -1,0 +1,8 @@
+                         Silhouette tertinggi                DBI terendah               CHI tertinggi                              ARI tertinggi
+Dataset                                                                                                                                         
+Jelas                                  DBSCAN                      DBSCAN                      DBSCAN  K-Means / Hierarchical / GMM / Mean Shift
+Tumpang tindih     K-Means / GMM / Mean Shift  K-Means / GMM / Mean Shift  K-Means / GMM / Mean Shift                 K-Means / GMM / Mean Shift
+Bulan sabit        K-Means / GMM / Mean Shift                         GMM                     K-Means                                     DBSCAN
+Kepadatan berbeda                      DBSCAN                      DBSCAN                      DBSCAN  K-Means / Hierarchical / GMM / Mean Shift
+Dengan noise                           DBSCAN                      DBSCAN                      DBSCAN                                     DBSCAN
+Miring (elips)                         DBSCAN                  Mean Shift                      DBSCAN                         Hierarchical / GMM

@@ -1,0 +1,7 @@
+ linkage    metric  ARI acuan ukuran kelompok
+    ward euclidean      0.425       [98, 202]
+complete euclidean      0.607      [137, 163]
+complete manhattan      0.597      [116, 184]
+ average euclidean      0.576      [114, 186]
+ average    cosine      0.425      [134, 166]
+  single euclidean      1.000      [150, 150]

@@ -176,12 +176,20 @@ Skrip lengkapnya ada di `examples/level-6/01_introduction_to_clustering_experime
 --8<-- "level-6/01_introduction_to_clustering_experiments.py:question"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/01/question.txt"
+```
+
 **Penjelasan:** `experiment` adalah dictionary (pasangan kunci dan nilai) yang menuliskan rancangan **sebelum** kita menjalankan apa pun. Perulangan `for key, value in experiment.items()` mencetaknya. `{key:20s}` memberi lebar 20 karakter agar rapi. Kebiasaan menulis rancangan lebih dulu mencegahmu mengubah pertanyaan setelah melihat hasil.
 
 ### Bagian C — Dataset dan karakteristiknya
 
 ```python
 --8<-- "level-6/01_introduction_to_clustering_experiments.py:data"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/01/data.txt"
 ```
 
 **Penjelasan:**
@@ -194,6 +202,10 @@ Skrip lengkapnya ada di `examples/level-6/01_introduction_to_clustering_experime
 
 ```python
 --8<-- "level-6/01_introduction_to_clustering_experiments.py:baseline"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/01/baseline.txt"
 ```
 
 **Penjelasan baris demi baris:**
@@ -209,6 +221,10 @@ Skrip lengkapnya ada di `examples/level-6/01_introduction_to_clustering_experime
 --8<-- "level-6/01_introduction_to_clustering_experiments.py:conditions"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/01/conditions.txt"
+```
+
 **Penjelasan:**
 
 - `X_dollars[:, 0] *= 1000` mengalikan kolom pendapatan dengan 1000, sehingga satuannya dolar (bukan ribu dolar). Sebelumnya kita salin dulu dengan `.copy()` supaya `X_raw` tidak ikut berubah.
@@ -219,6 +235,10 @@ Skrip lengkapnya ada di `examples/level-6/01_introduction_to_clustering_experime
 
 ```python
 --8<-- "level-6/01_introduction_to_clustering_experiments.py:commonspace"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/01/commonspace.txt"
 ```
 
 **Penjelasan:** untuk tiap kondisi kita mencatat tiga angka.
@@ -235,12 +255,18 @@ Alasannya: jarak di ruang yang berbeda tidak sebanding. Silhouette di ruang bers
 --8<-- "level-6/01_introduction_to_clustering_experiments.py:plot"
 ```
 
+![Empat panel scatter Mall Customers dengan lima kelompok untuk tiap kondisi skala. Panel A, B, dan C sama dengan ARI 1,000, sedangkan panel D (pendapatan dalam dolar) memotong data menjadi pita vertikal dengan ARI 0,427](../assets/level-6/01-empat-kondisi-skala.png)
+
 **Penjelasan:** empat panel berdampingan, `sharex=True` dan `sharey=True` membuat sumbu sama. Semua panel digambar dalam satuan asli (`X_raw`) supaya bisa dibandingkan secara visual. Warna menunjukkan kelompok. Nomor warna bisa berbeda antar panel, jadi yang dibandingkan adalah **bentuk pembagian**, bukan warnanya.
 
 ### Bagian H — Meringkas
 
 ```python
 --8<-- "level-6/01_introduction_to_clustering_experiments.py:summary"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/01/summary.txt"
 ```
 
 **Penjelasan:** ambang `0.95` hanya contoh batas "praktis sama" untuk keperluan ringkasan. Pilihan ambang harus ditulis dan dijustifikasi, bukan diam-diam digeser setelah melihat hasil.
@@ -274,13 +300,11 @@ Skrip mencetak output ke terminal dan menyimpan satu gambar ke `docs/assets/leve
 jupyter notebook notebooks/level-6/01-introduction-to-clustering-experiments.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/01.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

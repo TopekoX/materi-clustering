@@ -1,0 +1,8 @@
+k = 2: silhouette = 0.321
+k = 3: silhouette = 0.467
+k = 4: silhouette = 0.494
+k = 5: silhouette = 0.555
+k = 6: silhouette = 0.540
+k = 7: silhouette = 0.528
+k = 8: silhouette = 0.455
+k dengan silhouette tertinggi: 5

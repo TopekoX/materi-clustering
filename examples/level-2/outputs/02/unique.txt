@@ -1,0 +1,11 @@
+Jumlah nilai unik per kolom:
+CustomerID                200
+Gender                      2
+Age                        51
+Annual Income (k$)         64
+Spending Score (1-100)     84
+dtype: int64
+
+Nilai unik pada Gender: <StringArray>
+['Male', 'Female']
+Length: 2, dtype: str

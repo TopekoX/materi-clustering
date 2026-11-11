@@ -1,0 +1,5 @@
+Jumlah seed: semua titik = 310, bin_seeding=True dengan min_bin_freq=5 = 12
+
+bin_seeding=False, cluster_all=True : 9 pusat, label -1 = 0, ukuran = [101, 100, 102, 2, 1, 1, 1, 1, 1]
+bin_seeding=True,  min_bin_freq=5, cluster_all=True : 3 pusat, label -1 = 0, ukuran = [101, 102, 107]
+bin_seeding=True,  min_bin_freq=5, cluster_all=False: 3 pusat, label -1 = 19, ukuran = [98, 97, 96]

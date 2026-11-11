@@ -1,0 +1,2 @@
+ARI antara K-Means dan Gender : -0.0006
+NMI antara K-Means dan Gender : 0.0051

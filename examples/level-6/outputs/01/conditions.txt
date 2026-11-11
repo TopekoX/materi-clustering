@@ -1,0 +1,4 @@
+A. StandardScaler (baseline)               ukuran kelompok: [81, 39, 35, 23, 22]
+B. MinMaxScaler                            ukuran kelompok: [81, 39, 35, 23, 22]
+C. Tanpa skala (k$)                        ukuran kelompok: [81, 39, 35, 23, 22]
+D. Tanpa skala (pendapatan dalam dolar)    ukuran kelompok: [56, 50, 42, 32, 20]

@@ -1,0 +1,3 @@
+Kelompok ditemukan: [0, 1, 2] | titik noise (label -1): 43 dari 340
+Silhouette, noise dianggap kelompok : 0.708
+Silhouette, noise dikeluarkan       : 0.897  (297 titik dinilai)

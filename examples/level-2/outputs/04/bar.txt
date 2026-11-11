@@ -1,0 +1,4 @@
+Gender
+Female    112
+Male       88
+Name: count, dtype: int64

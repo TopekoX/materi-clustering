@@ -1,0 +1,7 @@
+Urutan fitur menurut pemisahan kelompok: ['flavanoids', 'od280/od315_of_diluted_wines', 'proline', 'total_phenols', 'color_intensity'] ... ['alcalinity_of_ash', 'magnesium', 'ash']
+                                 A     B     C
+flavanoids                    0.02  0.98 -1.22
+od280/od315_of_diluted_wines  0.27  0.78 -1.29
+proline                      -0.75  1.13 -0.41
+total_phenols                -0.08  0.89 -0.98
+color_intensity              -0.90  0.17  0.94

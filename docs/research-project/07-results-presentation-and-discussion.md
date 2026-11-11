@@ -245,12 +245,20 @@ Skrip lengkapnya ada di `examples/level-7/07_results_presentation_and_discussion
 --8<-- "level-7/07_results_presentation_and_discussion.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/07/setup.txt"
+```
+
 **Penjelasan:** kita membaca protokol, ringkasan RQ1 (JSON), serta tabel RQ2, RQ3, grid DBSCAN, sensitivitas K, profil kelompok, dan tabulasi silang (CSV). `index_col=...` menjadikan satu kolom sebagai indeks baris agar mudah dipanggil, misalnya `rq3.loc["GMM"]`. Fungsi `fmt(value, digits)` memformat angka dengan **koma desimal**: `f"{value:.{digits}f}"` membulatkan, `.replace(".", ",")` mengganti titik dengan koma. Seluruh angka di teks nantinya melewati fungsi ini.
 
 ### Bagian B — Tabel hasil
 
 ```python
 --8<-- "level-7/07_results_presentation_and_discussion.py:tables"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/07/tables.txt"
 ```
 
 **Penjelasan:**
@@ -266,12 +274,20 @@ Skrip lengkapnya ada di `examples/level-7/07_results_presentation_and_discussion
 --8<-- "level-7/07_results_presentation_and_discussion.py:families"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/07/families.txt"
+```
+
 **Penjelasan:** `split_name` memecah nama fitur menjadi jenis statistik dan ukuran: nama berawalan "mean " atau "worst " dipotong awalannya, sisanya (berakhiran " error") dipotong akhirannya. `profile.index` adalah nama 30 fitur, `pd.DataFrame([...])` membuat tabel dua kolom dari hasil pemecahan, dan `profile.join(parts)` menempelkannya ke profil. `groupby("ukuran")["selisih_mutlak"].mean()` menghitung rata-rata selisih mutlak per ukuran (tiga fitur per ukuran), lalu `.sort_values(ascending=False)` mengurutkannya.
 
 ### Bagian D — Analisis eksploratori
 
 ```python
 --8<-- "level-7/07_results_presentation_and_discussion.py:explore"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/07/explore.txt"
 ```
 
 **Penjelasan:**
@@ -288,12 +304,20 @@ Skrip lengkapnya ada di `examples/level-7/07_results_presentation_and_discussion
 --8<-- "level-7/07_results_presentation_and_discussion.py:facts"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/07/facts.txt"
+```
+
 **Penjelasan:** `facts` adalah dictionary satu lapis: nama fakta menjadi angka, semuanya diambil dari tabel hasil dan analisis eksploratori (bukan diketik). `rq3.loc["KMeans"]` mengambil baris K-Means sebagai deret. `counts` menyimpan bilangan bulat dari tabulasi silang. `pool` adalah **himpunan semua bentuk tulisan angka yang sah**: untuk setiap fakta, tiga pembulatan (1, 2, dan 3 desimal) diformat dengan `fmt` lalu dimasukkan. Himpunan ini dipakai pemeriksa keterlacakan.
 
 ### Bagian F — Buku bukti
 
 ```python
 --8<-- "level-7/07_results_presentation_and_discussion.py:ledger"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/07/ledger.txt"
 ```
 
 **Penjelasan:**
@@ -307,6 +331,10 @@ Skrip lengkapnya ada di `examples/level-7/07_results_presentation_and_discussion
 
 ```python
 --8<-- "level-7/07_results_presentation_and_discussion.py:checks"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/07/checks.txt"
 ```
 
 **Penjelasan:**
@@ -325,12 +353,18 @@ Skrip lengkapnya ada di `examples/level-7/07_results_presentation_and_discussion
 --8<-- "level-7/07_results_presentation_and_discussion.py:plot"
 ```
 
+![Dua panel. Kiri: ARI terhadap diagnosis untuk K-Means, Agglomerative, dan GMM dengan garis interval bootstrap 95 persen, penanda belah ketupat untuk eksekusi utama dan lingkaran untuk rata-rata bootstrap; ketiga interval saling tumpang tindih. Kanan: batang ukuran inti sel menurut rata-rata selisih z-score antar kelompok, tertinggi concave points dan terendah texture](../assets/level-7/07-ari-dan-ketidakpastian.png)
+
 **Penjelasan:** panel kiri menggambar, untuk tiap algoritma, **garis interval bootstrap** (`hlines`), **penanda belah ketupat** untuk hasil eksekusi utama, dan **penanda lingkaran** untuk rata-rata bootstrap. Bentuk dan warna berbeda agar terbaca tanpa warna. `set_ylim(-1.6, 2.4)` menyisakan ruang kosong untuk legenda. Panel kanan adalah diagram batang mendatar `by_measure`, diurutkan agar mudah dibaca.
 
 ### Bagian I — Menyusun bagian Hasil dan Pembahasan
 
 ```python
 --8<-- "level-7/07_results_presentation_and_discussion.py:report"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/07/report.txt"
 ```
 
 **Penjelasan:** untuk tiap jenis, skrip mencetak judul tebal lalu semua kalimat jenis itu sebagai daftar berpoin dengan id. Hasilnya disimpan sebagai `07_results_discussion.md`, dan berkas lain (tabel, buku bukti, bootstrap, profil per ukuran, fakta) ikut disimpan. Teks yang tampil di bagian *Expected Output* **berasal dari berkas ini**, bukan diketik di bab.
@@ -371,13 +405,11 @@ jupyter notebook notebooks/level-7/07-results-presentation-and-discussion.ipynb
 
 Notebook memuat Bagian A sampai I, ditambah tiga bagian **Praktik**: menulis kalimat hasilmu sendiri dari fakta dan memeriksanya, menambahkan kalimat ke buku bukti, dan melihat apa yang berubah (dan tidak berubah) pada interval bootstrap bila jumlah ulangan ditambah. Pada eksekusi nyata, lebar interval selisih ARI GMM − K-Means adalah 0,153 (B = 50), 0,163 (B = 100), dan 0,168 (B = 200), jadi menambah ulangan menstabilkan batas interval tetapi tidak mempersempitnya.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. Bootstrap memakai seed tetap sehingga hasilnya sama pada eksekusi ulang.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. Bootstrap memakai seed tetap sehingga hasilnya sama pada eksekusi ulang.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/07.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

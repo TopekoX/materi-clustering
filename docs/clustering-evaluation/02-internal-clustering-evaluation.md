@@ -209,12 +209,20 @@ Skrip lengkapnya ada di `examples/level-5/02_internal_clustering_evaluation.py`,
 --8<-- "level-5/02_internal_clustering_evaluation.py:tinyresult"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/02/tinyresult.txt"
+```
+
 **Penjelasan:** kita memanggil keempat fungsi pada data kecil. `.round(3)` dan `round(float(v), 3)` membulatkan angka ke tiga desimal agar mudah dibaca. Bagian `int(k)` dan `float(v)` hanya mengubah tipe NumPy menjadi angka biasa supaya cetakannya rapi.
 
 ### Bagian E — Kelompok dekat vs jauh
 
 ```python
 --8<-- "level-5/02_internal_clustering_evaluation.py:neardistant"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/02/neardistant.txt"
 ```
 
 **Penjelasan:**
@@ -228,12 +236,18 @@ Skrip lengkapnya ada di `examples/level-5/02_internal_clustering_evaluation.py`,
 --8<-- "level-5/02_internal_clustering_evaluation.py:plotnear"
 ```
 
+![Dua panel: dua kelompok berpusat 3 satuan yang saling menempel, dan dua kelompok berpusat 10 satuan yang terpisah jelas, dengan centroid hitam](../assets/level-5/02-dekat-vs-jauh.png)
+
 **Penjelasan:** dua panel berdampingan, `sharey=True` membuat sumbu vertikal sama. Tanda `X` hitam adalah centroid.
 
 ### Bagian F — Kepadatan
 
 ```python
 --8<-- "level-5/02_internal_clustering_evaluation.py:density"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/02/density.txt"
 ```
 
 **Penjelasan:**
@@ -248,9 +262,15 @@ Skrip lengkapnya ada di `examples/level-5/02_internal_clustering_evaluation.py`,
 --8<-- "level-5/02_internal_clustering_evaluation.py:limits"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/02/limits.txt"
+```
+
 ```python
 --8<-- "level-5/02_internal_clustering_evaluation.py:plotmoons"
 ```
+
+![Dua panel data moons: hasil K-Means yang memotong dua bulan sabit secara lurus dengan Silhouette 0,486, dan label benar dengan Silhouette 0,330](../assets/level-5/02-moons-label-benar.png)
 
 **Penjelasan:** `make_moons` memberi dua bulan sabit beserta label benarnya `y_moons`. Kita menghitung Silhouette dan cohesion untuk dua pembagian: hasil K-Means, dan label benar. Label benar **hanya dipakai untuk dinilai**, tidak untuk melatih K-Means.
 
@@ -258,6 +278,10 @@ Skrip lengkapnya ada di `examples/level-5/02_internal_clustering_evaluation.py`,
 
 ```python
 --8<-- "level-5/02_internal_clustering_evaluation.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/02/mall.txt"
 ```
 
 **Penjelasan:** setelah menyamakan skala, K-Means (K = 5) menghasilkan label. Kita membuat tabel ukuran dan cohesion tiap kelompok, lalu mencari pasangan kelompok dengan centroid terdekat dan terjauh. `min(sep_mall, key=sep_mall.get)` mengambil kunci (pasangan kelompok) dengan nilai terkecil.
@@ -289,13 +313,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-5/02-internal-clustering-evaluation.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/02.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

@@ -205,6 +205,10 @@ Skrip lengkapnya ada di `examples/level-6/06_dimensionality_reduction_and_pca.py
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:manual"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/06/manual.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `X_small - X_small.mean(axis=0)` memusatkan tiap kolom (langkah 1).
@@ -218,12 +222,20 @@ Skrip lengkapnya ada di `examples/level-6/06_dimensionality_reduction_and_pca.py
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:sklearn"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/06/sklearn.txt"
+```
+
 **Penjelasan:** `PCA(n_components=2).fit(X_small)` mempelajari komponen. `explained_variance_` adalah nilai eigen, `explained_variance_ratio_` adalah rasionya, dan `components_` adalah vektor eigen (satu baris per komponen). `transform` memproyeksikan data. Varians skor komponen 1 harus sama dengan nilai eigen pertama (dihitung dengan `ddof=1`).
 
 ### Bagian D — PCA pada Wine
 
 ```python
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:wine"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/06/wine.txt"
 ```
 
 **Penjelasan:** setelah `StandardScaler`, `PCA()` tanpa argumen menyimpan semua 13 komponen. `np.cumsum` menjumlahkan rasio secara kumulatif. `np.argmax(cumulative >= target) + 1` mencari indeks pertama yang mencapai ambang, lalu ditambah 1 karena indeks dimulai dari 0.
@@ -234,12 +246,20 @@ Skrip lengkapnya ada di `examples/level-6/06_dimensionality_reduction_and_pca.py
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:scaling"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/06/scaling.txt"
+```
+
 **Penjelasan:** dua PCA dengan data yang sama, satu mentah (`X_wine_df.to_numpy(float)`) dan satu terskala. Yang dibandingkan hanya rasio varians dua komponen pertama.
 
 ### Bagian F — Loadings
 
 ```python
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:loadings"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/06/loadings.txt"
 ```
 
 **Penjelasan:** `pca_scaled.components_.T` mengubah komponen menjadi tabel fitur × komponen (*loadings*). Untuk tiap komponen, kita urutkan menurut nilai **mutlak** (`.abs()`) lalu tampilkan lima teratas. Tanda tidak bermakna mutlak, tetapi tanda **relatif** antar fitur dalam satu komponen menunjukkan fitur yang bergerak searah atau berlawanan.
@@ -250,12 +270,20 @@ Skrip lengkapnya ada di `examples/level-6/06_dimensionality_reduction_and_pca.py
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:viz"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/06/viz.txt"
+```
+
 **Penjelasan:** `labels_13d` berasal dari K-Means pada 13 dimensi. `X_2d` hanya dipakai untuk menggambar. Kita juga mencetak Silhouette di dua ruang yang berbeda untuk **label yang sama**, agar terlihat mengapa angkanya tidak boleh dibandingkan.
 
 ### Bagian H — Cara B: cluster di ruang PCA
 
 ```python
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:inpca"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/06/inpca.txt"
 ```
 
 **Penjelasan:** untuk tiap jumlah komponen, `fit_transform` membuat data ringkas, K-Means dijalankan, lalu kita mencatat: varians yang dipertahankan, ARI terhadap label acuan (menilai), dan ARI terhadap hasil 13D (seberapa berubah).
@@ -266,12 +294,20 @@ Skrip lengkapnya ada di `examples/level-6/06_dimensionality_reduction_and_pca.py
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:digits"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/06/digits.txt"
+```
+
 **Penjelasan:** `digits.data / 16.0` mengubah piksel (0 sampai 16) menjadi 0 sampai 1. Kita bandingkan clustering di 64D dengan clustering di ruang PCA berbagai ukuran. ARI terhadap hasil 64D mengukur seberapa **sama** hasilnya.
 
 ### Bagian J — Batas visualisasi 2D
 
 ```python
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:projection"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/06/projection.txt"
 ```
 
 **Penjelasan:** Silhouette dihitung untuk label digit asli dan untuk hasil K-Means, masing-masing di 64D dan di 2D. Tujuannya melihat apakah proyeksi 2D tampak lebih atau kurang terpisah dibanding aslinya.
@@ -282,13 +318,19 @@ Skrip lengkapnya ada di `examples/level-6/06_dimensionality_reduction_and_pca.py
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:plotscree"
 ```
 
+![Scree plot Wine: batang varians per komponen turun dari sekitar 36 persen pada komponen 1 dan kurva kumulatif memotong garis 90 persen di antara komponen 7 dan 8](../assets/level-6/06-scree-wine.png)
+
 ```python
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:plotwine"
 ```
 
+![Dua panel proyeksi 2D Wine pada PC1 dan PC2. Kiri diwarnai kelompok K-Means, kanan diwarnai kelas acuan. Warnanya mengikuti pola yang hampir sama, dengan satu kelompok terpisah di kiri dan dua kelompok yang saling menempel di kanan](../assets/level-6/06-proyeksi-wine.png)
+
 ```python
 --8<-- "level-6/06_dimensionality_reduction_and_pca.py:plotdigits"
 ```
+
+![Kiri: Digits di 2D PCA dengan sepuluh warna yang saling tumpang tindih di bagian tengah. Kanan: ARI terhadap label digit naik dari sekitar 0,39 pada 2 komponen sampai sekitar 0,67 pada 15 komponen, lalu mendatar sejajar garis hasil 64 dimensi](../assets/level-6/06-digits-pca.png)
 
 **Penjelasan:** gambar pertama adalah scree plot Wine dengan garis ambang 90%. Gambar kedua menampilkan proyeksi 2D Wine dengan warna dari hasil K-Means (kiri) dan dari kelas acuan (kanan), sumbu dibuat sama (`sharex`, `sharey`) agar bisa dibandingkan. Gambar ketiga memiliki dua panel: Digits di 2D PCA, dan ARI terhadap label digit untuk berbagai jumlah komponen dengan garis putus-putus sebagai hasil 64D.
 
@@ -321,13 +363,11 @@ Skrip mencetak output ke terminal dan menyimpan tiga gambar ke `docs/assets/leve
 jupyter notebook notebooks/level-6/06-dimensionality-reduction-and-pca.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/06.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

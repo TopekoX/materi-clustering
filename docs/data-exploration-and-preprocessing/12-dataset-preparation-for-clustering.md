@@ -114,6 +114,10 @@ Kita kerjakan dalam lima langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/12_dataset_preparation.py:run"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/12/run.txt"
+```
+
 **Penjelasan:**
 
 - `df_bersih, X, scaler = siapkan_dataset(DATA_PATH)` memanggil fungsi, lalu menerima tiga hasilnya ke tiga variabel.
@@ -124,6 +128,10 @@ Kita kerjakan dalam lima langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/12_dataset_preparation.py:sanity"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/12/sanity.txt"
 ```
 
 **Penjelasan:**
@@ -140,6 +148,10 @@ Kita kerjakan dalam lima langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/12_dataset_preparation.py:back"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/12/back.txt"
+```
+
 **Penjelasan:**
 
 - `scaler.inverse_transform(X)` membalik penskalaan: angka z-score diubah kembali ke usia, pendapatan, dan skor aslinya.
@@ -150,6 +162,10 @@ Kita kerjakan dalam lima langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/12_dataset_preparation.py:smoke"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/12/smoke.txt"
 ```
 
 **Penjelasan:**
@@ -190,11 +206,8 @@ jupyter notebook notebooks/level-2/12-dataset-preparation-for-clustering.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, scikit-learn 1.9.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, scikit-learn 1.9.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/12.txt"
-```
 
 **Cara membaca output:**
 

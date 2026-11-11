@@ -1,0 +1,6 @@
+Centroid kelompok 0: [1.333 1.333]
+Centroid kelompok 1: [6.333 5.333]
+Rata-rata jarak dalam kelompok : {0: 1.138, 1: 1.138}
+Cohesion (jarak ke centroid)   : {0: 0.654, 1: 0.654}
+Jarak antar centroid           : {(0, 1): 6.403}
+Jarak antar titik terdekat     : {(0, 1): 5.657}

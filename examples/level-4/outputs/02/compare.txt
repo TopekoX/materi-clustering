@@ -1,0 +1,3 @@
+Iterasi versi buatan sendiri: 3
+WCSS versi buatan sendiri   : 458.754
+Selisih terbesar antar centroid: 0.0

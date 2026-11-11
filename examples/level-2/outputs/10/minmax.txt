@@ -1,0 +1,12 @@
+Min-Max scaling (5 baris pertama):
+     Age  Annual Income (k$)  Spending Score (1-100)
+0  0.019               0.000                   0.388
+1  0.058               0.000                   0.816
+2  0.038               0.008                   0.051
+3  0.096               0.008                   0.776
+4  0.250               0.016                   0.398
+
+Min dan max setiap kolom:
+     Age  Annual Income (k$)  Spending Score (1-100)
+min  0.0                 0.0                     0.0
+max  1.0                 1.0                     1.0

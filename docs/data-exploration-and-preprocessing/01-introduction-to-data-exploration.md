@@ -94,6 +94,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/01_explore_mall_customers.py:glance"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/01/glance.txt"
+```
+
 **Penjelasan:**
 
 - `df.head()` menampilkan **5 baris pertama**. Ini seperti mengintip isi tabel tanpa membuka semuanya.
@@ -105,6 +109,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/01_explore_mall_customers.py:summary"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/01/summary.txt"
 ```
 
 **Penjelasan:**
@@ -119,6 +127,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/01_explore_mall_customers.py:quality"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/01/quality.txt"
+```
+
 **Penjelasan:**
 
 - `df.isna()` menandai sel yang **kosong** (`True`), lalu `.sum()` menjumlahkannya per kolom. Hasil `0` berarti tidak ada sel kosong.
@@ -130,6 +142,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```python
 --8<-- "level-2/01_explore_mall_customers.py:hist"
 ```
+
+![Histogram usia, pendapatan, dan skor belanja](../assets/level-2/01-distribusi-fitur.png)
 
 **Penjelasan:**
 
@@ -144,6 +158,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```python
 --8<-- "level-2/01_explore_mall_customers.py:scatter"
 ```
+
+![Scatter plot pendapatan vs skor belanja](../assets/level-2/01-scatter-income-spending.png)
 
 **Penjelasan:**
 
@@ -184,11 +200,8 @@ jupyter notebook notebooks/level-2/01-introduction-to-data-exploration.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, matplotlib 3.11.2, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, matplotlib 3.11.2, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/01.txt"
-```
 
 Gambar yang dihasilkan:
 

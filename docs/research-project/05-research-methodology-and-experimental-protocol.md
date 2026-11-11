@@ -222,12 +222,20 @@ Skrip lengkapnya ada di `examples/level-7/05_research_methodology_and_protocol.p
 --8<-- "level-7/05_research_methodology_and_protocol.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/05/setup.txt"
+```
+
 **Penjelasan:** kita mengimpor empat algoritma (`KMeans`, `AgglomerativeClustering`, `GaussianMixture`, `DBSCAN`), `NearestNeighbors` untuk menghitung jarak ke tetangga, serta `StandardScaler`. Lalu kita membaca dua berkas hasil sebelumnya: rumusan masalah Bab 2 (`problem`) dan kartu dokumentasi Bab 4 (`card`). Protokol mengambil pertanyaan dan sidik jari data dari sana, jadi kita **tidak mengetik ulang** dan tidak bisa salah salin.
 
 ### Bagian B — Menulis protokol
 
 ```python
 --8<-- "level-7/05_research_methodology_and_protocol.py:protocol"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/05/protocol.txt"
 ```
 
 **Penjelasan:**
@@ -246,6 +254,10 @@ Skrip lengkapnya ada di `examples/level-7/05_research_methodology_and_protocol.p
 --8<-- "level-7/05_research_methodology_and_protocol.py:validate"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/05/validate.txt"
+```
+
 **Penjelasan:**
 
 - `validate(p)` mengembalikan **daftar masalah**. Daftar kosong berarti protokol lolos pemeriksaan **bentuk**.
@@ -262,12 +274,20 @@ Skrip lengkapnya ada di `examples/level-7/05_research_methodology_and_protocol.p
 --8<-- "level-7/05_research_methodology_and_protocol.py:grid"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/05/grid.txt"
+```
+
 **Penjelasan:** jumlah eksekusi dihitung **dari protokol**, bukan diketik tangan. `len(a["RQ2"]["level"]) * a["RQ2"]["ulangan"]["seed"]` mengalikan jumlah level skala dengan jumlah seed. `sum(not v["disetel"] for v in ...)` menghitung algoritma yang tidak disetel dengan menjumlahkan nilai `True` dari kondisi `not disetel`. `grid.loc["TOTAL"] = ...` menambahkan baris total di akhir. Mengetahui total di awal membantu memperkirakan waktu dan memastikan tidak ada eksekusi tambahan yang diam-diam dijalankan.
 
 ### Bagian E — Smoke test tanpa metrik berbasis label
 
 ```python
 --8<-- "level-7/05_research_methodology_and_protocol.py:smoke"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/05/smoke.txt"
 ```
 
 **Penjelasan:**
@@ -284,6 +304,10 @@ Skrip lengkapnya ada di `examples/level-7/05_research_methodology_and_protocol.p
 --8<-- "level-7/05_research_methodology_and_protocol.py:lock"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/05/lock.txt"
+```
+
 **Penjelasan:**
 
 - `json.dumps(p, sort_keys=True, ensure_ascii=False)` mengubah protokol menjadi teks dengan kunci terurut, sehingga urutan penulisan tidak memengaruhi hash. `hashlib.sha256(text.encode("utf-8")).hexdigest()` menghitung sidik jari teks itu.
@@ -294,6 +318,10 @@ Skrip lengkapnya ada di `examples/level-7/05_research_methodology_and_protocol.p
 
 ```python
 --8<-- "level-7/05_research_methodology_and_protocol.py:amend"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/05/amend.txt"
 ```
 
 **Penjelasan:** `amend(...)` **tidak mengubah** protokol asli. Ia membuat salinan, menambahkan satu catatan (tanggal, perubahan, alasan), dan mengembalikannya. Dengan begitu protokol terkunci tetap utuh, dan versi baru punya hash berbeda. Contoh yang dipakai jelas berlabel contoh latihan. Keluarannya menunjukkan protokol asli tetap berisi 0 amendment, salinan berisi 1, dan hash keduanya berbeda.
@@ -330,13 +358,11 @@ jupyter notebook notebooks/level-7/05-research-methodology-and-protocol.ipynb
 
 Notebook memuat Bagian A sampai G, ditambah tiga bagian **Praktik**: menulis protokol untuk pertanyaanmu sendiri dan memvalidasinya, membuat amendment, dan menghitung ulang jumlah eksekusi bila desain berubah.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0. **Kolom waktu (`detik`) bervariasi antar eksekusi**, sedangkan angka lainnya tetap.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0. **Kolom waktu (`detik`) bervariasi antar eksekusi**, sedangkan angka lainnya tetap.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/05.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 ### Interpretasi output
 

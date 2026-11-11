@@ -1,0 +1,1 @@
+Benchmark skala selesai: 20 pengukuran (waktu dan memori disimpan di CSV, tidak dicetak karena berubah tiap eksekusi)

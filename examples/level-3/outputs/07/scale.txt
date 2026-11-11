@@ -1,0 +1,2 @@
+Rata-rata setelah skala: [0. 0.]
+Simpangan baku setelah skala: [1. 1.]

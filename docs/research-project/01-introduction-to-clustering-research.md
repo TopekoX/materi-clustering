@@ -226,6 +226,10 @@ Isi modul bantu `_research.py`:
 --8<-- "level-7/01_introduction_to_clustering_research.py:data"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/01/data.txt"
+```
+
 **Penjelasan:**
 
 - `X_all.shape` mengembalikan (jumlah baris, jumlah kolom). Indeks `[0]` adalah baris, `[1]` adalah kolom.
@@ -237,6 +241,10 @@ Isi modul bantu `_research.py`:
 
 ```python
 --8<-- "level-7/01_introduction_to_clustering_research.py:questions"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/01/questions.txt"
 ```
 
 **Penjelasan:** `questions` adalah dictionary: kunci berupa nama pertanyaan, nilai berupa daftar kolom yang relevan.
@@ -256,6 +264,10 @@ Isi modul bantu `_research.py`:
 --8<-- "level-7/01_introduction_to_clustering_research.py:cluster"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/01/cluster.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - Semua yang **bukan** variabel bebas ditahan sama: `StandardScaler`, K-Means, `n_clusters=2`, `n_init=10`, dan `random_state=SEED` (42). Yang berubah hanya fitur. Ini prinsip variabel terkontrol dari Level 6 Bab 1.
@@ -272,6 +284,10 @@ Isi modul bantu `_research.py`:
 --8<-- "level-7/01_introduction_to_clustering_research.py:evaluate"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/01/evaluate.txt"
+```
+
 **Penjelasan:** untuk tiap pertanyaan kita menghitung tiga angka.
 
 - `silhouette_score(spaces[name], labels[name])`: kualitas kelompok **menurut data itu sendiri**, di ruang fitur pertanyaan tersebut.
@@ -285,6 +301,10 @@ Isi modul bantu `_research.py`:
 --8<-- "level-7/01_introduction_to_clustering_research.py:compare"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/01/compare.txt"
+```
+
 **Penjelasan:** daftar komprehensi bersarang membuat matriks: baris dan kolomnya adalah pertanyaan, isinya ARI antara dua pengelompokan. Kita memakai ARI dan **bukan** membandingkan nomor kelompok langsung, karena nomor kelompok bersifat sembarang (Level 6 Bab 9). Diagonal selalu 1,000 karena sebuah pengelompokan identik dengan dirinya.
 
 ### Bagian G — Menggambar
@@ -292,6 +312,8 @@ Isi modul bantu `_research.py`:
 ```python
 --8<-- "level-7/01_introduction_to_clustering_research.py:plot"
 ```
+
+![Dua baris tiga panel. Baris atas diwarnai menurut kelompok K-Means untuk tiga pertanyaan riset, baris bawah memakai tata letak yang sama diwarnai menurut diagnosis. Pada Q1 pembagian memisahkan sel berukuran besar dari yang kecil, pada Q2 kelompok terpisah menurut kehalusan sedangkan titik kedua diagnosis bercampur, pada Q3 pembagian tampak mengikuti sumbu komponen utama 1](../assets/level-7/01-tiga-pertanyaan-tiga-pengelompokan.png)
 
 **Penjelasan:**
 
@@ -303,6 +325,10 @@ Isi modul bantu `_research.py`:
 
 ```python
 --8<-- "level-7/01_introduction_to_clustering_research.py:record"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/01/record.txt"
 ```
 
 **Penjelasan:** kita menulis ringkasan keputusan dalam satu dictionary: dataset dan lisensinya, sidik jari data, algoritma, praproses, seed, daftar pertanyaan, dan pernyataan bahwa diagnosis hanya untuk validasi. Kebiasaan ini diperluas menjadi protokol penuh di Bab 5 dan paket reproduksi di Bab 9.
@@ -333,13 +359,11 @@ python examples/level-7/01_introduction_to_clustering_research.py
 
 Skrip mencetak output ke terminal dan menyimpan satu gambar ke `docs/assets/level-7/`. Dataset dimuat dari scikit-learn, jadi tidak perlu mengunduh apa pun.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/01.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

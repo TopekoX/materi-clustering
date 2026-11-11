@@ -1,0 +1,5 @@
+Kecocokan langsung (pred == true), nomor sama    : 1.0
+Kecocokan langsung (pred == true), nomor ditukar : 0.0
+ARI nomor sama    : 1.0
+ARI nomor ditukar : 1.0
+NMI nomor ditukar : 1.0

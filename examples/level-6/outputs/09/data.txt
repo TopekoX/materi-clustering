@@ -1,0 +1,1 @@
+Data: (200, 2) | fitur: ['Annual Income (k$)', 'Spending Score (1-100)']

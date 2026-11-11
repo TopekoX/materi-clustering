@@ -1,0 +1,6 @@
+   Gender  Age  Annual Income (k$)  Spending Score (1-100)  Spend_Income_Ratio
+0    Male   19                  15                      39            2.600000
+1    Male   21                  15                      81            5.400000
+2  Female   20                  16                       6            0.375000
+3  Female   23                  16                      77            4.812500
+4  Female   31                  17                      40            2.352941

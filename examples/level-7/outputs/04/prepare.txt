@@ -1,0 +1,5 @@
+Fitur final   : (569, 30)
+Label final   : {'benign': 357, 'malignant': 212}
+Sidik jari awal : 6b202a2072f9
+Sidik jari final: 6b202a2072f9
+Data berubah    : False

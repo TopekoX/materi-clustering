@@ -1,0 +1,18 @@
+Bagian laporan: 17
+ 1. Judul penelitian                         [DOKUMENTASI] 19 kata
+ 2. Latar belakang dan masalah penelitian    [RENCANA DAN PROTOKOL] 35 kata
+ 3. Tujuan dan pertanyaan penelitian         [RENCANA DAN PROTOKOL] 78 kata
+ 4. Matriks tinjauan pustaka                 [TINJAUAN PUSTAKA TERBATAS] 80 kata
+ 5. Celah riset dan kontribusi               [TINJAUAN PUSTAKA TERBATAS] 63 kata
+ 6. Pemilihan dan deskripsi dataset          [DOKUMENTASI] 51 kata
+ 7. Metodologi penelitian                    [RENCANA DAN PROTOKOL] 61 kata
+ 8. Praproses data                           [RENCANA DAN PROTOKOL] 37 kata
+ 9. Implementasi clustering                  [RENCANA DAN PROTOKOL] 53 kata
+10. Desain eksperimen                        [RENCANA DAN PROTOKOL] 51 kata
+11. Evaluasi                                 [RENCANA DAN PROTOKOL] 33 kata
+12. Visualisasi hasil                        [TEMUAN EKSPERIMEN] 28 kata
+13. Profil kelompok                          [TEMUAN EKSPERIMEN] 50 kata
+14. Hasil dan pembahasan                     [TEMUAN EKSPERIMEN] 611 kata
+15. Kesimpulan penelitian                    [TEMUAN EKSPERIMEN] 83 kata
+16. Keterbatasan dan pekerjaan lanjutan      [KETERBATASAN DAN RENCANA LANJUTAN] 175 kata
+17. Dokumentasi reproduksibilitas            [DOKUMENTASI] 43 kata

@@ -1,0 +1,7 @@
+Jumlah pelanggan per kelompok: [81, 39, 22, 35, 23]
+   Annual Income (k$)  Spending Score (1-100)
+0                55.3                    49.5
+1                86.5                    82.1
+2                25.7                    79.4
+3                88.2                    17.1
+4                26.3                    20.9

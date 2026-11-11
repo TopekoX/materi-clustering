@@ -90,6 +90,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/05_missing_values.py:real"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/05/real.txt"
+```
+
 **Penjelasan:**
 
 - `df.isna()` menandai sel kosong dengan `True`. Pertama `.sum()` menjumlahkan per kolom, kedua `.sum()` menjumlahkan semua kolom menjadi satu angka.
@@ -99,6 +103,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-2/05_missing_values.py:simulate"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/05/simulate.txt"
 ```
 
 **Penjelasan:**
@@ -115,6 +123,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/05_missing_values.py:detect"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/05/detect.txt"
+```
+
 **Penjelasan:**
 
 - `df_kosong.isna().sum()` menghitung sel kosong per kolom.
@@ -128,6 +140,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/05_missing_values.py:dropna"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/05/dropna.txt"
+```
+
 **Penjelasan:**
 
 - `dropna()` membuang semua baris yang punya minimal satu sel kosong, dan mengembalikan tabel baru.
@@ -137,6 +153,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-2/05_missing_values.py:fillna"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/05/fillna.txt"
 ```
 
 **Penjelasan:**
@@ -152,6 +172,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/05_missing_values.py:compare"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/05/compare.txt"
+```
+
 **Penjelasan:**
 
 - Kita membuat tabel kecil yang membandingkan **rata-rata** kolom pada tiga versi data: asli, hasil buang baris, dan hasil isi median.
@@ -161,6 +185,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-2/05_missing_values.py:imputer"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/05/imputer.txt"
 ```
 
 **Penjelasan:**
@@ -202,11 +230,8 @@ jupyter notebook notebooks/level-2/05-missing-values-analysis.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, scikit-learn 1.9.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, scikit-learn 1.9.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/05.txt"
-```
 
 **Cara membaca output:**
 

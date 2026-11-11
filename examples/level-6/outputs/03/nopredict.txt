@@ -1,0 +1,5 @@
+KMeans                   punya predict(): True
+GaussianMixture          punya predict(): True
+MeanShift                punya predict(): True
+DBSCAN                   punya predict(): False
+AgglomerativeClustering  punya predict(): False

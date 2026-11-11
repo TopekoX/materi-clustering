@@ -168,6 +168,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-3/02_understanding_clusters.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/02/setup.txt"
+```
+
 **Penjelasan:**
 
 - `import numpy as np` memanggil *NumPy*, pustaka untuk menghitung dengan larik (array) angka.
@@ -185,6 +189,8 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-3/02_understanding_clusters.py:plot_two"
 ```
 
+![Dua dataset sintetis: panel A tiga kelompok terpisah jelas, panel B tiga kelompok yang saling menumpuk](../assets/level-3/02-terpisah-vs-tumpang-tindih.png)
+
 **Penjelasan:**
 
 - `plt.subplots(1, 2, ..., sharex=True, sharey=True)` membuat dua panel berdampingan dengan skala sumbu yang sama. Skala yang sama penting agar kita bisa membandingkan sebaran secara adil.
@@ -197,6 +203,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-3/02_understanding_clusters.py:compact"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/02/compact.txt"
 ```
 
 **Penjelasan:**
@@ -216,6 +226,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-3/02_understanding_clusters.py:separate"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/02/separate.txt"
+```
+
 **Penjelasan:**
 
 - `center_distances` menghitung pusat tiap kelompok, lalu **jarak antar pusat** untuk setiap pasangan `(i, j)`.
@@ -228,6 +242,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-3/02_understanding_clusters.py:density"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/02/density.txt"
 ```
 
 **Penjelasan:**
@@ -245,6 +263,8 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-3/02_understanding_clusters.py:shape"
 ```
 
+![Kiri: dua kelompok berbentuk bulan sabit. Kanan: kelompok besar berisi 150 titik dan kelompok kecil berisi 15 titik dengan kepadatan berbeda](../assets/level-3/02-bentuk-dan-ukuran.png)
+
 **Penjelasan:**
 
 - `make_moons(n_samples=200, noise=0.07, random_state=42)` membuat 200 titik dua bulan sabit. `noise` menambah sedikit getaran acak.
@@ -258,6 +278,12 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-3/02_understanding_clusters.py:member"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/02/member.txt"
+```
+
+![Dataset tumpang tindih dengan bintang hitam di perbatasan kelompok 0 dan 1 serta tanda X di tiap pusat](../assets/level-3/02-keanggotaan-batas.png)
+
 **Penjelasan:**
 
 - `centers_B` adalah pusat tiga kelompok dataset B, dihitung dengan rata-rata.
@@ -269,6 +295,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-3/02_understanding_clusters.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/02/mall.txt"
 ```
 
 **Penjelasan:**
@@ -307,11 +337,8 @@ jupyter notebook notebooks/level-3/02-understanding-clusters.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1):
+Semua output berasal dari eksekusi nyata skrip (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-3/outputs/02.txt"
-```
 
 Gambar keanggotaan di batas:
 

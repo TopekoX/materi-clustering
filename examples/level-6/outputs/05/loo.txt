@@ -1,0 +1,14 @@
+               fitur dilepas  ARI vs baseline  ARI acuan
+             color_intensity            0.840      0.778
+                     alcohol            0.850      0.814
+                     proline            0.864      0.799
+                   magnesium            0.913      0.880
+                         ash            0.913      0.847
+               total_phenols            0.931      0.865
+                         hue            0.936      0.837
+                  flavanoids            0.947      0.880
+                  malic_acid            0.951      0.852
+           alcalinity_of_ash            0.964      0.864
+od280/od315_of_diluted_wines            0.967      0.898
+             proanthocyanins            0.967      0.929
+        nonflavanoid_phenols            0.984      0.913

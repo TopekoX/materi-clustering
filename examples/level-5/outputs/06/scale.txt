@@ -1,0 +1,2 @@
+DBI data asli      : 0.2887
+DBI data x 10      : 0.2887

@@ -1,0 +1,5 @@
+Data acak seragam, K=5: Silhouette 0.414 (Mall Customers: 0.555)
+  sampel 90%: ARI rata-rata 0.971 | min 0.785  (Mall: 0.993 | 0.983)
+  sampel 80%: ARI rata-rata 0.958 | min 0.574  (Mall: 0.987 | 0.927)
+  sampel 60%: ARI rata-rata 0.837 | min 0.501  (Mall: 0.977 | 0.906)
+  sampel 40%: ARI rata-rata 0.735 | min 0.357  (Mall: 0.966 | 0.823)

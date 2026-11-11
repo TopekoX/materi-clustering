@@ -169,6 +169,10 @@ Skrip lengkapnya ada di `examples/level-6/04_algorithm_comparison_and_benchmarki
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:datasets"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/04/datasets.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `raw` adalah dictionary: nama dataset menjadi kunci, dan pasangan `(X, y)` menjadi nilai.
@@ -182,6 +186,10 @@ Skrip lengkapnya ada di `examples/level-6/04_algorithm_comparison_and_benchmarki
 
 ```python
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:protocol"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/04/protocol.txt"
 ```
 
 **Penjelasan:** `protocol` adalah tabel yang mendokumentasikan konfigurasi dan **cara menentukan** parameter tiap algoritma. Menuliskan protokol sebelum menjalankan adalah bagian dari prosedur adil.
@@ -205,6 +213,10 @@ Skrip lengkapnya ada di `examples/level-6/04_algorithm_comparison_and_benchmarki
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:runall"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/04/runall.txt"
+```
+
 **Penjelasan:**
 
 - Perulangan luar melewati tiap dataset, perulangan dalam melewati tiap algoritma. `chosen` menyimpan parameter tiap algoritma untuk dataset itu.
@@ -219,12 +231,20 @@ Skrip lengkapnya ada di `examples/level-6/04_algorithm_comparison_and_benchmarki
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:tables"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/04/tables.txt"
+```
+
 **Penjelasan:** fungsi `pivot(column)` mengubah tabel panjang menjadi tabel silang (baris dataset, kolom algoritma) dengan `.pivot(...)`. `.loc[order, algorithms]` mengatur urutan baris dan kolom. Kita mencetak jumlah kelompok, noise, Silhouette, ARI, dan NMI.
 
 ### Bagian G — Peringkat menurut metrik berbeda
 
 ```python
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:rankings"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/04/rankings.txt"
 ```
 
 **Penjelasan:** fungsi `winners` menulis **semua** algoritma yang seri untuk nilai terbaik (setelah dibulatkan), bukan hanya satu. Tanpa ini, tabel akan berpura-pura ada satu pemenang padahal beberapa algoritma bernilai sama. `highest=False` dipakai untuk Davies-Bouldin (rendah lebih baik).
@@ -235,12 +255,20 @@ Skrip lengkapnya ada di `examples/level-6/04_algorithm_comparison_and_benchmarki
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:scaling"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/04/scaling.txt"
+```
+
 **Penjelasan:** untuk tiap ukuran \( n \), `tracemalloc.start()` mulai melacak memori, `ex.timed(...)` menjalankan algoritma, `tracemalloc.get_traced_memory()[1]` mengambil puncak memori (dalam byte, dibagi `1e6` menjadi MB), lalu `tracemalloc.stop()`. Parameter dibuat tetap supaya yang berubah hanya ukuran data.
 
 ### Bagian I — Menyimpan hasil
 
 ```python
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:save"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/04/save.txt"
 ```
 
 **Penjelasan:** tiga file: tabel benchmark (30 catatan), tabel skala (20 pengukuran), dan JSON protokol dan lingkungan.
@@ -251,13 +279,19 @@ Skrip lengkapnya ada di `examples/level-6/04_algorithm_comparison_and_benchmarki
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:plotgrid"
 ```
 
+![Kisi 6 baris dataset kali 5 kolom algoritma, tiap panel menampilkan kelompok berwarna dan noise abu-abu bertanda x, dengan ARI di judul. DBSCAN unggul pada bulan sabit dan data dengan noise, sedangkan Mean Shift menggabungkan dua gerombol pada data miring](../assets/level-6/04-hasil-semua-kombinasi.png)
+
 ```python
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:plotheat"
 ```
 
+![Tiga peta panas: ARI, Silhouette, dan jumlah kelompok untuk tiap kombinasi dataset dan algoritma](../assets/level-6/04-peta-panas-metrik.png)
+
 ```python
 --8<-- "level-6/04_algorithm_comparison_and_benchmarking.py:plotscale"
 ```
+
+![Dua grafik berskala log: waktu jalan dan puncak memori terhadap jumlah titik untuk lima algoritma. Memori Hierarchical naik paling cepat, waktu Mean Shift paling besar](../assets/level-6/04-waktu-dan-memori.png)
 
 **Penjelasan:** gambar pertama adalah kisi 6 × 5 hasil semua kombinasi, dengan ARI di judul dan noise abu-abu bertanda `x`. Gambar kedua adalah tiga peta panas (ARI, Silhouette, jumlah kelompok). Gambar ketiga menampilkan waktu dan memori terhadap \( n \) dengan **kedua sumbu berskala log**, supaya pola pertumbuhan terlihat sebagai garis dengan kemiringan berbeda.
 
@@ -290,13 +324,11 @@ Skrip membutuhkan beberapa menit (Mean Shift pada data besar paling lambat). Ia 
 jupyter notebook notebooks/level-6/04-algorithm-comparison-and-benchmarking.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/04.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

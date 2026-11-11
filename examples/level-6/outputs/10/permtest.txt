@@ -1,0 +1,1 @@
+Umur: selisih rata-rata antar kelompok 19.945 tahun | batas acak 95% 9.890 | p ≤ 0,0005 (tidak satu pun dari 2000 permutasi mencapai selisih teramati)

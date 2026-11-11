@@ -212,12 +212,20 @@ Skrip lengkapnya ada di `examples/level-7/04_dataset_selection_and_preparation.p
 --8<-- "level-7/04_dataset_selection_and_preparation.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/04/setup.txt"
+```
+
 **Penjelasan:** `rs.load_wdbc()` memuat fitur dan diagnosis (Bab 1). `RESULTS` adalah folder hasil. Baris cetak memastikan 569 baris fitur dan 569 label termuat.
 
 ### Bagian B — Kartu dokumentasi dataset
 
 ```python
 --8<-- "level-7/04_dataset_selection_and_preparation.py:datacard"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/04/datacard.txt"
 ```
 
 **Penjelasan:**
@@ -231,6 +239,10 @@ Skrip lengkapnya ada di `examples/level-7/04_dataset_selection_and_preparation.p
 
 ```python
 --8<-- "level-7/04_dataset_selection_and_preparation.py:verify"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/04/verify.txt"
 ```
 
 **Penjelasan:**
@@ -250,6 +262,10 @@ Skrip lengkapnya ada di `examples/level-7/04_dataset_selection_and_preparation.p
 --8<-- "level-7/04_dataset_selection_and_preparation.py:quality"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/04/quality.txt"
+```
+
 **Penjelasan:**
 
 - `X_all.corr().abs()` menghitung korelasi antar semua pasangan fitur dalam nilai mutlak. `np.triu(..., k=1)` membuat penanda segitiga atas di atas diagonal, agar tiap pasangan hanya dihitung sekali dan korelasi fitur dengan dirinya sendiri dibuang. `.where(...)` mengganti nilai di luar segitiga itu dengan kosong. `.stack()` mengubah tabel menjadi daftar pasangan, dan `.sort_values(ascending=False)` mengurutkannya dari yang terbesar.
@@ -261,6 +277,10 @@ Skrip lengkapnya ada di `examples/level-7/04_dataset_selection_and_preparation.p
 
 ```python
 --8<-- "level-7/04_dataset_selection_and_preparation.py:criteria"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/04/criteria.txt"
 ```
 
 **Penjelasan:**
@@ -276,6 +296,10 @@ Skrip lengkapnya ada di `examples/level-7/04_dataset_selection_and_preparation.p
 --8<-- "level-7/04_dataset_selection_and_preparation.py:ethics"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/04/ethics.txt"
+```
+
 **Penjelasan:** tabel berisi tiga kolom: pemeriksaan, status, dan dasar. Status kolom identitas **dihitung dengan kode** dari nama kolom (`any(c.lower() in (...) for c in X_all.columns)`). Status lain berasal dari halaman UCI dan dari keputusan kita, dan kolom `dasar` mencatat sumbernya. `(ethics["status"] == "Tidak diketahui").sum()` menghitung butir yang tidak diketahui, supaya ketidaktahuan terlihat sebagai angka dan tidak tersembunyi.
 
 !!! warning "Pemeriksaan identitas hanya berdasarkan nama kolom"
@@ -287,12 +311,20 @@ Skrip lengkapnya ada di `examples/level-7/04_dataset_selection_and_preparation.p
 --8<-- "level-7/04_dataset_selection_and_preparation.py:prepare"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/04/prepare.txt"
+```
+
 **Penjelasan:** `X_all.loc[keep]` memilih baris yang lolos semua aturan, dan `.reset_index(drop=True)` memberi nomor baris baru berurutan. Fitur dan diagnosis dipilih dengan cara yang sama agar tetap sejajar. Lalu dua sidik jari dicetak dan dibandingkan: `!=` bernilai `True` bila data berubah.
 
 ### Bagian H — Menyimpan kartu, laporan, dan dataset
 
 ```python
 --8<-- "level-7/04_dataset_selection_and_preparation.py:save"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/04/save.txt"
 ```
 
 **Penjelasan:** kartu diperkaya dengan sidik jari final, jumlah sampel final, jumlah baris dikeluarkan, dan daftar kriteria, lalu disimpan sebagai JSON. Hasil pencocokan, alur inklusi, dan daftar periksa etika disimpan sebagai CSV. `final_features.assign(diagnosis=final_diagnosis)` menambahkan kolom label ke fitur sebagai salinan beku `04_research_dataset.csv`. `reset_index(names="item")` mengubah indeks (nama pemeriksaan) menjadi kolom biasa sebelum disimpan.
@@ -327,13 +359,11 @@ jupyter notebook notebooks/level-7/04-dataset-selection-and-preparation.ipynb
 
 Notebook memuat Bagian A sampai H, ditambah tiga bagian **Praktik**: menambah kriteria eksklusi sendiri, mengisi kartu untuk dataset lain, dan memeriksa keterwakilan.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/04.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 ### Interpretasi output
 

@@ -1,0 +1,6 @@
+Centroid keseluruhan : [3.0, 5.0]
+B (antar kelompok)   : 124.000
+W (dalam kelompok)   : 4.000
+B + W                : 128.000   (jumlah kuadrat total = 128.000)
+n = 9, k = 3  ->  (B / 2) / (W / 6)
+CH manual = 93.0000

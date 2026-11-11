@@ -1,0 +1,4 @@
+Varians yang ditangkap PC1 dan PC2: 55.4%
+Silhouette di 13 fitur   : 0.285
+Silhouette di bidang PCA : 0.558
+Silhouette di alcohol dan ash: 0.087

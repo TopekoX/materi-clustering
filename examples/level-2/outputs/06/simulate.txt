@@ -1,0 +1,2 @@
+Ukuran data asli     : (200, 5)
+Ukuran setelah ditambah: (208, 5)

@@ -1,0 +1,2 @@
+Versi buatan sendiri: jumlah kelompok = 3 | ukuran = [100, 100, 100]
+Selisih terbesar antar pusat: 0.0366

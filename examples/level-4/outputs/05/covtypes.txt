@@ -1,0 +1,4 @@
+full       covariances_ bentuk = (3, 2, 2)  parameter kovarians = 9  ukuran komponen = [122, 264, 214]
+tied       covariances_ bentuk = (2, 2)     parameter kovarians = 3  ukuran komponen = [147, 237, 216]
+diag       covariances_ bentuk = (3, 2)     parameter kovarians = 6  ukuran komponen = [237, 211, 152]
+spherical  covariances_ bentuk = (3,)       parameter kovarians = 3  ukuran komponen = [240, 208, 152]

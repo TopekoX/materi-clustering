@@ -1,0 +1,1 @@
+Tanpa penyamaan skala, eps=0.3 -> 0 kelompok, 200 noise dari 200 titik

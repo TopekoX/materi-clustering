@@ -1,0 +1,17 @@
+Konvergen?          : True
+Iterasi (n_iter_)   : 7
+weights_            : [0.201, 0.442, 0.357]
+means_ (bentuk)     : (3, 2)
+covariances_ (bentuk): (3, 2, 2)
+Rata-rata log-likelihood per titik: -3.63
+
+Bobot sebenarnya   : [0.45, 0.2, 0.35]
+Bobot hasil GMM    : [0.442, 0.201, 0.357]
+Rata-rata sebenarnya:
+ [[0.  0. ]
+ [1.5 4.5]
+ [4.5 0.5]]
+Rata-rata hasil GMM :
+ [[-0.04 -0.04]
+ [ 1.45  4.44]
+ [ 4.52  0.52]]

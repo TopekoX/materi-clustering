@@ -1,0 +1,10 @@
+ID kelompok identik (cara naif)   : 19.5% titik
+ARI (tidak bergantung pada ID)    : 1.0
+Tabel silang ID eksekusi A (baris) vs B (kolom):
+col_0   0   1   2   3   4
+row_0                    
+0       0   0  81   0   0
+1       0  39   0   0   0
+2      35   0   0   0   0
+3       0   0   0   0  23
+4       0   0   0  22   0

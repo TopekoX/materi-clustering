@@ -1,0 +1,14 @@
+Pelanggan yang tetangga terdekatnya berubah setelah standardisasi: 54 dari 200
+
+Standar deviasi tiap fitur (mentah): {'Age': 13.93, 'Annual Income (k$)': 26.2, 'Spending Score (1-100)': 25.76}
+Standar deviasi tiap fitur (standardisasi): {'Age': 1.0, 'Annual Income (k$)': 1.0, 'Spending Score (1-100)': 1.0}
+
+Contoh pelanggan yang tetangganya berubah: pelanggan 11
+Tetangga terdekat (mentah)       : pelanggan 13
+Tetangga terdekat (standardisasi): pelanggan 9
+ CustomerID  Age  Annual Income (k$)  Spending Score (1-100)
+         11   67                  19                      14
+         13   58                  20                      15
+          9   64                  19                       3
+Jarak mentah ke tetangga mentah / tetangga standardisasi : 9.11 / 11.4
+Jarak standardisasi ke tetangga mentah / tetangga standardisasi: 0.65 / 0.48

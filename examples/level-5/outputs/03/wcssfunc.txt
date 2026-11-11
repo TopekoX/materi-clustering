@@ -1,0 +1,1 @@
+wcss(X_tiny, labels_tiny) = 2.667

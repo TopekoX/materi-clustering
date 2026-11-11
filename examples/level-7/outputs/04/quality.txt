@@ -1,0 +1,18 @@
+baris_duplikat                          : 0
+kolom_konstan                           : 0
+nilai_negatif                           : 0
+pasangan_fitur_korelasi_di_atas_0.95    : 15
+fitur_miring_kuat_(|skew|>1)            : 22
+total_nilai_di_luar_pagar_IQR           : 608
+Lima pasangan fitur paling berkorelasi:
+mean radius     mean perimeter     0.998
+worst radius    worst perimeter    0.994
+mean radius     mean area          0.987
+mean perimeter  mean area          0.987
+worst radius    worst area         0.984
+Lima fitur dengan nilai luar pagar IQR terbanyak:
+area error          65
+radius error        38
+perimeter error     38
+worst area          35
+smoothness error    30

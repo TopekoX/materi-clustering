@@ -1,0 +1,7 @@
+Berhasil. Jumlah anggota per kelompok:
+0    20
+1    54
+2    40
+3    39
+4    47
+Name: count, dtype: int64

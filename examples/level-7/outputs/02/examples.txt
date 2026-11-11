@@ -1,0 +1,18 @@
+B1: Menggunakan K-Means untuk mengelompokkan data kanker.
+    -> perlu diperbaiki: bukan_pertanyaan, mulai_dari_algoritma, tidak_terukur
+B2: Apakah clustering bisa mendiagnosis kanker payudara?
+    -> perlu diperbaiki: klaim_klinis, tidak_terukur
+B3: Mengapa ukuran inti sel menyebabkan kelompok ganas?
+    -> perlu diperbaiki: klaim_sebab_akibat, tidak_terukur
+B4: Algoritma clustering mana yang selalu terbaik untuk semua data?
+    -> perlu diperbaiki: klaim_universal, tidak_terukur
+B5: Bagaimana data ini?
+    -> perlu diperbaiki: tidak_terukur
+G1: Seberapa stabil pengelompokan K-Means pada 30 fitur morfologi bila seed dan sampel data diubah?
+    -> lolos
+G2: Apakah pengelompokan pada 30 fitur morfologi berubah bila fitur tidak distandarkan, dan seberapa besar perubahannya (ARI)?
+    -> lolos
+G3: Seberapa selaras pengelompokan tak terawasi pada profil morfologi dengan diagnosis yang tercatat (ARI dan NMI)?
+    -> lolos
+T1: Apakah hasil clustering stabil dan selaras dengan diagnosis serta berbeda antar algoritma pada semua aspek?
+    -> lolos

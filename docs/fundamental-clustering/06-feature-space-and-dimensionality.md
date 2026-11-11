@@ -154,6 +154,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-3/06_feature_space_and_dimensionality.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/06/setup.txt"
+```
+
 **Penjelasan:**
 
 - Kita memuat data dan memilih tiga fitur numerik dalam `cols`.
@@ -164,6 +168,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:grow"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/06/grow.txt"
 ```
 
 **Penjelasan:**
@@ -178,6 +186,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-3/06_feature_space_and_dimensionality.py:plot_dims"
 ```
 
+![Tiga panel: 60 pelanggan sebagai titik pada satu garis (usia), pada bidang (pendapatan dan skor), dan di ruang tiga dimensi](../assets/level-3/06-ruang-1d-2d-3d.png)
+
 **Penjelasan:**
 
 - `sample = df.iloc[:60]` mengambil 60 pelanggan pertama agar grafik tidak terlalu ramai.
@@ -191,6 +201,12 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:curse"
 ```
+
+```text title="Output"
+--8<-- "level-3/outputs/06/curse.txt"
+```
+
+![Grafik log-log: kontras jarak turun dari puluhan ribu pada satu dimensi menjadi sekitar 0,16 pada seribu dimensi](../assets/level-3/06-efek-dimensi.png)
 
 **Penjelasan:**
 
@@ -207,6 +223,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-3/06_feature_space_and_dimensionality.py:noise"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/06/noise.txt"
+```
+
 **Penjelasan:**
 
 - `base` adalah data dua fitur (pendapatan dan skor belanja) yang sudah distandardisasi.
@@ -220,6 +240,12 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:scale"
 ```
+
+```text title="Output"
+--8<-- "level-3/outputs/06/scale.txt"
+```
+
+![Dua panel scatter usia vs pendapatan: kiri skala asli dengan sumbu sama panjang, kanan setelah standardisasi](../assets/level-3/06-skala-ruang-fitur.png)
 
 **Penjelasan:**
 
@@ -258,11 +284,8 @@ jupyter notebook notebooks/level-3/06-feature-space-and-dimensionality.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1):
+Semua output berasal dari eksekusi nyata skrip (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-3/outputs/06.txt"
-```
 
 ![Grafik log-log: kontras jarak turun dari puluhan ribu pada satu dimensi menjadi sekitar 0,16 pada seribu dimensi](../assets/level-3/06-efek-dimensi.png)
 

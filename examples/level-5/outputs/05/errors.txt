@@ -1,0 +1,2 @@
+satu kelompok: ValueError -> Number of labels is 1. Valid values are 2 to n_samples - 1 (inclusive)
+setiap titik kelompok sendiri: ValueError -> Number of labels is 7. Valid values are 2 to n_samples - 1 (inclusive)

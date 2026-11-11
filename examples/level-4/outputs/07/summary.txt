@@ -1,0 +1,7 @@
+dataset K-Means Hierarchical (Ward)          DBSCAN   GMM Mean Shift
+  blobs   3 kel               3 kel           3 kel 3 kel      3 kel
+  moons   2 kel               2 kel           2 kel 2 kel      3 kel
+circles   2 kel               2 kel           2 kel 2 kel      4 kel
+  noisy   3 kel               3 kel 3 kel, 21 noise 3 kel     16 kel
+density   3 kel               3 kel  3 kel, 5 noise 3 kel      3 kel
+overlap   3 kel               3 kel 3 kel, 80 noise 3 kel      3 kel

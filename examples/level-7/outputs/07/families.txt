@@ -1,0 +1,17 @@
+Rata-rata |selisih z-score| menurut ukuran inti sel:
+ukuran
+concave points       1.53
+perimeter            1.43
+concavity            1.42
+radius               1.40
+compactness          1.36
+area                 1.35
+fractal dimension    0.71
+symmetry             0.67
+smoothness           0.64
+texture              0.50
+Menurut jenis statistik:
+statistik
+worst    1.28
+mean     1.22
+error    0.80

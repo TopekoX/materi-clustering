@@ -1,0 +1,2 @@
+Inertia K-Means (label salah bentuk) : 121.63
+WCSS label benar (dua bulan utuh)    : 180.93

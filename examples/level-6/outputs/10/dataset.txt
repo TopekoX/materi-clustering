@@ -1,0 +1,2 @@
+{'n': 200, 'kolom': ['CustomerID', 'Gender', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)'], 'kosong': 0, 'perempuan': 112, 'laki': 88, 'pendapatan': (15, 137), 'skor': (1, 99), 'umur': (18, 70)}
+Sidik jari data (cocok dengan konfigurasi Bab 9): edb2a3858344

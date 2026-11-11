@@ -1,0 +1,7 @@
+max_iter = 1   -> n_iter_ = 1, WCSS = 3174.80
+max_iter = 2   -> n_iter_ = 2, WCSS = 459.03
+max_iter = 3   -> n_iter_ = 3, WCSS = 458.75
+max_iter = 300 -> n_iter_ = 4, WCSS = 458.75
+
+WCSS tiap iterasi (versi buatan sendiri): [1251.2, 459.0, 458.8]
+Tidak pernah naik? True

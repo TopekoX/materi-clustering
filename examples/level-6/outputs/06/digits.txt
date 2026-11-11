@@ -1,0 +1,9 @@
+Digits: (1797, 64) | jumlah kelas: 10
+Varians dipertahankan: 2 komponen = 28.5 %, 10 = 73.8 %, 30 = 95.9 %
+Komponen minimum untuk >= 90% varians: 21 dari 64
+          ruang  ARI acuan  NMI acuan  ARI vs cluster 64D
+64 dimensi asli      0.667      0.739               1.000
+ PCA 2 komponen      0.388      0.527               0.412
+PCA 10 komponen      0.654      0.729               0.940
+PCA 20 komponen      0.670      0.744               0.976
+PCA 30 komponen      0.668      0.745               0.977

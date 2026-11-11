@@ -1,0 +1,2 @@
+Nilai kosong tersisa: 0
+Median yang dipakai : [36.  61.5]

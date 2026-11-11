@@ -1,0 +1,8 @@
+Nilai pada Gender: ['Female', 'Male']
+Spasi berlebih pada Gender: 0
+
+Nama kolom: ['CustomerID', 'Gender', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)']
+
+Usia di luar 18-100         : 0
+Skor di luar 1-100          : 0
+Pendapatan negatif atau nol : 0

@@ -1,0 +1,4 @@
+                        Cohesion rata-rata  Jarak antar centroid  Rasio separation/cohesion  Silhouette
+Dataset                                                                                                
+Dekat (pusat 3 satuan)               1.161                 3.326                      2.866       0.525
+Jauh (pusat 10 satuan)               1.194                10.244                      8.580       0.834

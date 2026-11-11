@@ -1,0 +1,3 @@
+Kelompok jelas            ukuran kelompok: [100, 100, 100]
+Kelompok tumpang tindih   ukuran kelompok: [103, 98, 99]
+Tanpa kelompok alami      ukuran kelompok: [94, 105, 101]

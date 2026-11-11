@@ -1,0 +1,4 @@
+Simetris (D sama dengan transposnya)? True
+Diagonal semuanya nol?                True
+Tidak ada jarak negatif?              True
+Pasangan paling mirip: pelanggan 2 dan 4 dengan jarak 4.58

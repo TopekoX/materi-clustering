@@ -263,6 +263,10 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:kde"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/06/kde.txt"
+```
+
 **Penjelasan:**
 
 - `gaussian_kde_1d(grid, data, bandwidth)` menghitung KDE dengan kernel Gaussian di setiap titik `grid`.
@@ -276,12 +280,18 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:plotkde"
 ```
 
+![Tiga panel kurva KDE: bandwidth 0,15 menghasilkan 5 puncak bergerigi, bandwidth 0,6 menghasilkan 2 puncak halus, bandwidth 2,5 menghasilkan 1 puncak lebar](../assets/level-4/06-kde-bandwidth.png)
+
 **Penjelasan:** tiga panel, satu per bandwidth. `ax.plot(data_1d, ..., "|")` menggambar tiap titik data sebagai garis tegak kecil (*rug plot*) di bawah kurva.
 
 ### Bagian C — Pergeseran manual satu dimensi
 
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:tiny"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/06/tiny.txt"
 ```
 
 **Penjelasan:**
@@ -312,6 +322,10 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:blobs"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/06/blobs.txt"
+```
+
 **Penjelasan:**
 
 - `estimate_bandwidth(X, quantile=0.2, random_state=42)` adalah perkiraan scikit-learn.
@@ -321,11 +335,17 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:paths"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/06/paths.txt"
+```
+
 **Penjelasan:** kita memilih 12 seed acak (`rng.choice(..., replace=False)`), menjalankan `shift_seed` dengan bandwidth 2,0, dan mencetak jumlah langkah, titik awal, dan puncak tiap seed.
 
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:plotpaths"
 ```
+
+![Scatter plot tiga gerombol dengan jalur pergeseran 12 seed berupa garis biru dari titik hitam menuju bintang oranye di pusat tiap gerombol](../assets/level-4/06-jalur-pergeseran.png)
 
 **Penjelasan:** titik abu-abu adalah data. Untuk tiap seed, garis biru menunjukkan jalur pergeseran, titik hitam adalah titik awal, dan bintang oranye adalah puncak. `ax.plot(..., "-o")` menggambar garis dengan penanda bulat di setiap langkah.
 
@@ -333,6 +353,10 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:fit"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/06/fit.txt"
 ```
 
 **Penjelasan:**
@@ -345,11 +369,17 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:compare"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/06/compare.txt"
+```
+
 **Penjelasan:** kita mengurutkan pusat kedua versi dengan `np.lexsort` supaya nomor kelompok tidak mengganggu, lalu membandingkan ukuran kelompok dan selisih terbesar antar pusat.
 
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:plotcenters"
 ```
+
+![Scatter plot tiga kelompok Mean Shift dengan pusat X hitam dan lingkaran radius bandwidth 2,0 di sekitar tiap pusat](../assets/level-4/06-pusat-kelompok.png)
 
 **Penjelasan:** untuk tiap kelompok kita menggambar titiknya, pusatnya (`X` hitam), dan lingkaran radius bandwidth di sekitar pusat (`plt.Circle(...)`). Lingkaran ini adalah "lengan" yang dipakai tiap seed untuk mencari tetangga.
 
@@ -359,11 +389,17 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:sweep"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/06/sweep.txt"
+```
+
 **Penjelasan:** kita menjalankan `MeanShift` dengan 7 nilai bandwidth dan mencatat jumlah kelompok dan ukuran terbesar. `sorted(..., reverse=True)[:5]` mengurutkan dari terbesar dan mengambil lima pertama (supaya tabel tidak terlalu panjang pada bandwidth kecil yang menghasilkan puluhan kelompok).
 
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:plotsweep"
 ```
+
+![Empat panel Mean Shift dengan bandwidth 0,5 (65 kelompok), 1,0 (8 kelompok), 2,0 (3 kelompok), dan 8,0 (2 kelompok)](../assets/level-4/06-pengaruh-bandwidth.png)
 
 **Penjelasan:** empat panel dengan bandwidth 0,5; 1,0; 2,0; dan 8,0. `X` hitam adalah pusat.
 
@@ -371,6 +407,10 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:options"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/06/options.txt"
 ```
 
 **Penjelasan:**
@@ -385,6 +425,10 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:moons"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/06/moons.txt"
+```
+
 **Penjelasan:** Mean Shift dengan bandwidth hasil `estimate_bandwidth` pada data bulan sabit.
 
 ### Bagian J — Mall Customers
@@ -393,10 +437,18 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 --8<-- "level-4/06_mean_shift_clustering.py:mall"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/06/mall.txt"
+```
+
 **Penjelasan:** fitur diskalakan dengan `StandardScaler`. Kita mencoba empat nilai `quantile` pada `estimate_bandwidth` dan mencatat jumlah kelompok. Lalu kita memilih `quantile=0.15` dan membaca pusatnya dalam satuan asli dengan `scaler.inverse_transform`.
 
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:newpoint"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/06/newpoint.txt"
 ```
 
 **Penjelasan:** `scaler.transform` menyamakan skala tiga pelanggan baru, dan `ms_mall.predict` menempatkan masing-masing ke pusat terdekat.
@@ -404,6 +456,8 @@ Skrip lengkapnya ada di `examples/level-4/06_mean_shift_clustering.py`, dan vers
 ```python
 --8<-- "level-4/06_mean_shift_clustering.py:plotmall"
 ```
+
+![Scatter plot Mall Customers dengan lima kelompok Mean Shift dan pusat X hitam](../assets/level-4/06-mall-customers.png)
 
 **Penjelasan:** scatter plot dengan satu warna per kelompok dan `X` hitam untuk pusat (puncak), dalam satuan asli.
 
@@ -435,13 +489,11 @@ Skrip mencetak output ke terminal dan menyimpan lima gambar ke `docs/assets/leve
 jupyter notebook notebooks/level-4/06-mean-shift-clustering.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-4/outputs/06.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

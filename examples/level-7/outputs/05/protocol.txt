@@ -1,0 +1,2 @@
+Bagian protokol: ['versi', 'judul_kerja', 'dataset', 'pertanyaan', 'analisis', 'algoritma', 'praproses', 'kebijakan_hyperparameter', 'pembanding_adil', 'kondisi_terkontrol', 'aturan_keputusan', 'pengungkapan', 'amendments']
+Algoritma: ['KMeans', 'Agglomerative', 'GMM', 'DBSCAN']

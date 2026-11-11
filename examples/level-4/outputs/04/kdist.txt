@@ -1,0 +1,7 @@
+persentil   0: jarak ke-5 = 0.035
+persentil  50: jarak ke-5 = 0.090
+persentil  75: jarak ke-5 = 0.114
+persentil  90: jarak ke-5 = 0.146
+persentil  95: jarak ke-5 = 0.174
+persentil  98: jarak ke-5 = 0.274
+persentil 100: jarak ke-5 = 0.841

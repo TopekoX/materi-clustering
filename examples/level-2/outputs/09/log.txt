@@ -1,0 +1,5 @@
+Skewness sebelum log: 0.32
+Skewness sesudah log: -0.74
+
+Rentang sebelum: 15 sampai 137
+Rentang sesudah: 2.77 sampai 4.93

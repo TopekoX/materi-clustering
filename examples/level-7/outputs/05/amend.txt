@@ -1,0 +1,4 @@
+Amendment pada protokol asli: 0
+Amendment pada salinan contoh: 1
+Hash salinan contoh berbeda dari protokol terkunci: True
+Masalah pada salinan contoh: []

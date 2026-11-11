@@ -1,0 +1,18 @@
+Jumlah kelompok (baris = eps, kolom = min_samples):
+min_samples  3   5   10
+eps                    
+0.2           4   3   8
+0.3           2   2   2
+0.4           2   2   2
+Proporsi noise:
+min_samples   3      5      10
+eps                           
+0.2          0.0  0.017  0.233
+0.3          0.0  0.000  0.007
+0.4          0.0  0.000  0.000
+ARI terhadap label acuan (dinilai SETELAH clustering):
+min_samples     3      5      10
+eps                             
+0.2          0.812  0.799  0.271
+0.3          1.000  1.000  0.987
+0.4          1.000  1.000  1.000

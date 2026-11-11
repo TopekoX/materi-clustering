@@ -1,0 +1,6 @@
+                                 Homogeneity  Completeness  V-measure    NMI    ARI
+Kasus                                                                              
+Sempurna                               1.000           1.0      1.000  1.000  1.000
+Dua titik salah                        0.579           0.6      0.590  0.590  0.357
+Semua digabung (1 kelompok)            0.000           1.0      0.000  0.000  0.000
+Tiap titik sendiri (9 kelompok)        1.000           0.5      0.667  0.667  0.000

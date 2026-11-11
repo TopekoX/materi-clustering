@@ -1,0 +1,4 @@
+Bentuk X_tiny: (8, 2)
+Centroid awal:
+ [[1. 1.]
+ [2. 1.]]

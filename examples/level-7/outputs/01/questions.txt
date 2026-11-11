@@ -1,0 +1,3 @@
+Q1 ukuran inti sel            :  3 fitur
+Q2 tekstur dan kehalusan      :  4 fitur
+Q3 seluruh profil morfologi   : 30 fitur

@@ -194,6 +194,10 @@ Skrip lengkapnya ada di `examples/level-5/07_calinski_harabasz_index.py`, dan no
 --8<-- "level-5/07_calinski_harabasz_index.py:manual"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/07/manual.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `n = len(X)` jumlah titik, `ks = np.unique(labels)` daftar kelompok, `k = len(ks)` jumlah kelompok.
@@ -211,6 +215,10 @@ Skrip lengkapnya ada di `examples/level-5/07_calinski_harabasz_index.py`, dan no
 --8<-- "level-5/07_calinski_harabasz_index.py:check"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/07/check.txt"
+```
+
 **Penjelasan:** `calinski_harabasz_score(X, labels)` seharusnya sama dengan hitungan manual.
 
 ### Bagian E — CH untuk beberapa K
@@ -219,12 +227,20 @@ Skrip lengkapnya ada di `examples/level-5/07_calinski_harabasz_index.py`, dan no
 --8<-- "level-5/07_calinski_harabasz_index.py:blobs"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/07/blobs.txt"
+```
+
 **Penjelasan:** untuk K = 2 sampai 8 kita menjalankan K-Means dan menghitung CHI. `idxmax()` mengambil K dengan CHI **tertinggi**.
 
 ### Bagian F — Skala dan jumlah data
 
 ```python
 --8<-- "level-5/07_calinski_harabasz_index.py:invariance"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/07/invariance.txt"
 ```
 
 **Penjelasan:**
@@ -238,12 +254,20 @@ Skrip lengkapnya ada di `examples/level-5/07_calinski_harabasz_index.py`, dan no
 --8<-- "level-5/07_calinski_harabasz_index.py:uniform"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/07/uniform.txt"
+```
+
 **Penjelasan:** data acak rata (tanpa kelompok), K = 2 sampai 10. `max(uniform_ch, key=uniform_ch.get)` memberi K dengan CHI tertinggi.
 
 ### Bagian H — Keterbatasan: moons
 
 ```python
 --8<-- "level-5/07_calinski_harabasz_index.py:moons"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/07/moons.txt"
 ```
 
 **Penjelasan:** CHI K-Means vs CHI label benar. Label benar hanya dipakai untuk **dinilai**.
@@ -254,6 +278,10 @@ Skrip lengkapnya ada di `examples/level-5/07_calinski_harabasz_index.py`, dan no
 --8<-- "level-5/07_calinski_harabasz_index.py:together"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/07/together.txt"
+```
+
 **Penjelasan:** pada Mall Customers (terskala), untuk K = 2 sampai 10 kita menghitung ketiga metrik dalam satu tabel, lalu mencari K terbaik menurut masing-masing. `idxmin()` dipakai untuk Davies-Bouldin (terendah terbaik) dan `idxmax()` untuk dua lainnya.
 
 ### Bagian J — Grafik
@@ -262,9 +290,13 @@ Skrip lengkapnya ada di `examples/level-5/07_calinski_harabasz_index.py`, dan no
 --8<-- "level-5/07_calinski_harabasz_index.py:plotk"
 ```
 
+![Tiga grafik CHI terhadap K: empat gerombol jelas memuncak tegas di K = 4, data acak naik pelan sampai K = 10, dan Mall Customers naik sampai K = 9](../assets/level-5/07-ch-vs-k.png)
+
 ```python
 --8<-- "level-5/07_calinski_harabasz_index.py:plottogether"
 ```
+
+![Tiga grafik Silhouette, Davies-Bouldin, dan Calinski-Harabasz pada Mall Customers: dua pertama memilih K = 5, yang ketiga memilih K = 9](../assets/level-5/07-tiga-metrik-mall.png)
 
 **Penjelasan:** grafik pertama menampilkan CHI terhadap K untuk tiga dataset. Grafik kedua menampilkan tiga metrik pada Mall Customers berdampingan, dengan garis putus-putus pada K terbaik tiap metrik. `zip(axes, mall_table.columns, palette)` memasangkan panel, nama metrik, dan warna.
 
@@ -296,13 +328,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-5/07-calinski-harabasz-index.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/07.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

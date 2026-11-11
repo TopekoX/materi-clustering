@@ -1,0 +1,11 @@
+Nilai |z| terbesar per kolom:
+Age                       2.23
+Annual Income (k$)        2.91
+Spending Score (1-100)    1.91
+dtype: float64
+
+Jumlah |z| > 3 per kolom:
+Age                       0
+Annual Income (k$)        0
+Spending Score (1-100)    0
+dtype: int64

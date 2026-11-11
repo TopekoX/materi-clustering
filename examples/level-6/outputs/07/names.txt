@@ -1,0 +1,5 @@
+Kelompok A (81 pelanggan): pendapatan menengah, belanja menengah
+Kelompok B (39 pelanggan): pendapatan tinggi, belanja tinggi
+Kelompok C (35 pelanggan): pendapatan tinggi, belanja rendah
+Kelompok D (23 pelanggan): pendapatan rendah, belanja rendah
+Kelompok E (22 pelanggan): pendapatan rendah, belanja tinggi

@@ -1,0 +1,7 @@
+   tanggal             sumber                                                         kueri hasil_dipilih
+2026-11-10 alat pencarian web      Clustering: Science or Art? von Luxburg Williamson Guyon            L1
+2026-11-10      halaman arXiv                                     arXiv:1502.02555 (Hennig)            L2
+2026-11-10 alat pencarian web Ben-Hur Elisseeff Guyon stability based method clustered data            L3
+2026-11-10       halaman JMLR                              jmlr.org/papers/v11/vinh10a.html            L4
+2026-11-10 alat pencarian web                  Jain Data clustering 50 years beyond K-means            L5
+Jenis tinjauan: terarah (bukan sistematis); jumlah pencarian: 5

@@ -1,0 +1,13 @@
+covariance_type  ARI acuan
+      spherical      0.947
+           diag      0.982
+           tied      1.000
+           full      1.000
+reg_covar = 1e-06: ARI acuan = 1.000
+reg_covar = 0.001: ARI acuan = 1.000
+reg_covar = 0.1: ARI acuan = 1.000
+reg_covar = 1: ARI acuan = 0.942
+n_components = 2: ARI acuan = 0.571
+n_components = 3: ARI acuan = 1.000
+n_components = 4: ARI acuan = 0.874
+n_components = 6: ARI acuan = 0.582

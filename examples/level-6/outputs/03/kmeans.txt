@@ -1,0 +1,9 @@
+     init  n_init  inertia terkecil  inertia terbesar  seed yang mencapai terkecil
+   random       1           2398.51           3358.04                            2
+   random      10           2398.51           2399.72                           17
+k-means++       1           2398.51           3004.09                            3
+k-means++      10           2398.51           2398.71                           18
+max_iter =   1: n_iter_ = 1, inertia = 3379.91
+max_iter =   2: n_iter_ = 2, inertia = 3365.88
+max_iter =   5: n_iter_ = 5, inertia = 3358.04
+max_iter = 300: n_iter_ = 6, inertia = 3358.04

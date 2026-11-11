@@ -1,0 +1,3 @@
+H(kelas) = 1.0986, H(kelompok) = 1.0609, informasi bersama = 0.6365
+NMI manual        = 0.5895
+NMI scikit-learn  = 0.5895

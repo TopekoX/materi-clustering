@@ -183,6 +183,10 @@ Skrip lengkapnya ada di `examples/level-6/05_feature_selection_and_impact_analys
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:wine"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/05/wine.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `load_wine(as_frame=True)` mengembalikan data dalam bentuk tabel pandas (`wine.data`) dan label kelas (`wine.target`). Label hanya akan dipakai untuk menilai.
@@ -197,6 +201,10 @@ Skrip lengkapnya ada di `examples/level-6/05_feature_selection_and_impact_analys
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:baseline"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/05/baseline.txt"
+```
+
 **Penjelasan:**
 
 - `StandardScaler().fit_transform(X_wine_df)` menyamakan skala 13 fitur. `kmeans_labels(X_all, 3)` menghasilkan pengelompokan baseline.
@@ -209,12 +217,20 @@ Skrip lengkapnya ada di `examples/level-6/05_feature_selection_and_impact_analys
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:randomsubsets"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/05/randomsubsets.txt"
+```
+
 **Penjelasan:** `rng.choice(13, size=4, replace=False)` mengambil 4 indeks kolom berbeda secara acak (`replace=False` berarti tanpa pengulangan). Kita ulangi 30 kali. Tiap kali K-Means dijalankan pada kolom terpilih, dan dua ARI dihitung. `.describe().loc[[...]]` meringkas sebaran: minimum, kuartil, median, maksimum.
 
 ### Bagian E — Melepas satu fitur
 
 ```python
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:loo"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/05/loo.txt"
 ```
 
 **Penjelasan:** untuk tiap fitur `dropped`, `keep` berisi indeks semua fitur **kecuali** itu. K-Means dijalankan pada `X_all[:, keep]`. `ARI vs baseline` mengukur seberapa mirip hasilnya dengan baseline. `sort_values("ARI vs baseline")` mengurutkan dari yang paling mengubah hasil (ARI terendah).
@@ -225,6 +241,10 @@ Skrip lengkapnya ada di `examples/level-6/05_feature_selection_and_impact_analys
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:noisefeat"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/05/noisefeat.txt"
+```
+
 **Penjelasan:** `rng.normal(size=(n, m))` membuat \( m \) kolom bilangan acak berdistribusi normal baku (rata-rata 0, varians 1), sehingga skalanya sama dengan fitur terstandarkan. `np.hstack([X_all, extra])` menempelkan kolom acak di sebelah kanan fitur asli. Satu `rng` dipakai berurutan sehingga hasilnya bisa diulang.
 
 ### Bagian G — Subset fitur dan K bersama
@@ -233,12 +253,20 @@ Skrip lengkapnya ada di `examples/level-6/05_feature_selection_and_impact_analys
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:grid"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/05/grid.txt"
+```
+
 **Penjelasan:** tiga subset (13 fitur, tanpa redundan, 4 fitur pertama) dikombinasikan dengan K = 2 sampai 5, total 12 percobaan, dicatat ke `records`. `.pivot(...)` membuat tabel silang. Silhouette dicetak dengan peringatan bahwa **nilainya tidak sebanding antar baris**, karena dihitung di ruang yang berbeda.
 
 ### Bagian H — Mall Customers (tanpa label acuan)
 
 ```python
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/05/mall.txt"
 ```
 
 **Penjelasan:**
@@ -254,6 +282,10 @@ Skrip lengkapnya ada di `examples/level-6/05_feature_selection_and_impact_analys
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:save"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/05/save.txt"
+```
+
 **Penjelasan:** semua 18 catatan disimpan ke `results/05_feature_impact.csv`. Catatan konfigurasi disimpan ke JSON, termasuk pengingat bahwa pada Mall Customers tidak ada label acuan.
 
 ### Bagian J — Gambar
@@ -262,13 +294,19 @@ Skrip lengkapnya ada di `examples/level-6/05_feature_selection_and_impact_analys
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:plotloo"
 ```
 
+![Diagram batang mendatar ARI antara clustering tanpa satu fitur dan clustering 13 fitur pada Wine. Semua batang berkisar 0,84 sampai 0,98, terendah untuk color_intensity](../assets/level-6/05-dampak-lepas-fitur.png)
+
 ```python
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:plotnoise"
 ```
 
+![Grafik garis dua ARI terhadap jumlah fitur acak yang ditambahkan pada Wine: ARI terhadap baseline turun dari 1,00 menjadi sekitar 0,78 pada 50 fitur, ARI terhadap label acuan turun dari 0,90 menjadi sekitar 0,72](../assets/level-6/05-fitur-tak-relevan.png)
+
 ```python
 --8<-- "level-6/05_feature_selection_and_impact_analysis.py:plotgrid"
 ```
+
+![Peta panas ARI acuan untuk tiga subset fitur dan K dari 2 sampai 5, tertinggi di K = 3 untuk semua subset](../assets/level-6/05-peta-subset-k.png)
 
 **Penjelasan:** diagram batang mendatar menampilkan dampak melepas tiap fitur. Grafik garis menampilkan dua ARI terhadap jumlah fitur acak. Peta panas menampilkan ARI acuan untuk subset × K, dengan skala warna tetap 0 sampai 1 (`vmin=0, vmax=1`) supaya tidak menyesatkan.
 
@@ -301,13 +339,11 @@ Skrip mencetak output ke terminal, menyimpan tiga gambar ke `docs/assets/level-6
 jupyter notebook notebooks/level-6/05-feature-selection-and-impact-analysis.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/05.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

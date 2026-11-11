@@ -1,0 +1,8 @@
+   CustomerID  Age  Annual Income (k$)  Spending Score (1-100)  Gender_Female  Gender_Male
+0           1   19                  15                      39              0            1
+1           2   21                  15                      81              0            1
+2           3   20                  16                       6              1            0
+3           4   23                  16                      77              1            0
+4           5   31                  17                      40              1            0
+
+Kolom sekarang: ['CustomerID', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)', 'Gender_Female', 'Gender_Male']

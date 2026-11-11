@@ -1,0 +1,15 @@
+Jumlah nilai kosong per kolom:
+CustomerID                0
+Gender                    0
+Age                       0
+Annual Income (k$)        0
+Spending Score (1-100)    0
+dtype: int64
+
+Jumlah baris duplikat: 0
+
+Jumlah per Gender:
+Gender
+Female    112
+Male       88
+Name: count, dtype: int64

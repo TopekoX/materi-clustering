@@ -1,0 +1,10 @@
+Draf pertama: 262 kata | melebihi batas
+Latar belakang :  18 kata
+Tujuan         :  30 kata
+Metode         :  32 kata
+Hasil          :  60 kata
+Kesimpulan     :  67 kata
+Keterbatasan   :  27 kata
+Total kata abstrak: 234 | contoh batas: 250
+Angka tak terlacak : []
+Kata berlebihan    : []

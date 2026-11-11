@@ -151,6 +151,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/04_similarity_and_dissimilarity.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/04/setup.txt"
+```
+
 **Penjelasan:**
 
 - `pairwise_distances` dari scikit-learn menghitung jarak semua pasangan data. `StandardScaler` dipakai di Langkah 6.
@@ -162,6 +166,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:matrix"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/04/matrix.txt"
 ```
 
 **Penjelasan:**
@@ -176,6 +184,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/04_similarity_and_dissimilarity.py:similarity"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/04/similarity.txt"
+```
+
 **Penjelasan:**
 
 - `S = 1 / (1 + D)` menerapkan rumus \( s = 1/(1+d) \) pada **seluruh matriks sekaligus**. NumPy mengerjakannya untuk setiap sel.
@@ -185,6 +197,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:check"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/04/check.txt"
 ```
 
 **Penjelasan:**
@@ -201,6 +217,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/04_similarity_and_dissimilarity.py:categorical"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/04/categorical.txt"
+```
+
 **Penjelasan:**
 
 - `a` dan `b` adalah dua pelanggan dan lima produk: 1 berarti membeli, 0 berarti tidak.
@@ -214,6 +234,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/04_similarity_and_dissimilarity.py:scale"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/04/scale.txt"
+```
+
 **Penjelasan:**
 
 - `raw[0] - raw[1]` adalah selisih tiap fitur antara pelanggan 1 dan 2. Kita cetak selisih dan **kuadrat selisih** (kontribusi tiap fitur pada jarak).
@@ -225,6 +249,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:plot"
 ```
+
+![Dua peta warna matriks jarak lima pelanggan: kiri data mentah, kanan setelah standardisasi](../assets/level-3/04-matriks-jarak.png)
 
 **Penjelasan:**
 
@@ -262,11 +288,8 @@ jupyter notebook notebooks/level-3/04-similarity-and-dissimilarity.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1):
+Semua output berasal dari eksekusi nyata skrip (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-3/outputs/04.txt"
-```
 
 ![Dua peta warna matriks jarak lima pelanggan: kiri data mentah, kanan setelah standardisasi](../assets/level-3/04-matriks-jarak.png)
 

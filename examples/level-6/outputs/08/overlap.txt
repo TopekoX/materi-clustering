@@ -1,0 +1,3 @@
+Silhouette rata-rata (tumpang tindih): 0.408
+Titik dengan silhouette < 0,1: 17 dari 300 (5.7%)
+Titik dengan silhouette < 0: 3

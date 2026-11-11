@@ -1,0 +1,4 @@
+explained_variance_        : [6.834  0.0327]
+explained_variance_ratio_  : [0.9952 0.0048]
+components_[0] (komponen 1): [0.714  0.7001] (tanda boleh terbalik)
+Varians skor komponen 1    : 6.834

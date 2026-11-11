@@ -234,6 +234,10 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:load"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/10/load.txt"
+```
+
 **Penjelasan:** `pd.read_csv` membaca tabel hasil, dan `json.loads` membaca file konfigurasi Bab 9. `index_col` menjadikan kolom kelompok sebagai indeks. Perulangan di bawahnya mencetak jumlah baris tiap file, sebagai pemeriksaan bahwa file terbaca dan ukurannya wajar (misalnya 5 kelompok, 7 nilai K).
 
 ### Bagian C — Deskripsi data
@@ -242,12 +246,20 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:dataset"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/10/dataset.txt"
+```
+
 **Penjelasan:** `data_facts` mengumpulkan fakta data langsung dari file: jumlah baris, daftar kolom, jumlah nilai kosong (`df.isna().sum().sum()`), jumlah tiap gender, dan rentang tiga kolom numerik. Bagian ini akan masuk ke bagian "Data" laporan. Sidik jari data dari konfigurasi Bab 9 dicetak untuk dicocokkan.
 
 ### Bagian D — Uji permutasi umur
 
 ```python
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:permtest"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/10/permtest.txt"
 ```
 
 **Penjelasan:**
@@ -262,6 +274,10 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:tables"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/10/tables.txt"
+```
+
 **Penjelasan:**
 
 - `k_table["silhouette"].idxmax()` memberi indeks baris Silhouette tertinggi. `.loc[...]` mengambil baris itu. Hal yang sama untuk kestabilan. Dengan cara ini, kalimat "Silhouette tertinggi pada K = 5" **dihasilkan dari data**, bukan diketik.
@@ -273,12 +289,20 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:conflict"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/10/conflict.txt"
+```
+
 **Penjelasan:** dari hasil benchmark Bab 4 kita ambil baris dataset "Bulan sabit" untuk dua algoritma (K-Means dan DBSCAN), lalu menyusunnya per algoritma dengan `set_index("algorithm")`. `idxmax()` pada Silhouette dan ARI menunjukkan algoritma mana yang dipilih tiap metrik. Dua baris yang dicetak di akhir menyatakan pertentangannya secara eksplisit.
 
 ### Bagian G — Pemeriksa kata berlebihan
 
 ```python
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:wording"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/10/wording.txt"
 ```
 
 **Penjelasan baris demi baris:**
@@ -295,6 +319,10 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:report"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/10/report.txt"
+```
+
 **Penjelasan:**
 
 - `report` adalah f-string Markdown yang menyatukan kata-kata tafsiran (ditulis tangan) dengan angka (dari variabel). Contoh: `{fmt(best_sil['silhouette'])}` mengisi nilai Silhouette tertinggi, `{int(best_sil['k'])}` mengisi nilai K-nya.
@@ -308,6 +336,10 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:save"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/10/save.txt"
+```
+
 **Penjelasan:** `write_text` menyimpan laporan ke `10_report.md`. `10_config.json` mencatat sumber yang dipakai dan bahwa pemeriksaan kata dilakukan. Laporan ikut tercatat sebagai bagian dari eksperimen.
 
 ### Bagian J — Gambar untuk laporan
@@ -315,6 +347,8 @@ Skrip lengkapnya ada di `examples/level-6/10_experimental_reporting_and_interpre
 ```python
 --8<-- "level-6/10_experimental_reporting_and_interpretation.py:plotreport"
 ```
+
+![Tiga panel untuk laporan. (a) Silhouette dan kestabilan menurut K dari 2 sampai 8 dengan area berarsir antara rata-rata dan minimum kestabilan. (b) Ukuran lima kelompok pelanggan dengan nilai Jaccard 0,97 sampai 1,00 di atas tiap batang. (c) Pada data bulan sabit, Silhouette menyukai K-Means (0,492 versus 0,389) tetapi ARI terhadap label acuan menyukai DBSCAN (0,960 versus 0,486)](../assets/level-6/10-gambar-laporan.png)
 
 **Penjelasan:** satu figur tiga panel yang bisa langsung dimasukkan ke laporan. Panel (a) menyandingkan Silhouette dan kestabilan menurut K, dengan area berarsir dari rata-rata sampai minimum untuk menunjukkan sebaran. Panel (b) menampilkan ukuran kelompok dengan nilai Jaccard di atas tiap batang. Panel (c) memperlihatkan pertentangan metrik pada data bulan sabit. Warna kelompok sama dengan Bab 7 dan 8.
 
@@ -350,13 +384,11 @@ Skrip Bab 10 mencetak output ke terminal, menyimpan satu gambar ke `docs/assets/
 jupyter notebook notebooks/level-6/10-experimental-reporting-and-interpretation.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/10.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

@@ -1,0 +1,3 @@
+DITANDAI ['membuktikan', 'benar-benar']: Hasil ini membuktikan bahwa lima segmen pelanggan benar-benar ada.
+DITANDAI ['pasti']: Kelompok E pasti boros karena umurnya muda.
+DITANDAI ['terbaik']: K = 5 adalah pilihan terbaik.

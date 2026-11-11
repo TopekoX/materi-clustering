@@ -1,0 +1,8 @@
+Ukuran kelompok: [50, 50, 50]
+n_clusters_ : 3
+n_leaves_   : 150
+children_ (3 baris pertama, pasangan yang digabung):
+[[ 24  52]
+ [ 72 117]
+ [ 74 124]]
+distances_ (3 pertama dan 2 terakhir): [0.01, 0.039, 0.046] [70.406, 119.406]

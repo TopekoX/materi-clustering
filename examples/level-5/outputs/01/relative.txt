@@ -1,0 +1,9 @@
+   Silhouette
+K            
+2       0.736
+3       0.908
+4       0.704
+5       0.518
+6       0.327
+7       0.357
+K dengan Silhouette tertinggi: 3

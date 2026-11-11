@@ -1,0 +1,2 @@
+Fitur untuk clustering: ['Annual Income (k$)', 'Spending Score (1-100)']
+Kolom yang tidak dipakai: ['CustomerID', 'Gender', 'Age']

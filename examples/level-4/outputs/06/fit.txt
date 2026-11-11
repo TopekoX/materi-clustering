@@ -1,0 +1,9 @@
+Jumlah kelompok : 3
+Ukuran kelompok : [100, 100, 100]
+cluster_centers_:
+ [[-2.685  8.945]
+ [ 4.736  2.003]
+ [-6.834 -7.077]]
+n_iter_         : 7
+
+Dengan bandwidth hasil estimate_bandwidth (1.861): 4 kelompok, ukuran [100, 98, 100, 2]

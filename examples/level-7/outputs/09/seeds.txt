@@ -1,0 +1,2 @@
+Pemanggilan acak diperiksa: 17 | tanpa seed: tidak ada
+Demo kode tanpa seed: (1, [('demo.py', 2, 'KMeans')])

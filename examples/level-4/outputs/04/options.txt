@@ -1,0 +1,6 @@
+algorithm=auto      leaf_size=10 -> label sama dengan bawaan? True
+algorithm=ball_tree leaf_size=10 -> label sama dengan bawaan? True
+algorithm=kd_tree   leaf_size=10 -> label sama dengan bawaan? True
+algorithm=brute     leaf_size=10 -> label sama dengan bawaan? True
+metric=euclidean -> 2 kelompok, 7 noise
+metric=manhattan -> 2 kelompok, 10 noise

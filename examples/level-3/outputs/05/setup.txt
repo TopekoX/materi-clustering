@@ -1,0 +1,2 @@
+Selisih per fitur (B - A): [3. 4.]
+Selisih mutlak           : [3. 4.]

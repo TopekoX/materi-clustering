@@ -1,0 +1,3 @@
+Jarak Jakarta-Bandung : 1
+Jarak Jakarta-Surabaya: 2
+Padahal ketiganya setara, tanpa urutan.

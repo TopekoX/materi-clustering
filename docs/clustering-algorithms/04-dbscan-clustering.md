@@ -270,6 +270,10 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:classify"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/04/classify.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `P[:, None, :] - P[None, :, :]` memasangkan setiap titik dengan setiap titik lain (*broadcasting*, seperti di Bab 2). `np.linalg.norm(..., axis=2)` menghitung jaraknya, menghasilkan **matriks jarak** `(9, 9)`.
@@ -284,11 +288,17 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:dbtiny"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/04/dbtiny.txt"
+```
+
 **Penjelasan:** `DBSCAN(eps=eps, min_samples=min_samples).fit(P)` menjalankan algoritma sungguhan. `labels_` adalah label tiap titik, dan `core_sample_indices_` adalah nomor core point. Baris terakhir memeriksa apakah core point dari scikit-learn sama dengan hitungan manual kita (`np.array_equal`).
 
 ```python
 --8<-- "level-4/04_dbscan_clustering.py:plottiny"
 ```
+
+![Sembilan titik: gerombol kiri bawah berwarna biru dengan lingkaran eps di sekitar titik inti A sampai D, titik E berbentuk persegi sebagai titik tepi, titik F berupa x abu-abu sebagai noise, dan gerombol kanan atas berwarna oranye](../assets/level-4/04-titik-kecil.png)
 
 **Penjelasan:** `palette` adalah daftar warna. Untuk tiap titik: core digambar sebagai **lingkaran** dengan **lingkaran putus-putus** `eps` di sekelilingnya (`Circle(..., fill=False, linestyle="--")`), border sebagai **persegi**, noise sebagai **tanda x** abu-abu. `ax.annotate(name, ...)` menulis nama titik di dekatnya, dan `ax.set_aspect("equal")` memastikan lingkaran tampak bulat.
 
@@ -298,10 +308,18 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:moons"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/04/moons.txt"
+```
+
 **Penjelasan:** `make_moons(...)` membuat dua bulan sabit. `rng.uniform(low=[-1.5, -1.0], high=[2.5, 1.5], size=(15, 2))` mengambil 15 titik acak merata dalam sebuah persegi panjang, yang kita anggap noise. `np.vstack([...])` menumpuk kedua kumpulan data menjadi `X` berisi 315 titik.
 
 ```python
 --8<-- "level-4/04_dbscan_clustering.py:fitmoons"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/04/fitmoons.txt"
 ```
 
 **Penjelasan:**
@@ -321,12 +339,18 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:plotmoons"
 ```
 
+![Scatter plot dua bulan sabit berwarna oranye dan biru dengan titik inti berupa bulatan besar bertepi hitam, titik tepi berupa bulatan kecil, dan 7 noise berupa x abu-abu](../assets/level-4/04-core-border-noise.png)
+
 **Penjelasan:** memanggil `plot_dbscan` dan menambahkan legenda. `ax.scatter([], [], ...)` menggambar "titik kosong" yang hanya dipakai untuk membuat entri legenda.
 
 ### Bagian D — Memilih `eps` dengan k-distance
 
 ```python
 --8<-- "level-4/04_dbscan_clustering.py:kdist"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/04/kdist.txt"
 ```
 
 **Penjelasan:**
@@ -340,6 +364,8 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:plotkdist"
 ```
 
+![Grafik k-distance: kurva naik landai lalu menanjak tajam di ujung kanan, dengan garis putus-putus di eps 0,2](../assets/level-4/04-k-distance.png)
+
 **Penjelasan:** garis biru adalah k-distance terurut. Garis putus-putus oranye menandai `eps = 0.2` yang kita pilih.
 
 ### Bagian E — Pengaruh `eps` dan `min_samples`
@@ -348,11 +374,17 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:params"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/04/params.txt"
+```
+
 **Penjelasan:** fungsi `run_dbscan` menjalankan DBSCAN dan mengembalikan label serta penanda core. Dua perulangan mengubah `eps` (dengan `min_samples=5` tetap) lalu `min_samples` (dengan `eps=0.2` tetap), dan mengumpulkan jumlah kelompok dan noise ke dalam tabel pandas. Mengubah **satu parameter pada satu waktu** adalah cara yang jelas untuk melihat pengaruhnya.
 
 ```python
 --8<-- "level-4/04_dbscan_clustering.py:plotparams"
 ```
+
+![Grid 2 baris kali 4 kolom: pengaruh eps (0,05; 0,1; 0,2; 0,5) pada baris atas dan min_samples (3, 10, 20, 30) pada baris bawah](../assets/level-4/04-pengaruh-parameter.png)
 
 **Penjelasan:** grid 2 × 4: baris atas memvariasikan `eps`, baris bawah memvariasikan `min_samples`. `axes[0]` dan `axes[1]` adalah baris pertama dan kedua.
 
@@ -362,12 +394,22 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:density"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/04/density.txt"
+```
+
+![Tiga panel dua gerombol dengan kepadatan berbeda pada eps 0,25; 0,5; dan 0,8](../assets/level-4/04-kepadatan-berbeda.png)
+
 **Penjelasan:** `make_blobs(n_samples=[200, 200], centers=[[0, 0], [3, 0]], cluster_std=[0.25, 0.9])` membuat dua gerombol dengan sebaran berbeda: satu rapat (`std=0.25`) dan satu renggang (`std=0.9`). Kita mencoba tiga nilai `eps` dan mencetak jumlah kelompok, ukurannya, dan noise.
 
 ### Bagian G — `metric`, `algorithm`, dan `leaf_size`
 
 ```python
 --8<-- "level-4/04_dbscan_clustering.py:options"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/04/options.txt"
 ```
 
 **Penjelasan:** kita membandingkan label dari tiap `algorithm` (dan `leaf_size=10`) dengan label bawaan memakai `np.array_equal`. Lalu kita membandingkan `metric="euclidean"` dengan `"manhattan"`.
@@ -378,10 +420,18 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:mall"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/04/mall.txt"
+```
+
 **Penjelasan:** fitur diskalakan, lalu `DBSCAN(eps=0.4, min_samples=8)` dijalankan. `df["Cluster"].value_counts().sort_index()` menghitung jumlah per label (termasuk `-1`), dan `groupby(...).mean()` memberi profil rata-rata tiap kelompok. Karena rata-rata dihitung dari data **asli** (bukan terskala), angkanya mudah dibaca.
 
 ```python
 --8<-- "level-4/04_dbscan_clustering.py:gridmall"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/04/gridmall.txt"
 ```
 
 **Penjelasan:** kita menjalankan DBSCAN untuk 4 nilai `eps` × 3 nilai `min_samples`. Tiap hasil disimpan sebagai teks "jumlah kelompok, jumlah noise". `pd.Series(grid).unstack()` mengubah kamus dengan kunci ganda menjadi tabel dua dimensi.
@@ -390,11 +440,17 @@ Skrip lengkapnya ada di `examples/level-4/04_dbscan_clustering.py`, dan versi no
 --8<-- "level-4/04_dbscan_clustering.py:scale"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/04/scale.txt"
+```
+
 **Penjelasan:** kesalahan umum: memakai `eps=0.3` pada data yang belum diskalakan. `.values` mengambil array mentah dari tabel.
 
 ```python
 --8<-- "level-4/04_dbscan_clustering.py:plotmall"
 ```
+
+![Scatter plot Mall Customers dengan lima kelompok DBSCAN dan noise berupa x abu-abu](../assets/level-4/04-mall-customers.png)
 
 **Penjelasan:** scatter plot dengan satu warna per kelompok dan `x` abu-abu untuk noise.
 
@@ -425,13 +481,11 @@ Skrip mencetak output ke terminal dan menyimpan enam gambar ke `docs/assets/leve
 jupyter notebook notebooks/level-4/04-dbscan-clustering.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-4/outputs/04.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

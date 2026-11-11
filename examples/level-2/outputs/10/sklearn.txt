@@ -1,0 +1,2 @@
+Min-Max sama dengan hitungan manual? True
+Standardization sama dengan hitungan manual? True

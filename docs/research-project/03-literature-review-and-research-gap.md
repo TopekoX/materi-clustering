@@ -219,12 +219,20 @@ Skrip lengkapnya ada di `examples/level-7/03_literature_review_and_research_gap.
 --8<-- "level-7/03_literature_review_and_research_gap.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/03/setup.txt"
+```
+
 **Penjelasan:** `json.loads(... .read_text(encoding="utf-8"))` membaca berkas JSON dari Bab 2 dan mengubahnya menjadi dictionary Python. `RESULTS / "02_research_problem.json"` menyusun jalur berkas dengan operator `/` dari `pathlib`. Kita mencetak kunci `pertanyaan` untuk memastikan RQ1 sampai RQ3 terbaca. Bab ini memakai rumusan Bab 2 sebagai satu sumber kebenaran, bukan menyalinnya ulang.
 
 ### Bagian B — Matriks tinjauan pustaka
 
 ```python
 --8<-- "level-7/03_literature_review_and_research_gap.py:matrix"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/03/matrix.txt"
 ```
 
 **Penjelasan:**
@@ -241,6 +249,10 @@ Skrip lengkapnya ada di `examples/level-7/03_literature_review_and_research_gap.
 --8<-- "level-7/03_literature_review_and_research_gap.py:completeness"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/03/completeness.txt"
+```
+
 **Penjelasan:**
 
 - `matrix[fields] != NA` menghasilkan tabel `True`/`False`: `True` bila sel **bukan** "—". `.sum(axis=1)` menjumlahkan per baris, sehingga hasilnya adalah banyaknya sel terisi untuk tiap makalah (`True` dihitung sebagai 1).
@@ -252,6 +264,10 @@ Skrip lengkapnya ada di `examples/level-7/03_literature_review_and_research_gap.
 
 ```python
 --8<-- "level-7/03_literature_review_and_research_gap.py:coverage"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/03/coverage.txt"
 ```
 
 **Penjelasan:**
@@ -267,12 +283,20 @@ Skrip lengkapnya ada di `examples/level-7/03_literature_review_and_research_gap.
 --8<-- "level-7/03_literature_review_and_research_gap.py:searchlog"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/03/searchlog.txt"
+```
+
 **Penjelasan:** log mencatat tanggal, sumber, kueri, dan makalah yang dipilih. Isinya adalah pencarian yang **benar-benar dilakukan** saat bab ini ditulis. Baris terakhir menyatakan jenis tinjauannya: **terarah**, bukan sistematis. Pencatatan semacam ini adalah syarat dasar agar orang lain bisa menilai atau mengulang pencarianmu.
 
 ### Bagian F — Memeriksa kata-kata klaim celah
 
 ```python
 --8<-- "level-7/03_literature_review_and_research_gap.py:gapcheck"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/03/gapcheck.txt"
 ```
 
 **Penjelasan:**
@@ -290,12 +314,20 @@ Skrip lengkapnya ada di `examples/level-7/03_literature_review_and_research_gap.
 --8<-- "level-7/03_literature_review_and_research_gap.py:statement"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/03/statement.txt"
+```
+
 **Penjelasan:** `n_sources = len(matrix)` menghitung jumlah makalah, lalu f-string memasukkannya ke kalimat. Angka itu **tidak diketik tangan**: bila kamu menambah baris di matriks, kalimatnya ikut berubah. Pernyataan lalu diperiksa pemeriksa yang sama.
 
 ### Bagian H — Menyimpan hasil
 
 ```python
 --8<-- "level-7/03_literature_review_and_research_gap.py:save"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/03/save.txt"
 ```
 
 **Penjelasan:** fungsi `to_markdown` mengubah tabel menjadi teks tabel Markdown (`str(v).replace("|", "/")` mengganti tanda `|` agar tabel tidak rusak). Kita menyimpan empat berkas: matriks (CSV dan Markdown), log pencarian (CSV), dan pernyataan celah (JSON). Berkas `03_gap_statement.json` mencatat bahwa teks pertanyaan tidak berubah dari Bab 2, tetapi RQ2 ditandai butuh pustaka tambahan. Pencatatan perubahan seperti ini mencegah *HARKing* (Bab 2).
@@ -332,13 +364,11 @@ jupyter notebook notebooks/level-7/03-literature-review-and-research-gap.ipynb
 
 Notebook memuat Bagian A sampai H, ditambah tiga bagian **Praktik**: menambah makalah ke matriks, menambah catatan pencarian, dan menulis pernyataan celahmu sendiri.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10 dan pandas 3.0.5.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10 dan pandas 3.0.5.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/03.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Matriks lengkap yang disimpan skrip (`results/03_literature_matrix.md`):
 

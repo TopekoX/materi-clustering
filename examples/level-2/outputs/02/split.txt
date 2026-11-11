@@ -1,0 +1,2 @@
+Kolom angka: ['CustomerID', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)']
+Kolom teks : ['Gender']

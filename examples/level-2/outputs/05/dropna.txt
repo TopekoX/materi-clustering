@@ -1,0 +1,2 @@
+Ukuran sebelum: (200, 5)
+Ukuran sesudah: (181, 5)

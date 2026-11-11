@@ -1,0 +1,7 @@
+Bandwidth Mean Shift (hasil estimate_bandwidth): 1.489
+
+K-Means              label unik: [0, 1, 2]  jumlah anggota: [100, 100, 100]
+Hierarchical (Ward)  label unik: [0, 1, 2]  jumlah anggota: [100, 100, 100]
+DBSCAN               label unik: [-1, 0, 1, 2]  jumlah anggota: [8, 98, 98, 96]
+GMM                  label unik: [0, 1, 2]  jumlah anggota: [100, 100, 100]
+Mean Shift           label unik: [0, 1, 2, 3]  jumlah anggota: [100, 98, 100, 2]

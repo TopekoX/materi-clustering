@@ -1,0 +1,6 @@
+Euclidean       : 5.0
+Manhattan       : 7.0
+Minkowski (p=3) : 4.4979
+Chebyshev (max) : 4.0
+Minkowski p=1 sama dengan Manhattan? True
+Minkowski p=2 sama dengan Euclidean? True

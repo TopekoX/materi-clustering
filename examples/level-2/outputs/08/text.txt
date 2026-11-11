@@ -1,0 +1,2 @@
+Nilai Gender sebelum: [' male', 'FEMALE', 'Female ', 'Male', 'female']
+Nilai Gender sesudah: ['Male', 'Female', 'Female', 'Male', 'Female']

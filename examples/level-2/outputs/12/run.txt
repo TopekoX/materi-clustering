@@ -1,0 +1,10 @@
+Tabel bersih   : (200, 5)
+Dataset akhir  : (200, 3)
+
+Lima baris pertama dataset akhir:
+     Age  Annual Income (k$)  Spending Score (1-100)
+0 -1.425              -1.739                  -0.435
+1 -1.281              -1.739                   1.196
+2 -1.353              -1.701                  -1.716
+3 -1.138              -1.701                   1.040
+4 -0.563              -1.663                  -0.396

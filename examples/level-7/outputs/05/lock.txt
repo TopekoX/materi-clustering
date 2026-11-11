@@ -1,0 +1,3 @@
+Hash protokol    : c65be407e00ab39b ...
+Hash setelah baca: sama
+Hash setelah K diubah menjadi 3: BERBEDA

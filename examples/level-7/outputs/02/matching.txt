@@ -1,0 +1,6 @@
+   Tipe pertanyaan                                                 Contoh                         Pendekatan                   Evaluasi                   Rujukan
+       Eksploratif                              Adakah struktur kelompok?              K-Means, Hierarchical    Silhouette, visualisasi Level 4 B2-B3, Level 6 B8
+        Komparatif              Algoritma mana yang cocok untuk data ini? K-Means, GMM, DBSCAN, Hierarchical  Metrik di ruang yang sama    Level 4 B7, Level 6 B4
+      Sensitivitas Seberapa peka hasil terhadap praproses atau parameter? Satu algoritma, satu faktor diubah      ARI terhadap baseline        Level 6 B2, B3, B5
+        Kestabilan           Apakah hasil tahan terhadap seed dan sampel? Satu algoritma, ulang berkali-kali ARI antar-ulangan, Jaccard                Level 6 B9
+Validasi eksternal      Seberapa selaras dengan pengetahuan di luar data?  Clustering dulu, label sesudahnya    ARI, NMI terhadap label                Level 5 B8

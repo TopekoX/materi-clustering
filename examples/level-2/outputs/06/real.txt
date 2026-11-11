@@ -1,0 +1,2 @@
+Baris ganda penuh pada data asli  : 0
+CustomerID yang muncul lebih dari sekali: 0

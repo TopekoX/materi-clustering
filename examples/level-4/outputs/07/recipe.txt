@@ -1,0 +1,7 @@
+         K (K-Means/Ward/GMM)  eps DBSCAN  bandwidth Mean Shift
+blobs                       3         0.3                 0.266
+moons                       2         0.3                 0.952
+circles                     2         0.4                 1.038
+noisy                       3         0.3                 0.349
+density                     3         0.4                 0.795
+overlap                     3         0.2                 0.851

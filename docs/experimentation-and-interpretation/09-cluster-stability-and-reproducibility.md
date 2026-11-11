@@ -224,12 +224,20 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:data"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/09/data.txt"
+```
+
 **Penjelasan:** data Mall Customers dibaca, dua fitur dijadikan z-score (`(x - rata-rata) / simpangan baku`), dan hasilnya adalah array 200 baris dengan dua kolom. Sama seperti Bab 7.
 
 ### Bagian C — ID kelompok tidak boleh dibandingkan langsung
 
 ```python
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:relabel"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/09/relabel.txt"
 ```
 
 **Penjelasan:**
@@ -245,6 +253,10 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:seed"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/09/seed.txt"
+```
+
 **Penjelasan:**
 
 - `pairwise_ari` menerima daftar label dari beberapa eksekusi, membentuk semua pasangan dengan `combinations(label_sets, 2)` (untuk 30 eksekusi ada 435 pasangan), menghitung ARI tiap pasangan, dan mengembalikan rata-rata, minimum, maksimum.
@@ -255,6 +267,10 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 
 ```python
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:prep"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/09/prep.txt"
 ```
 
 **Penjelasan:**
@@ -269,12 +285,20 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:hyper"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/09/hyper.txt"
+```
+
 **Penjelasan:** hyperparameter `init` menentukan cara memilih pusat awal: `"k-means++"` (pilihan cerdas yang menyebarkan pusat awal, bawaan scikit-learn) atau `"random"` (acak murni). Dengan `n_init=1`, kita mengamati 30 seed untuk tiap cara. `best` menghitung berapa seed yang mencapai inertia terbaik (nilai terkecil ditambah toleransi kecil `1e-6`).
 
 ### Bagian G — Kestabilan terhadap sampel
 
 ```python
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:sample"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/09/sample.txt"
 ```
 
 **Penjelasan baris demi baris:**
@@ -292,12 +316,20 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:kscan"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/09/kscan.txt"
+```
+
 **Penjelasan:** untuk tiap K dari 2 sampai 8, kita hitung kestabilan (ARI sampel 80%) dan Silhouette pada data penuh, lalu menyusunnya dalam tabel. Bagian bawahnya adalah pemeriksaan khusus K = 2: pada tiap dari 50 sampel, `abs(c0[0] - c1[0]) > abs(c0[1] - c1[1])` membandingkan apakah dua pusat lebih berbeda pada sumbu pendapatan (indeks 0) atau skor belanja (indeks 1). Hasilnya menjelaskan mengapa K = 2 tidak stabil.
 
 ### Bagian I — Kestabilan tiap kelompok
 
 ```python
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:jaccard"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/09/jaccard.txt"
 ```
 
 **Penjelasan:**
@@ -314,12 +346,20 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:nostruct"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/09/nostruct.txt"
+```
+
 **Penjelasan:** `rng_u.uniform(size=(200, 2))` membuat 200 titik acak merata di persegi. Titik-titik ini **tidak memiliki kelompok alami**, tetapi K-Means tetap membaginya menjadi lima. Data distandarkan seperti Mall Customers. Kita menjalankan `subsample_ari` yang sama dan membandingkan hasilnya dengan Mall Customers.
 
 ### Bagian K — Reproduksibilitas
 
 ```python
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:repro"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/09/repro.txt"
 ```
 
 **Penjelasan:**
@@ -335,6 +375,10 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:save"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/09/save.txt"
+```
+
 **Penjelasan:** tabel kestabilan menurut K dan tabel Jaccard disimpan sebagai CSV. File JSON menyimpan semua pengaturan: seed, sidik jari data, fitur, praproses, algoritma, jumlah pengulangan, ukuran sampel, dan lingkungan perangkat lunak. Dengan file ini, orang lain dapat memeriksa persis kondisi eksperimen.
 
 ### Bagian M — Gambar
@@ -343,13 +387,19 @@ Skrip lengkapnya ada di `examples/level-6/09_cluster_stability_and_reproducibili
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:plotseed"
 ```
 
+![Dua histogram inertia dari 30 seed K-Means. Kiri, n_init=1: 26 seed berada di sekitar 65 dan 4 seed di sekitar 98. Kanan, n_init=10: ketiga puluh seed berada di sekitar 65](../assets/level-6/09-stabilitas-seed.png)
+
 ```python
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:plotk"
 ```
 
+![Kiri: kestabilan (ARI sampel 80%) dan Silhouette menurut K dari 2 sampai 8. Kestabilan tertinggi pada K=3 (1,0) dan K=5 (0,987), terendah pada K=2 (0,313). Kanan: Jaccard rata-rata lima kelompok semuanya 0,97 atau lebih, jauh di atas garis ambang 0,6](../assets/level-6/09-stabilitas-k-dan-kelompok.png)
+
 ```python
 --8<-- "level-6/09_cluster_stability_and_reproducibility.py:plotsample"
 ```
+
+![Kestabilan menurut ukuran sampel pada K=5. Garis Mall Customers tetap tinggi (rata-rata 0,97 sampai 0,99, minimum turun sampai 0,82). Garis data acak seragam turun lebih curam (rata-rata sampai 0,74, minimum sampai 0,36)](../assets/level-6/09-stabilitas-sampel.png)
 
 **Penjelasan:** gambar pertama adalah histogram inertia 30 seed pada `n_init` 1 dan 10, dengan sumbu x yang sama (65 sampai 99, diambil dari data) agar bisa dibandingkan. Gambar kedua berisi kestabilan dan Silhouette menurut K (kiri) serta Jaccard tiap kelompok dengan garis ambang 0,6 (kanan). Gambar ketiga menunjukkan kestabilan terhadap ukuran sampel pada Mall Customers dan data acak seragam, dengan garis penuh untuk rata-rata dan garis putus-putus untuk minimum.
 
@@ -384,13 +434,11 @@ Skrip mencetak output ke terminal, menyimpan tiga gambar ke `docs/assets/level-6
 jupyter notebook notebooks/level-6/09-cluster-stability-and-reproducibility.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, SciPy 1.18.1, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, SciPy 1.18.1, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/09.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

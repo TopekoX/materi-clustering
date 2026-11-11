@@ -1,0 +1,9 @@
+Tiga baris pertama, dikembalikan ke satuan asli:
+    Age  Annual Income (k$)  Spending Score (1-100)
+0  19.0                15.0                    39.0
+1  21.0                15.0                    81.0
+2  20.0                16.0                     6.0
+
+Sama dengan tabel bersih? True
+
+Baris 0 milik CustomerID: 1

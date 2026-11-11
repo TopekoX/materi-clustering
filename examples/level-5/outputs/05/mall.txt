@@ -1,0 +1,7 @@
+   Ukuran  Rata-rata s(i)  s(i) minimum  Titik s(i) < 0
+0      81           0.598         0.116               0
+1      39           0.511         0.228               0
+2      22           0.598         0.050               0
+3      35           0.505        -0.029               1
+4      23           0.511        -0.012               1
+Silhouette keseluruhan: 0.555

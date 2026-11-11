@@ -286,6 +286,10 @@ Kita kerjakan dalam delapan langkah. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/01_introduction_to_clustering_algorithms.py:data"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/01/data.txt"
+```
+
 **Penjelasan:**
 
 - `make_blobs(n_samples=300, centers=3, cluster_std=0.8, random_state=42)` membangkitkan 300 titik di sekitar 3 pusat. `cluster_std=0.8` mengatur sebaran tiap gerombol (makin kecil makin rapat). `random_state=42` mengunci acakan supaya hasilnya sama setiap kali dijalankan.
@@ -299,6 +303,8 @@ Kita kerjakan dalam delapan langkah. **Setiap potongan kode diikuti penjelasanny
 ```python
 --8<-- "level-4/01_introduction_to_clustering_algorithms.py:plotdata"
 ```
+
+![Dua scatter plot: kiri tiga gerombol bulat yang terpisah, kanan dua bentuk bulan sabit yang saling mengait](../assets/level-4/01-dua-dataset.png)
 
 **Penjelasan:**
 
@@ -332,6 +338,10 @@ Perhatikan: kelima objek dibuat dengan cara yang sama, yaitu `NamaAlgoritma(peng
 --8<-- "level-4/01_introduction_to_clustering_algorithms.py:fit"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/01/fit.txt"
+```
+
 **Penjelasan:**
 
 - `estimate_bandwidth(X_blobs, quantile=0.2, random_state=42)` adalah fungsi bantu scikit-learn yang **memperkirakan** `bandwidth` dari jarak antar-titik. `quantile=0.2` berarti memakai jarak yang mewakili sekitar 20% tetangga terdekat. Kita bahas di Bab 6. Di sini kita pakai saja sebagai nilai awal.
@@ -347,6 +357,10 @@ Perhatikan: kelima objek dibuat dengan cara yang sama, yaitu `NamaAlgoritma(peng
 --8<-- "level-4/01_introduction_to_clustering_algorithms.py:table"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/01/table.txt"
+```
+
 **Penjelasan:**
 
 - `hasattr(model, "labels_")` menjawab `True` atau `False`: apakah objek `model` **punya** anggota bernama `labels_`. Kita tidak memanggil fungsinya, hanya memeriksa keberadaannya.
@@ -357,6 +371,10 @@ Perhatikan: kelima objek dibuat dengan cara yang sama, yaitu `NamaAlgoritma(peng
 
 ```python
 --8<-- "level-4/01_introduction_to_clustering_algorithms.py:grid"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/01/grid.txt"
 ```
 
 **Penjelasan:**
@@ -375,6 +393,8 @@ Perhatikan: kelima objek dibuat dengan cara yang sama, yaitu `NamaAlgoritma(peng
 ```python
 --8<-- "level-4/01_introduction_to_clustering_algorithms.py:plotgrid"
 ```
+
+![Grid 2 baris kali 5 kolom: hasil K-Means, Hierarchical (Ward), DBSCAN, GMM, dan Mean Shift pada dataset blobs (atas) dan moons (bawah), tiap kelompok berwarna berbeda dan noise DBSCAN berupa tanda x abu-abu](../assets/level-4/01-lima-algoritma-dua-dataset.png)
 
 **Penjelasan:**
 
@@ -416,13 +436,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-4/01-introduction-to-clustering-algorithms.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-4/outputs/01.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan (baris atas dataset blobs, baris bawah dataset moons):
 

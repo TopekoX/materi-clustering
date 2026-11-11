@@ -1,0 +1,2 @@
+Sebelum: (200, 5)
+Sesudah: (198, 5)

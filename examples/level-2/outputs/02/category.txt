@@ -1,0 +1,4 @@
+Memori sebelum : 10956 byte
+Memori sesudah : 440 byte
+Tipe sekarang  : category
+Kategori       : ['Female', 'Male']

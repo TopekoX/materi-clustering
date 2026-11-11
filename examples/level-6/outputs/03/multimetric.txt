@@ -1,0 +1,14 @@
+    Silhouette  Davies-Bouldin  Calinski-Harabasz  ARI acuan
+K                                                           
+2        0.498           0.922            549.895      0.331
+3        0.653           0.458           1557.313      0.463
+4        0.602           0.530           1956.613      0.655
+5        0.543           0.658           1889.006      0.725
+6        0.489           0.747           1853.456      0.718
+7        0.461           0.803           1710.481      0.651
+8        0.437           0.897           1613.578      0.597
+9        0.367           1.038           1551.070      0.523
+10       0.343           1.036           1519.103      0.500
+K terbaik menurut Silhouette        : 3
+K terbaik menurut Davies-Bouldin    : 3
+K terbaik menurut Calinski-Harabasz : 4

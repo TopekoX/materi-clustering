@@ -1,0 +1,4 @@
+Jarak antar pusat dataset A: {(0, 1): 6.03, (0, 2): 5.95, (1, 2): 5.69}
+  Jarak pusat terdekat / rata-rata kekompakan = 7.76
+Jarak antar pusat dataset B: {(0, 1): 6.08, (0, 2): 6.2, (1, 2): 5.41}
+  Jarak pusat terdekat / rata-rata kekompakan = 2.46

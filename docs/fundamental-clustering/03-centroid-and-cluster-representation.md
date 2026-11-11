@@ -141,6 +141,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/03_centroid_and_representation.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/03/setup.txt"
+```
+
 **Penjelasan:**
 
 - `import numpy as np`, `pandas as pd`, dan `matplotlib.pyplot as plt` memanggil tiga pustaka dengan nama singkat. `KMeans` kita pakai di Langkah 6.
@@ -154,6 +158,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/03_centroid_and_representation.py:centroid"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/03/centroid.txt"
+```
+
 **Penjelasan:**
 
 - `n = len(points)` memberi jumlah baris (jumlah titik), yaitu 5.
@@ -165,6 +173,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:medoid"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/03/medoid.txt"
 ```
 
 **Penjelasan:**
@@ -181,6 +193,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/03_centroid_and_representation.py:outlier"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/03/outlier.txt"
+```
+
 **Penjelasan:**
 
 - `np.vstack([points, [[30, 30]]])` menumpuk satu baris baru (titik (30, 30)) di bawah data lama. Titik ini sengaja jauh: sebuah *outlier*.
@@ -190,6 +206,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:move"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/03/move.txt"
 ```
 
 **Penjelasan:**
@@ -209,6 +229,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/03_centroid_and_representation.py:mall"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/03/mall.txt"
+```
+
 **Penjelasan:**
 
 - Kita memuat data dan melakukan clustering seperti Bab 1.
@@ -222,6 +246,12 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:plot"
 ```
+
+![Dua panel: kiri lima titik dengan centroid dan medoid berdekatan, kanan setelah ditambah outlier di (30, 30) sehingga centroid tertarik jauh sedangkan medoid tetap](../assets/level-3/03-centroid-vs-medoid.png)
+
+![Dua pusat awal berpindah ke pusat baru dengan panah, di atas lima titik data](../assets/level-3/03-centroid-berpindah.png)
+
+![Scatter plot Mall Customers lima warna dengan label centroid di tengah tiap kelompok](../assets/level-3/03-centroid-mall.png)
 
 **Penjelasan:**
 
@@ -259,11 +289,8 @@ jupyter notebook notebooks/level-3/03-centroid-and-cluster-representation.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1):
+Semua output berasal dari eksekusi nyata skrip (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-3/outputs/03.txt"
-```
 
 Gambar yang dihasilkan:
 

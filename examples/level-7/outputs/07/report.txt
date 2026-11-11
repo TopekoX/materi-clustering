@@ -1,0 +1,2 @@
+Kalimat per jenis: {'hasil': 8, 'interpretasi': 8, 'keterbatasan': 7, 'pembahasan': 4}
+Berkas hasil disimpan di examples/level-7/results/ (awalan 07_)

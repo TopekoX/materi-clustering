@@ -1,0 +1,11 @@
+                direktori_berkas                                             di_proyek_ini  ada
+                       README.md                            docs/research-project/index.md True
+requirements.txt (+ kunci versi) requirements-notebooks.txt (kunci versi ditulis di paket) True
+            data/ (+ kartu data)     results/04_research_dataset.csv, 04_dataset_card.json True
+                       protocol/              results/05_protocol.json, 05_protocol.sha256 True
+            src/ (modul bersama)                             examples/level-7/_research.py True
+                        scripts/                                  examples/level-7/NN_*.py True
+                      notebooks/                                        notebooks/level-7/ True
+                        results/                                 examples/level-7/results/ True
+                        figures/                                      docs/assets/level-7/ True
+    logs/ (keputusan, pencarian)         results/03_search_log.csv, 06_clarifications.json True

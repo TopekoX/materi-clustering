@@ -1,0 +1,8 @@
+   Ukuran  Cohesion
+0      81     0.387
+1      39     0.627
+2      22     0.447
+3      35     0.625
+4      23     0.549
+Pasangan kelompok dengan centroid terdekat: (0, 4) 1.568
+Pasangan kelompok dengan centroid terjauh : (2, 3) 3.395

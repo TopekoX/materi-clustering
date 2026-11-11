@@ -1,0 +1,13 @@
+   CustomerID   Gender              Age  Annual Income (k$)  Spending Score (1-100)
+0           1     male               19                  15                      39
+1           2   FEMALE               21                  15                      81
+2           3  Female   tidak diketahui                  16                       6
+3           4     Male               23                  16                      77
+4           5   female              250                  17                      40
+
+CustomerID                int64
+Gender                      str
+Age                         str
+Annual Income (k$)        int64
+Spending Score (1-100)    int64
+dtype: object

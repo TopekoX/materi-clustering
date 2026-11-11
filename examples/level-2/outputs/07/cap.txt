@@ -1,0 +1,3 @@
+Ukuran: (200, 5)
+Nilai maksimum Annual Income sebelum: 137
+Nilai maksimum Annual Income sesudah : 132.75

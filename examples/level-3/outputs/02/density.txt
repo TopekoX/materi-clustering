@@ -1,0 +1,2 @@
+Jarak tetangga terdekat, kelompok padat  : 0.063
+Jarak tetangga terdekat, kelompok jarang : 0.422

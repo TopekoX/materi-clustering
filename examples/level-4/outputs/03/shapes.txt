@@ -1,0 +1,8 @@
+moons   single    ukuran kelompok: [100, 100]
+moons   complete  ukuran kelompok: [121, 79]
+moons   average   ukuran kelompok: [127, 73]
+moons   ward      ukuran kelompok: [132, 68]
+bridge  single    ukuran kelompok: [155, 1]
+bridge  complete  ukuran kelompok: [81, 75]
+bridge  average   ukuran kelompok: [78, 78]
+bridge  ward      ukuran kelompok: [80, 76]

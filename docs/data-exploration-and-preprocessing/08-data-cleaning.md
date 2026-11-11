@@ -88,6 +88,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/08_data_cleaning.py:check"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/08/check.txt"
+```
+
 **Penjelasan:**
 
 - `sorted(df["Gender"].unique())` menampilkan nilai berbeda pada `Gender`, diurutkan. Jika ada `"male"` dan `"Male"`, keduanya akan muncul terpisah.
@@ -101,6 +105,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/08_data_cleaning.py:messy"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/08/messy.txt"
+```
+
 **Penjelasan:**
 
 - `pd.DataFrame({...})` membuat tabel dari kamus Python: nama kolom di kiri, daftar isinya di kanan.
@@ -111,6 +119,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-2/08_data_cleaning.py:text"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/08/text.txt"
 ```
 
 **Penjelasan:**
@@ -126,6 +138,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/08_data_cleaning.py:numeric"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/08/numeric.txt"
+```
+
 **Penjelasan:**
 
 - `pd.to_numeric(..., errors="coerce")` mengubah tiap teks menjadi angka. `"19"` menjadi `19.0`.
@@ -137,6 +153,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-2/08_data_cleaning.py:ranges"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/08/ranges.txt"
 ```
 
 **Penjelasan:**
@@ -151,6 +171,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 --8<-- "level-2/08_data_cleaning.py:rename"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/08/rename.txt"
+```
+
 **Penjelasan:**
 
 - `rename(columns={lama: baru})` mengganti nama kolom.
@@ -161,6 +185,10 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ```python
 --8<-- "level-2/08_data_cleaning.py:pipeline"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/08/pipeline.txt"
 ```
 
 **Penjelasan:**
@@ -202,11 +230,8 @@ jupyter notebook notebooks/level-2/08-data-cleaning.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/08.txt"
-```
 
 **Cara membaca output:**
 

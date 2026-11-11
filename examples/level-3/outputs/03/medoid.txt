@@ -1,0 +1,7 @@
+Jumlah jarak tiap titik ke semua titik lain:
+  P1: 13.7
+  P2: 12.48
+  P3: 11.54
+  P4: 14.46
+  P5: 27.11
+Medoid: P3 [4. 4.]

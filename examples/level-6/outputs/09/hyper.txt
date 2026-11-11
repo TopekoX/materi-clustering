@@ -1,0 +1,2 @@
+init=k-means++: 16 dari 30 seed mencapai inertia terbaik (65.2406) | ARI antar seed: rata-rata 0.921, min 0.506
+init=random   : 9 dari 30 seed mencapai inertia terbaik (65.2406) | ARI antar seed: rata-rata 0.782, min 0.464

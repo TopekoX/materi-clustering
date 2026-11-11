@@ -1,0 +1,3 @@
+Blobs    bentuk data (300, 2), jumlah kelas acuan = 3, ukuran kelas = [100, 100, 100]
+Moons    bentuk data (300, 2), jumlah kelas acuan = 2, ukuran kelas = [150, 150]
+Circles  bentuk data (300, 2), jumlah kelas acuan = 2, ukuran kelas = [150, 150]

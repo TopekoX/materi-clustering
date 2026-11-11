@@ -1,0 +1,4 @@
+Rata-rata Age (manual)        : 38.85
+Simpangan baku Age (manual)   : 13.97
+Rata-rata Age (pandas)        : 38.85
+Simpangan baku Age (pandas)   : 13.97

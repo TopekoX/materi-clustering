@@ -1,0 +1,2 @@
+Bentuk matriks linkage: (199, 4) (n - 1 baris, 4 kolom)
+Tinggi gabung 5 langkah terakhir: [4.35, 9.45, 10.14, 15.19, 15.62]

@@ -1,0 +1,1 @@
+Bulan sabit: bandwidth = 0.668 -> 3 kelompok, ukuran [70, 122, 108]

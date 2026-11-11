@@ -1,0 +1,7 @@
+   Algoritma                                                         Konfigurasi                            Cara menentukan
+     K-Means                          n_clusters = K acuan, n_init = 10, seed 42                             diberi K acuan
+Hierarchical                                n_clusters = K acuan, linkage = ward                             diberi K acuan
+         GMM n_components = K acuan, covariance_type = full, n_init = 3, seed 42                             diberi K acuan
+      DBSCAN                              eps dan min_samples dicari dengan grid dipilih TANPA label (batasan + Silhouette)
+  Mean Shift                                        bandwidth dicari dengan grid dipilih TANPA label (batasan + Silhouette)
+Praproses sama untuk semua: StandardScaler. Seed = 42. Label acuan hanya untuk menilai.

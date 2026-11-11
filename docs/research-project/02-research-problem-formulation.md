@@ -224,6 +224,10 @@ Skrip lengkapnya ada di `examples/level-7/02_research_problem_formulation.py`, d
 --8<-- "level-7/02_research_problem_formulation.py:feasibility"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/02/feasibility.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `facts` adalah dictionary: kunci berupa nama pemeriksaan, nilai berupa hasilnya.
@@ -261,6 +265,10 @@ Skrip lengkapnya ada di `examples/level-7/02_research_problem_formulation.py`, d
 --8<-- "level-7/02_research_problem_formulation.py:examples"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/02/examples.txt"
+```
+
 **Penjelasan:** `examples` adalah dictionary: kunci berupa kode (B untuk buruk, G untuk baik, T untuk jebakan), nilai berupa kalimat. Perulangan mencetak kalimat dan hasil `verdict(check_question(text))`. Kode `B1` sampai `B5` dirancang buruk, `G1` sampai `G3` dirancang baik, dan `T1` dirancang untuk melihat apa yang **tidak** ditangkap pemeriksa.
 
 ### Bagian E — Mencocokkan pertanyaan dengan pendekatan
@@ -269,12 +277,20 @@ Skrip lengkapnya ada di `examples/level-7/02_research_problem_formulation.py`, d
 --8<-- "level-7/02_research_problem_formulation.py:matching"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/02/matching.txt"
+```
+
 **Penjelasan:** `pd.DataFrame([...], columns=[...])` membuat tabel dari daftar baris, setiap baris adalah daftar bernilai lima kolom. `matching.to_string(index=False)` mencetaknya tanpa nomor baris. Tabel ini berfungsi sebagai peta: dari tipe pertanyaan ke pendekatan, evaluasi, dan bab Level 4–6 tempat kamu belajar caranya.
 
 ### Bagian F — Rumusan masalah proyek
 
 ```python
 --8<-- "level-7/02_research_problem_formulation.py:project"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/02/project.txt"
 ```
 
 **Penjelasan:**
@@ -291,6 +307,10 @@ Skrip lengkapnya ada di `examples/level-7/02_research_problem_formulation.py`, d
 
 ```python
 --8<-- "level-7/02_research_problem_formulation.py:save"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/02/save.txt"
 ```
 
 **Penjelasan:** kita menambahkan sidik jari data dan status, lalu menyimpannya sebagai JSON. `rs.RESULTS_DIR.mkdir(exist_ok=True)` membuat folder hasil bila belum ada tanpa error jika sudah ada. `json.dumps(..., indent=2, ensure_ascii=False)` mengubah dictionary menjadi teks JSON yang rapi dan mempertahankan huruf non-ASCII. `out.write_text(..., encoding="utf-8")` menulis berkas. `relative_to(ROOT).as_posix()` menampilkan jalur relatif dengan garis miring biasa. File ini dipakai lagi di bab-bab berikutnya agar rumusan masalah tetap satu sumber kebenaran.
@@ -325,13 +345,11 @@ jupyter notebook notebooks/level-7/02-research-problem-formulation.ipynb
 
 Notebook memuat Bagian A sampai G dari bab ini, ditambah tiga bagian **Praktik** yang tidak ada di halaman: menulis pertanyaan risetmu sendiri, memperluas pemeriksa dengan aturan baru, dan mengisi lembar rumusan masalah.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/02.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 ### Interpretasi output
 

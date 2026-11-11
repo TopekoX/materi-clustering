@@ -1,0 +1,4 @@
+Silhouette label K-Means : 0.486
+Silhouette label benar   : 0.330
+Cohesion label K-Means   : 0.604
+Cohesion label benar     : 0.729

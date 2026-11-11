@@ -1,0 +1,8 @@
+max_iter -> n_iter_, konvergen?, rata-rata log-likelihood per titik (tol sangat kecil)
+max_iter = 1   -> n_iter_ = 1   konvergen = False log-likelihood = -3.6633
+max_iter = 2   -> n_iter_ = 2   konvergen = False log-likelihood = -3.6477
+max_iter = 3   -> n_iter_ = 3   konvergen = False log-likelihood = -3.6376
+max_iter = 5   -> n_iter_ = 5   konvergen = False log-likelihood = -3.6309
+max_iter = 10  -> n_iter_ = 10  konvergen = False log-likelihood = -3.6298
+max_iter = 20  -> n_iter_ = 20  konvergen = False log-likelihood = -3.6297
+max_iter = 50  -> n_iter_ = 27  konvergen = True  log-likelihood = -3.6297

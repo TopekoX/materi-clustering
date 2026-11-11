@@ -1,0 +1,20 @@
+Label unik: [-1, 0, 1, 2, 3, 4]
+Jumlah per label:
+Cluster
+-1    25
+ 0    14
+ 1    12
+ 2    95
+ 3    30
+ 4    24
+Name: count, dtype: int64
+
+Rata-rata tiap kelompok (noise = -1):
+         Annual Income (k$)  Spending Score (1-100)
+Cluster                                            
+-1                     83.0                    60.5
+ 0                     23.6                    76.4
+ 1                     24.6                     9.6
+ 2                     53.3                    47.8
+ 3                     79.5                    83.1
+ 4                     81.9                    13.0

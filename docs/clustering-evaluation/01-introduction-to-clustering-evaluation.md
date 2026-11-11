@@ -175,6 +175,10 @@ Skrip lengkapnya ada di `examples/level-5/01_introduction_to_clustering_evaluati
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:data"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/01/data.txt"
+```
+
 **Penjelasan:**
 
 - `make_blobs(n_samples=300, centers=3, cluster_std=0.6, random_state=42)` membuat 300 titik di 3 gerombol. `cluster_std` mengatur lebar sebaran tiap gerombol: `0.6` rapat, `3.0` lebar sehingga gerombol saling menempel. `random_state=42` menjaga hasil tetap sama tiap dijalankan.
@@ -186,6 +190,10 @@ Skrip lengkapnya ada di `examples/level-5/01_introduction_to_clustering_evaluati
 
 ```python
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:fit"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/01/fit.txt"
 ```
 
 **Penjelasan:**
@@ -202,6 +210,10 @@ Perhatikan: pada data **tanpa kelompok alami**, K-Means tetap memberi tiga kelom
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:scores"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/01/scores.txt"
+```
+
 **Penjelasan:**
 
 - Tiap fungsi metrik menerima **data** `X` dan **label hasil clustering** `labels`. Tidak ada label benar yang dibutuhkan, itulah ciri evaluasi internal.
@@ -213,12 +225,18 @@ Perhatikan: pada data **tanpa kelompok alami**, K-Means tetap memberi tiga kelom
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:plot"
 ```
 
+![Tiga panel: kelompok jelas dengan Silhouette 0,908, kelompok tumpang tindih dengan 0,577, dan data acak tanpa kelompok alami dengan 0,401](../assets/level-5/01-tiga-dataset.png)
+
 **Penjelasan:** `plt.subplots(1, 3)` membuat tiga panel berdampingan. Untuk tiap dataset, kita menggambar titik per kelompok dengan warna berbeda (`labels == j` memilih titik milik kelompok `j`), lalu menaruh nilai Silhouette di judul. `plt.tight_layout()` merapikan jarak antarpanel.
 
 ### Bagian F — Evaluasi relatif: membandingkan K
 
 ```python
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:relative"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/01/relative.txt"
 ```
 
 **Penjelasan:** kita menjalankan K-Means dengan K dari 2 sampai 7 pada data jelas, menghitung Silhouette tiap K, lalu `idxmax()` memberi K dengan skor tertinggi. Inilah *relative evaluation*: tidak ada label benar, kita hanya membandingkan beberapa hasil.
@@ -229,11 +247,17 @@ Perhatikan: pada data **tanpa kelompok alami**, K-Means tetap memberi tiga kelom
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:noclusters"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/01/noclusters.txt"
+```
+
 **Penjelasan:** kita mengulang hal yang sama pada data acak rata, dengan K dari 2 sampai 5.
 
 ```python
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:plotrel"
 ```
+
+![Grafik garis Silhouette terhadap K: data jelas puncak di K = 3 sebesar 0,908, data acak naik turun pelan di sekitar 0,4](../assets/level-5/01-skor-tiap-k.png)
 
 **Penjelasan:** dua garis pada satu grafik: skor tiap K untuk data jelas (biru) dan data acak (oranye). `marker="o"` dan `marker="s"` memberi bentuk titik berbeda agar mudah dibedakan.
 
@@ -241,6 +265,10 @@ Perhatikan: pada data **tanpa kelompok alami**, K-Means tetap memberi tiga kelom
 
 ```python
 --8<-- "level-5/01_introduction_to_clustering_evaluation.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/01/mall.txt"
 ```
 
 **Penjelasan:**
@@ -277,13 +305,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-5/01-introduction-to-clustering-evaluation.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/01.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

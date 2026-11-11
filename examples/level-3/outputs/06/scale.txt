@@ -1,0 +1,2 @@
+Rentang usia   : 52.0
+Rentang income : 122.0

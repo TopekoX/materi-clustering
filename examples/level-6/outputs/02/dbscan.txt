@@ -1,0 +1,8 @@
+experiment_id                          params  n_clusters  noise_fraction  silhouette  davies_bouldin  ari_reference
+        DB-E1 {"eps": 0.15, "min_samples": 5}          16           0.087       0.264           0.634          0.299
+        DB-E2  {"eps": 0.2, "min_samples": 5}           3           0.017       0.355           0.866          0.799
+        DB-E3  {"eps": 0.3, "min_samples": 5}           2           0.000       0.384           1.022          1.000
+        DB-E4  {"eps": 0.4, "min_samples": 5}           2           0.000       0.384           1.022          1.000
+        DB-M1  {"eps": 0.3, "min_samples": 3}           2           0.000       0.384           1.022          1.000
+        DB-M2 {"eps": 0.3, "min_samples": 10}           2           0.007       0.391           1.007          0.987
+        DB-M3 {"eps": 0.3, "min_samples": 20}           3           0.497       0.617           0.508          0.196

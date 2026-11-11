@@ -208,6 +208,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-3/05_distance_metrics.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/05/setup.txt"
+```
+
 **Penjelasan:**
 
 - `A = np.array([1.0, 2.0])` dan `B = np.array([4.0, 6.0])` adalah dua titik dengan dua fitur. Kita memakai `1.0` (bukan `1`) agar tipenya desimal.
@@ -218,6 +222,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-3/05_distance_metrics.py:manual"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/05/manual.txt"
 ```
 
 **Penjelasan:**
@@ -233,6 +241,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-3/05_distance_metrics.py:sklearn"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/05/sklearn.txt"
 ```
 
 **Penjelasan:**
@@ -251,6 +263,10 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 --8<-- "level-3/05_distance_metrics.py:cosine"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/05/cosine.txt"
+```
+
 **Penjelasan:**
 
 - `u`, `v`, dan `w` adalah tiga vektor. `v` searah dengan `u` tetapi dua kali lebih panjang. `w` tegak lurus terhadap `u`.
@@ -264,6 +280,8 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 --8<-- "level-3/05_distance_metrics.py:shape"
 ```
 
+![Tiga bentuk pada bidang dua dimensi: belah ketupat untuk Manhattan, lingkaran untuk Euclidean, dan persegi membulat untuk Minkowski p=8](../assets/level-3/05-bentuk-jarak.png)
+
 **Penjelasan:**
 
 - `np.linspace(0, 2 * np.pi, 400)` membuat 400 sudut dari 0 sampai satu putaran penuh.
@@ -275,6 +293,10 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 
 ```python
 --8<-- "level-3/05_distance_metrics.py:scale"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/05/scale.txt"
 ```
 
 **Penjelasan:**
@@ -315,11 +337,8 @@ jupyter notebook notebooks/level-3/05-distance-metrics.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1):
+Semua output berasal dari eksekusi nyata skrip (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-3/outputs/05.txt"
-```
 
 ### Interpretasi output
 

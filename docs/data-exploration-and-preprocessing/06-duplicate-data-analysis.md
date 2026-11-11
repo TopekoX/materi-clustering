@@ -78,6 +78,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/06_duplicate_data.py:real"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/06/real.txt"
+```
+
 **Penjelasan:**
 
 - `df.duplicated()` mengembalikan `True` untuk baris yang **sama persis** dengan baris sebelumnya. `.sum()` menghitung jumlah `True`.
@@ -87,6 +91,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/06_duplicate_data.py:partial"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/06/partial.txt"
 ```
 
 **Penjelasan:**
@@ -101,6 +109,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/06_duplicate_data.py:simulate"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/06/simulate.txt"
+```
+
 **Penjelasan:**
 
 - `df.sample(n=8, random_state=42)` mengambil 8 baris acak. `random_state=42` adalah *seed*: hasilnya selalu sama setiap dijalankan.
@@ -111,6 +123,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/06_duplicate_data.py:detect"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/06/detect.txt"
 ```
 
 **Penjelasan:**
@@ -125,6 +141,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/06_duplicate_data.py:drop"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/06/drop.txt"
+```
+
 **Penjelasan:**
 
 - `drop_duplicates()` membuang baris ganda dan mengembalikan tabel baru. Karena `keep` tidak ditulis, nilai bawaannya `"first"` dipakai: baris pertama dipertahankan, salinannya dibuang.
@@ -134,6 +154,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/06_duplicate_data.py:verify"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/06/verify.txt"
 ```
 
 **Penjelasan:**
@@ -171,11 +195,8 @@ jupyter notebook notebooks/level-2/06-duplicate-data-analysis.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/06.txt"
-```
 
 **Cara membaca output:**
 

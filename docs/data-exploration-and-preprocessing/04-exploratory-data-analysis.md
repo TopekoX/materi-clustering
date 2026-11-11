@@ -74,6 +74,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/04_exploratory_data_analysis.py:box"
 ```
 
+![Box plot tiga fitur](../assets/level-2/04-boxplot.png)
+
 **Penjelasan:**
 
 - `plt.subplots(1, 3, ...)` membuat tiga grafik berdampingan dalam satu gambar.
@@ -88,6 +90,12 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/04_exploratory_data_analysis.py:bar"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/04/bar.txt"
+```
+
+![Diagram batang jumlah pelanggan per Gender](../assets/level-2/04-gender-bar.png)
+
 **Penjelasan:**
 
 - `value_counts()` menghitung jumlah tiap kategori. Hasilnya punya dua bagian: `.index` (nama kategori) dan `.values` (jumlahnya).
@@ -100,6 +108,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/04_exploratory_data_analysis.py:pairs"
 ```
 
+![Tiga scatter plot pasangan fitur](../assets/level-2/04-scatter-pairs.png)
+
 **Penjelasan:**
 
 - `pasangan` adalah daftar berisi tiga pasangan kolom. Tiap pasangan akan menjadi satu grafik.
@@ -111,6 +121,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```python
 --8<-- "level-2/04_exploratory_data_analysis.py:gender"
 ```
+
+![Scatter plot pendapatan vs skor belanja berwarna menurut Gender](../assets/level-2/04-scatter-gender.png)
 
 **Penjelasan:**
 
@@ -125,6 +137,12 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/04_exploratory_data_analysis.py:heatmap"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/04/heatmap.txt"
+```
+
+![Heatmap korelasi](../assets/level-2/04-heatmap.png)
+
 **Penjelasan:**
 
 - `df[fitur].corr()` menghitung matriks korelasi (Bab 3).
@@ -138,6 +156,12 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```python
 --8<-- "level-2/04_exploratory_data_analysis.py:age"
 ```
+
+```text title="Output"
+--8<-- "level-2/outputs/04/age.txt"
+```
+
+![Rata-rata Spending Score per kelompok usia](../assets/level-2/04-age-group.png)
 
 **Penjelasan:**
 
@@ -177,11 +201,8 @@ jupyter notebook notebooks/level-2/04-exploratory-data-analysis.ipynb
 
 ## Expected Output
 
-Output teks dari eksekusi nyata skrip (pandas 3.1.1, matplotlib 3.11.2, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, matplotlib 3.11.2, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/04.txt"
-```
 
 ### Box plot
 

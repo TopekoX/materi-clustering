@@ -1,0 +1,8 @@
+Simpangan baku terkecil : fractal dimension error 0.00265
+Simpangan baku terbesar : worst area 569.36
+Rasio terbesar/terkecil : 2.15e+05
+Proporsi malignant      : 0.373
+      mean radius  mean area  mean smoothness
+min         6.981    143.500            0.053
+mean       14.127    654.889            0.096
+max        28.110   2501.000            0.163

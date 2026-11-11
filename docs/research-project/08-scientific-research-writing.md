@@ -271,6 +271,10 @@ Skrip lengkapnya ada di `examples/level-7/08_scientific_research_writing.py`. Ba
 --8<-- "level-7/08_scientific_research_writing.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/08/setup.txt"
+```
+
 **Penjelasan:**
 
 - Skrip membaca rumusan masalah (Bab 2), pernyataan celah (Bab 3), kartu data (Bab 4), protokol dan hash (Bab 5), fakta dan buku bukti (Bab 7), serta matriks pustaka (Bab 3). `set_index("id")` dan `index_col="id"` menjadikan kolom `id` sebagai indeks baris, sehingga kalimat bisa dipanggil dengan `ledger.loc["H1", "kalimat"]`.
@@ -283,12 +287,20 @@ Skrip lengkapnya ada di `examples/level-7/08_scientific_research_writing.py`. Ba
 --8<-- "level-7/08_scientific_research_writing.py:title"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/08/title.txt"
+```
+
 **Penjelasan:** `check_title` mengembalikan lima penanda: terlalu pendek (kurang dari 8 kata), terlalu panjang (lebih dari 25 kata), klaim berlebihan, tanpa objek penelitian (tidak menyebut "pengelompokan", "clustering", atau "klaster"), dan tanpa konteks data (tidak memuat kata "pada"). Tanda `f" {low} "` menambahkan spasi di kedua ujung agar kata "pada" dicari sebagai kata utuh. `titles` berisi tiga judul: dua yang sengaja buruk (T1, T2) dan satu yang dipakai (T3). Ini alat bantu berbasis kata kunci, bukan penilai: judul yang lolos belum tentu baik.
 
 ### Bagian C — Abstrak terstruktur
 
 ```python
 --8<-- "level-7/08_scientific_research_writing.py:abstract"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/08/abstract.txt"
 ```
 
 **Penjelasan:**
@@ -306,12 +318,20 @@ Skrip lengkapnya ada di `examples/level-7/08_scientific_research_writing.py`. Ba
 --8<-- "level-7/08_scientific_research_writing.py:sections"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/08/sections.txt"
+```
+
 **Penjelasan:** `section_map` adalah tabel: tiap bagian naskah dipetakan ke **berkas proyek yang menjadi sumbernya**, isi utamanya, dan **saran** panjang kata (saran, bukan aturan; pedoman penerbit yang berlaku). Perulangan `for sources in ...` memecah daftar berkas dengan `split(";")`, lalu `all((RESULTS / n).exists() for n in names)` memeriksa bahwa **semua** berkas sumber ada. Kolom `sumber_ada` bernilai `True` bila lengkap.
 
 ### Bagian E — Tabel konfigurasi, tabel, gambar, dan persamaan
 
 ```python
 --8<-- "level-7/08_scientific_research_writing.py:elements"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/08/elements.txt"
 ```
 
 **Penjelasan:**
@@ -326,12 +346,20 @@ Skrip lengkapnya ada di `examples/level-7/08_scientific_research_writing.py`. Ba
 --8<-- "level-7/08_scientific_research_writing.py:statements"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/08/statements.txt"
+```
+
 **Penjelasan:** pernyataan data dirakit dengan f-string dari kartu data dan protokol: nama dataset, sumber, DOI, lisensi, pembuat, sidik jari, dan 16 karakter pertama hash protokol. `card['sumber_asli'].split(', ')[0]` mengambil nama sumber saja (sebelum koma pertama). Tautan repositori **sengaja ditulis sebagai placeholder** `[TAUTAN REPOSITORI: diisi penulis]`, karena tautan itu belum ditentukan. Pernyataan etik mencatat bahwa persetujuan dan de-identifikasi tidak diketahui.
 
 ### Bagian G — Daftar periksa penulisan
 
 ```python
 --8<-- "level-7/08_scientific_research_writing.py:checklist"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/08/checklist.txt"
 ```
 
 **Penjelasan:**
@@ -345,6 +373,10 @@ Skrip lengkapnya ada di `examples/level-7/08_scientific_research_writing.py`. Ba
 
 ```python
 --8<-- "level-7/08_scientific_research_writing.py:outline"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/08/outline.txt"
 ```
 
 **Penjelasan:** fungsi `block(title, body)` membuat satu bagian Markdown. Kerangka dirakit dari judul, abstrak, tiap bagian naskah (dengan sumber, isi utama, saran panjang, dan penanda `[TODO penulis]`), tabel konfigurasi, daftar tabel dan gambar, pernyataan data dan etik, serta daftar referensi **beserta tingkat bacaannya**. `outline.count("[TODO penulis")` menghitung bagian yang menunggu prosa penulis. Kerangka disimpan sebagai `08_manuscript_outline.md`, dan hasil daftar periksa sebagai CSV.
@@ -379,13 +411,11 @@ python examples/level-7/08_scientific_research_writing.py
 
 Skrip mencetak output dan menyimpan tiga berkas berawalan `08_` di `examples/level-7/results/`: kerangka naskah, daftar periksa, dan peta bagian. Eksekusinya beberapa detik karena tidak ada pelatihan model.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10 dan pandas 3.0.5.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10 dan pandas 3.0.5.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/08.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Kerangka naskah yang dirakit skrip (`results/08_manuscript_outline.md`), ditampilkan sebagai teks mentah:
 

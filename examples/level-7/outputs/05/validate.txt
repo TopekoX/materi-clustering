@@ -1,0 +1,5 @@
+Protokol asli, masalah: []
+  - protokol rusak: RQ2 tidak punya rencana analisis
+  - protokol rusak: label tidak boleh dipakai untuk menyetel
+  - protokol rusak: sidik jari data tidak tercatat
+  - protokol rusak: RQ3 memakai algoritma 'SpectralClustering' yang tidak didefinisikan

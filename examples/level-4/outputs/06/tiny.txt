@@ -1,0 +1,10 @@
+Mulai dari 5.0
+  langkah 1: tetangga = [2.0, 3.0, 4.0], rata-rata = 3.0, pergeseran = -2.00
+  langkah 2: tetangga = [1.0, 2.0, 3.0, 4.0], rata-rata = 2.5, pergeseran = -0.50
+  langkah 3: tetangga = [1.0, 2.0, 3.0, 4.0], rata-rata = 2.5, pergeseran = +0.00
+  -> berhenti di puncak 2.5
+
+Mulai dari 10.0
+  langkah 1: tetangga = [10.0, 11.0, 12.0], rata-rata = 11.0, pergeseran = +1.00
+  langkah 2: tetangga = [10.0, 11.0, 12.0], rata-rata = 11.0, pergeseran = +0.00
+  -> berhenti di puncak 11.0

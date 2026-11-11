@@ -1,0 +1,6 @@
+Matriks kovarians:
+ [[3.5    3.4   ]
+ [3.4    3.3667]]
+Nilai eigen          : [6.834  0.0327]
+Rasio varians manual : [0.9952 0.0048]
+Vektor eigen pertama : [-0.714  -0.7001]

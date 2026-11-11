@@ -1,0 +1,19 @@
+Ringkasan fitur baru:
+count    200.00
+mean       1.07
+std        0.97
+min        0.01
+25%        0.63
+50%        0.89
+75%        1.13
+max        5.40
+Name: Spend_Income_Ratio, dtype: float64
+
+Skewness fitur baru: 2.43
+
+Korelasi fitur baru dengan fitur asal:
+Age                      -0.32
+Annual Income (k$)       -0.57
+Spending Score (1-100)    0.59
+Spend_Income_Ratio        1.00
+Name: Spend_Income_Ratio, dtype: float64

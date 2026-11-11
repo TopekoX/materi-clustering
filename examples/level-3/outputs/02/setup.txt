@@ -1,0 +1,2 @@
+Bentuk XA: (150, 2) | Bentuk XB: (150, 2)
+Jumlah anggota per kelompok (A): [50 50 50]

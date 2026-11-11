@@ -1,0 +1,3 @@
+Pelanggan 1 sebagai titik di ruang 3 dimensi: [19. 15. 39.]
+Pelanggan 2 sebagai titik di ruang 3 dimensi: [21. 15. 81.]
+Jumlah dimensi (fitur): 3

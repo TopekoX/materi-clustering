@@ -1,0 +1,17 @@
+Iterasi 1:
+  centroid yang dipakai : [[1.0, 1.0], [2.0, 1.0]]
+  label tiap titik      : [0, 1, 0, 1, 1, 1, 1, 1]
+  WCSS                  : 166.000
+  pergeseran centroid   : 4.362
+Iterasi 2:
+  centroid yang dipakai : [[1.0, 1.5], [5.0, 4.167]]
+  label tiap titik      : [0, 0, 0, 0, 1, 1, 1, 1]
+  WCSS                  : 21.111
+  pergeseran centroid   : 2.007
+Iterasi 3:
+  centroid yang dipakai : [[1.5, 1.5], [6.5, 5.5]]
+  label tiap titik      : [0, 0, 0, 0, 1, 1, 1, 1]
+  WCSS                  : 4.000
+  pergeseran centroid   : 0.000
+
+Centroid akhir: [[1.5, 1.5], [6.5, 5.5]]

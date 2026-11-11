@@ -1,0 +1,5 @@
+Median Age: 36.0
+Median Annual Income (k$): 61.5
+
+Nilai kosong tersisa: 0
+Ukuran: (200, 5)

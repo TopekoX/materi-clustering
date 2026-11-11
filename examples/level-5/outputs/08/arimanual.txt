@@ -1,0 +1,3 @@
+Pasangan sel = 5, baris = 9, kolom = 10, total pasangan = 36, diharapkan = 2.500, maksimum = 9.5
+ARI manual        = 0.3571
+ARI scikit-learn  = 0.3571

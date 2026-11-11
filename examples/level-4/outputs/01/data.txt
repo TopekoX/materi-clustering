@@ -1,0 +1,10 @@
+Bentuk X_blobs: (300, 2)
+Bentuk X_moons: (300, 2)
+
+Lima baris pertama X_blobs:
+      x1     x2
+0 -7.247 -7.560
+1 -7.568 -7.188
+2 -1.851  8.038
+3  4.466  2.852
+4 -8.510 -7.687

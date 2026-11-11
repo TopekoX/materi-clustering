@@ -1,0 +1,7 @@
+            Age  Annual Income (k$)  Spending Score (1-100)
+CustomerID                                                 
+1            19                  15                      39
+2            21                  15                      81
+3            20                  16                       6
+4            23                  16                      77
+5            31                  17                      40

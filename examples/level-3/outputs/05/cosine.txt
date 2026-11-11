@@ -1,0 +1,2 @@
+u dan v (searah): cosine similarity = 1.0000, cosine distance = 0.0000, Euclidean = 2.2361
+u dan w (tegak lurus): cosine similarity = 0.0000, cosine distance = 1.0000, Euclidean = 3.1623

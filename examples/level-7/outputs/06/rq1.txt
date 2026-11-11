@@ -1,0 +1,7 @@
+stab_seed_mean  : 0.9814
+stab_seed_min   : 0.9647
+pasangan        : 190
+stab_sub_mean   : 0.9638
+stab_sub_min    : 0.8709
+stab_sub_max    : 1.0
+ukuran_subsampel: 455

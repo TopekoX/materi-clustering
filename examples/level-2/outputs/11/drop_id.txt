@@ -1,0 +1,2 @@
+Kolom sebelum: ['CustomerID', 'Gender', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)']
+Kolom sesudah: ['Gender', 'Age', 'Annual Income (k$)', 'Spending Score (1-100)']

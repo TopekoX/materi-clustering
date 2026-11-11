@@ -1,0 +1,3 @@
+Ukuran kelompok Wine: {'A': 65, 'B': 62, 'C': 51}
+Silhouette (13 fitur terstandar): 0.285
+ARI terhadap label cultivar (hanya untuk evaluasi, bukan masukan): 0.897

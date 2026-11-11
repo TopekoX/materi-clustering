@@ -126,7 +126,7 @@ r_{31} = \frac{0{,}5 \times 0{,}12099}{0{,}5 \times 0{,}12099 + 0{,}5 \times 0{,
 r_{32} \approx 0{,}0675
 $$
 
-Titik \( x = 3 \) "milik" komponen 1 dengan peluang sekitar 93,25% dan komponen 2 sekitar 6,75%. Dengan cara yang sama kita hitung semua titik (tabel ada di bagian Expected Output).
+Titik \( x = 3 \) "milik" komponen 1 dengan peluang sekitar 93,25% dan komponen 2 sekitar 6,75%. Dengan cara yang sama kita hitung semua titik (tabelnya ada pada output langkah terkait di bagian Python Implementation).
 
 **M-step.** Dengan semua responsibility, hitung ulang parameter. Misalnya total tanggung jawab komponen 1 adalah \( N_1 = \sum_i r_{i1} \approx 2{,}998 \), sehingga:
 
@@ -330,10 +330,18 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:gauss1d"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/05/gauss1d.txt"
+```
+
 **Penjelasan:** fungsi `normal_pdf` adalah rumus Gaussian satu dimensi: `np.exp(...)` untuk bagian eksponen, dan `np.sqrt(2 * np.pi * var)` untuk penyebut. Kita menghitung dua nilai yang sama dengan contoh manual: \( \mathcal{N}(3 \mid 1, 4) \approx 0{,}121 \) dan \( \mathcal{N}(3 \mid 8, 4) \approx 0{,}00876 \).
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:gauss2d"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/05/gauss2d.txt"
 ```
 
 **Penjelasan:**
@@ -348,12 +356,18 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:plotcov"
 ```
 
+![Empat kontur Gaussian dua dimensi: spherical berbentuk lingkaran, diag berbentuk elips mendatar, full dengan korelasi positif miring ke kanan atas, full dengan korelasi negatif miring ke kanan bawah](../assets/level-4/05-gaussian-kovarians.png)
+
 **Penjelasan:** `np.meshgrid` membuat kisi titik di bidang dari \(-4\) sampai \(4\). `grid` meratakannya menjadi daftar titik `(40000, 2)`. Untuk tiap bentuk kovarians kita hitung kepadatan di semua titik kisi, lalu `ax.contour(...)` menggambar garis kontur. `ax.set_aspect("equal")` membuat skala x dan y sama supaya lingkaran tampak bulat.
 
 ### Bagian C — Algoritma EM dari nol (satu dimensi)
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:em1d"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/05/em1d.txt"
 ```
 
 **Penjelasan baris demi baris:**
@@ -375,10 +389,16 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:plotem"
 ```
 
+![Dua panel kurva Gaussian satu dimensi: tebakan awal dengan dua lonceng lebar di sekitar 1 dan 8, dan setelah 8 iterasi EM dengan dua lonceng yang lebih sempit tepat di atas dua gerombol titik](../assets/level-4/05-em-1d.png)
+
 **Penjelasan:** dua panel: tebakan awal dan hasil setelah 8 iterasi. Tiap komponen digambar sebagai kurva terbobot (`w[k] * normal_pdf(...)`), dan garis putus-putus hitam adalah **campurannya** (jumlah kedua kurva). Titik-titik data digambar di sumbu bawah.
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:emsk"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/05/emsk.txt"
 ```
 
 **Penjelasan:** kita menjalankan `GaussianMixture` scikit-learn dengan tebakan awal yang sama (`means_init`, `weights_init`, `precisions_init`; presisi adalah 1/varians \( = 1/4 = 0{,}25 \)) dan `tol` sangat kecil supaya konvergen penuh, lalu membandingkan hasilnya dengan EM buatan sendiri. `gm_1d.score(x[:, None]) * len(x)` mengubah rata-rata log-likelihood per titik menjadi total.
@@ -387,6 +407,10 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:data2d"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/05/data2d.txt"
 ```
 
 **Penjelasan:** `true_components` mendaftar tiga komponen yang kita pakai membangkitkan data: jumlah titik, rata-rata, dan matriks kovarians. `rng.multivariate_normal(mean, cov, size=n)` mengambil `n` titik dari Gaussian dengan parameter itu. `np.vstack` menumpuk ketiganya menjadi `X` berisi 600 titik. Komentar pada tiap baris menjelaskan bentuk elipsnya.
@@ -406,6 +430,10 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:fit"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/05/fit.txt"
+```
+
 **Penjelasan:**
 
 - `GaussianMixture(n_components=3, covariance_type="full", ...)` mengatur parameter yang dibahas. `n_init=5` menjalankan EM dari 5 awal berbeda dan mengambil yang terbaik.
@@ -414,6 +442,10 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:proba"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/05/proba.txt"
 ```
 
 **Penjelasan:**
@@ -427,10 +459,18 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:manual"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/05/manual.txt"
+```
+
 **Penjelasan:** kita menghitung responsibility sendiri dengan rumus E-step memakai `mvn_pdf` dan parameter hasil `gmm`. Perulangan `[... for k in range(3)]` membuat satu kolom per komponen, `np.column_stack` menyatukannya, dan pembagian dengan jumlah baris menormalkan. Lalu kita ambil selisih terbesar dengan `predict_proba`.
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:iterations"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/05/iterations.txt"
 ```
 
 **Penjelasan:** kita menjalankan GMM dengan `max_iter` = 1, 2, 3, 5, 10, 20, 50 dan `tol=1e-8` (sangat ketat, agar tidak berhenti dini). `warnings.catch_warnings()` dan `simplefilter("ignore", ...)` menyembunyikan `ConvergenceWarning` yang wajar muncul ketika `max_iter` terlalu kecil. Kita mencetak `n_iter_`, `converged_`, dan log-likelihood tiap kali.
@@ -441,11 +481,17 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:covtypes"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/05/covtypes.txt"
+```
+
 **Penjelasan:** `param_formula` menghitung jumlah parameter kovarians dengan rumus pada tabel. Perulangan melatih satu model untuk tiap `covariance_type`, dan mencetak bentuk `covariances_` serta ukuran komponen. `//` adalah pembagian bulat.
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:plotcov2"
 ```
+
+![Empat panel hasil GMM dengan covariance_type full, tied, diag, dan spherical, tiap panel berisi tiga elips hitam](../assets/level-4/05-tipe-kovarians.png)
 
 **Penjelasan:** empat panel, satu per tipe kovarians. Tiap panel menggambar titik berwarna menurut komponen dan elips hitam sebagai kontur 2 simpangan baku tiap komponen. `full_covariances(model)[j]` mengambil matriks penuh komponen `j`.
 
@@ -455,12 +501,22 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:plotcmp"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/05/plotcmp.txt"
+```
+
+![Dua panel: K-Means dengan batas lurus dan centroid, dan GMM full dengan tiga elips miring serta titik besar di daerah tumpang tindih](../assets/level-4/05-kmeans-vs-gmm.png)
+
 **Penjelasan:** panel kiri adalah K-Means dengan centroid (`X` hitam). Panel kanan adalah GMM `full` dengan elips. Ukuran titik pada panel kanan: `10 + 60 * (1 - confidence) ** 0.5`, jadi titik dengan keyakinan rendah digambar **lebih besar**. Pangkat 0,5 (akar) memperjelas perbedaan di antara titik-titik yang cukup yakin.
 
 ### Bagian H — Mall Customers
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/05/mall.txt"
 ```
 
 **Penjelasan:**
@@ -474,11 +530,17 @@ Skrip lengkapnya ada di `examples/level-4/05_gaussian_mixture_models.py`, dan ve
 --8<-- "level-4/05_gaussian_mixture_models.py:newpoint"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/05/newpoint.txt"
+```
+
 **Penjelasan:** `scaler.transform(...)` (bukan `fit_transform`) menyamakan skala pelanggan baru, lalu `predict_proba` dan `predict` memberi peluang dan label.
 
 ```python
 --8<-- "level-4/05_gaussian_mixture_models.py:plotmall"
 ```
+
+![Scatter plot Mall Customers dengan lima elips komponen GMM dan titik besar pada pelanggan yang kurang pasti keanggotaannya](../assets/level-4/05-mall-customers.png)
 
 **Penjelasan:** scatter plot dengan ukuran titik menurut ketidakyakinan, plus elips komponen. Kovarians diubah ke satuan asli: jika data diskalakan dengan `scale_` (simpangan baku), maka kovarians asli \( = \Sigma \cdot (s_i s_j) \), ditulis `gmm_mall.covariances_[j] * np.outer(scaler.scale_, scaler.scale_)`. Rata-rata dikembalikan dengan `inverse_transform`.
 
@@ -511,13 +573,11 @@ Skrip mencetak output ke terminal dan menyimpan lima gambar ke `docs/assets/leve
 jupyter notebook notebooks/level-4/05-gaussian-mixture-models.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-4/outputs/05.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

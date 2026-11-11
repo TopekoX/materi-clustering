@@ -1,0 +1,11 @@
+Tabel kotor setelah dibersihkan:
+   CustomerID  Gender   Age  Annual Income (k$)  Spending Score (1-100)
+0           1    Male  19.0                  15                      39
+1           2  Female  21.0                  15                      81
+2           3  Female   NaN                  16                       6
+3           4    Male  23.0                  16                      77
+4           5  Female   NaN                  17                      40
+
+Isi kolom Age pada data asli tetap sama? True
+Tipe Age sebelum : int64
+Tipe Age sesudah : float64

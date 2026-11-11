@@ -1,0 +1,6 @@
+z-score (baseline)  : ukuran kelompok [81, 39, 35, 23, 22] | ARI terhadap baseline 1.000
+min-max             : ukuran kelompok [81, 39, 35, 23, 22] | ARI terhadap baseline 1.000
+tanpa penskalaan    : ukuran kelompok [81, 39, 35, 23, 22] | ARI terhadap baseline 1.000
+Wine, z-score (baseline)  : ukuran kelompok [65, 62, 51] | ARI terhadap baseline 1.000
+Wine, min-max             : ukuran kelompok [62, 61, 55] | ARI terhadap baseline 0.918
+Wine, tanpa penskalaan    : ukuran kelompok [69, 62, 47] | ARI terhadap baseline 0.354

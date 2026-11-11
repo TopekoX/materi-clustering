@@ -104,6 +104,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/02_data_types.py:dtypes"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/02/dtypes.txt"
+```
+
 **Penjelasan:**
 
 - `df.dtypes` menampilkan tipe data setiap kolom, satu baris per kolom.
@@ -114,6 +118,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/02_data_types.py:split"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/02/split.txt"
 ```
 
 **Penjelasan:**
@@ -129,6 +137,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/02_data_types.py:unique"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/02/unique.txt"
+```
+
 **Penjelasan:**
 
 - `df.nunique()` menghitung **ada berapa nilai berbeda** di setiap kolom.
@@ -139,6 +151,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/02_data_types.py:category"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/02/category.txt"
 ```
 
 **Penjelasan:**
@@ -152,6 +168,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/02_data_types.py:scale"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/02/scale.txt"
 ```
 
 **Penjelasan:**
@@ -191,11 +211,8 @@ jupyter notebook notebooks/level-2/02-understanding-data-types.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/02.txt"
-```
 
 **Cara membaca output:**
 

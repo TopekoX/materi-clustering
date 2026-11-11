@@ -1,0 +1,6 @@
+Jumlah baris (sampel) : 569
+Jumlah fitur          : 30
+Nilai hilang          : 0
+Diagnosis (hanya untuk validasi): {'benign': 357, 'malignant': 212}
+Sidik jari data       : 6b202a2072f9
+Contoh nama fitur     : ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness']

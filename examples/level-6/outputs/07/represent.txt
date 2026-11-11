@@ -1,0 +1,6 @@
+Kelompok  CustomerID Gender  Age  Income  Score
+       A          81   Male   57      54     51
+       B         176 Female   30      88     86
+       C         177   Male   58      88     15
+       D          25 Female   54      28     14
+       E          26   Male   29      28     82

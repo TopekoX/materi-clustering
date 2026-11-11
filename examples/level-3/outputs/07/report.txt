@@ -1,0 +1,5 @@
+Kelompok 0: 81 pelanggan (40.5%), pendapatan rata-rata 55.3, skor belanja rata-rata 49.5, usia rata-rata 42.7
+Kelompok 1: 39 pelanggan (19.5%), pendapatan rata-rata 86.5, skor belanja rata-rata 82.1, usia rata-rata 32.7
+Kelompok 2: 22 pelanggan (11.0%), pendapatan rata-rata 25.7, skor belanja rata-rata 79.4, usia rata-rata 25.3
+Kelompok 3: 35 pelanggan (17.5%), pendapatan rata-rata 88.2, skor belanja rata-rata 17.1, usia rata-rata 41.1
+Kelompok 4: 23 pelanggan (11.5%), pendapatan rata-rata 26.3, skor belanja rata-rata 20.9, usia rata-rata 45.2

@@ -1,0 +1,2 @@
+Kelompok 0: cohesion = 0.491, rata-rata jarak ke tetangga terdekat = 0.071
+Kelompok 1: cohesion = 1.930, rata-rata jarak ke tetangga terdekat = 0.289

@@ -255,6 +255,10 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:tiny"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/03/tiny.txt"
+```
+
 **Penjelasan:**
 
 - `X_line` adalah array `(5, 1)`: lima baris, satu kolom. Kita beri nama A sampai E.
@@ -267,6 +271,10 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:linkmat"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/03/linkmat.txt"
+```
+
 **Penjelasan:**
 
 - `linkage(X_line, method=method)` membangun pohon dan mengembalikan **matriks linkage** dengan `n - 1 = 4` baris. Tiap baris adalah satu penggabungan, dengan empat kolom: nomor kelompok pertama, nomor kelompok kedua, **jarak penggabungan (tinggi)**, dan ukuran kelompok hasil.
@@ -277,6 +285,10 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:wardcheck"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/03/wardcheck.txt"
+```
+
 **Penjelasan:** kita menghitung sendiri tinggi penggabungan Ward terakhir dengan rumus \( \sqrt{2 \cdot n_A n_B / (n_A + n_B)} \cdot \lVert \mu_A - \mu_B \rVert \). `A.mean(axis=0)` adalah rata-rata kolom (centroid), dan `np.linalg.norm(...)` menghitung jarak antar centroid. Hasilnya harus sama dengan baris terakhir matriks linkage Ward.
 
 ### Bagian D — Dendrogram kecil
@@ -284,6 +296,8 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 ```python
 --8<-- "level-4/03_hierarchical_clustering.py:plottiny"
 ```
+
+![Empat dendrogram untuk lima titik A sampai E dengan linkage single, complete, average, dan ward; tinggi penggabungan terakhir berbeda di tiap panel](../assets/level-4/03-dendrogram-kecil.png)
 
 **Penjelasan:**
 
@@ -297,6 +311,10 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:blobs"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/03/blobs.txt"
+```
+
 **Penjelasan:**
 
 - `AgglomerativeClustering(n_clusters=3, linkage="ward", compute_distances=True)` membuat model. `compute_distances=True` menyimpan jarak penggabungan di `distances_`.
@@ -308,12 +326,20 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:threshold"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/03/threshold.txt"
+```
+
 **Penjelasan:** alih-alih menyebut jumlah kelompok, kita memberi **ambang jarak**. `n_clusters=None` wajib saat memakai `distance_threshold`. Penggabungan hanya dilakukan jika jaraknya di bawah ambang. Jumlah kelompok yang dihasilkan terbaca dari `n_clusters_`.
 
 ### Bagian F — Linkage pada bentuk data yang berbeda
 
 ```python
 --8<-- "level-4/03_hierarchical_clustering.py:shapes"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/03/shapes.txt"
 ```
 
 **Penjelasan:**
@@ -326,12 +352,18 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:plotshapes"
 ```
 
+![Grid 2 baris kali 4 kolom: hasil pengelompokan pada data moons (atas) dan data dua gerombol dengan jembatan (bawah) memakai linkage single, complete, average, dan ward](../assets/level-4/03-linkage-bentuk.png)
+
 **Penjelasan:** grid 2 baris × 4 kolom. Setiap titik diwarnai menurut kelompok hasil linkage tersebut. Sumbu disembunyikan agar yang terlihat hanya bentuk pengelompokan.
 
 ### Bagian G — Dendrogram Mall Customers
 
 ```python
 --8<-- "level-4/03_hierarchical_clustering.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/03/mall.txt"
 ```
 
 **Penjelasan:**
@@ -344,6 +376,8 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:plotmall"
 ```
 
+![Dendrogram Mall Customers yang dipangkas ke 16 cabang terakhir dengan garis potong horizontal di tinggi 7](../assets/level-4/03-dendrogram-mall.png)
+
 **Penjelasan:**
 
 - Dendrogram untuk 200 titik terlalu padat, jadi `truncate_mode="lastp"` dan `p=16` memangkasnya menjadi **16 cabang terakhir**. Angka dalam kurung adalah jumlah pelanggan di cabang itu (`show_leaf_counts=True`).
@@ -351,6 +385,10 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 
 ```python
 --8<-- "level-4/03_hierarchical_clustering.py:cut"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/03/cut.txt"
 ```
 
 **Penjelasan:**
@@ -364,10 +402,18 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 --8<-- "level-4/03_hierarchical_clustering.py:metric"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/03/metric.txt"
+```
+
 **Penjelasan:** kita menjalankan linkage `average` dengan tiga ukuran jarak (`euclidean`, `manhattan`, `cosine`) dan membandingkan ukuran kelompok. Hanya `ward` yang dibatasi pada Euclidean, `average` bebas.
 
 ```python
 --8<-- "level-4/03_hierarchical_clustering.py:memory"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/03/memory.txt"
 ```
 
 **Penjelasan:** perhitungan murni: jumlah pasangan \( n(n-1)/2 \), dikali 8 byte per angka `float64`, dibagi \( 1024^3 \) untuk mendapat gibibyte. `//` adalah pembagian bulat dan `{n:>16,}` memformat angka rata kanan dengan pemisah ribuan. Ini **perkiraan matriks jarak**, bukan pengukuran memori nyata.
@@ -375,6 +421,8 @@ Skrip lengkapnya ada di `examples/level-4/03_hierarchical_clustering.py`, dan ve
 ```python
 --8<-- "level-4/03_hierarchical_clustering.py:plotresult"
 ```
+
+![Scatter plot Mall Customers dengan lima kelompok hasil Ward](../assets/level-4/03-hasil-mall.png)
 
 **Penjelasan:** scatter plot Mall Customers dengan lima kelompok hasil Ward.
 
@@ -405,13 +453,11 @@ Skrip mencetak output ke terminal dan menyimpan empat gambar ke `docs/assets/lev
 jupyter notebook notebooks/level-4/03-hierarchical-clustering.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, SciPy 1.18.1, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, SciPy 1.18.1, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-4/outputs/03.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

@@ -1,0 +1,6 @@
+          Algoritma  punya labels_  punya predict()  punya predict_proba()  punya pusat
+            K-Means           True             True                  False         True
+Hierarchical (Ward)           True            False                  False        False
+             DBSCAN           True            False                  False        False
+                GMM          False             True                   True         True
+         Mean Shift           True             True                  False         True

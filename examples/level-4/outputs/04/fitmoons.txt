@@ -1,0 +1,5 @@
+Label unik: [-1, 0, 1]
+Jumlah kelompok: 2
+Jumlah noise (label -1): 7
+Ukuran tiap kelompok: [155, 153]
+Titik inti: 303, tepi: 5, noise: 7

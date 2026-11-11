@@ -1,0 +1,2 @@
+Rata-rata A,B,C = 1.500; rata-rata D,E = 8.000
+Tinggi gabung Ward terakhir (rumus) = 10.070

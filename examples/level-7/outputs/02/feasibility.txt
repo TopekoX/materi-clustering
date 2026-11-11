@@ -1,0 +1,7 @@
+jumlah_sampel         : 569
+jumlah_fitur          : 30
+nilai_hilang          : 0
+ada_label_eksternal   : True
+kelas_label           : {'benign': 357, 'malignant': 212}
+ada_kolom_waktu       : False
+ada_kolom_pasien      : False

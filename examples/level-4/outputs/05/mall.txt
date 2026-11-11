@@ -1,0 +1,18 @@
+Konvergen?: True | iterasi: 5
+Bobot komponen: [0.413, 0.197, 0.104, 0.166, 0.121]
+Ukuran komponen: [84, 39, 21, 33, 23]
+Pusat dalam satuan asli:
+   Annual Income (k$)  Spending Score (1-100)
+0                55.7                    49.4
+1                86.2                    82.0
+2                25.1                    80.1
+3                88.8                    16.1
+4                27.0                    22.2
+Pelanggan dengan peluang tertinggi < 0.9: 8 dari 200
+
+Peluang tiga pelanggan paling tidak pasti:
+              p_0  p_1  p_2    p_3    p_4
+CustomerID                               
+125         0.497  0.0  0.0  0.503  0.000
+49          0.611  0.0  0.0  0.000  0.388
+50          0.611  0.0  0.0  0.000  0.388

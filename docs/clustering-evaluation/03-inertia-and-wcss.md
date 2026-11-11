@@ -182,6 +182,10 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 --8<-- "level-5/03_inertia_and_wcss.py:manual"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/03/manual.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `total = 0.0` adalah penampung jumlah. Kita mengisinya sambil berjalan.
@@ -197,6 +201,10 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 --8<-- "level-5/03_inertia_and_wcss.py:sklearn"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/03/sklearn.txt"
+```
+
 **Penjelasan:** `KMeans(n_clusters=2, ...).fit(X_tiny)` melatih K-Means. `km_tiny.inertia_` adalah Inertia hasil pelatihan. **Perhatikan:** tanda garis bawah di akhir (`inertia_`) adalah konvensi scikit-learn untuk atribut yang baru ada setelah `fit`. `km_tiny.labels_` adalah label hasil K-Means. Kita memeriksa apakah ia sama dengan label buatan tangan kita.
 
 ### Bagian E — WCSS sebagai fungsi
@@ -205,12 +213,20 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 --8<-- "level-5/03_inertia_and_wcss.py:wcssfunc"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/03/wcssfunc.txt"
+```
+
 **Penjelasan:** hitungan yang sama dibungkus dalam fungsi `wcss(X, labels)` yang **menerima label apa pun**, bukan hanya label K-Means. `np.unique(labels)` mendaftar kelompok. Fungsi ini kita pakai lagi pada data moons untuk menilai label benar.
 
 ### Bagian F — Inertia untuk K = 1 sampai 10
 
 ```python
 --8<-- "level-5/03_inertia_and_wcss.py:blobs"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/03/blobs.txt"
 ```
 
 **Penjelasan:**
@@ -225,11 +241,17 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 --8<-- "level-5/03_inertia_and_wcss.py:kequalsn"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/03/kequalsn.txt"
+```
+
 **Penjelasan:** pada enam titik, K-Means dengan K = 6 menjadikan tiap titik kelompoknya sendiri.
 
 ```python
 --8<-- "level-5/03_inertia_and_wcss.py:plotk"
 ```
+
+![Grafik garis Inertia terhadap K dari 1 sampai 10: turun tajam dari sekitar 27365 ke 767 pada K = 4, lalu melandai sampai sekitar 389 pada K = 10](../assets/level-5/03-inertia-vs-k.png)
 
 **Penjelasan:** `ax.plot(..., marker="o")` menggambar garis dengan titik bulat di tiap K. `ax.set_xticks(k_values)` menampilkan tiap bilangan K di sumbu horizontal.
 
@@ -237,6 +259,10 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 
 ```python
 --8<-- "level-5/03_inertia_and_wcss.py:scale"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/03/scale.txt"
 ```
 
 **Penjelasan:**
@@ -251,6 +277,10 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 --8<-- "level-5/03_inertia_and_wcss.py:notuniversal"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/03/notuniversal.txt"
+```
+
 **Penjelasan:** `hasattr(objek, "nama")` bernilai `True` jika objek punya atribut itu. K-Means punya `inertia_`, DBSCAN tidak. DBSCAN tidak meminimalkan jarak ke centroid, jadi konsep Inertia bukan bagian dari modelnya.
 
 ### Bagian I — Inertia yang menyesatkan pada moons
@@ -259,9 +289,15 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 --8<-- "level-5/03_inertia_and_wcss.py:moons"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/03/moons.txt"
+```
+
 ```python
 --8<-- "level-5/03_inertia_and_wcss.py:plotmoons"
 ```
+
+![Dua panel data moons: hasil K-Means dengan Inertia 121,6 dan label benar dengan WCSS 180,9](../assets/level-5/03-moons-inertia.png)
 
 **Penjelasan:** kita membandingkan Inertia hasil K-Means dengan WCSS label benar (`y_moons`). Label benar hanya dipakai untuk **dihitung**, tidak untuk melatih K-Means.
 
@@ -269,6 +305,10 @@ Skrip lengkapnya ada di `examples/level-5/03_inertia_and_wcss.py`, dan notebook-
 
 ```python
 --8<-- "level-5/03_inertia_and_wcss.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/03/mall.txt"
 ```
 
 **Penjelasan:** list comprehension `[... for k in range(1, 11)]` menjalankan K-Means untuk K = 1 sampai 10 dalam satu baris. Hasil tabel ini dipakai lagi di Bab 4.
@@ -303,13 +343,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-5/03-inertia-and-wcss.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/03.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

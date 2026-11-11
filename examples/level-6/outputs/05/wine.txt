@@ -1,0 +1,6 @@
+Wine: (178, 13) | kelas acuan: [59, 71, 48]
+Pasangan fitur dengan |korelasi| > 0.7:
+  total_phenols                  flavanoids                     r = +0.865
+  flavanoids                     od280/od315_of_diluted_wines   r = +0.787
+Fitur disimpan setelah penyaringan redundansi: 12 dari 13
+Fitur dibuang: ['flavanoids']

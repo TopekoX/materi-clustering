@@ -1,0 +1,8 @@
+Ukuran kelompok: [75, 75, 75, 75]
+Centroid (cluster_centers_):
+ [[-2.653  8.982]
+ [-6.837 -6.835]
+ [ 4.71   2.035]
+ [-8.833  7.205]]
+Inertia (WCSS): 458.754
+Jumlah iterasi (n_iter_): 3

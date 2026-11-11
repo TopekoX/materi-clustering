@@ -1,0 +1,2 @@
+Jumlah kombinasi: 66
+Kombinasi dengan Silhouette bisa dihitung: 50 dari 66

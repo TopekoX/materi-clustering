@@ -1,0 +1,7 @@
+Jumlah keputusan tercatat: 18
+jenis
+dikunci         10
+klarifikasi      5
+pengungkapan     2
+revisi           1
+Amendment pada protokol: 0

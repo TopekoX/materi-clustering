@@ -1,0 +1,2 @@
+Baris ganda tersisa: 0
+Jumlah baris sama dengan data asli? True

@@ -286,6 +286,10 @@ Skrip lengkapnya ada di `examples/level-7/09_reproducibility_and_documentation.p
 --8<-- "level-7/09_reproducibility_and_documentation.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/09/setup.txt"
+```
+
 **Penjelasan:** `LEVEL_DIR.glob("[0-9][0-9]_*.py")` mencari semua berkas skrip yang namanya diawali dua angka, `if not p.name.startswith("09_")` mengecualikan skrip bab ini sendiri, dan `sorted` mengurutkannya. `sha256_of(path)` membaca isi berkas sebagai byte dan menghitung SHA-256 dengan `hashlib.sha256(...).hexdigest()`.
 
 ### Bagian B — Struktur proyek yang disarankan
@@ -294,12 +298,20 @@ Skrip lengkapnya ada di `examples/level-7/09_reproducibility_and_documentation.p
 --8<-- "level-7/09_reproducibility_and_documentation.py:layout"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/09/layout.txt"
+```
+
 **Penjelasan:** `layout` adalah tabel yang memetakan setiap direktori atau berkas dari struktur yang disarankan ke padanannya di proyek ini. `layout["ada"] = [Path(p).exists() for p in layout["path"]]` memeriksa apakah tiap path benar-benar ada. Hasilnya 10 dari 10.
 
 ### Bagian C — Audit seed dengan AST
 
 ```python
 --8<-- "level-7/09_reproducibility_and_documentation.py:seeds"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/09/seeds.txt"
 ```
 
 **Penjelasan:**
@@ -316,12 +328,20 @@ Skrip lengkapnya ada di `examples/level-7/09_reproducibility_and_documentation.p
 --8<-- "level-7/09_reproducibility_and_documentation.py:deps"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/09/deps.txt"
+```
+
 **Penjelasan:** `sys.stdlib_module_names` adalah himpunan nama pustaka standar Python. Untuk tiap skrip kita menelusuri simpul `ast.Import` dan `ast.ImportFrom`, mengambil nama modul paling depan (`name.split(".")[0]`), dan menggabungkannya ke himpunan `imported`. Lalu kita membuang pustaka standar dan modul lokal (yang berawalan garis bawah, seperti `_research`). `DISTRIBUTION` memetakan nama modul ke nama paket (misalnya `sklearn` ke `scikit-learn`), karena kedua nama bisa berbeda. `metadata.version(...)` mengambil versi terpasang, dan `unknown` mengumpulkan modul yang belum terpetakan.
 
 ### Bagian E — Urutan eksekusi dari ketergantungan berkas
 
 ```python
 --8<-- "level-7/09_reproducibility_and_documentation.py:order"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/09/order.txt"
 ```
 
 **Penjelasan:** `re.compile(r"\b(\d\d)_[A-Za-z0-9_]+\.(?:json|csv|md|sha256|txt)")` mencari nama berkas seperti `05_protocol.json`: dua angka, garis bawah, nama, dan ekstensi. `findall` mengambil dua angka depannya. Untuk tiap skrip, kita membuang angka milik skrip itu sendiri, dan sisanya adalah bab yang hasilnya **dibaca**. `forward` memuat angka yang lebih besar dari nomor skrip (ketergantungan ke depan, yang seharusnya kosong).
@@ -332,6 +352,10 @@ Skrip lengkapnya ada di `examples/level-7/09_reproducibility_and_documentation.p
 --8<-- "level-7/09_reproducibility_and_documentation.py:decisions"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/09/decisions.txt"
+```
+
 **Penjelasan:** skrip membaca rumusan masalah, kartu data, protokol, dan klarifikasi Bab 6. Perulangan menambahkan entri: kriteria data (Bab 4), praproses dan kebijakan hyperparameter (Bab 5, jenis "dikunci"), pengungkapan (Bab 5), klarifikasi C1 sampai C5 (Bab 6), dan satu **revisi** (Bab 8). `decisions.insert(0, "id", [...])` menambahkan kolom id D1, D2, dan seterusnya di posisi paling kiri. Jumlah per jenis dicetak dengan `value_counts()`.
 
 ### Bagian G — Checksum berkas
@@ -340,12 +364,20 @@ Skrip lengkapnya ada di `examples/level-7/09_reproducibility_and_documentation.p
 --8<-- "level-7/09_reproducibility_and_documentation.py:checksums"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/09/checksums.txt"
+```
+
 **Penjelasan:** `tracked` adalah daftar berkas yang dilacak: skrip, modul bantu, berkas hasil (selain yang berawalan `09_`, karena dihasilkan skrip ini), keluaran teks (selain `outputs/09.txt`, karena berkas itu sedang ditulis oleh skrip ini sendiri dan hash-nya pasti usang), dan gambar. Berkas yang mereferensikan dirinya tidak boleh masuk manifest; cacat ini sempat terjadi pada versi awal skrip dan ditemukan saat bab ini disusun. Tiap berkas dicatat dengan jalur relatif, ukuran byte, dan SHA-256. Hasilnya 67 berkas dengan total 837862 byte.
 
 ### Bagian H — Uji keterulangan
 
 ```python
 --8<-- "level-7/09_reproducibility_and_documentation.py:rerun"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/09/rerun.txt"
 ```
 
 **Penjelasan:**
@@ -362,6 +394,10 @@ Skrip lengkapnya ada di `examples/level-7/09_reproducibility_and_documentation.p
 --8<-- "level-7/09_reproducibility_and_documentation.py:git"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/09/git.txt"
+```
+
 **Penjelasan:** `git(*args)` menjalankan perintah Git dan mengembalikan keluarannya, atau `None` bila gagal. `git rev-parse --short HEAD` mengambil hash commit terakhir. `git status --porcelain --untracked-files=all -- ...` mencetak satu baris per berkas yang belum di-commit; `--untracked-files=all` penting karena tanpanya Git meringkas folder baru menjadi satu baris. Hanya perintah **baca** yang dipakai. Paket bisa menunjuk satu commit hanya bila tidak ada berkas yang belum di-commit.
 
 ### Bagian J — Menulis paket reproduksi
@@ -370,12 +406,20 @@ Skrip lengkapnya ada di `examples/level-7/09_reproducibility_and_documentation.p
 --8<-- "level-7/09_reproducibility_and_documentation.py:package"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/09/package.txt"
+```
+
 **Penjelasan:** `PACKAGE.mkdir(parents=True, exist_ok=True)` membuat folder paket. Enam berkas ditulis dari data yang sudah dihitung: kunci versi, urutan eksekusi, log keputusan (dengan `|` diganti `/` agar tabel Markdown tidak rusak), atribusi data (termasuk pernyataan perubahan), manifest, dan README. README mengambil hash protokol dan sidik jari data dari berkas, dan **status versi kode ditulis jujur** (`state`): bila ada berkas belum di-commit, tertulis bahwa belum ada commit yang bisa dirujuk.
 
 ### Bagian K — Daftar periksa paket
 
 ```python
 --8<-- "level-7/09_reproducibility_and_documentation.py:checklist"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/09/checklist.txt"
 ```
 
 **Penjelasan:** `check(name, ok, detail, warn_only)` menambahkan butir dengan status `LULUS`, `PERINGATAN` (bila `warn_only`), atau `GAGAL`. Butirnya: paket lengkap, seed, dependensi, ketergantungan ke depan, hash protokol, klarifikasi, keterulangan skrip dan berkas, dan status commit. Bila `RERUN=0`, butir keterulangan menjadi `PERINGATAN` ("dilewati"), bukan `LULUS`, supaya tidak ada klaim tanpa pengujian.
@@ -417,13 +461,11 @@ jupyter notebook notebooks/level-7/09-reproducibility-and-documentation.ipynb
 
 Notebook memuat Bagian A sampai K, ditambah tiga bagian **Praktik**: memverifikasi manifest seperti `sha256sum -c`, mengaudit seed pada kodemu sendiri, dan menambah entri log keputusan.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. **Kolom waktu, jumlah baris output Bab 5 yang berbeda, hash commit, dan jumlah berkas yang belum di-commit akan berbeda di mesinmu.**
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. **Kolom waktu, jumlah baris output Bab 5 yang berbeda, hash commit, dan jumlah berkas yang belum di-commit akan berbeda di mesinmu.**
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/09.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 ### Interpretasi output
 

@@ -1,0 +1,8 @@
+                           jumlah_eksekusi
+RQ1 seed                                20
+RQ1 subsampel                           50
+RQ2 level x seed                        60
+RQ3 algoritma tak disetel                3
+RQ3 grid DBSCAN                          8
+Sensitivitas K                          15
+TOTAL                                  156

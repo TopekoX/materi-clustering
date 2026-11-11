@@ -1,0 +1,5 @@
+pertanyaan          : Apakah cara menyamakan skala mengubah pengelompokan pelanggan Mall Customers?
+variabel_bebas      : perlakuan skala fitur (4 kondisi)
+variabel_terkontrol : algoritma K-Means, K = 5, n_init = 10, seed = 42, dua fitur yang sama
+variabel_terikat    : kesamaan pengelompokan dengan baseline (ARI), ukuran kelompok, Silhouette di ruang bersama
+baseline            : StandardScaler

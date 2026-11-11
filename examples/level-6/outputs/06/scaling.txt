@@ -1,0 +1,2 @@
+Tanpa penskalaan: rasio varians komponen 1 dan 2 = [0.9981 0.0017]
+Dengan penskalaan: rasio varians komponen 1 dan 2 = [0.362  0.1921]

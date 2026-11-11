@@ -180,6 +180,10 @@ Skrip lengkapnya ada di `examples/level-5/05_silhouette_score.py`, dan notebook-
 --8<-- "level-5/05_silhouette_score.py:manual"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/05/manual.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `d = np.linalg.norm(X - X[i], axis=1)` menghitung jarak titik `i` ke **semua** titik sekaligus (selisih setiap baris dengan `X[i]`, lalu panjangnya).
@@ -196,12 +200,20 @@ Skrip lengkapnya ada di `examples/level-5/05_silhouette_score.py`, dan notebook-
 --8<-- "level-5/05_silhouette_score.py:check"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/05/check.txt"
+```
+
 **Penjelasan:** list comprehension menghitung \( s(i) \) untuk semua titik secara manual (`[2]` mengambil elemen ketiga, yaitu `s`). `silhouette_samples(X, labels)` menghasilkan hal yang sama dari scikit-learn. `.round(3).tolist()` membulatkan dan mengubah array menjadi daftar biasa. Rata-rata \( s(i) \) harus sama dengan `silhouette_score`.
 
 ### Bagian E — Tiga gerombol dan beberapa K
 
 ```python
 --8<-- "level-5/05_silhouette_score.py:blobs"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/05/blobs.txt"
 ```
 
 **Penjelasan:**
@@ -231,12 +243,18 @@ Skrip lengkapnya ada di `examples/level-5/05_silhouette_score.py`, dan notebook-
 --8<-- "level-5/05_silhouette_score.py:plotblobs"
 ```
 
+![Dua baris tiga kolom: sebaran data dan silhouette plot untuk K = 2, 3, dan 4. K = 3 memiliki pita lebar dan rata dengan rata-rata 0,818, sedangkan K = 4 memiliki dua pita pendek dengan rata-rata 0,655](../assets/level-5/05-silhouette-plot-k.png)
+
 **Penjelasan:** baris atas menggambar sebaran titik, baris bawah silhouette plot. `plt.subplots(2, 3)` membuat dua baris tiga kolom, dan `axes[baris, kolom]` memilih panel.
 
 ### Bagian G — Parameter `metric`, `sample_size`, `random_state`
 
 ```python
 --8<-- "level-5/05_silhouette_score.py:params"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/05/params.txt"
 ```
 
 **Penjelasan:**
@@ -252,12 +270,20 @@ Skrip lengkapnya ada di `examples/level-5/05_silhouette_score.py`, dan notebook-
 --8<-- "level-5/05_silhouette_score.py:errors"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/05/errors.txt"
+```
+
 **Penjelasan:** kita sengaja memberi label yang melanggar syarat. `try ... except ValueError as err` menangkap galat dan mencetak pesannya. Berguna agar kamu mengenali pesan ini saat terjadi sungguhan.
 
 ### Bagian I — Noise pada DBSCAN
 
 ```python
 --8<-- "level-5/05_silhouette_score.py:noise"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/05/noise.txt"
 ```
 
 **Penjelasan:**
@@ -272,12 +298,18 @@ Skrip lengkapnya ada di `examples/level-5/05_silhouette_score.py`, dan notebook-
 --8<-- "level-5/05_silhouette_score.py:plotnoise"
 ```
 
+![Sebaran DBSCAN pada tiga gerombol dengan titik noise abu-abu bertanda x tersebar di sekelilingnya](../assets/level-5/05-dbscan-noise.png)
+
 **Penjelasan:** titik noise digambar abu-abu dengan tanda `x`. Tanda `~mask` berarti kebalikan dari `mask`, yaitu titik noise.
 
 ### Bagian J — Ketika skor tinggi menyesatkan
 
 ```python
 --8<-- "level-5/05_silhouette_score.py:misleading"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/05/misleading.txt"
 ```
 
 **Penjelasan:** pada moons, K-Means memotong bulan sabit, sedangkan DBSCAN (`eps=0.2`) mengikuti bentuk bulan. Kita membandingkan Silhouette keduanya.
@@ -288,9 +320,15 @@ Skrip lengkapnya ada di `examples/level-5/05_silhouette_score.py`, dan notebook-
 --8<-- "level-5/05_silhouette_score.py:mall"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/05/mall.txt"
+```
+
 ```python
 --8<-- "level-5/05_silhouette_score.py:plotmall"
 ```
+
+![Silhouette plot Mall Customers dengan lima pita dan garis rata-rata 0,555](../assets/level-5/05-silhouette-mall.png)
 
 **Penjelasan:** tabel merangkum ukuran, rata-rata, nilai minimum, dan jumlah titik negatif per kelompok. Fungsi `silhouette_plot` yang sama dipakai ulang untuk menggambar plotnya.
 
@@ -323,13 +361,11 @@ Skrip mencetak output ke terminal dan menyimpan tiga gambar ke `docs/assets/leve
 jupyter notebook notebooks/level-5/05-silhouette-score.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/05.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

@@ -1,0 +1,3 @@
+eps = 0.25: 3 kelompok, ukuran [116, 199, 5], noise 80
+eps = 0.5: 2 kelompok, ukuran [190, 203], noise 7
+eps = 0.8: 1 kelompok, ukuran [399], noise 1

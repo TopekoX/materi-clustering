@@ -1,0 +1,49 @@
+Jumlah kelompok yang ditemukan (kelas acuan: 3, 3, 2, 3, 3, 3):
+algorithm          K-Means  Hierarchical  GMM  DBSCAN  Mean Shift
+dataset                                                          
+Jelas                    3             3    3       3           3
+Tumpang tindih           3             3    3       2           3
+Bulan sabit              2             2    2       2           2
+Kepadatan berbeda        3             3    3       3           3
+Dengan noise             3             3    3       3           4
+Miring (elips)           3             3    3       3           2
+
+Proporsi noise (hanya DBSCAN yang punya noise):
+algorithm          K-Means  Hierarchical  GMM  DBSCAN  Mean Shift
+dataset                                                          
+Jelas                  0.0           0.0  0.0   0.049         0.0
+Tumpang tindih         0.0           0.0  0.0   0.087         0.0
+Bulan sabit            0.0           0.0  0.0   0.020         0.0
+Kepadatan berbeda      0.0           0.0  0.0   0.140         0.0
+Dengan noise           0.0           0.0  0.0   0.138         0.0
+Miring (elips)         0.0           0.0  0.0   0.084         0.0
+
+Silhouette (noise dikeluarkan):
+algorithm          K-Means  Hierarchical    GMM  DBSCAN  Mean Shift
+dataset                                                            
+Jelas                0.892         0.892  0.892   0.899       0.892
+Tumpang tindih       0.661         0.653  0.661   0.612       0.661
+Bulan sabit          0.492         0.443  0.492   0.389       0.492
+Kepadatan berbeda    0.784         0.784  0.784   0.837       0.784
+Dengan noise         0.826         0.799  0.826   0.912       0.794
+Miring (elips)       0.734         0.735  0.735   0.776       0.763
+
+ARI terhadap label acuan:
+algorithm          K-Means  Hierarchical    GMM  DBSCAN  Mean Shift
+dataset                                                            
+Jelas                1.000         1.000  1.000   0.926       1.000
+Tumpang tindih       0.987         0.961  0.987   0.492       0.987
+Bulan sabit          0.486         0.524  0.498   0.960       0.492
+Kepadatan berbeda    1.000         1.000  1.000   0.903       1.000
+Dengan noise         0.825         0.825  0.825   0.928       0.858
+Miring (elips)       0.993         1.000  1.000   0.868       0.570
+
+NMI terhadap label acuan:
+algorithm          K-Means  Hierarchical    GMM  DBSCAN  Mean Shift
+dataset                                                            
+Jelas                1.000         1.000  1.000   0.898       1.000
+Tumpang tindih       0.978         0.949  0.978   0.587       0.978
+Bulan sabit          0.388         0.535  0.399   0.925       0.393
+Kepadatan berbeda    1.000         1.000  1.000   0.871       1.000
+Dengan noise         0.806         0.806  0.806   0.895       0.829
+Miring (elips)       0.988         1.000  1.000   0.840       0.734

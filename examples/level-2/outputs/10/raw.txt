@@ -1,0 +1,16 @@
+Rentang tiap fitur:
+     Age  Annual Income (k$)  Spending Score (1-100)
+min   18                  15                       1
+max   70                 137                      99
+
+Varians tiap fitur:
+Age                       195.1
+Annual Income (k$)        689.8
+Spending Score (1-100)    666.9
+dtype: float64
+
+Porsi varians (persen) pada skala asli:
+Age                       12.6
+Annual Income (k$)        44.5
+Spending Score (1-100)    43.0
+dtype: float64

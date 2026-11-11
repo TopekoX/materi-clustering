@@ -1,0 +1,17 @@
+Nilai kosong      : 0
+Baris ganda       : 0
+Semua kolom angka : True
+
+Rata-rata (harus ~0):
+Age                      -0.0
+Annual Income (k$)       -0.0
+Spending Score (1-100)   -0.0
+dtype: float64
+
+Simpangan baku (harus ~1):
+Age                       1.0
+Annual Income (k$)        1.0
+Spending Score (1-100)    1.0
+dtype: float64
+
+Baris sama dengan data asli? True

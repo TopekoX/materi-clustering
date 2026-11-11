@@ -187,6 +187,10 @@ Skrip lengkapnya ada di `examples/level-5/06_davies_bouldin_index.py`, dan noteb
 --8<-- "level-5/06_davies_bouldin_index.py:manual"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/06/manual.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `ks = np.unique(labels)` mendaftar kelompok.
@@ -204,12 +208,20 @@ Skrip lengkapnya ada di `examples/level-5/06_davies_bouldin_index.py`, dan noteb
 --8<-- "level-5/06_davies_bouldin_index.py:check"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/06/check.txt"
+```
+
 **Penjelasan:** `davies_bouldin_score(X, labels)` menerima data dan label, sama seperti metrik lain. Hasilnya harus sama dengan fungsi manual kita.
 
 ### Bagian E — DBI untuk beberapa K
 
 ```python
 --8<-- "level-5/06_davies_bouldin_index.py:blobs"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/06/blobs.txt"
 ```
 
 **Penjelasan:** untuk K = 2 sampai 8 kita menjalankan K-Means dan menghitung DBI serta Silhouette. `idxmin()` memberi K dengan DBI **terendah** dan `idxmax()` memberi K dengan Silhouette **tertinggi** (arah "baik" kedua metrik berlawanan).
@@ -220,12 +232,20 @@ Skrip lengkapnya ada di `examples/level-5/06_davies_bouldin_index.py`, dan noteb
 --8<-- "level-5/06_davies_bouldin_index.py:scale"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/06/scale.txt"
+```
+
 **Penjelasan:** kita menghitung DBI pada data asli dan data yang dikali 10, dengan label yang sama. Sebaran dan jarak antar centroid sama-sama dikali 10, sehingga rasionya tidak berubah.
 
 ### Bagian G — Pengaruh jarak dan sebaran
 
 ```python
 --8<-- "level-5/06_davies_bouldin_index.py:spread"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/06/spread.txt"
 ```
 
 **Penjelasan:** eksperimen pertama menggeser dua pusat sampai 3, 6, dan 12 satuan dengan sebaran tetap. Eksperimen kedua menetapkan jarak pusat 8 satuan dan mengubah sebaran (`cluster_std`) menjadi 0,5; 1,0; dan 2,0. `centers=[[0, 0], [gap, 0]]` menentukan pusat secara eksplisit.
@@ -236,6 +256,8 @@ Skrip lengkapnya ada di `examples/level-5/06_davies_bouldin_index.py`, dan noteb
 --8<-- "level-5/06_davies_bouldin_index.py:plotk"
 ```
 
+![Dua grafik DBI terhadap K: pada empat gerombol jelas minimum di K = 4 sebesar 0,289, dan pada Mall Customers minimum di K = 5 sebesar 0,572](../assets/level-5/06-dbi-vs-k.png)
+
 **Penjelasan:** panel kiri untuk empat gerombol, panel kanan untuk Mall Customers (data distandarkan, K = 2 sampai 10). Kita menghitung DBI Mall Customers dengan dictionary comprehension `{k: ... for k in range(2, 11)}`.
 
 ### Bagian I — Keterbatasan
@@ -244,9 +266,15 @@ Skrip lengkapnya ada di `examples/level-5/06_davies_bouldin_index.py`, dan noteb
 --8<-- "level-5/06_davies_bouldin_index.py:limits"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/06/limits.txt"
+```
+
 ```python
 --8<-- "level-5/06_davies_bouldin_index.py:plotmoons"
 ```
+
+![Dua panel moons: hasil K-Means dengan DBI 0,780 dan label benar dengan DBI 1,151](../assets/level-5/06-moons-dbi.png)
 
 **Penjelasan:** pada moons kita membandingkan DBI K-Means dengan DBI label benar. Pada data acak kita melihat apakah DBI memberi sinyal jelas ketika tidak ada kelompok. Label benar hanya dipakai untuk **dinilai**.
 
@@ -254,6 +282,10 @@ Skrip lengkapnya ada di `examples/level-5/06_davies_bouldin_index.py`, dan noteb
 
 ```python
 --8<-- "level-5/06_davies_bouldin_index.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/06/mall.txt"
 ```
 
 **Penjelasan:** hasil DBI Mall Customers dicetak, dan `min(mall_dbi, key=mall_dbi.get)` mengambil K dengan DBI terendah.
@@ -287,13 +319,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-5/06-davies-bouldin-index.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/06.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

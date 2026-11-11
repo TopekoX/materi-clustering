@@ -1,0 +1,12 @@
+skrip              membaca_hasil_bab ketergantungan_ke_depan
+   01                              -                      []
+   02                              -                      []
+   03                             02                      []
+   04                              -                      []
+   05                         02, 04                      []
+   06                         04, 05                      []
+   07                         05, 06                      []
+   08         02, 03, 04, 05, 06, 07                      []
+   10 02, 03, 04, 05, 06, 07, 08, 09                      []
+   09             02, 03, 04, 05, 06                      []
+Urutan eksekusi: 01 -> 02 -> 03 -> 04 -> 05 -> 06 -> 07 -> 08 -> 10 -> 09 | ada ketergantungan ke depan: False

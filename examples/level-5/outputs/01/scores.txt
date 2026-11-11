@@ -1,0 +1,5 @@
+                         Silhouette  Davies-Bouldin  Calinski-Harabasz
+Dataset                                                               
+Kelompok jelas                0.908           0.128          14321.247
+Kelompok tumpang tindih       0.577           0.596            647.906
+Tanpa kelompok alami          0.401           0.847            251.661

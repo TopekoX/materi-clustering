@@ -1,0 +1,10 @@
+                    bagian saran_kata  sumber_ada
+               Pendahuluan    500-800        True
+            Kajian pustaka   600-1000        True
+                    Metode   800-1200        True
+                     Hasil   700-1000        True
+                Pembahasan   700-1000        True
+              Keterbatasan    200-400        True
+                Kesimpulan    150-300        True
+Ketersediaan data dan kode     80-150        True
+Semua sumber ada: True

@@ -1,0 +1,5 @@
+Kalimat bermasalah pada buku bukti: tidak ada
+Demo: ARI GMM terhadap diagnosis sebesar 0,812, membuktikan bahwa GMM adalah algoritma terbaik.
+   angka tak terlacak: ['0,812'] | kata berlebihan: ['membuktikan', 'terbaik']
+Demo: Ukuran inti sel menyebabkan kelompok ganas, tidak diragukan lagi.
+   angka tak terlacak: [] | kata berlebihan: ['menyebabkan', 'tidak diragukan']

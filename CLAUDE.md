@@ -23,6 +23,7 @@ Learning Objectives, Introduction, Fundamental Concepts, Detailed Explanation, M
 - Satu `# Judul` per halaman; folder dengan `index.md` menjadi landing section.
 - Objective: task list `- [x]`. Peringatan/tips: `!!! warning|tip|note`; jawaban latihan: `??? question`.
 - Kode: fence dengan bahasa, `title="..."`; potongan dari file via `--8<-- "path"` (base `examples/`, `check_paths: true`). Beberapa bahasa/varian: `=== "Tab"`.
+- Output: gambar yang dihasilkan potongan kode ditampilkan sebagai `![alt](../assets/level-N/nama.png)` tepat setelah kodenya (bukan teks `[gambar disimpan: ...]`). Setiap potongan kode yang mencetak sesuatu diikuti blok ` ```text title="Output" ` tepat setelah kodenya, yang menyertakan `examples/level-N/outputs/NN/<nama-bagian>.txt` (output nyata per bagian `[start:nama]`). Jangan menggabungkan seluruh output di bagian Expected Output; bagian itu hanya berisi gambar dan interpretasi. `outputs/NN.txt` (gabungan) tetap disimpan sebagai acuan.
 - Math: `\( … \)` inline, `$$ … $$` display (arithmatex). `$` literal ditulis `\$`.
 - Diagram: fence `mermaid`. Warna CSS hanya lewat `var(--md-*)`.
 - Validasi link/anchor berstatus `warn`, sehingga `mkdocs build --strict` gagal bila ada yang rusak.

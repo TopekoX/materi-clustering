@@ -1,0 +1,9 @@
+A: 3 tetangga ['A', 'B', 'C'] -> inti
+B: 3 tetangga ['A', 'B', 'D'] -> inti
+C: 3 tetangga ['A', 'C', 'D'] -> inti
+D: 4 tetangga ['B', 'C', 'D', 'E'] -> inti
+E: 2 tetangga ['D', 'E'] -> tepi
+F: 1 tetangga ['F'] -> noise
+G: 3 tetangga ['G', 'H', 'I'] -> inti
+H: 3 tetangga ['G', 'H', 'I'] -> inti
+I: 3 tetangga ['G', 'H', 'I'] -> inti

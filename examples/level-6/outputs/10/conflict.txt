@@ -1,0 +1,5 @@
+           silhouette  davies_bouldin  ari_reference
+algorithm                                           
+K-Means         0.492           0.816          0.486
+DBSCAN          0.389           1.016          0.960
+Dipilih menurut Silhouette: K-Means | dipilih menurut ARI terhadap label acuan: DBSCAN

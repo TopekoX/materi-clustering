@@ -1,0 +1,4 @@
+Seed sama (7 dan 7): label identik = True | sidik jari label: 674866d4cc5a 674866d4cc5a
+Seed beda (7 dan 8): label identik = False | ARI = 0.703
+Sidik jari data: edb2a3858344 = edb2a3858344
+Lingkungan: {'python': '3.14.10', 'os': 'Windows', 'numpy': '2.5.2', 'pandas': '3.0.5', 'scikit-learn': '1.9.0', 'scipy': '1.18.1', 'matplotlib': '3.11.1'}

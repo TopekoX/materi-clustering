@@ -1,0 +1,6 @@
+          Algoritma  labels_  predict  predict_proba  pusat kelompok
+            K-Means     True     True          False            True
+Hierarchical (Ward)     True    False          False           False
+             DBSCAN     True    False          False           False
+                GMM    False     True           True            True
+         Mean Shift     True     True          False            True

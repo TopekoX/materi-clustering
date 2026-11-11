@@ -1,0 +1,15 @@
+Ukuran kelompok: {0: 375, 1: 194}
+Enam fitur dengan selisih z-score terbesar antar kelompok:
+                      kelompok_0  kelompok_1  selisih
+mean concave points        -0.59        1.13     1.72
+worst concave points       -0.58        1.12     1.70
+mean concavity             -0.58        1.12     1.70
+worst concavity            -0.54        1.04     1.57
+worst perimeter            -0.53        1.03     1.56
+mean compactness           -0.53        1.02     1.54
+Tabulasi silang kelompok x diagnosis (jumlah):
+diagnosis  benign  malignant
+kelompok                    
+0             339         36
+1              18        176
+Proporsi malignant per kelompok: {0: 0.096, 1: 0.907}

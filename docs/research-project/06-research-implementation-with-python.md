@@ -192,6 +192,10 @@ Skrip lengkapnya ada di `examples/level-7/06_research_implementation.py`, dan no
 --8<-- "level-7/06_research_implementation.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/06/setup.txt"
+```
+
 **Penjelasan:**
 
 - Impor mencakup empat algoritma, tiga metrik internal, dua metrik eksternal, dua scaler, PCA, dan `NearestNeighbors`.
@@ -205,6 +209,10 @@ Skrip lengkapnya ada di `examples/level-7/06_research_implementation.py`, dan no
 --8<-- "level-7/06_research_implementation.py:data"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/06/data.txt"
+```
+
 **Penjelasan:** `pd.read_csv` memuat salinan beku. `frame.pop("diagnosis")` **mengambil** kolom diagnosis keluar dari tabel dan mengembalikannya sebagai `y`, sehingga `X` sudah tidak memuat label. Itu menjamin diagnosis tidak ikut masuk ke algoritma. Kemudian `rs.dataset_fingerprint(X)` dibandingkan dengan sidik jari di protokol. Bila tidak sama, skrip berhenti.
 
 ### Bagian C — Eksplorasi data singkat
@@ -213,12 +221,20 @@ Skrip lengkapnya ada di `examples/level-7/06_research_implementation.py`, dan no
 --8<-- "level-7/06_research_implementation.py:eda"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/06/eda.txt"
+```
+
 **Penjelasan:** `X.std()` menghitung simpangan baku tiap fitur, `.sort_values()` mengurutkannya. `std.index[0]` dan `std.iloc[0]` mengambil nama dan nilai yang terkecil, `[-1]` yang terbesar. Rasio terbesar dibanding terkecil menunjukkan seberapa lebar rentang skala. `describe().loc[["min", "mean", "max"]]` mengambil tiga baris ringkasan statistik untuk tiga fitur. EDA ini **mendeskripsikan** dan tidak mengubah protokol.
 
 ### Bagian D — Praproses sesuai protokol
 
 ```python
 --8<-- "level-7/06_research_implementation.py:prep"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/06/prep.txt"
 ```
 
 **Penjelasan:** `X.to_numpy(dtype=float)` mengubah tabel menjadi array NumPy. `StandardScaler().fit_transform(...)` menghasilkan baseline: tiap fitur dikurangi rata-rata dan dibagi simpangan baku. `MinMaxScaler()` menghasilkan alternatif yang mengubah tiap fitur ke rentang 0 sampai 1. Baris cetak memeriksa bahwa baseline berpusat di sekitar 0 dengan simpangan baku sekitar 1 (tanda `-0.0` hanya pembulatan dari bilangan sangat kecil negatif).
@@ -241,6 +257,10 @@ Skrip lengkapnya ada di `examples/level-7/06_research_implementation.py`, dan no
 --8<-- "level-7/06_research_implementation.py:rq1"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/06/rq1.txt"
+```
+
 **Penjelasan:**
 
 - `plan1` mengambil jumlah seed (20), jumlah subsampel (50), dan fraksi (0,8) dari protokol.
@@ -255,12 +275,20 @@ Skrip lengkapnya ada di `examples/level-7/06_research_implementation.py`, dan no
 --8<-- "level-7/06_research_implementation.py:rq2"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/06/rq2.txt"
+```
+
 **Penjelasan:** `levels` memetakan nama perlakuan ke data. `assert list(levels) == protocol[...]["level"]` memastikan level yang kita jalankan **sama persis** dengan protokol. Tiap level dijalankan dengan 20 seed, dan tiap hasil dibandingkan dengan `reference` memakai ARI. `threshold` diambil dari protokol (0,95). Kolom `proporsi_ari>=0.95` menghitung seberapa sering sebuah perlakuan "praktis sama dengan baseline", memakai ambang yang ditetapkan sebelumnya.
 
 ### Bagian H — RQ3: Algoritma dan validasi eksternal
 
 ```python
 --8<-- "level-7/06_research_implementation.py:rq3"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/06/rq3.txt"
 ```
 
 **Penjelasan:**
@@ -276,12 +304,20 @@ Skrip lengkapnya ada di `examples/level-7/06_research_implementation.py`, dan no
 --8<-- "level-7/06_research_implementation.py:ksens"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/06/ksens.txt"
+```
+
 **Penjelasan:** untuk tiap K dari 2 sampai 6, tiga algoritma dilatih dan Silhouette dihitung di ruang baseline. `pivot(index="k", columns="algoritma", values="silhouette")` mengubah daftar panjang menjadi tabel dengan K sebagai baris dan algoritma sebagai kolom. `k_table[c].idxmax()` mencari K dengan Silhouette tertinggi tiap algoritma.
 
 ### Bagian J — Profil kelompok
 
 ```python
 --8<-- "level-7/06_research_implementation.py:profile"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/06/profile.txt"
 ```
 
 **Penjelasan:** `z.groupby(cluster).mean().T` menghitung rata-rata *z-score* tiap fitur per kelompok lalu membaliknya (`.T`) agar fitur menjadi baris. `selisih` adalah perbedaan antara dua kelompok, dan `.abs().sort_values(ascending=False).head(6)` memilih enam fitur dengan selisih terbesar. `pd.crosstab(cluster, y)` membuat tabel silang antara kelompok dan diagnosis. Proporsi *malignant* per kelompok dihitung dari tabel itu. Semua ini **deskriptif**.
@@ -292,12 +328,24 @@ Skrip lengkapnya ada di `examples/level-7/06_research_implementation.py`, dan no
 --8<-- "level-7/06_research_implementation.py:plot"
 ```
 
+![Simpangan baku 30 fitur pada skala logaritmik dengan rasio terbesar terhadap terkecil sekitar 2,15 kali sepuluh pangkat lima](../assets/level-7/06-skala-fitur.png)
+
+![Dua boxplot. Kiri: ARI antar-seed dan ARI subsampel terhadap data penuh untuk K-Means K sama dengan 2. Kanan: ARI terhadap baseline untuk tiga perlakuan skala dengan garis ambang 0,95; StandardScaler berada di atas ambang, tanpa skala dan MinMaxScaler di bawah](../assets/level-7/06-kestabilan-dan-skala.png)
+
+![Empat panel proyeksi PCA untuk K-Means, Agglomerative, GMM, dan DBSCAN. Tiga panel pertama menampilkan dua kelompok dengan ARI terhadap diagnosis masing-masing 0,654; 0,575; dan 0,774. Panel DBSCAN kosong dengan teks tidak ada konfigurasi valid](../assets/level-7/06-empat-algoritma.png)
+
+![Kiri: Silhouette terhadap K untuk tiga algoritma, tertinggi pada K sama dengan 2 untuk ketiganya. Kanan: persentase noise untuk delapan konfigurasi DBSCAN, semuanya abu-abu (tidak valid) dengan garis batas 10 persen](../assets/level-7/06-sensitivitas-k-dan-dbscan.png)
+
 **Penjelasan:** empat gambar. (1) Simpangan baku 30 fitur pada skala logaritmik. (2) Dua *boxplot*: kestabilan RQ1 dan kepekaan skala RQ2, dengan garis ambang 0,95. `showmeans=True` menambah penanda rata-rata. (3) Empat panel proyeksi PCA, satu per algoritma. Panel DBSCAN menampilkan teks "tidak ada konfigurasi valid" karena memang tidak ada hasil yang dipilih. Warna dan bentuk penanda berbeda untuk tiap kelompok, sehingga terbaca tanpa bergantung warna saja. (4) Sensitivitas K dan batang persentase *noise* grid DBSCAN dengan garis batas 10 persen. `plt.show()` menyimpan tiap gambar ke berkas lewat pembantu `_savefig`.
 
 ### Bagian L — Menyimpan hasil dan memeriksa jumlah eksekusi
 
 ```python
 --8<-- "level-7/06_research_implementation.py:save"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/06/save.txt"
 ```
 
 **Penjelasan:** `planned` dihitung dari protokol (seed, subsampel, level × seed, algoritma tak disetel, grid DBSCAN, level K × algoritma). `executed = sum(fits.values())` menjumlahkan eksekusi yang benar-benar dijalankan. Keduanya dibandingkan dan dicetak. Lalu hasil disimpan: tabel CSV, ringkasan RQ1 (JSON), klarifikasi (JSON), dan **manifest** yang memuat hash protokol, sidik jari data, jumlah eksekusi, dan DBSCAN terpilih (`null` bila tidak ada).
@@ -337,13 +385,11 @@ jupyter notebook notebooks/level-7/06-research-implementation.ipynb
 
 Notebook memuat Bagian A sampai L, ditambah tiga bagian **Praktik**: menguji bahwa pemeriksaan hash benar-benar menghentikan eksekusi, mencatat analisis eksploratori secara terpisah dari hasil utama, dan memeriksa keterulangan RQ1.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. Dijalankan dua kali dengan hasil identik.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. Dijalankan dua kali dengan hasil identik.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/06.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

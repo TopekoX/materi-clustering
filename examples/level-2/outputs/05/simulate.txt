@@ -1,0 +1,7 @@
+Nilai kosong pada salinan:
+CustomerID                 0
+Gender                     0
+Age                       10
+Annual Income (k$)        10
+Spending Score (1-100)     0
+dtype: int64

@@ -1,0 +1,6 @@
+Jelas              bentuk (450, 2), kelas acuan: [150, 150, 150], sidik jari 4bba185c7c68
+Tumpang tindih     bentuk (450, 2), kelas acuan: [150, 150, 150], sidik jari 0635866a1edc
+Bulan sabit        bentuk (450, 2), kelas acuan: [225, 225], sidik jari 9fc42919fd31
+Kepadatan berbeda  bentuk (450, 2), kelas acuan: [200, 150, 100], sidik jari 84bcb7b35821
+Dengan noise       bentuk (450, 2), kelas acuan: [134, 133, 133, 50], sidik jari bcafeda2d46e
+Miring (elips)     bentuk (450, 2), kelas acuan: [150, 150, 150], sidik jari a6a0e9b4e77e

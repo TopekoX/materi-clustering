@@ -1,0 +1,9 @@
+Peluang tiga titik pertama dataset overlap (GMM):
+     p_0    p_1    p_2
+0  0.000  0.009  0.991
+1  0.000  0.006  0.994
+2  0.157  0.843  0.000
+
+Titik dengan peluang tertinggi < 0.9 : 131 dari 300
+Titik dengan peluang tertinggi < 0.6 : 24 dari 300
+Pada K-Means, Ward, DBSCAN, dan Mean Shift: tidak ada predict_proba (hanya satu label per titik).

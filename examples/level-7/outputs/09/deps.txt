@@ -1,0 +1,3 @@
+Modul pihak ketiga yang diimpor: ['matplotlib', 'numpy', 'pandas', 'sklearn']
+Tidak dikenali (perlu dipetakan): tidak ada
+Kunci versi: ['matplotlib==3.11.1', 'numpy==2.5.2', 'pandas==3.0.5', 'scikit-learn==1.9.0']

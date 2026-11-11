@@ -286,6 +286,10 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/02_k_means_clustering.py:tiny"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/02/tiny.txt"
+```
+
 **Penjelasan:**
 
 - `np.array([...], dtype=float)` membuat array 8 baris × 2 kolom. `dtype=float` memastikan angkanya desimal sehingga rata-rata (misalnya 4,167) tidak terpotong.
@@ -325,11 +329,17 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/02_k_means_clustering.py:trace"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/02/trace.txt"
+```
+
 **Penjelasan:** kita memanggil fungsi dan mencetak catatan tiap iterasi. `round(3).tolist()` membulatkan centroid lalu mengubahnya menjadi daftar biasa. `f"{...:.3f}"` mencetak angka dengan tiga desimal.
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:plotiter"
 ```
+
+![Tiga panel: iterasi 1, 2, dan 3 dari K-Means pada 8 titik, dengan tanda X untuk centroid yang berpindah dari gerombol kiri ke posisi tengah masing-masing gerombol](../assets/level-4/02-iterasi-kmeans.png)
 
 **Penjelasan:** satu panel gambar untuk tiap iterasi. Titik diwarnai menurut labelnya, dan tanda `X` adalah centroid. `zip(axes, hist_tiny)` memasangkan tiap panel dengan satu catatan iterasi. `sharex=True, sharey=True` membuat semua panel berskala sama supaya perpindahan centroid mudah dibandingkan.
 
@@ -337,6 +347,10 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:blobs"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/02/blobs.txt"
 ```
 
 **Penjelasan:**
@@ -353,6 +367,10 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/02_k_means_clustering.py:compare"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/02/compare.txt"
+```
+
 **Penjelasan:**
 
 - `np.random.default_rng(42)` membuat pembangkit acak dengan seed. `rng.choice(len(X), size=4, replace=False)` memilih 4 nomor baris **berbeda** secara acak, dan `X[...]` mengambil titiknya sebagai centroid awal.
@@ -364,11 +382,19 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/02_k_means_clustering.py:kvalues"
 ```
 
+![Empat panel hasil K-Means pada data blobs dengan K = 2, 3, 4, dan 6, beserta centroid hitam](../assets/level-4/02-pengaruh-k.png)
+
 **Penjelasan:** satu perulangan menjalankan K-Means dengan K = 2, 3, 4, dan 6. `palette[j % len(palette)]` memilih warna untuk kelompok `j`. Tanda `X` hitam adalah centroid, dan judul tiap panel memuat WCSS.
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:elbow"
 ```
+
+```text title="Output"
+--8<-- "level-4/outputs/02/elbow.txt"
+```
+
+![Grafik garis WCSS terhadap K dari 1 sampai 8, turun tajam sampai K = 4 lalu melandai](../assets/level-4/02-elbow.png)
 
 **Penjelasan:** daftar komprehensi menjalankan K-Means untuk K = 1 sampai 8 dan hanya menyimpan `inertia_`. Lalu kita cetak dan gambar WCSS terhadap K.
 
@@ -376,6 +402,10 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:init"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/02/init.txt"
 ```
 
 **Penjelasan:**
@@ -387,6 +417,10 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:plusplus"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/02/plusplus.txt"
 ```
 
 **Penjelasan k-means++ buatan sendiri:**
@@ -403,11 +437,17 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/02_k_means_clustering.py:converge"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/02/converge.txt"
+```
+
 **Penjelasan:** kita menjalankan K-Means dengan `max_iter` = 1, 2, 3, dan 300 (`init="random"`, `n_init=1`, `random_state=0`) dan mencetak `n_iter_` dan WCSS. Lalu kita ambil WCSS tiap iterasi dari versi buatan sendiri dan memeriksa apakah **tidak pernah naik**. `zip(a, a[1:])` memasangkan tiap nilai dengan nilai sesudahnya. `1e-9` adalah toleransi untuk galat pembulatan.
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:plotconv"
 ```
+
+![Grafik garis WCSS terhadap iterasi, turun dari sekitar 1251 ke 459 lalu 459 pada iterasi ketiga](../assets/level-4/02-konvergensi.png)
 
 **Penjelasan:** grafik garis WCSS terhadap iterasi. `marker="o"` menandai tiap iterasi dengan lingkaran.
 
@@ -415,6 +455,10 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:mall"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/02/mall.txt"
 ```
 
 **Penjelasan:**
@@ -427,6 +471,10 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/02_k_means_clustering.py:newpoint"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/02/newpoint.txt"
+```
+
 **Penjelasan:**
 
 - `scaler.transform(new_customers)` memakai rata-rata dan simpangan baku **dari data latih**. Jangan memanggil `fit_transform` lagi pada data baru, karena itu mengubah skalanya.
@@ -436,11 +484,17 @@ Kita kerjakan dalam beberapa bagian. **Setiap potongan kode diikuti penjelasanny
 --8<-- "level-4/02_k_means_clustering.py:mistake"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/02/mistake.txt"
+```
+
 **Penjelasan:** kita sengaja mengalikan pendapatan dengan 1000 (seolah satuannya dolar, bukan ribu dolar) dan **tidak** menyamakan skala. Lalu kita bandingkan ukuran kelompok dengan hasil yang diskalakan. `sorted(...)` mengurutkan ukuran supaya perbandingan tidak terganggu nomor kelompok.
 
 ```python
 --8<-- "level-4/02_k_means_clustering.py:plotmall"
 ```
+
+![Scatter plot Mall Customers dengan lima kelompok berwarna dan lima centroid hitam](../assets/level-4/02-mall-customers.png)
 
 **Penjelasan:** scatter plot dengan satu warna per kelompok dan `X` hitam untuk centroid (dalam satuan asli). `ax.legend(fontsize=8)` menampilkan keterangan warna.
 
@@ -471,13 +525,11 @@ Skrip mencetak output ke terminal dan menyimpan lima gambar ke `docs/assets/leve
 jupyter notebook notebooks/level-4/02-k-means-clustering.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-4/outputs/02.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

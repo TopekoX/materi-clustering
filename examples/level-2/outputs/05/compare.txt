@@ -1,0 +1,4 @@
+Rata-rata:
+                     asli  buang baris  isi median
+Age                 38.85        38.71       38.78
+Annual Income (k$)  60.56        60.88       60.42

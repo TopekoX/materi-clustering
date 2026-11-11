@@ -1,0 +1,4 @@
+Eksekusi direncanakan: 156 | dijalankan: 156 | rincian: {'RQ1': 70, 'RQ2': 60, 'RQ3': 11, 'K': 15}
+Sesuai protokol: True
+Klarifikasi implementasi dicatat: ['C1', 'C2', 'C3', 'C4', 'C5']
+Berkas hasil disimpan di examples/level-7/results/ (awalan 06_)

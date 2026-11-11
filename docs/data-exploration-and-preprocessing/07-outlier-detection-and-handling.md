@@ -104,6 +104,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/07_outliers.py:iqr"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/07/iqr.txt"
+```
+
 **Penjelasan:**
 
 - `quantile(0.25)` dan `quantile(0.75)` menghitung `Q1` dan `Q3` untuk tiap kolom. `iqr = q3 - q1`.
@@ -116,6 +120,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/07_outliers.py:zscore"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/07/zscore.txt"
 ```
 
 **Penjelasan:**
@@ -131,6 +139,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/07_outliers.py:plot"
 ```
 
+![Scatter plot pendapatan vs skor belanja dengan outlier berwarna merah](../assets/level-2/07-outlier-income.png)
+
 **Penjelasan:**
 
 - `is_outlier = di_luar[kolom]` mengambil tanda `True/False` untuk kolom pendapatan.
@@ -144,6 +154,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/07_outliers.py:remove"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/07/remove.txt"
+```
+
 **Penjelasan:**
 
 - `~di_luar.any(axis=1)` berarti "baris yang **tidak** mengandung outlier".
@@ -153,6 +167,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/07_outliers.py:cap"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/07/cap.txt"
 ```
 
 **Penjelasan:**
@@ -165,6 +183,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/07_outliers.py:compare"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/07/compare.txt"
 ```
 
 **Penjelasan:**
@@ -204,11 +226,8 @@ jupyter notebook notebooks/level-2/07-outlier-detection-and-handling.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, matplotlib 3.11.2, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, matplotlib 3.11.2, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/07.txt"
-```
 
 ![Scatter plot pendapatan vs skor belanja dengan outlier berwarna merah](../assets/level-2/07-outlier-income.png)
 

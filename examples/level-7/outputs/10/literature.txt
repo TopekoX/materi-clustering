@@ -1,0 +1,2 @@
+Sumber pada matriks akhir: 7 | dibaca penuh: 0
+Cakupan pustaka per pertanyaan: {'RQ1': 1, 'RQ2': 2, 'RQ3': 1}

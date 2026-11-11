@@ -271,6 +271,10 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:permutation"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/08/permutation.txt"
+```
+
 **Penjelasan:**
 
 - `y_true` adalah label acuan. `pred_same` pengelompokan yang **identik** dengan label acuan. `pred_permuted` mengelompokkan data **dengan cara yang sama**, tetapi nomornya ditukar: kelas 0 menjadi 2, kelas 1 menjadi 0, kelas 2 menjadi 1.
@@ -283,12 +287,20 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:contingency"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/08/contingency.txt"
+```
+
 **Penjelasan:** `pred_mixed` adalah hasil yang tidak sempurna (dua titik salah). `pd.crosstab(a, b)` membuat tabel hitungan silang. `pd.Series(..., name=...)` memberi nama pada baris dan kolom.
 
 ### Bagian D — ARI manual
 
 ```python
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:arimanual"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/08/arimanual.txt"
 ```
 
 **Penjelasan baris demi baris:**
@@ -305,12 +317,20 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:hcv"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/08/hcv.txt"
+```
+
 **Penjelasan:** empat kasus dibandingkan. `np.zeros(n, dtype=int)` membuat satu kelompok untuk semua titik. `np.arange(n)` membuat tiap titik kelompok sendiri. Dictionary `cases` dan perulangan membangun tabelnya.
 
 ### Bagian F — NMI manual
 
 ```python
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:nmimanual"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/08/nmimanual.txt"
 ```
 
 **Penjelasan baris demi baris:**
@@ -327,6 +347,10 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:datasets"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/08/datasets.txt"
+```
+
 **Penjelasan:**
 
 - Setiap generator mengembalikan **data `X` dan label acuan `y`**. Label `y` hanya akan dipakai untuk menilai.
@@ -339,12 +363,20 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:algos"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/08/algos.txt"
+```
+
 **Penjelasan:** fungsi `run_algorithms` hanya menerima `X` dan jumlah kelompok `k`. **Label acuan tidak diberikan.** Keempat algoritma dibuat dengan pengaturan sederhana: `n_clusters=k` untuk K-Means dan Hierarchical, `eps=...` dan `min_samples=5` untuk DBSCAN, dan `n_components=k` untuk GMM (kelompok GMM diambil dengan `.predict(X)`). Setelah itu kita melaporkan berapa kelompok dan noise yang ditemukan DBSCAN.
 
 ### Bagian I — Tabel perbandingan
 
 ```python
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:tables"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/08/tables.txt"
 ```
 
 **Penjelasan:**
@@ -358,6 +390,10 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:epssweep"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/08/epssweep.txt"
+```
+
 **Penjelasan:** kita mencoba beberapa nilai `eps` pada Circles untuk melihat kepekaan DBSCAN. Peringatan di komentar kode penting: memilih `eps` supaya ARI tinggi berarti **memakai label untuk menyetel model**, sehingga skor eksternal tidak jujur lagi. Di sini kita memakainya hanya untuk memperlihatkan kepekaan.
 
 ### Bagian J — Menggambar
@@ -366,11 +402,15 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:plotgrid"
 ```
 
+![Kisi 3 × 4: tiga dataset (Blobs, Moons, Circles) dan empat algoritma (K-Means, Hierarchical, DBSCAN, GMM), dengan ARI di judul tiap panel. DBSCAN mengikuti bentuk bulan dan lingkaran, sedangkan tiga algoritma lain memotongnya](../assets/level-5/08-hasil-algoritma.png)
+
 **Penjelasan:** `plt.subplots(3, 4)` membuat kisi tiga dataset × empat algoritma. Titik noise DBSCAN digambar abu-abu bertanda `x`. Judul tiap panel memuat ARI.
 
 ```python
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:plotbars"
 ```
+
+![Tiga diagram batang Silhouette dan ARI per algoritma untuk Blobs, Moons, dan Circles. Pada Moons dan Circles, DBSCAN punya ARI tinggi tetapi Silhouette terendah](../assets/level-5/08-metrik-berdampingan.png)
 
 **Penjelasan:** diagram batang berdampingan: Silhouette (internal, biru) dan ARI (eksternal, oranye) untuk tiap algoritma pada tiap dataset. `ax.bar(posisi ± width/2, ...)` menempatkan dua batang berdampingan.
 
@@ -380,12 +420,20 @@ Skrip lengkapnya ada di `examples/level-5/08_external_evaluation_and_metric_comp
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:mall"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/08/mall.txt"
+```
+
 **Penjelasan:** hanya tiga algoritma (DBSCAN dilewati karena tidak kita setel di sini), dengan K = 5. Hanya metrik internal yang dihitung.
 
 ### Bagian L — Label acuan harus bermakna
 
 ```python
 --8<-- "level-5/08_external_evaluation_and_metric_comparison.py:refgender"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/08/refgender.txt"
 ```
 
 **Penjelasan:** `Gender` adalah kolom yang ada di tabel, jadi kita bisa memakainya sebagai "label acuan". Tetapi apakah ia cocok sebagai jawaban benar untuk pengelompokan berdasarkan pendapatan dan skor belanja? Kita mengukurnya dengan ARI dan NMI.
@@ -421,13 +469,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-5/08-external-evaluation-and-metric-comparison.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/08.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

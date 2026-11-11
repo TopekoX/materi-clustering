@@ -1,0 +1,7 @@
+30 subset acak berukuran 4 fitur, semuanya K-Means K = 3:
+     ARI acuan  ARI vs baseline
+min      0.244            0.294
+25%      0.371            0.426
+50%      0.498            0.538
+75%      0.623            0.615
+max      0.832            0.834

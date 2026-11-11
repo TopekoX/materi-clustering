@@ -1,0 +1,15 @@
+                                       butir     status                                     rincian
+   Ketujuh belas bagian ada dan tidak kosong      LULUS                                   17 bagian
+        Setiap bagian punya label status isi      LULUS                               label lengkap
+          Angka di laporan terlacak ke fakta      LULUS                            tak terlacak: []
+                       Tanpa kata berlebihan      LULUS                               ditemukan: []
+ Hash protokol cocok dan tidak ada amendment      LULUS                                 0 amendment
+Eksekusi dijalankan sama dengan direncanakan      LULUS                                156 dari 156
+           Semua sumber pada peta status ada      LULUS                                  15 dari 15
+                    Semua gambar laporan ada      LULUS                                    4 gambar
+          Analisis eksploratori diberi label      LULUS            label terdeteksi di bagian hasil
+   Setiap pertanyaan punya pustaka pendukung      LULUS      cakupan {'RQ1': 1, 'RQ2': 2, 'RQ3': 1}
+     Ilustrasi didaktik terpisah dari temuan      LULUS                            tiga label hadir
+                 Sumber pustaka dibaca penuh PERINGATAN                                    0 dari 7
+          Paket reproduksi: tanpa peringatan PERINGATAN status Bab 9: {'LULUS': 8, 'PERINGATAN': 1}
+Ringkasan QA: {'LULUS': 11, 'PERINGATAN': 2}

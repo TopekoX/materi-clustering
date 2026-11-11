@@ -1,0 +1,14 @@
+Segmentasi pelanggan, 200 baris, kelompok bulat, K kira-kira 5
+   - K-Means: cepat, mudah dijelaskan, cocok untuk kelompok bulat
+   - Hierarchical (Ward): dendrogram membantu memilih jumlah kelompok
+Titik GPS 50.000 baris, bentuk bebas, ada titik tersesat
+   - DBSCAN: mengikuti bentuk bebas dan menandai noise
+   - (catatan): data besar: hindari Hierarchical dan Mean Shift tanpa bin_seeding; K-Means dan DBSCAN lebih skalabel
+Data pengukuran, elips tumpang tindih, butuh peluang
+   - GMM: satu-satunya yang memberi peluang keanggotaan (soft clustering)
+   - GMM (covariance_type='full'): memodelkan elips berbagai ukuran dan kemiringan
+   - K-Means: cepat, mudah dijelaskan, cocok untuk kelompok bulat
+   - Hierarchical (Ward): dendrogram membantu memilih jumlah kelompok
+Data eksplorasi 800 baris, K tidak diketahui, kelompok bulat
+   - Hierarchical (Ward): dendrogram membantu memilih jumlah kelompok
+   - Mean Shift: jumlah kelompok mengikuti puncak kepadatan (pilih bandwidth dengan hati-hati)

@@ -1,0 +1,5 @@
+                           ari_mean  ari_min  ari_max  proporsi_ari>=0.95
+perlakuan                                                                
+StandardScaler (baseline)     0.982    0.965    1.000                 1.0
+tanpa skala                   0.496    0.496    0.496                 0.0
+MinMaxScaler                  0.896    0.896    0.896                 0.0

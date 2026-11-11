@@ -1,0 +1,11 @@
+Rata-rata per Gender:
+          Age  Annual Income (k$)  Spending Score (1-100)
+Gender                                                   
+Female  38.10               59.25                   51.53
+Male    39.81               62.23                   48.51
+
+Jumlah pelanggan per Gender:
+Gender
+Female    112
+Male       88
+dtype: int64

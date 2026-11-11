@@ -1,0 +1,4 @@
+Jumlah per kolom: [20. 22.]
+Jumlah titik n  : 5
+Centroid        : [4.  4.4]
+Sama dengan points.mean(axis=0)? True

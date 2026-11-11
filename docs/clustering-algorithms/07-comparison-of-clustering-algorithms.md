@@ -104,7 +104,7 @@ Notasi: \( n \) jumlah data, \( K \) jumlah kelompok, \( d \) jumlah fitur.
 | GMM | Satu iterasi EM sekitar \( n K d^2 \) untuk `full` | Sedang. Mahal bila \( d \) besar |
 | Mean Shift | Pencarian tetangga dari **setiap seed** secara berulang | **Buruk**, kecuali memakai `bin_seeding` |
 
-Angka-angka ini adalah gambaran. Pengukuran nyata pada mesin kita ada di bagian Expected Output.
+Angka-angka ini adalah gambaran. Pengukuran nyata pada mesin kita ada pada output langkah terkait di bagian Python Implementation, dibahas di Expected Output.
 
 ### Hard clustering dan soft clustering
 
@@ -222,6 +222,10 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:datasets"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/07/datasets.txt"
+```
+
 **Penjelasan:**
 
 - `blobs_core` (270 titik) dan `noise_points` (30 titik acak dari persegi panjang yang sedikit lebih luas dari data) dipakai untuk dataset `noisy`. `np.vstack` menumpuknya menjadi 300 titik.
@@ -233,6 +237,10 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 
 ```python
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:recipe"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/07/recipe.txt"
 ```
 
 **Penjelasan:**
@@ -257,11 +265,17 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:summary"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/07/summary.txt"
+```
+
 **Penjelasan:** untuk tiap kombinasi kita menghitung jumlah kelompok (`set(labels) - {-1}`, tanpa menghitung noise) dan jumlah noise (`np.sum(labels == -1)`), lalu menyusunnya menjadi tabel. f-string `f"{n_found} kel" + (...)` menambahkan teks noise hanya jika ada.
 
 ```python
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:plotgrid"
 ```
+
+![Grid 6 baris kali 5 kolom: hasil K-Means, Hierarchical (Ward), DBSCAN, GMM, dan Mean Shift pada dataset blobs, moons, circles, noisy, density, dan overlap](../assets/level-4/07-perbandingan-algoritma.png)
 
 **Penjelasan:** grid 6 baris (dataset) × 5 kolom (algoritma). Tiap panel mewarnai titik menurut label. Noise DBSCAN digambar sebagai `x` abu-abu. `axes[row, 0].set_ylabel(name)` memberi nama dataset di sisi kiri, dan `ax.set_title(algo)` memberi nama algoritma di baris pertama.
 
@@ -271,10 +285,18 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:capabilities"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/07/capabilities.txt"
+```
+
 **Penjelasan:** kita melatih kelima model pada dataset `blobs` (`model.fit(X)` mengembalikan model itu sendiri) dan memakai `hasattr` untuk memeriksa apakah tiap objek punya `labels_`, `predict`, `predict_proba`, dan pusat kelompok.
 
 ```python
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:soft"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/07/soft.txt"
 ```
 
 **Penjelasan:** GMM `full` dilatih pada dataset `overlap`. `predict_proba` memberi peluang, dan `confidence = proba_ov.max(axis=1)` adalah peluang tertinggi tiap titik. Kita menghitung berapa titik yang keyakinannya di bawah 0,9 dan di bawah 0,6.
@@ -283,6 +305,10 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 
 ```python
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:scalability"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/07/scalability.txt"
 ```
 
 **Penjelasan:**
@@ -300,6 +326,8 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:plotscal"
 ```
 
+![Grafik garis waktu fit lima algoritma terhadap jumlah data 500 sampai 4000 dengan sumbu waktu logaritmik; Mean Shift jauh di atas yang lain](../assets/level-4/07-skalabilitas.png)
+
 **Penjelasan:** garis per algoritma. `ax.set_yscale("log")` memakai sumbu waktu logaritmik supaya algoritma cepat dan lambat terlihat dalam satu gambar.
 
 ### Bagian G — Mall Customers
@@ -308,10 +336,18 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:mall"
 ```
 
+```text title="Output"
+--8<-- "level-4/outputs/07/mall.txt"
+```
+
 **Penjelasan:** fitur Mall Customers diskalakan, lalu kelima algoritma dijalankan dengan pengaturan dari bab masing-masing (K = 5; DBSCAN `eps=0.4`, `min_samples=8`; Mean Shift `quantile=0.15`). Kita mencetak jumlah kelompok, ukuran (tanpa noise), dan jumlah noise.
 
 ```python
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:crosstab"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/07/crosstab.txt"
 ```
 
 **Penjelasan:** `pd.crosstab(a, b)` membuat **tabel silang**: berapa pelanggan yang diberi label `i` oleh K-Means **dan** label `j` oleh GMM. Karena nomor label sembarang, kita membaca pola (sel berisi angka besar) bukan nomornya. Tabel ini hanya menghitung, bukan skor kualitas.
@@ -319,6 +355,8 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 ```python
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:plotmall"
 ```
+
+![Lima panel hasil K-Means, Hierarchical, DBSCAN, GMM, dan Mean Shift pada Mall Customers](../assets/level-4/07-mall-perbandingan.png)
 
 **Penjelasan:** lima panel berdampingan, satu per algoritma, dengan sumbu bersama (`sharex=True, sharey=True`) supaya mudah dibandingkan.
 
@@ -337,6 +375,10 @@ Ditambah **Mall Customers** sebagai contoh tabular nyata.
 
 ```python
 --8<-- "level-4/07_comparison_of_clustering_algorithms.py:guidetest"
+```
+
+```text title="Output"
+--8<-- "level-4/outputs/07/guidetest.txt"
 ```
 
 **Penjelasan:** empat profil data diberi nama dengan kamus, lalu `suggest_algorithms(**profile)` dipanggil (`**` membongkar kamus menjadi argumen bernama). Hasilnya dicetak per profil.
@@ -369,13 +411,11 @@ Skrip membutuhkan **sekitar satu menit** karena Mean Shift pada bagian skalabili
 jupyter notebook notebooks/level-4/07-comparison-of-clustering-algorithms.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. **Angka waktu pada bagian skalabilitas akan berbeda di mesinmu.**
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1. **Angka waktu pada bagian skalabilitas akan berbeda di mesinmu.**
 
 ## Expected Output
 
-```text
---8<-- "level-4/outputs/07.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

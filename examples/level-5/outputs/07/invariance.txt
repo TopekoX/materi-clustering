@@ -1,0 +1,3 @@
+CH data asli          : 4580.38
+CH data x 10          : 4580.38
+CH data digandakan    : 9207.02   (400 -> 800 titik)

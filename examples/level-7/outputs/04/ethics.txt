@@ -1,0 +1,9 @@
+                              pemeriksaan              status                                             dasar
+       Kategori data sensitif (kesehatan)                  Ya           Subjek halaman UCI: Health and Medicine
+Kolom identitas pada salinan yang dipakai           Tidak ada             Diperiksa dengan kode pada nama kolom
+     Persetujuan pasien dan tinjauan etik     Tidak diketahui                     Halaman UCI tidak membahasnya
+                   Status de-identifikasi     Tidak diketahui                     Halaman UCI tidak membahasnya
+      Lisensi mengizinkan pemakaian ulang Ya, dengan atribusi                     CC BY 4.0 menurut halaman UCI
+      Tujuan asli sama dengan tujuan kita          Tidak sama Asli: classification; kita: metodologi clustering
+                   Klaim klinis dilakukan               Tidak                Dinyatakan di luar lingkup (Bab 2)
+Butir 'Tidak diketahui': 2 dari 7

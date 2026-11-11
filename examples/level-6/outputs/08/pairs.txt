@@ -1,0 +1,1 @@
+Pemisahan kelompok per fitur (z): {'alcohol': 1.76, 'flavanoids': 2.19, 'color_intensity': 1.84, 'proline': 1.88}

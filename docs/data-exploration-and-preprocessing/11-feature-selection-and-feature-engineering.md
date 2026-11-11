@@ -91,6 +91,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/11_feature_selection_engineering.py:drop_id"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/11/drop_id.txt"
+```
+
 **Penjelasan:**
 
 - `df.columns.tolist()` menampilkan nama semua kolom sebagai daftar.
@@ -101,6 +105,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/11_feature_selection_engineering.py:redundancy"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/11/redundancy.txt"
 ```
 
 **Penjelasan:**
@@ -116,6 +124,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/11_feature_selection_engineering.py:engineer"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/11/engineer.txt"
+```
+
 **Penjelasan:**
 
 - `df_fitur.copy()` membuat salinan agar tabel sebelumnya aman.
@@ -126,6 +138,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/11_feature_selection_engineering.py:judge"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/11/judge.txt"
 ```
 
 **Penjelasan:**
@@ -139,6 +155,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/11_feature_selection_engineering.py:sets"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/11/sets.txt"
 ```
 
 **Penjelasan:**
@@ -176,11 +196,8 @@ jupyter notebook notebooks/level-2/11-feature-selection-and-feature-engineering.
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/11.txt"
-```
 
 **Cara membaca output:**
 

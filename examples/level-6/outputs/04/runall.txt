@@ -1,0 +1,14 @@
+Jumlah catatan: 30 (6 dataset x 5 algoritma)
+          dataset  algorithm                           params
+            Jelas     DBSCAN  {"eps": 0.1, "min_samples": 10}
+            Jelas Mean Shift               {"bandwidth": 0.3}
+   Tumpang tindih     DBSCAN {"eps": 0.25, "min_samples": 10}
+   Tumpang tindih Mean Shift               {"bandwidth": 0.7}
+      Bulan sabit     DBSCAN  {"eps": 0.2, "min_samples": 10}
+      Bulan sabit Mean Shift               {"bandwidth": 1.5}
+Kepadatan berbeda     DBSCAN {"eps": 0.25, "min_samples": 10}
+Kepadatan berbeda Mean Shift               {"bandwidth": 0.7}
+     Dengan noise     DBSCAN  {"eps": 0.1, "min_samples": 10}
+     Dengan noise Mean Shift               {"bandwidth": 1.0}
+   Miring (elips)     DBSCAN  {"eps": 0.1, "min_samples": 10}
+   Miring (elips) Mean Shift               {"bandwidth": 1.0}

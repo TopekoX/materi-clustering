@@ -1,0 +1,6 @@
+   CustomerID  Annual Income (k$)  Spending Score (1-100)  Cluster
+0           1                  15                      39        4
+1           2                  15                      81        2
+2           3                  16                       6        4
+3           4                  16                      77        2
+4           5                  17                      40        4

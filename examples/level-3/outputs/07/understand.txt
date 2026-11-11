@@ -1,0 +1,7 @@
+Ukuran: (200, 5)
+Nilai kosong total: 0
+Baris duplikat: 0
+      CustomerID   Age  Annual Income (k$)  Spending Score (1-100)
+min          1.0  18.0                15.0                     1.0
+mean       100.5  38.8                60.6                    50.2
+max        200.0  70.0               137.0                    99.0

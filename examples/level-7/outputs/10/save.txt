@@ -1,0 +1,2 @@
+Laporan akhir: 1921 kata, 17 bagian
+Berkas hasil disimpan di examples/level-7/results/ (awalan 10_)

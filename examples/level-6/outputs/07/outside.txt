@@ -1,0 +1,2 @@
+Age  : selisih rata-rata antar kelompok = 19.945 | rentang acak 95% = 9.890 | p (permutasi, 2000 kali) = 0.0005
+Male : selisih rata-rata antar kelompok = 0.152 | rentang acak 95% = 0.339 | p (permutasi, 2000 kali) = 0.7426

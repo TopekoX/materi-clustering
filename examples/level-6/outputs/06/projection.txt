@@ -1,0 +1,4 @@
+Silhouette label digit asli di 64D : 0.163
+Silhouette label digit asli di 2D  : 0.105
+Silhouette cluster 64D di 64D      : 0.182
+Silhouette cluster 64D di 2D       : 0.143

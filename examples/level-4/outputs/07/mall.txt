@@ -1,0 +1,5 @@
+K-Means              5 kelompok, ukuran [81, 39, 35, 23, 22], noise 0
+Hierarchical (Ward)  5 kelompok, ukuran [85, 39, 32, 23, 21], noise 0
+DBSCAN               5 kelompok, ukuran [95, 30, 24, 14, 12], noise 25
+GMM                  5 kelompok, ukuran [84, 39, 33, 23, 21], noise 0
+Mean Shift           5 kelompok, ukuran [78, 39, 38, 23, 22], noise 0

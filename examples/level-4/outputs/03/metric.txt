@@ -1,0 +1,3 @@
+linkage=average, metric=euclidean -> ukuran kelompok: [3, 21, 36, 38, 102]
+linkage=average, metric=manhattan -> ukuran kelompok: [20, 23, 38, 39, 80]
+linkage=average, metric=cosine    -> ukuran kelompok: [11, 43, 47, 48, 51]

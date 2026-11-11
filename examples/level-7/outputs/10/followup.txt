@@ -1,0 +1,4 @@
+ari_raw_vs_worst_area_saja        : 1,000
+ari_raw_vs_dua_fitur_area         : 0,992
+ari_raw_vs_tanpa_dua_fitur_area   : 0,849
+Ukuran kelompok K-Means tanpa skala: [131, 438] | tanpa dua fitur area: [454, 115]

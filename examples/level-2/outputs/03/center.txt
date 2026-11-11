@@ -1,0 +1,13 @@
+Mean  :
+Age                       38.85
+Annual Income (k$)        60.56
+Spending Score (1-100)    50.20
+dtype: float64
+
+Median:
+Age                       36.0
+Annual Income (k$)        61.5
+Spending Score (1-100)    50.0
+dtype: float64
+
+Modus Age : [32]

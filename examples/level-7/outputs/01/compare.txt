@@ -1,0 +1,4 @@
+                             Q1 ukuran inti sel  Q2 tekstur dan kehalusan  Q3 seluruh profil morfologi
+Q1 ukuran inti sel                        1.000                     0.014                        0.498
+Q2 tekstur dan kehalusan                  0.014                     1.000                        0.143
+Q3 seluruh profil morfologi               0.498                     0.143                        1.000

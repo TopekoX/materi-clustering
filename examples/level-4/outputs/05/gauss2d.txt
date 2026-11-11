@@ -1,0 +1,2 @@
+Sigma = I, selisih (1, 1): 0.05855
+Sigma = diag(4, 1), selisih (2, 1): jarak Mahalanobis kuadrat = 2.0

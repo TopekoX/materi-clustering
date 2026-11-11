@@ -1,0 +1,9 @@
+          n  pendapatan_rata  pendapatan_sd  skor_rata  skor_sd  umur_median  umur_rata  porsi_laki
+Cluster                                                                                            
+A        81            55.30           8.99      49.52     6.53         46.0      42.72        0.41
+B        39            86.54          16.31      82.13     9.36         32.0      32.69        0.46
+C        35            88.20          16.40      17.11     9.95         42.0      41.11        0.54
+D        23            26.30           7.89      20.91    13.02         46.0      45.22        0.39
+E        22            25.73           7.57      79.36    10.50         23.5      25.27        0.41
+
+Seluruh pelanggan: pendapatan 60.56 | skor 50.2 | umur 38.85 | porsi laki-laki 0.44

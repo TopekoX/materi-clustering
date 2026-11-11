@@ -1,0 +1,2 @@
+Kekompakan dataset A: [0.68 0.72 0.79]
+Kekompakan dataset B: [2.05 2.16 2.38]

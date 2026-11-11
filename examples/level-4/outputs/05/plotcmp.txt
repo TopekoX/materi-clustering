@@ -1,0 +1,1 @@
+Ukuran K-Means: [235, 211, 154] | Ukuran GMM (full): [122, 264, 214]

@@ -182,12 +182,20 @@ Skrip lengkapnya ada di `examples/level-7/10_final_research_project.py`, dan not
 --8<-- "level-7/10_final_research_project.py:setup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/10/setup.txt"
+```
+
 **Penjelasan:** seperti di Bab 6, skrip menghitung ulang hash protokol dan **berhenti** (`raise SystemExit`) bila berbeda dari yang terkunci. Lalu skrip membaca rumusan masalah, kartu data, manifest eksekusi Bab 6, klarifikasi, fakta dan buku bukti Bab 7, matriks pustaka Bab 3, profil per ukuran, daftar periksa paket Bab 9, dan judul dari kerangka naskah Bab 8 (`splitlines()[0].lstrip("# ")` mengambil baris pertama dan membuang tanda judul Markdown). Tidak ada angka yang diketik ulang.
 
 ### Bagian B — Melengkapi tinjauan pustaka untuk RQ2
 
 ```python
 --8<-- "level-7/10_final_research_project.py:literature"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/10/literature.txt"
 ```
 
 **Penjelasan:**
@@ -204,12 +212,20 @@ Skrip lengkapnya ada di `examples/level-7/10_final_research_project.py`, dan not
 --8<-- "level-7/10_final_research_project.py:followup"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/10/followup.txt"
+```
+
 **Penjelasan:** `kmeans = lambda data: ...` adalah fungsi pendek yang menjalankan K-Means (K = 2, `n_init=10`, seed 42). Kita memakainya empat kali: pada seluruh fitur tanpa skala (`raw_all`), hanya `worst area` (`X_df[["worst area"]]`), dua fitur area, dan seluruh fitur **kecuali** dua fitur area (`X_df.drop(columns=[...])`). `adjusted_rand_score(raw_all, ...)` membandingkan tiap pengelompokan dengan `raw_all`. Hasilnya disimpan di `followup`. Pengelompokan ini **tidak ada di protokol**, jadi semua keluarannya akan diberi label eksploratori.
 
 ### Bagian D — Peta status isi
 
 ```python
 --8<-- "level-7/10_final_research_project.py:statusmap"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/10/statusmap.txt"
 ```
 
 **Penjelasan:** `status_items` mendaftar 15 item penting dengan **bab asal, label status, dan berkas sumber**. `status_map["sumber_ada"]` memeriksa bahwa tiap berkas sumber benar-benar ada. `value_counts()` menghitung jumlah item per label: 5 temuan eksperimen, 3 dokumentasi, 3 eksploratori, 2 ilustrasi didaktik, 1 tinjauan pustaka terbatas, 1 rencana dan protokol.
@@ -220,12 +236,20 @@ Skrip lengkapnya ada di `examples/level-7/10_final_research_project.py`, dan not
 --8<-- "level-7/10_final_research_project.py:facts"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/10/facts.txt"
+```
+
 **Penjelasan:** `facts_all` menggabungkan fakta Bab 7 dengan hasil uji lanjutan dan empat nilai profil per ukuran. `pool` adalah himpunan bentuk tulisan angka yang sah, dan `F(key, d)` mengutip fakta dengan format koma. Pemeriksa kata berlebihan dan keterlacakan angka sama dengan Bab 7 (pencocokan kata utuh, negasi sederhana, tanda minus). Empat nilai profil ditambahkan **setelah** QA pertama menangkap bahwa dua di antaranya (1,43 dan 1,42) belum terdaftar.
 
 ### Bagian F — Menyusun laporan 17 bagian
 
 ```python
 --8<-- "level-7/10_final_research_project.py:report"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/10/report.txt"
 ```
 
 **Penjelasan:**
@@ -244,12 +268,20 @@ Skrip lengkapnya ada di `examples/level-7/10_final_research_project.py`, dan not
 --8<-- "level-7/10_final_research_project.py:qa"
 ```
 
+```text title="Output"
+--8<-- "level-7/outputs/10/qa.txt"
+```
+
 **Penjelasan:** `all_text` menggabungkan isi semua bagian. `check(name, ok, detail, warn_only)` menambahkan butir dengan status `LULUS`, `PERINGATAN`, atau `GAGAL`. Butir yang bisa **gagal**: kelengkapan 17 bagian, label, keterlacakan angka, kata berlebihan, hash dan amendment, kecocokan eksekusi, sumber dan gambar, label eksploratori, cakupan pustaka, dan pemisahan label. Dua butir selalu **peringatan bila tidak terpenuhi**: sumber dibaca penuh dan status paket Bab 9.
 
 ### Bagian H — Menyimpan laporan dan hasil QA
 
 ```python
 --8<-- "level-7/10_final_research_project.py:save"
+```
+
+```text title="Output"
+--8<-- "level-7/outputs/10/save.txt"
 ```
 
 **Penjelasan:** laporan ditulis sebagai Markdown dengan judul, tiap bagian beserta labelnya, dan **peta status isi** di akhir. Berkas lain: matriks pustaka akhir, pernyataan celah akhir, hasil uji lanjutan, status bagian, peta status, dan QA.
@@ -283,13 +315,11 @@ jupyter notebook notebooks/level-7/10-final-clustering-research-project.ipynb
 
 Notebook memuat Bagian A sampai H, ditambah tiga bagian **Praktik**: menambahkan analisis eksploratori berlabel ke laporan, menguji peta status isi, dan menulis draf amendment untuk satu pekerjaan lanjutan.
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, dan scikit-learn 1.9.0.
 
 ## Expected Output
 
-```text
---8<-- "level-7/outputs/10.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Laporan proyek akhir yang dirakit skrip (`results/10_final_report.md`), ditampilkan sebagai teks mentah. **Inilah proyek Level 7 secara utuh**:
 

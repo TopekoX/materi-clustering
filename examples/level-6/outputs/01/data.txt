@@ -1,0 +1,7 @@
+Jumlah pelanggan : 200
+Fitur dipakai    : ['Annual Income (k$)', 'Spending Score (1-100)']
+      Annual Income (k$)  Spending Score (1-100)
+min                15.00                    1.00
+max               137.00                   99.00
+mean               60.56                   50.20
+std                26.26                   25.82

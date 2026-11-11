@@ -1,0 +1,11 @@
+Selisih tiap fitur antara pelanggan 1 dan 2: {'Age': -2, 'Annual Income (k$)': 0, 'Spending Score (1-100)': -42}
+Kuadrat selisih tiap fitur: {'Age': 4, 'Annual Income (k$)': 0, 'Spending Score (1-100)': 1764}
+
+Matriks jarak setelah standardisasi:
+CustomerID     1     2     3     4     5
+CustomerID                              
+1           0.00  1.64  1.28  1.50  0.87
+2           1.64  0.00  2.91  0.21  1.75
+3           1.28  2.91  0.00  2.76  1.54
+4           1.50  0.21  2.76  0.00  1.55
+5           0.87  1.75  1.54  1.55  0.00

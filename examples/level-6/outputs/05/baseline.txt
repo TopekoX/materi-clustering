@@ -1,0 +1,3 @@
+Baseline (13 fitur, terskala, K = 3): Silhouette = 0.285, ARI acuan = 0.897
+Tanpa penskalaan: ARI acuan = 0.371, ARI vs baseline = 0.354
+Fitur dengan varians terbesar tanpa penskalaan: proline (99.8% dari total varians)

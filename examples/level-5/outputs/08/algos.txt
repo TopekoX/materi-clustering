@@ -1,0 +1,3 @@
+Blobs    DBSCAN: 3 kelompok, 3 titik noise dari 300
+Moons    DBSCAN: 2 kelompok, 0 titik noise dari 300
+Circles  DBSCAN: 3 kelompok, 0 titik noise dari 300

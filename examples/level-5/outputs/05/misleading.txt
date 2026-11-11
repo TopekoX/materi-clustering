@@ -1,0 +1,3 @@
+DBSCAN pada moons menemukan kelompok: [0, 1]
+Silhouette K-Means (memotong bulan) : 0.486
+Silhouette DBSCAN (mengikuti bulan) : 0.330

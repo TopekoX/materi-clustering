@@ -211,6 +211,10 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:synth"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/08/synth.txt"
+```
+
 **Penjelasan baris demi baris:**
 
 - `make_blobs(..., cluster_std=[0.7, 1.1, 0.6])` membuat tiga gerombol. Daftar `cluster_std` memberi tiap gerombol sebaran (kepadatan) berbeda.
@@ -226,6 +230,8 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:plotpanels"
 ```
 
+![Tiga panel berdampingan pada data sintetis: (a) titik abu-abu tanpa kelompok, (b) hasil K-Means dengan tiga warna dan tiga centroid hitam, (c) hasil DBSCAN dengan tiga kelompok dan 46 titik noise berbentuk x abu-abu](../assets/level-6/08-tiga-panel-dasar.png)
+
 **Penjelasan:**
 
 - `plt.subplots(1, 3, sharex=True, sharey=True)` membuat tiga panel berdampingan yang berbagi sumbu, sehingga posisi titik sama persis di ketiganya.
@@ -240,9 +246,15 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:overlap"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/08/overlap.txt"
+```
+
 ```python
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:plotoverlap"
 ```
+
+![Kiri: dua kelompok yang bertumpuk diwarnai menurut label. Kanan: titik yang sama diwarnai menurut Silhouette per titik, dengan lingkaran hitam pada 17 titik yang silhouette-nya di bawah 0,1, terkonsentrasi di daerah tengah](../assets/level-6/08-tumpang-tindih.png)
 
 **Penjelasan:**
 
@@ -255,6 +267,10 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 
 ```python
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:wine"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/08/wine.txt"
 ```
 
 **Penjelasan:**
@@ -270,9 +286,15 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:pairs"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/08/pairs.txt"
+```
+
 ```python
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:plotpairs"
 ```
+
+![Pair plot empat fitur Wine (alcohol, flavanoids, color_intensity, proline) dengan histogram di diagonal dan tiga warna kelompok](../assets/level-6/08-pair-plot-wine.png)
 
 **Penjelasan:**
 
@@ -287,9 +309,15 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:heat"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/08/heat.txt"
+```
+
 ```python
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:plotheat"
 ```
+
+![Kiri: peta panas rata-rata z tiga kelompok pada 13 fitur Wine, diurutkan dari fitur yang paling membedakan (flavanoids) ke yang paling sedikit (ash). Kanan: koordinat paralel dengan garis tipis tiap anggota dan garis tebal rata-rata tiap kelompok](../assets/level-6/08-peta-panas-dan-paralel.png)
 
 **Penjelasan:**
 
@@ -304,9 +332,15 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:slice"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/08/slice.txt"
+```
+
 ```python
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:plotslice"
 ```
+
+![Tiga cara menggambar Wine dengan label yang sama: (a) bidang PCA dengan sumbu sama, ketiga kelompok tampak terpisah, (b) dua fitur mentah alcohol dan ash, ketiganya tampak bercampur, (c) bidang PCA yang sama dengan sumbu y dipadatkan sehingga kelompok tampak menempel](../assets/level-6/08-irisan-2d.png)
 
 **Penjelasan:**
 
@@ -318,6 +352,10 @@ Skrip lengkapnya ada di `examples/level-6/08_cluster_visualization_and_analysis.
 
 ```python
 --8<-- "level-6/08_cluster_visualization_and_analysis.py:save"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/08/save.txt"
 ```
 
 **Penjelasan:** profil terstandar Wine disimpan sebagai CSV. Konfigurasi (seed, dataset, algoritma, palet, dan tiga nilai Silhouette) disimpan sebagai JSON supaya gambar dapat dibuat ulang dan dibandingkan.
@@ -353,13 +391,11 @@ Skrip mencetak output ke terminal, menyimpan lima gambar ke `docs/assets/level-6
 jupyter notebook notebooks/level-6/08-cluster-visualization-and-analysis.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, dan Matplotlib 3.11.1.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/08.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

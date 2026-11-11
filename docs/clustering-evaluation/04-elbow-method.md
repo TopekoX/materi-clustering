@@ -167,6 +167,10 @@ Skrip lengkapnya ada di `examples/level-5/04_elbow_method.py`, dan notebook-nya 
 --8<-- "level-5/04_elbow_method.py:curve"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/04/curve.txt"
+```
+
 **Penjelasan:**
 
 - `inertia_curve(X, k_values)` adalah fungsi yang menjalankan K-Means untuk tiap K dan mengembalikan daftar Inertia. Ia memakai list comprehension: `[... for k in k_values]`.
@@ -179,6 +183,10 @@ Skrip lengkapnya ada di `examples/level-5/04_elbow_method.py`, dan notebook-nya 
 --8<-- "level-5/04_elbow_method.py:drops"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/04/drops.txt"
+```
+
 **Penjelasan:** `table.pct_change()` menghitung perubahan relatif tiap baris terhadap baris sebelumnya (hasil negatif karena Inertia turun). `.mul(-100)` mengubahnya menjadi persentase penurunan positif. Baris K = 1 kosong (`NaN`) karena tidak ada sebelumnya.
 
 ### Bagian E — Menggambar kurva
@@ -186,6 +194,8 @@ Skrip lengkapnya ada di `examples/level-5/04_elbow_method.py`, dan notebook-nya 
 ```python
 --8<-- "level-5/04_elbow_method.py:plotcurve"
 ```
+
+![Tiga panel kurva elbow: empat gerombol jelas dengan patahan tegas di K = 4, empat gerombol tumpang tindih dengan patahan lebih halus, dan data acak dengan kurva melengkung mulus tanpa patahan jelas](../assets/level-5/04-tiga-kurva-elbow.png)
 
 **Penjelasan:** tiga panel, satu tiap dataset. `ax.set_xticks(k_values)` menampilkan semua nilai K. Setiap panel punya skala vertikal sendiri, jadi bentuk kurvalah yang dibandingkan, bukan angkanya.
 
@@ -207,12 +217,20 @@ Skrip lengkapnya ada di `examples/level-5/04_elbow_method.py`, dan notebook-nya 
 --8<-- "level-5/04_elbow_method.py:findelbow"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/04/findelbow.txt"
+```
+
 **Penjelasan:** untuk tiap dataset, kita cetak K hasil heuristik, jarak terbesar, dan jarak terbesar kedua. Jika dua angka itu berdekatan, berarti siku **tidak tegas**. `np.sort(distances)[-2:][::-1]` mengambil dua terbesar, dengan yang terbesar di depan.
 
 ### Bagian G — Siku berubah jika rentang berubah
 
 ```python
 --8<-- "level-5/04_elbow_method.py:range"
+```
+
+```text title="Output"
+--8<-- "level-5/outputs/04/range.txt"
 ```
 
 **Penjelasan:** heuristik yang sama dijalankan dengan rentang K berbeda: 1 sampai 6, 1 sampai 10, dan 1 sampai 15. `{k_max:<4d}` dan `{name:27s}` hanya mengatur lebar kolom cetakan.
@@ -223,11 +241,17 @@ Skrip lengkapnya ada di `examples/level-5/04_elbow_method.py`, dan notebook-nya 
 --8<-- "level-5/04_elbow_method.py:mall"
 ```
 
+```text title="Output"
+--8<-- "level-5/outputs/04/mall.txt"
+```
+
 **Penjelasan:** data distandarkan, kurva Inertia dihitung, lalu heuristik mencari siku. Kita juga menghitung Silhouette untuk K = 2 sampai 10 sebagai pembanding (Silhouette tidak terdefinisi pada K = 1). `max(mall_sil, key=mall_sil.get)` mengambil K dengan Silhouette tertinggi.
 
 ```python
 --8<-- "level-5/04_elbow_method.py:plotmall"
 ```
+
+![Dua panel Mall Customers: kurva Inertia dengan lingkaran pada K = 5 dan garis putus-putus awal-akhir, serta kurva Silhouette dengan puncak di K = 5](../assets/level-5/04-elbow-mall.png)
 
 **Penjelasan:** panel kiri menggambar kurva Inertia, garis putus-putus awal-akhir, dan lingkaran pada siku heuristik. Panel kanan menggambar Silhouette. `facecolors="none"` membuat lingkaran kosong sehingga titik di dalamnya tetap terlihat.
 
@@ -259,13 +283,11 @@ Skrip mencetak output ke terminal dan menyimpan dua gambar ke `docs/assets/level
 jupyter notebook notebooks/level-5/04-elbow-method.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-5/outputs/04.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

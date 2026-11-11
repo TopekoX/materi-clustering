@@ -1,0 +1,2 @@
+CH K-Means (memotong bulan) : 440.2
+CH label benar              : 198.3

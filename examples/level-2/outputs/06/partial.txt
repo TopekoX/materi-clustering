@@ -1,0 +1,5 @@
+Baris dengan sifat yang sama persis (tanpa CustomerID): 0
+
+Empty DataFrame
+Columns: [CustomerID, Gender, Age, Annual Income (k$), Spending Score (1-100)]
+Index: []

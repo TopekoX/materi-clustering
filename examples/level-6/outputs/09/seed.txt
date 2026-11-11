@@ -1,0 +1,2 @@
+n_init= 1: inertia 65.2406 sampai 98.3137 | ARI antar seed: rata-rata 0.921, min 0.506, maks 1.000
+n_init=10: inertia 65.2406 sampai 65.2406 | ARI antar seed: rata-rata 1.000, min 1.000, maks 1.000

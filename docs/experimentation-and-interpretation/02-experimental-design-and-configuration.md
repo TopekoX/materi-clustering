@@ -162,6 +162,10 @@ Skrip lengkapnya ada di `examples/level-6/02_experimental_design_and_configurati
 --8<-- "level-6/02_experimental_design_and_configuration.py:data"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/02/data.txt"
+```
+
 **Penjelasan:**
 
 - `import _experiment as ex` memuat alat pencatat dengan nama singkat `ex`.
@@ -192,12 +196,20 @@ Skrip lengkapnya ada di `examples/level-6/02_experimental_design_and_configurati
 --8<-- "level-6/02_experimental_design_and_configuration.py:kmeans"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/02/kmeans.txt"
+```
+
 **Penjelasan:** `enumerate(..., start=1)` memberi nomor urut untuk ID (`KM-01`, `KM-02`, ...). `f"KM-{i:02d}"` memformat nomor menjadi dua digit. Hanya `n_clusters` yang berubah. `pd.DataFrame(records)` mengubah daftar catatan menjadi tabel.
 
 ### Bagian E — Desain 2: DBSCAN (OVAT)
 
 ```python
 --8<-- "level-6/02_experimental_design_and_configuration.py:dbscan"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/02/dbscan.txt"
 ```
 
 **Penjelasan:** dua perulangan terpisah. Pada yang pertama, `min_samples` selalu 5 dan hanya `eps` yang berganti. Pada yang kedua, `eps` selalu 0,3 dan hanya `min_samples` yang berganti. Itulah *one-variable-at-a-time*.
@@ -208,12 +220,20 @@ Skrip lengkapnya ada di `examples/level-6/02_experimental_design_and_configurati
 --8<-- "level-6/02_experimental_design_and_configuration.py:hier"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/02/hier.txt"
+```
+
 **Penjelasan:** `n_clusters=2` tetap, hanya `linkage` yang berubah (cara mengukur jarak antar kelompok, Level 4 Bab 3).
 
 ### Bagian G — Pengantar multi-faktor
 
 ```python
 --8<-- "level-6/02_experimental_design_and_configuration.py:factorial"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/02/factorial.txt"
 ```
 
 **Penjelasan:**
@@ -228,12 +248,20 @@ Skrip lengkapnya ada di `examples/level-6/02_experimental_design_and_configurati
 --8<-- "level-6/02_experimental_design_and_configuration.py:save"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/02/save.txt"
+```
+
 **Penjelasan:** semua catatan digabung (`records + dbscan_records + ...`) dan disimpan ke `results/02_experiments.csv`. Konfigurasi umum dan info lingkungan disimpan sebagai JSON. File-file ini bisa dibuka kembali, dibagikan, atau dipakai lagi di Bab 10.
 
 ### Bagian I — Memeriksa keterulangan
 
 ```python
 --8<-- "level-6/02_experimental_design_and_configuration.py:repro"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/02/repro.txt"
 ```
 
 **Penjelasan:** setiap catatan dijalankan ulang dari konfigurasi tersimpannya. `json.loads(rec["params"])` mengembalikan parameter, dan `rec["seed"]` mengembalikan seed. Hasil baru dibandingkan dengan CSV yang disimpan (`np.allclose`) **tanpa kolom waktu jalan**, yang memang berbeda tiap eksekusi. `.fillna(-9)` mengganti `NaN` supaya bisa dibandingkan.
@@ -243,6 +271,10 @@ Skrip lengkapnya ada di `examples/level-6/02_experimental_design_and_configurati
 ```python
 --8<-- "level-6/02_experimental_design_and_configuration.py:plot"
 ```
+
+![Empat panel DBSCAN pada moons dengan eps 0,15 sampai 0,4: eps kecil memecah bulan menjadi banyak kelompok dan noise, eps 0,3 dan 0,4 memberi dua bulan utuh](../assets/level-6/02-dbscan-eps.png)
+
+![Dua peta panas eps dan min_samples: jumlah kelompok dan proporsi noise. Nilai tinggi hanya pada eps 0,2 dengan min_samples besar](../assets/level-6/02-faktorial-dbscan.png)
 
 **Penjelasan:** gambar pertama menampilkan DBSCAN pada empat nilai `eps`, titik noise berwarna abu-abu bertanda `x`. Gambar kedua adalah dua peta panas (*heatmap*) hasil desain multi-faktor: jumlah kelompok dan proporsi noise. `imshow` menggambar tabel sebagai warna, dan `ax.text` menulis angka di tiap sel.
 
@@ -275,13 +307,11 @@ Skrip mencetak output ke terminal, menyimpan dua gambar ke `docs/assets/level-6/
 jupyter notebook notebooks/level-6/02-experimental-design-and-configuration.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/02.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

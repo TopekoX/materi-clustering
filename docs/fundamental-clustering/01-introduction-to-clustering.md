@@ -183,6 +183,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/01_introduction_to_clustering.py:nolabel"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/01/nolabel.txt"
+```
+
 **Penjelasan:**
 
 - `list(df.columns)` mencetak daftar nama kolom. Kamu bisa memastikan **tidak ada kolom jawaban** seperti "kelompok" atau "tipe pelanggan". Inilah ciri data untuk clustering.
@@ -194,6 +198,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```python
 --8<-- "level-3/01_introduction_to_clustering.py:look"
 ```
+
+![Scatter plot data mentah pendapatan vs skor belanja, semua titik berwarna abu-abu](../assets/level-3/01-data-mentah.png)
 
 **Penjelasan:**
 
@@ -208,6 +214,10 @@ Selalu **lihat data mentah dulu**. Dari sini kamu mendapat firasat apakah ada ge
 
 ```python
 --8<-- "level-3/01_introduction_to_clustering.py:cluster"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/01/cluster.txt"
 ```
 
 **Penjelasan:**
@@ -226,6 +236,10 @@ Selalu **lihat data mentah dulu**. Dari sini kamu mendapat firasat apakah ada ge
 --8<-- "level-3/01_introduction_to_clustering.py:sizes"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/01/sizes.txt"
+```
+
 **Penjelasan:**
 
 - `df["Cluster"].value_counts()` menghitung berapa pelanggan di tiap kelompok.
@@ -235,6 +249,10 @@ Selalu **lihat data mentah dulu**. Dari sini kamu mendapat firasat apakah ada ge
 
 ```python
 --8<-- "level-3/01_introduction_to_clustering.py:profile"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/01/profile.txt"
 ```
 
 **Penjelasan:**
@@ -250,6 +268,8 @@ Tabel ini adalah **profil** tiap kelompok, dasar untuk memberi arti.
 ```python
 --8<-- "level-3/01_introduction_to_clustering.py:result"
 ```
+
+![Scatter plot yang sama, kini dengan lima warna untuk lima kelompok dan tanda X hitam untuk pusat kelompok](../assets/level-3/01-hasil-clustering.png)
 
 **Penjelasan:**
 
@@ -295,11 +315,8 @@ jupyter notebook notebooks/level-3/01-introduction-to-clustering.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (Python 3.14.10, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1):
+Semua output berasal dari eksekusi nyata skrip (Python 3.14.10, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-3/outputs/01.txt"
-```
 
 Gambar yang dihasilkan:
 

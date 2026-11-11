@@ -1,0 +1,7 @@
+dataset         : Breast Cancer Wisconsin (Diagnostic), UCI, CC BY 4.0
+sidik_jari_data : 6b202a2072f9
+algoritma       : KMeans(n_clusters=2, n_init=10)
+praproses       : StandardScaler
+seed            : 42
+pertanyaan      : ['Q1 ukuran inti sel', 'Q2 tekstur dan kehalusan', 'Q3 seluruh profil morfologi']
+label_diagnosis : hanya untuk validasi eksternal, tidak dipakai melatih

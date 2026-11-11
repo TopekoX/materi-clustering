@@ -1,0 +1,14 @@
+Ukuran tiap komponen: [122, 264, 214]
+
+Peluang lima titik pertama (tiap baris berjumlah 1):
+   p_0    p_1    p_2
+0  0.0  1.000  0.000
+1  0.0  1.000  0.000
+2  0.0  0.147  0.853
+3  0.0  1.000  0.000
+4  0.0  1.000  0.000
+Jumlah tiap baris: [1.0, 1.0, 1.0, 1.0, 1.0]
+
+label = argmax(peluang) untuk semua titik? True
+Titik dengan peluang tertinggi < 0.9: 51 dari 600
+Titik dengan peluang tertinggi < 0.6: 19 dari 600

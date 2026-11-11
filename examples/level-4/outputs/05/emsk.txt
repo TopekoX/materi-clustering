@@ -1,0 +1,4 @@
+scikit-learn means    : [1.9988, 7.328]
+scikit-learn variances: [0.6664, 1.5771]
+scikit-learn weights  : [0.4994, 0.5006]
+scikit-learn log-likelihood total: -12.7235

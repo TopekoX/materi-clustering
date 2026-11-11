@@ -1,0 +1,12 @@
+ARI acuan (dinilai setelahnya):
+K                              2      3      4      5
+subset                                               
+13 fitur                   0.374  0.897  0.765  0.599
+4 fitur pertama            0.211  0.541  0.430  0.412
+Tanpa redundan (12 fitur)  0.384  0.880  0.726  0.607
+Silhouette di ruang masing-masing (TIDAK sebanding antar baris):
+K                              2      3      4      5
+subset                                               
+13 fitur                   0.259  0.285  0.260  0.202
+4 fitur pertama            0.232  0.294  0.301  0.297
+Tanpa redundan (12 fitur)  0.245  0.277  0.241  0.201

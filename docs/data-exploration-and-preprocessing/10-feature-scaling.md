@@ -98,6 +98,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/10_feature_scaling.py:raw"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/10/raw.txt"
+```
+
 **Penjelasan:**
 
 - `X.agg(["min", "max"])` menampilkan nilai terkecil dan terbesar tiap kolom.
@@ -109,6 +113,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/10_feature_scaling.py:minmax"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/10/minmax.txt"
 ```
 
 **Penjelasan:**
@@ -124,6 +132,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/10_feature_scaling.py:standard"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/10/standard.txt"
+```
+
 **Penjelasan:**
 
 - `(X - X.mean()) / X.std(ddof=0)` adalah rumus z-score. `ddof=0` memakai pembagi \(n\), sama dengan scikit-learn.
@@ -134,6 +146,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ```python
 --8<-- "level-2/10_feature_scaling.py:sklearn"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/10/sklearn.txt"
 ```
 
 **Penjelasan:**
@@ -149,6 +165,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-2/10_feature_scaling.py:after"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/10/after.txt"
+```
+
 **Penjelasan:**
 
 - Kita ulangi perhitungan porsi varians pada data yang sudah diskalakan, untuk kedua metode.
@@ -158,6 +178,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```python
 --8<-- "level-2/10_feature_scaling.py:plot"
 ```
+
+![Scatter plot usia vs pendapatan, sebelum dan sesudah standardization](../assets/level-2/10-scaling-scatter.png)
 
 **Penjelasan:**
 
@@ -193,11 +215,8 @@ jupyter notebook notebooks/level-2/10-feature-scaling.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, scikit-learn 1.9.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, scikit-learn 1.9.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/10.txt"
-```
 
 ![Scatter plot usia vs pendapatan, sebelum dan sesudah standardization](../assets/level-2/10-scaling-scatter.png)
 

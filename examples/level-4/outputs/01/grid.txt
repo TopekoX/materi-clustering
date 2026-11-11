@@ -1,0 +1,11 @@
+Jumlah kelompok (tanpa noise) dan jumlah noise per algoritma:
+blobs  K-Means              kelompok: 3  noise: 0
+blobs  Hierarchical (Ward)  kelompok: 3  noise: 0
+blobs  DBSCAN               kelompok: 3  noise: 8
+blobs  GMM                  kelompok: 3  noise: 0
+blobs  Mean Shift           kelompok: 4  noise: 0
+moons  K-Means              kelompok: 2  noise: 0
+moons  Hierarchical (Ward)  kelompok: 2  noise: 0
+moons  DBSCAN               kelompok: 2  noise: 0
+moons  GMM                  kelompok: 2  noise: 0
+moons  Mean Shift           kelompok: 3  noise: 0

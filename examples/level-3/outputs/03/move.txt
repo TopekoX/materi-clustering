@@ -1,0 +1,8 @@
+Pusat awal:
+ [[2. 2.]
+ [7. 7.]]
+Kelompok tiap titik: {'P1': 0, 'P2': 0, 'P3': 0, 'P4': 0, 'P5': 1}
+Pusat baru (rata-rata anggota):
+ [[3.  3.5]
+ [8.  8. ]]
+Pergeseran pusat: [1.8  1.41]

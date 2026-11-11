@@ -1,0 +1,14 @@
+    Silhouette  Davies-Bouldin  Calinski-Harabasz
+K                                                
+2        0.321           1.267             95.669
+3        0.467           0.716            151.335
+4        0.494           0.710            174.595
+5        0.555           0.572            248.649
+6        0.540           0.655            243.088
+7        0.528           0.715            254.621
+8        0.455           0.760            267.279
+9        0.457           0.763            270.948
+10       0.443           0.793            260.540
+K terbaik menurut Silhouette (tertinggi)        : 5
+K terbaik menurut Davies-Bouldin (terendah)     : 5
+K terbaik menurut Calinski-Harabasz (tertinggi) : 9

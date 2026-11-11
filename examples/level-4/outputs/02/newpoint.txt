@@ -1,0 +1,2 @@
+Label pelanggan baru: [2, 3]
+Jarak ke tiap centroid (pelanggan pertama): [1.53, 2.16, 0.16, 3.3, 2.3]

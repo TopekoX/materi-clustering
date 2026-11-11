@@ -1,0 +1,1 @@
+{'blobs': (300, 2), 'moons': (300, 2), 'circles': (300, 2), 'noisy': (300, 2), 'density': (300, 2), 'overlap': (300, 2)}

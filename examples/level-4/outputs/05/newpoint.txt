@@ -1,0 +1,2 @@
+Peluang pelanggan baru (pendapatan 60, skor 50): [[1.0, 0.0, 0.0, 0.0, 0.0]]
+Label: [0]

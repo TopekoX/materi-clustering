@@ -1,0 +1,7 @@
+               berjalan  kelompok  noise  detik
+algoritma                                      
+KMeans             True         2      0  0.063
+Agglomerative      True         2      0  0.058
+GMM                True         2      0  0.173
+DBSCAN             True         1     75  0.013
+Smoke test tidak menghitung ARI/NMI; hasilnya tidak dilaporkan sebagai temuan.

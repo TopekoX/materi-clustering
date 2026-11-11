@@ -187,12 +187,20 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:paramtypes"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/03/paramtypes.txt"
+```
+
 **Penjelasan:** `model.get_params()` mengembalikan semua hyperparameter dalam dictionary. Kita hanya menampilkan enam. Setelah `fit`, atribut berakhiran garis bawah seperti `cluster_centers_`, `inertia_`, dan `n_iter_` muncul. Itu **parameter hasil belajar**. Konvensi scikit-learn: tanda `_` di akhir berarti "baru ada setelah `fit`".
 
 ### Bagian C — Hyperparameter K-Means
 
 ```python
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:kmeans"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/03/kmeans.txt"
 ```
 
 **Penjelasan:**
@@ -207,12 +215,20 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:hier"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/03/hier.txt"
+```
+
 **Penjelasan:** kita mencoba kombinasi `linkage` dan `metric` yang valid. `ward` hanya boleh dengan `euclidean`, jadi hanya satu pasangan untuknya. `metric="cosine"` mengukur sudut, bukan jarak. `sorted(np.bincount(labels).tolist())` menampilkan ukuran kelompok. ARI acuan dipakai untuk menilai.
 
 ### Bagian E — Hyperparameter GMM
 
 ```python
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:gmm"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/03/gmm.txt"
 ```
 
 **Penjelasan:** `X_a @ np.array([[...]])` mengalikan data dengan matriks transformasi sehingga gerombol menjadi elips miring (operator `@` adalah perkalian matriks). Lalu kita mengubah `covariance_type`, `reg_covar`, dan `n_components` satu per satu. `{reg_covar:g}` mencetak angka dalam format ringkas.
@@ -223,12 +239,20 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:meanshift"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/03/meanshift.txt"
+```
+
 **Penjelasan:** `estimate_bandwidth(X, quantile=0.2)` memperkirakan `bandwidth` dari data. Kemudian kita mencoba lima `bandwidth`, dan beberapa kombinasi `bin_seeding` dan `min_bin_freq`. `{bin_seeding!s:5}` mengubah `True/False` menjadi teks selebar 5 karakter.
 
 ### Bagian G — Grid search DBSCAN
 
 ```python
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:grid"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/03/grid.txt"
 ```
 
 **Penjelasan:**
@@ -244,6 +268,10 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:naive"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/03/naive.txt"
+```
+
 **Penjelasan:** `dropna(subset=["silhouette"])` membuang baris yang metriknya tidak bisa dihitung. `sort_values("silhouette", ascending=False).head(3)` mengambil tiga terbaik menurut Silhouette. Davies-Bouldin diurutkan naik (`sort_values("davies_bouldin")`) karena rendah lebih baik.
 
 ### Bagian I — Pemilihan dengan batasan
@@ -252,12 +280,20 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:constrained"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/03/constrained.txt"
+```
+
 **Penjelasan:** batasan ditulis **sebelum** melihat hasil: `noise_fraction <= 0.05` dan `n_clusters.between(2, 10)`. Operator `&` menggabungkan dua syarat. Kita memilih Silhouette tertinggi hanya di antara kombinasi yang memenuhi batasan.
 
 ### Bagian J — Pencarian acak
 
 ```python
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:random"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/03/random.txt"
 ```
 
 **Penjelasan:**
@@ -272,12 +308,20 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:multimetric"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/03/multimetric.txt"
+```
+
 **Penjelasan:** untuk K = 2 sampai 10 pada enam gerombol, kita menghitung tiga metrik dan ARI acuan, lalu melihat K terbaik menurut masing-masing metrik. `idxmax()` dan `idxmin()` mengembalikan K dengan nilai tertinggi atau terendah.
 
 ### Bagian L — Mengapa `GridSearchCV` tidak dipakai buta
 
 ```python
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:nopredict"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/03/nopredict.txt"
 ```
 
 **Penjelasan:** `hasattr(objek, "predict")` bernilai `True` bila objek punya method `predict`.
@@ -288,6 +332,10 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:save"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/03/save.txt"
+```
+
 **Penjelasan:** seluruh 66 baris hasil grid disimpan ke `results/03_dbscan_grid.csv`, bersama konfigurasi pencarian (ruang, batasan, sidik jari data) ke JSON.
 
 ### Bagian N — Gambar
@@ -296,9 +344,13 @@ Semua sintetis dan punya label acuan, yang **hanya dipakai untuk menilai setelah
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:plotsens"
 ```
 
+![Tiga grafik sensitivitas DBSCAN terhadap eps untuk min_samples 3, 10, dan 30: jumlah kelompok, persen noise, dan ARI. min_samples 30 menandai hampir seluruh data sebagai noise sampai eps sekitar 0,35](../assets/level-6/03-sensitivitas-eps.png)
+
 ```python
 --8<-- "level-6/03_hyperparameter_tuning_and_optimization.py:plotsel"
 ```
+
+![Sebaran kombinasi eps dan min_samples: sumbu x proporsi noise, sumbu y Silhouette, warna ARI. Kombinasi dengan Silhouette tertinggi memiliki noise sekitar 64% dan ARI rendah](../assets/level-6/03-peta-pemilihan.png)
 
 **Penjelasan:** gambar pertama menampilkan tiga kurva (jumlah kelompok, noise, ARI) terhadap `eps` untuk tiga nilai `min_samples`. Gambar kedua menggambar **setiap kombinasi sebagai satu titik**: sumbu x proporsi noise, sumbu y Silhouette, warna ARI acuan. `c=..., cmap="viridis"` mewarnai titik menurut ARI. Lingkaran oranye menandai kombinasi Silhouette tertinggi.
 
@@ -332,13 +384,11 @@ Skrip mencetak output ke terminal, menyimpan dua gambar ke `docs/assets/level-6/
 jupyter notebook notebooks/level-6/03-hyperparameter-tuning-and-optimization.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, SciPy 1.18.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, SciPy 1.18.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/03.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

@@ -1,0 +1,3 @@
+C1: perlu diperbaiki: klaim_mutlak, tanpa_batas_pencarian
+C2: perlu diperbaiki: klaim_mutlak, tanpa_batas_pencarian
+C3: lolos

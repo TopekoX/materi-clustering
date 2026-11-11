@@ -1,0 +1,4 @@
+A. StandardScaler (baseline)               ARI = 1.000 -> praktis sama dengan baseline
+B. MinMaxScaler                            ARI = 1.000 -> praktis sama dengan baseline
+C. Tanpa skala (k$)                        ARI = 1.000 -> praktis sama dengan baseline
+D. Tanpa skala (pendapatan dalam dolar)    ARI = 0.427 -> berbeda dari baseline

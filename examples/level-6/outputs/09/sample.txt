@@ -1,0 +1,4 @@
+K=5, sampel 90%, 50 kali: ARI rata-rata 0.993 | min 0.983 | maks 1.000
+K=5, sampel 80%, 50 kali: ARI rata-rata 0.987 | min 0.927 | maks 1.000
+K=5, sampel 60%, 50 kali: ARI rata-rata 0.977 | min 0.906 | maks 1.000
+K=5, sampel 40%, 50 kali: ARI rata-rata 0.966 | min 0.823 | maks 1.000

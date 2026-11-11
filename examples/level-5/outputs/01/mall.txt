@@ -1,0 +1,4 @@
+Ukuran kelompok: [81, 39, 22, 35, 23]
+Silhouette        : 0.555
+Davies-Bouldin    : 0.572
+Calinski-Harabasz : 248.6

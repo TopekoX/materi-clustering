@@ -1,0 +1,5 @@
+Inertia data asli          : 766.52
+Inertia data x 10          : 76651.83  (rasio 100.0)
+Inertia data digandakan    : 1533.04  (rasio 2.00)
+Inertia per titik (asli)   : 1.916
+Inertia per titik (ganda)  : 1.916

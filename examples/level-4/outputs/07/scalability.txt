@@ -1,0 +1,14 @@
+Waktu fit (detik); angka bergantung mesin dan bisa berbeda tiap eksekusi:
+                 K-Means  Hierarchical (Ward)  DBSCAN    GMM  Mean Shift
+n (jumlah data)                                                         
+500                0.059                0.010   0.006  0.014       3.102
+1000               0.073                0.036   0.013  0.017       6.504
+2000               0.025                0.097   0.022  0.016      14.698
+4000               0.023                0.465   0.055  0.021      29.456
+
+Rasio waktu saat n naik 4000/1000 (4 kali lipat data):
+K-Means                 0.3
+Hierarchical (Ward)    12.9
+DBSCAN                  4.2
+GMM                     1.2
+Mean Shift              4.5

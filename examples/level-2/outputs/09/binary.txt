@@ -1,0 +1,12 @@
+   Gender  Gender_code
+0    Male            1
+1    Male            1
+2  Female            0
+3  Female            0
+4  Female            0
+
+Jumlah per kode:
+Gender_code
+0    112
+1     88
+Name: count, dtype: int64

@@ -1,0 +1,17 @@
+Rentang (max - min):
+Age                        52
+Annual Income (k$)        122
+Spending Score (1-100)     98
+dtype: int64
+
+Simpangan baku:
+Age                       13.97
+Annual Income (k$)        26.26
+Spending Score (1-100)    25.82
+dtype: float64
+
+IQR (Q3 - Q1):
+Age                       20.25
+Annual Income (k$)        36.50
+Spending Score (1-100)    38.25
+dtype: float64

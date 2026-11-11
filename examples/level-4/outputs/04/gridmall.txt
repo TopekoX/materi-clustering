@@ -1,0 +1,6 @@
+       min_samples=4    min_samples=5     min_samples=8
+eps                                                    
+0.2  5 kel, 73 noise  7 kel, 77 noise  2 kel, 116 noise
+0.3  8 kel, 23 noise  7 kel, 35 noise   5 kel, 72 noise
+0.4  3 kel, 14 noise  4 kel, 15 noise   5 kel, 25 noise
+0.5   2 kel, 8 noise   2 kel, 8 noise   2 kel, 15 noise

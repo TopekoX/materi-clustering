@@ -1,0 +1,9 @@
+    sel_terisi  dari                     dibaca
+id                                             
+L1           2     7                    abstrak
+L2           2     7    ringkasan halaman arXiv
+L3           5     7  ringkasan hasil pencarian
+L4           3     7     ringkasan halaman JMLR
+L5           3     7  ringkasan hasil pencarian
+Makalah dibaca penuh : 0 dari 5
+Kolom 'keterbatasan' terisi: 0 dari 5

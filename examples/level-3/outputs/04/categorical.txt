@@ -1,0 +1,5 @@
+Jumlah posisi yang sama: 3
+Simple matching similarity: 0.6
+Jumlah posisi keduanya 1: 2 | salah satunya 1: 4
+Jaccard similarity: 0.5
+Jaccard distance  : 0.5

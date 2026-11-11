@@ -1,0 +1,12 @@
+    4 gerombol jelas  4 gerombol tumpang tindih  Tanpa kelompok alami
+K                                                                    
+1                NaN                        NaN                   NaN
+2               53.6                       46.3                  41.7
+3               79.1                       60.8                  34.5
+4               81.2                       35.1                  37.8
+5                9.8                       11.0                  18.2
+6                9.5                       11.2                  16.9
+7               11.4                       12.4                  16.9
+8               12.0                       11.3                  14.2
+9                9.1                       12.3                  11.0
+10              10.8                       12.3                  11.4

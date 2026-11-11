@@ -1,0 +1,2 @@
+KMeans punya inertia_ : True
+DBSCAN punya inertia_ : False

@@ -1,0 +1,6 @@
+Age Group
+18-30    61.03
+31-45    52.57
+46-60    35.10
+61-70    44.18
+Name: Spending Score (1-100), dtype: float64

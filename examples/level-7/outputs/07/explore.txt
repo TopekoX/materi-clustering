@@ -1,0 +1,15 @@
+EKSPLORATORI, bootstrap 200 ulangan, ARI vs diagnosis:
+               rata_rata  bawah_2.5  atas_97.5
+KMeans             0.674      0.602      0.780
+Agglomerative      0.617      0.393      0.792
+GMM                0.742      0.626      0.843
+Selisih ARI berpasangan:
+                        rata_rata  bawah_2.5  atas_97.5  proporsi_positif
+GMM - KMeans                0.068     -0.012      0.157             0.940
+KMeans - Agglomerative      0.057     -0.112      0.278             0.695
+GMM - Agglomerative         0.126     -0.032      0.343             0.905
+Pangsa varians terbesar (data tanpa skala):
+worst area    71.73
+mean area     27.41
+area error     0.46
+Dua fitur teratas bersama: 99.14 persen dari total varians

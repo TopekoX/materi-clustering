@@ -1,0 +1,3 @@
+labels_              : [0, 0, 0, 0, 0, -1, 1, 1, 1]
+core_sample_indices_ : [0, 1, 2, 3, 6, 7, 8]
+Sama dengan hitungan manual? True

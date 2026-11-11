@@ -1,0 +1,5 @@
+Disimpan: examples/level-7/results/04_dataset_card.json
+Disimpan: examples/level-7/results/04_documentation_check.csv
+Disimpan: examples/level-7/results/04_inclusion_funnel.csv
+Disimpan: examples/level-7/results/04_ethics_checklist.csv
+Disimpan: examples/level-7/results/04_research_dataset.csv

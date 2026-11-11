@@ -1,0 +1,2 @@
+Dataset: (569, 30) | diagnosis: {'benign': 357, 'malignant': 212}
+Sidik jari cocok dengan protokol: True

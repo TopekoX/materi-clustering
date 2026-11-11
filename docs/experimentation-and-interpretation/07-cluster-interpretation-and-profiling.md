@@ -181,12 +181,20 @@ Skrip lengkapnya ada di `examples/level-6/07_cluster_interpretation_and_profilin
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:sizes"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/07/sizes.txt"
+```
+
 **Penjelasan:** `value_counts()` menghitung anggota tiap huruf, `sort_index()` mengurutkan A sampai E. Persentase dihitung dari 200 pelanggan.
 
 ### Bagian D — Profil dalam satuan asli
 
 ```python
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:profile"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/07/profile.txt"
 ```
 
 **Penjelasan:** `groupby("Cluster").agg(...)` menghitung beberapa ringkasan sekaligus per kelompok. Setiap argumen berbentuk `nama_kolom_hasil=("kolom_asal", "fungsi")`. Kita mengambil jumlah, rata-rata, dan simpangan baku untuk dua variabel yang dipakai, serta median dan rata-rata umur dan porsi laki-laki. Baris terakhir mencetak rata-rata seluruh pelanggan sebagai pembanding.
@@ -197,12 +205,20 @@ Skrip lengkapnya ada di `examples/level-6/07_cluster_interpretation_and_profilin
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:zprofile"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/07/zprofile.txt"
+```
+
 **Penjelasan:** `df.groupby("Cluster")[variables].mean()` memberi rata-rata tiap kelompok, dikurangi rata-rata seluruh data dan dibagi simpangan baku seluruh data. Pandas mencocokkan baris dan kolom otomatis. Nama kolom kemudian diganti dengan nama yang mudah dibaca. Inilah rumus \( z_{k,v} \).
 
 ### Bagian F — Memberi nama berbasis aturan
 
 ```python
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:names"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/07/names.txt"
 ```
 
 **Penjelasan:** `level` adalah fungsi kecil: bila \( z \ge 0{,}5 \) disebut tinggi, bila \( z \le -0{,}5 \) disebut rendah, selain itu menengah. `describe` merangkai kalimat dari dua variabel yang dipakai. Docstring-nya menyatakan bahwa nama hanya label. Aturan ditulis di kode, sehingga siapa pun bisa memeriksanya.
@@ -213,12 +229,20 @@ Skrip lengkapnya ada di `examples/level-6/07_cluster_interpretation_and_profilin
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:represent"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/07/represent.txt"
+```
+
 **Penjelasan:** untuk tiap kelompok, kita ambil anggotanya, hitung jarak kuadrat tiap anggota ke centroid (`((member_x - centroid) ** 2).sum(axis=1)`), lalu `argmin` memilih yang terdekat. Hasilnya adalah satu baris data nyata per kelompok. Perhatikan bahwa jarak dihitung di ruang yang dipakai clustering, jadi umur dan gender **tidak ikut** menentukan siapa yang terpilih.
 
 ### Bagian H — Variabel di luar clustering dan uji permutasi
 
 ```python
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:outside"
+```
+
+```text title="Output"
+--8<-- "level-6/outputs/07/outside.txt"
 ```
 
 **Penjelasan:**
@@ -235,6 +259,10 @@ Skrip lengkapnya ada di `examples/level-6/07_cluster_interpretation_and_profilin
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:save"
 ```
 
+```text title="Output"
+--8<-- "level-6/outputs/07/save.txt"
+```
+
 **Penjelasan:** profil satuan asli, nama, dan profil terstandar digabung dalam satu tabel CSV. Konfigurasi, aturan penamaan, dan jumlah permutasi disimpan dalam JSON.
 
 ### Bagian J — Gambar
@@ -243,9 +271,13 @@ Skrip lengkapnya ada di `examples/level-6/07_cluster_interpretation_and_profilin
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:plotheat"
 ```
 
+![Peta panas profil terstandar lima kelompok pada empat variabel: pendapatan dan skor belanja (dipakai) dengan nilai z antara -1,33 dan +1,24, serta umur dan laki-laki (tidak dipakai) dengan nilai z yang lebih kecil. Kelompok E paling muda (-0,97)](../assets/level-6/07-profil-kelompok.png)
+
 ```python
 --8<-- "level-6/07_cluster_interpretation_and_profiling.py:plotmap"
 ```
+
+![Kiri: peta pendapatan terhadap skor belanja dengan lima kelompok berwarna dan huruf di pusat tiap kelompok. Kanan: diagram kotak umur tiap kelompok dengan garis putus-putus untuk rata-rata semua. Kelompok E paling muda, kelompok B dan E punya sebaran umur paling sempit](../assets/level-6/07-peta-dan-umur.png)
 
 **Penjelasan:** gambar pertama adalah peta panas profil terstandar dengan angka di tiap sel. Garis tebal memisahkan variabel yang dipakai dan yang tidak. `vmin` dan `vmax` dikunci pada -1,5 sampai 1,5 agar warna tidak berubah menurut data. Gambar kedua berisi peta pendapatan terhadap skor belanja (kiri) dan diagram kotak umur (kanan). Diagram kotak menampilkan **sebaran**, bukan hanya rata-rata.
 
@@ -278,13 +310,11 @@ Skrip mencetak output ke terminal, menyimpan dua gambar ke `docs/assets/level-6/
 jupyter notebook notebooks/level-6/07-cluster-interpretation-and-profiling.ipynb
 ```
 
-Output di bawah berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
+Semua output pada bab ini berasal dari eksekusi nyata dengan Python 3.14, NumPy 2.5.4, pandas 3.1.1, scikit-learn 1.9.1, dan Matplotlib 3.11.2.
 
 ## Expected Output
 
-```text
---8<-- "level-6/outputs/07.txt"
-```
+Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
 Gambar yang dihasilkan:
 

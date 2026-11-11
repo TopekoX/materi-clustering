@@ -1,0 +1,9 @@
+Kelompok 0, centroid = [1.333, 1.333]
+  titik [1.0, 1.0] -> jarak kuadrat = 0.222
+  titik [2.0, 1.0] -> jarak kuadrat = 0.556
+  titik [1.0, 2.0] -> jarak kuadrat = 0.556
+Kelompok 1, centroid = [6.333, 5.333]
+  titik [6.0, 5.0] -> jarak kuadrat = 0.222
+  titik [7.0, 5.0] -> jarak kuadrat = 0.556
+  titik [6.0, 6.0] -> jarak kuadrat = 0.556
+WCSS manual = 2.667

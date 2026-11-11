@@ -1,0 +1,2 @@
+Pernyataan celah: Dari 5 sumber yang ditelaah berdasarkan abstrak atau ringkasan, tidak satu pun yang kami baca menyajikan protokol terpadu yang mengukur kestabilan, kepekaan terhadap praproses, dan keselarasan eksternal pada satu dataset publik dengan seluruh konfigurasi dibagikan. Ini bukan klaim bahwa studi serupa tidak ada; tinjauan ini terarah, bukan sistematis.
+Pemeriksa klaim : lolos

@@ -1,0 +1,47 @@
+=== Blobs ===
+Metrik internal (butuh X dan label hasil clustering):
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz  Inertia
+Algoritma                                                                  
+K-Means                   0.773           0.313           2132.101   39.069
+Hierarchical (Ward)       0.773           0.313           2132.101      NaN
+DBSCAN                    0.780           0.306           2263.284      NaN
+GMM                       0.773           0.313           2132.101      NaN
+Metrik eksternal (butuh label acuan):
+                       ARI    NMI  Homogeneity  Completeness  V-measure
+Algoritma                                                              
+K-Means              1.000  1.000        1.000         1.000      1.000
+Hierarchical (Ward)  1.000  1.000        1.000         1.000      1.000
+DBSCAN               0.985  0.974        0.994         0.955      0.974
+GMM                  1.000  1.000        1.000         1.000      1.000
+
+=== Moons ===
+Metrik internal (butuh X dan label hasil clustering):
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz  Inertia
+Algoritma                                                                  
+K-Means                   0.495           0.806            417.437  249.917
+Hierarchical (Ward)       0.425           0.845            286.199      NaN
+DBSCAN                    0.384           1.022            258.481      NaN
+GMM                       0.495           0.806            417.405      NaN
+Metrik eksternal (butuh label acuan):
+                       ARI    NMI  Homogeneity  Completeness  V-measure
+Algoritma                                                              
+K-Means              0.479  0.382        0.382         0.382      0.382
+Hierarchical (Ward)  0.425  0.467        0.446         0.489      0.467
+DBSCAN               1.000  1.000        1.000         1.000      1.000
+GMM                  0.488  0.390        0.390         0.390      0.390
+
+=== Circles ===
+Metrik internal (butuh X dan label hasil clustering):
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz  Inertia
+Algoritma                                                                  
+K-Means                   0.353           1.175            174.943  378.058
+Hierarchical (Ward)       0.307           1.265            134.689      NaN
+DBSCAN                    0.004          24.334              5.201      NaN
+GMM                       0.350           1.184            172.421      NaN
+Metrik eksternal (butuh label acuan):
+                       ARI    NMI  Homogeneity  Completeness  V-measure
+Algoritma                                                              
+K-Means             -0.003  0.000        0.000         0.000      0.000
+Hierarchical (Ward)  0.001  0.003        0.003         0.003      0.003
+DBSCAN               0.961  0.943        1.000         0.892      0.943
+GMM                 -0.003  0.000        0.000         0.000      0.000

@@ -1,0 +1,16 @@
+Iterasi 1: log-likelihood = -15.0389 | means = [2.0899, 7.2403] | variances = [1.1061, 2.0747] | weights = [0.4997, 0.5003]
+  Tanggung jawab (kolom: komponen 1, komponen 2) pada iterasi 1:
+        r_1     r_2
+1.0  0.9978  0.0022
+2.0  0.9876  0.0124
+3.0  0.9325  0.0675
+6.0  0.0675  0.9325
+7.0  0.0124  0.9876
+9.0  0.0004  0.9996
+Iterasi 2: log-likelihood = -12.9475 | means = [1.9981, 7.3125] | variances = [0.6757, 1.6437] | weights = [0.4979, 0.5021]
+Iterasi 3: log-likelihood = -12.7250 | means = [1.9984, 7.3263] | variances = [0.6663, 1.5838] | weights = [0.4992, 0.5008]
+Iterasi 4: log-likelihood = -12.7235 | means = [1.9988, 7.3278] | variances = [0.6664, 1.5778] | weights = [0.4994, 0.5006]
+Iterasi 5: log-likelihood = -12.7235 | means = [1.9988, 7.3279] | variances = [0.6664, 1.5772] | weights = [0.4994, 0.5006]
+Iterasi 6: log-likelihood = -12.7235 | means = [1.9988, 7.3279] | variances = [0.6664, 1.5771] | weights = [0.4994, 0.5006]
+Iterasi 7: log-likelihood = -12.7235 | means = [1.9988, 7.328] | variances = [0.6664, 1.5771] | weights = [0.4994, 0.5006]
+Iterasi 8: log-likelihood = -12.7235 | means = [1.9988, 7.328] | variances = [0.6664, 1.5771] | weights = [0.4994, 0.5006]

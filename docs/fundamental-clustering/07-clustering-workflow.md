@@ -146,6 +146,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 --8<-- "level-3/07_clustering_workflow.py:understand"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/07/understand.txt"
+```
+
 **Penjelasan:**
 
 - `df.shape` memberi ukuran data (baris, kolom).
@@ -157,6 +161,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ```python
 --8<-- "level-3/07_clustering_workflow.py:prepare"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/07/prepare.txt"
 ```
 
 **Penjelasan:**
@@ -171,6 +179,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 --8<-- "level-3/07_clustering_workflow.py:scale"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/07/scale.txt"
+```
+
 **Penjelasan:**
 
 - `StandardScaler()` membuat alat standardisasi. `.fit_transform(X)` mempelajari rata-rata dan simpangan baku tiap fitur, lalu mengubah data sehingga rata-rata 0 dan simpangan baku 1.
@@ -182,6 +194,12 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```python
 --8<-- "level-3/07_clustering_workflow.py:choose"
 ```
+
+```text title="Output"
+--8<-- "level-3/outputs/07/choose.txt"
+```
+
+![Grafik silhouette score terhadap jumlah kelompok 2 sampai 8, puncak di k=5](../assets/level-3/07-pemilihan-k.png)
 
 **Penjelasan:**
 
@@ -199,6 +217,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 --8<-- "level-3/07_clustering_workflow.py:fit"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/07/fit.txt"
+```
+
 **Penjelasan:**
 
 - `KMeans(n_clusters=best_k, ...)` membuat model dengan jumlah kelompok terpilih. `random_state=42` mengunci hasil.
@@ -209,6 +231,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ```python
 --8<-- "level-3/07_clustering_workflow.py:stability"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/07/stability.txt"
 ```
 
 **Penjelasan:**
@@ -223,6 +249,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 --8<-- "level-3/07_clustering_workflow.py:interpret"
 ```
 
+```text title="Output"
+--8<-- "level-3/outputs/07/interpret.txt"
+```
+
 **Penjelasan:**
 
 - `df.groupby("Cluster")[features + ["Age"]].mean()` menghitung rata-rata tiap fitur **dalam satuan asli** per kelompok. Kita tambahkan `Age` meski tidak dipakai saat clustering, untuk memperkaya tafsiran.
@@ -235,6 +265,8 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 --8<-- "level-3/07_clustering_workflow.py:plot"
 ```
 
+![Scatter plot pelanggan dalam lima warna dengan centroid hitam](../assets/level-3/07-segmentasi-akhir.png)
+
 **Penjelasan:**
 
 - `scaler.inverse_transform(model.cluster_centers_)` mengubah centroid dari skala standar **kembali ke satuan asli** (ribu dolar dan skor) agar pas digambar di atas data asli. Ini penting: centroid model berada di ruang terstandardisasi.
@@ -242,6 +274,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ```python
 --8<-- "level-3/07_clustering_workflow.py:report"
+```
+
+```text title="Output"
+--8<-- "level-3/outputs/07/report.txt"
 ```
 
 **Penjelasan:**
@@ -279,11 +315,8 @@ jupyter notebook notebooks/level-3/07-clustering-workflow.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1):
+Semua output berasal dari eksekusi nyata skrip (Python 3.14.10, NumPy 2.5.2, pandas 3.0.5, scikit-learn 1.9.0, matplotlib 3.11.1). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-3/outputs/07.txt"
-```
 
 ![Grafik silhouette score terhadap jumlah kelompok 2 sampai 8, puncak di k=5](../assets/level-3/07-pemilihan-k.png)
 

@@ -1,0 +1,5 @@
+random_state = 0: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 1: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 2: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 3: kesamaan dengan hasil utama (ARI) = 1.000
+random_state = 4: kesamaan dengan hasil utama (ARI) = 1.000

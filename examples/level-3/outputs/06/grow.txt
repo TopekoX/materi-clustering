@@ -1,0 +1,3 @@
+Jarak pelanggan 1 dan 2 memakai 1 fitur (Age): 2.00
+Jarak pelanggan 1 dan 2 memakai 2 fitur (Age, Annual Income (k$)): 2.00
+Jarak pelanggan 1 dan 2 memakai 3 fitur (Age, Annual Income (k$), Spending Score (1-100)): 42.05

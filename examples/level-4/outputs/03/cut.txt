@@ -1,0 +1,14 @@
+Potong di tinggi 3  -> 9 kelompok
+Potong di tinggi 5  -> 5 kelompok
+Potong di tinggi 7  -> 5 kelompok
+Potong di tinggi 10 -> 4 kelompok
+Potong di tinggi 20 -> 1 kelompok
+
+Ukuran 5 kelompok (urut): [21, 23, 32, 39, 85]
+         Annual Income (k$)  Spending Score (1-100)
+Cluster                                            
+0                      89.4                    15.6
+1                      86.5                    82.1
+2                      55.8                    49.1
+3                      25.1                    80.0
+4                      26.3                    20.9

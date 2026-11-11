@@ -1,0 +1,2 @@
+Disimpan: examples/level-7/results/02_research_problem.json
+Jumlah pertanyaan: 3 | jumlah tujuan: 3

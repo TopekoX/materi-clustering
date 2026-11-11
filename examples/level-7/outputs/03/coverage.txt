@@ -1,0 +1,4 @@
+RQ1: butuh 'kestabilan' -> 1 makalah ['L3']
+RQ2: butuh 'sensitivitas-praproses' -> 0 makalah []
+RQ3: butuh 'pembanding-partisi' -> 1 makalah ['L4']
+Pertanyaan tanpa dukungan pustaka pada set ini: ['RQ2']

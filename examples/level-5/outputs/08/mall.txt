@@ -1,0 +1,6 @@
+                     Silhouette  Davies-Bouldin  Calinski-Harabasz
+Algoritma                                                         
+K-Means                   0.555           0.572            248.649
+Hierarchical (Ward)       0.554           0.578            244.410
+GMM                       0.554           0.576            244.940
+Tidak ada label acuan pada Mall Customers, jadi metrik eksternal tidak bisa dihitung.

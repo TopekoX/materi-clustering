@@ -1,0 +1,14 @@
+   Age Age Group
+0   19     18-30
+1   21     18-30
+2   20     18-30
+3   23     18-30
+4   31     31-45
+
+Jumlah pelanggan per kelompok usia:
+Age Group
+18-30    62
+31-45    72
+46-60    49
+61-70    17
+Name: count, dtype: int64

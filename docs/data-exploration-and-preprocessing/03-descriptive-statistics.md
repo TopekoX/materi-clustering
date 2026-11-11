@@ -126,6 +126,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/03_descriptive_statistics.py:center"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/03/center.txt"
+```
+
 **Penjelasan:**
 
 - `.mean()` menghitung rata-rata, `.median()` menghitung nilai tengah. Keduanya dihitung untuk setiap kolom sekaligus.
@@ -136,6 +140,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/03_descriptive_statistics.py:spread"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/03/spread.txt"
 ```
 
 **Penjelasan:**
@@ -149,6 +157,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/03_descriptive_statistics.py:manual"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/03/manual.txt"
 ```
 
 **Penjelasan:**
@@ -166,6 +178,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-2/03_descriptive_statistics.py:skew"
 ```
 
+```text title="Output"
+--8<-- "level-2/outputs/03/skew.txt"
+```
+
 **Penjelasan:**
 
 - `.skew()` menghitung kemiringan sebaran tiap kolom.
@@ -175,6 +191,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/03_descriptive_statistics.py:group"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/03/group.txt"
 ```
 
 **Penjelasan:**
@@ -188,6 +208,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ```python
 --8<-- "level-2/03_descriptive_statistics.py:corr"
+```
+
+```text title="Output"
+--8<-- "level-2/outputs/03/corr.txt"
 ```
 
 **Penjelasan:**
@@ -227,11 +251,8 @@ jupyter notebook notebooks/level-2/03-descriptive-statistics.ipynb
 
 ## Expected Output
 
-Output berikut berasal dari eksekusi nyata skrip di atas (pandas 3.1.1, Python 3.14.7):
+Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian [Python Implementation](#python-implementation).
 
-```text
---8<-- "level-2/outputs/03.txt"
-```
 
 **Cara membaca output:**
 

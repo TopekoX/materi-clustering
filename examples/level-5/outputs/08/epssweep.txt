@@ -1,0 +1,5 @@
+eps = 0.20: 18 kelompok, 29 noise, ARI = 0.529
+eps = 0.25:  7 kelompok,  0 noise, ARI = 0.643
+eps = 0.30:  3 kelompok,  0 noise, ARI = 0.961
+eps = 0.35:  2 kelompok,  0 noise, ARI = 1.000
+eps = 0.40:  2 kelompok,  0 noise, ARI = 1.000

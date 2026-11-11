@@ -1,0 +1,6 @@
+Hyperparameter (kamu yang menentukan, sebelum fit):
+{'n_clusters': 3, 'init': 'k-means++', 'n_init': 10, 'max_iter': 300, 'tol': 0.0001, 'random_state': 42}
+Parameter yang DIPELAJARI (hasil fit, berakhiran _):
+  cluster_centers_ bentuk : (3, 2)
+  inertia_                : 364.47
+  n_iter_                 : 2
