@@ -89,6 +89,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 **Penjelasan:**
 
 - Kita memanggil pandas dan matplotlib, lalu membaca data ke `df`.
+- `pd.set_option("display.width", 120)` mengatur lebar baris cetakan tabel menjadi 120 karakter, supaya tabel pandas tidak dipotong dan dilipat ke baris berikutnya di terminal.
+- `pd.set_option("display.max_columns", None)` menampilkan **semua** kolom. Tanpa ini, pandas menyingkat tabel yang kolomnya banyak dengan `...`. Kedua pengaturan hanya memengaruhi tampilan, bukan data.
 - `fitur` adalah tiga kolom yang akan diskalakan. `CustomerID` tidak ikut karena hanya nomor urut.
 - `X = df[fitur]` adalah tabel yang berisi **hanya tiga kolom itu**. Mulai sekarang, kita bekerja dengan `X`.
 
@@ -109,6 +111,58 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 - `varians / varians.sum() * 100` menghitung **porsi** tiap kolom dari total varians, dalam persen.
 - Kalau porsi tiap kolom jauh berbeda, jarak akan didominasi kolom dengan porsi terbesar.
 
+**Cara membaca output:**
+
+- **Rentang.** `Age` hanya bergerak dari 18 sampai 70 (selisih 52). `Annual Income (k$)` dari 15 sampai 137 (selisih 122), dan `Spending Score (1-100)` dari 1 sampai 99 (selisih 98). Satuan dan rentang ketiganya memang berbeda.
+- **Varians.** `Age` hanya 195,1, sedangkan `Annual Income (k$)` 689,8 dan `Spending Score (1-100)` 666,9. Varians `Age` kira-kira sepertiga dari dua kolom lainnya.
+- **Porsi varians.** Dari total varians, `Age` hanya menyumbang 12,6%, sedangkan `Annual Income (k$)` 44,5% dan `Spending Score (1-100)` 43,0%. Ketiga angka ini berjumlah 100%.
+- **Artinya untuk clustering.** Pada skala asli, jarak antar pelanggan hampir seluruhnya (sekitar 87%) ditentukan oleh pendapatan dan skor belanja. `Age` nyaris tidak berpengaruh, padahal kita belum memutuskan bahwa usia kurang penting. Ketimpangan inilah yang ingin diperbaiki oleh *feature scaling* di langkah-langkah berikutnya.
+- Pada data ini, tidak ada satu kolom yang mendominasi sendirian. Yang tertinggal jauh adalah `Age`. Pada data lain dengan satuan yang lebih ekstrem (misalnya gaji dalam rupiah dengan usia dalam tahun), satu kolom bisa menguasai hampir seluruh jarak.
+- `dtype: float64` di akhir tiap deret hanya menunjukkan tipe angka hasil hitungan, bukan bagian dari hasil.
+
+??? question "Belum paham rentang, varians, dan porsi varians? Ikuti contoh sederhana ini"
+
+    Bayangkan kita punya dua kolom angka untuk tiga pelanggan:
+
+    | Pelanggan | Kolom A | Kolom B |
+    |---|---|---|
+    | 1 | 20 | 20 |
+    | 2 | 30 | 60 |
+    | 3 | 40 | 100 |
+
+    **1. Rentang: "dari berapa sampai berapa?"**
+
+    Rentang hanya melihat angka terkecil dan terbesar, lalu mengurangkannya.
+
+    - Kolom A: dari 20 sampai 40, selisihnya \( 40 - 20 = 20 \).
+    - Kolom B: dari 20 sampai 100, selisihnya \( 100 - 20 = 80 \).
+
+    Kolom B "lebih lebar" daripada kolom A. Baris `min` dan `max` pada output Langkah 2 adalah hal yang sama.
+
+    **2. Varians: "seberapa berserakan angkanya?"**
+
+    Varians adalah satu angka yang menggambarkan **seberapa jauh angka-angka menyebar dari titik tengahnya**.
+
+    - Kalau angkanya **rapat** (misalnya 29, 30, 31), variansnya **kecil**.
+    - Kalau angkanya **berserakan** (misalnya 0, 30, 60), variansnya **besar**.
+
+    Pada contoh kita, komputer menghitung varians kolom A = **100** dan kolom B = **1600**. Anda tidak perlu menghitungnya sendiri, cukup ingat artinya: *makin besar angkanya, makin berserakan datanya*.
+
+    **3. Porsi varians: "siapa yang paling berpengaruh?"**
+
+    Bayangkan varians sebagai "suara" tiap kolom saat menentukan siapa mirip dengan siapa. Porsi varians adalah **persentase suara** tiap kolom dari seluruh suara.
+
+    Total suara pada contoh: \( 100 + 1600 = 1700 \).
+
+    - Kolom A: \( 100 / 1700 \approx 6\% \)
+    - Kolom B: \( 1600 / 1700 \approx 94\% \)
+
+    Artinya kolom B menguasai hampir seluruh suara, sedangkan kolom A nyaris tidak didengar. Kalau kita memakai kedua kolom ini untuk mengelompokkan pelanggan, hasilnya hampir hanya ditentukan kolom B.
+
+    **Kaitannya dengan output di atas**
+
+    Pada data Mall Customers, `Age` hanya mendapat "suara" 12,6%, sedangkan pendapatan dan skor belanja masing-masing sekitar 44% dan 43%. Jadi usia kurang didengar, bukan karena tidak penting, tetapi karena angkanya kebetulan lebih sempit. *Feature scaling* dipakai supaya semua kolom mendapat suara yang lebih adil.
+
 ### Langkah 3 — Min-Max scaling
 
 ```python
@@ -126,6 +180,17 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 - `head().round(3)` menampilkan 5 baris pertama dengan tiga angka di belakang koma.
 - `agg(["min", "max"])` membuktikan bahwa setiap kolom sekarang berada tepat di antara 0 dan 1.
 
+**Cara membaca output:**
+
+- **Tabel 5 baris pertama.** Bentuknya sama dengan tabel asli, tetapi semua angka kini berada di antara 0 dan 1. Pelanggan pertama punya `Age` 19, `Annual Income (k$)` 15, dan `Spending Score (1-100)` 39. Kita bisa mencocokkannya dengan rumus Min-Max menggunakan min dan max dari Langkah 2:
+    - `Age`: \( (19 - 18) / (70 - 18) = 1/52 \approx 0{,}019 \)
+    - `Annual Income (k$)`: \( (15 - 15) / (137 - 15) = 0 \), jadi 0,000
+    - `Spending Score (1-100)`: \( (39 - 1) / (99 - 1) = 38/98 \approx 0{,}388 \)
+- **Nilai 0,000 pada pendapatan.** Pelanggan 1 dan 2 punya pendapatan 15, yaitu yang terkecil di seluruh data, sehingga hasilnya tepat 0. Pelanggan 3 dan 4 punya pendapatan 16, sehingga hasilnya \( 1/122 \approx 0{,}008 \), dan pelanggan 5 dengan pendapatan 17 menjadi \( 2/122 \approx 0{,}016 \).
+- **Urutan tetap terjaga.** Pelanggan 2 punya skor belanja 81 (hasil 0,816), jauh lebih tinggi daripada pelanggan 3 dengan skor 6 (hasil 0,051). Min-Max hanya menggeser dan meregangkan skala, sehingga urutan dan perbandingan relatif antar pelanggan tidak berubah.
+- **Tabel min dan max.** Semua kolom kini bernilai min 0,0 dan max 1,0. Rentang `Age` (52), pendapatan (122), dan skor belanja (98) yang tadinya berbeda sekarang sama-sama 1, sehingga ketiganya punya skala yang sebanding dalam menghitung jarak.
+- **Yang belum selesai.** Rentang sudah sama, tetapi varians belum tentu sama. Kolom yang sebagian besar datanya mengumpul di satu sisi tetap punya sebaran yang lebih sempit. Hal ini diperiksa di Langkah 6.
+
 ### Langkah 4 — Standardization
 
 ```python
@@ -139,6 +204,41 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 **Penjelasan:**
 
 - `(X - X.mean()) / X.std(ddof=0)` adalah rumus z-score. `ddof=0` memakai pembagi \(n\), sama dengan scikit-learn.
+
+    **Bagian pertama: `X - X.mean()` dan `/ X.std(...)`.** Rumus ini sama dengan \( z = (x - \mu)/\sigma \) di bagian Mathematical Foundation. Ada dua langkah:
+
+    1. **Kurangi dengan rata-rata** (`X - X.mean()`). Ini menggeser data sehingga titik tengahnya menjadi 0. Nilai di atas rata-rata menjadi positif, dan nilai di bawah rata-rata menjadi negatif.
+    2. **Bagi dengan simpangan baku** (`/ X.std(...)`). Simpangan baku adalah ukuran "seberapa lebar sebaran" data (akar dari varians pada Langkah 2). Pembagian ini mengubah satuan asli (tahun, k\$, skor) menjadi satuan baru: **berapa simpangan baku nilai ini dari rata-rata**.
+
+    Jadi z-score `-1,425` berarti "1,425 simpangan baku di bawah rata-rata", dan z-score `1,196` berarti "1,196 simpangan baku di atas rata-rata". Karena semua kolom kini memakai satuan yang sama, ketiganya bisa dibandingkan secara adil.
+
+    **Contoh dari data kita (`Age` pelanggan pertama).** Usianya 19, rata-rata `Age` 38,85, dan simpangan baku (pembagi \(n\)) ≈ 13,934:
+
+    $$
+    z = \frac{19 - 38{,}85}{13{,}934} \approx -1{,}425
+    $$
+
+    Hasilnya sama dengan baris pertama kolom `Age` pada output.
+
+    **Bagian kedua: apa itu `ddof=0`?** Ada dua cara menghitung simpangan baku yang sedikit berbeda. Bedanya hanya pada **angka pembagi** saat menghitung varians (setelah selisih tiap nilai dikuadratkan dan dijumlahkan):
+
+    | Pengaturan | Pembagi | Nama | Dipakai oleh |
+    |---|---|---|---|
+    | `ddof=0` | \(n\) (jumlah data) | simpangan baku populasi | `StandardScaler` scikit-learn |
+    | `ddof=1` | \(n-1\) | simpangan baku sampel | `.std()` pandas (bawaan) |
+
+    `ddof` singkatan dari *delta degrees of freedom*, yaitu "berapa yang dikurangkan dari \(n\) pada pembagi". Pada `ddof=0` tidak ada yang dikurangkan, pada `ddof=1` dikurangi 1.
+
+    **Contoh kecil.** Ambil tiga angka: 10, 20, 30. Rata-ratanya 20, selisihnya \( -10, 0, 10 \), kuadratnya \( 100, 0, 100 \), jumlahnya 200.
+
+    | | Pembagi | Varians | Simpangan baku | z-score untuk angka 10 |
+    |---|---|---|---|---|
+    | `ddof=0` | \(3\) | \(200/3 \approx 66{,}7\) | \(\approx 8{,}165\) | \(\approx -1{,}225\) |
+    | `ddof=1` | \(2\) | \(200/2 = 100\) | \(10\) | \(-1\) |
+
+    Pada 3 data, bedanya terlihat jelas. Pada data kita \(n = 200\), pembaginya 200 lawan 199, sehingga bedanya sangat kecil: simpangan baku `Age` 13,934 (`ddof=0`) lawan 13,969 (`ddof=1`), dan z-score pelanggan pertama -1,425 lawan -1,421.
+
+    **Mengapa kita memilih `ddof=0`?** Karena kita ingin hasil hitungan manual **persis sama** dengan `StandardScaler`. Itu dibuktikan di Langkah 5. Jika Anda memakai `.std()` tanpa `ddof=0`, angkanya sedikit berbeda dan `StandardScaler` tidak akan cocok dengan hitungan manual Anda.
 - Kita memeriksa **rata-rata** dan **simpangan baku** hasilnya. Rata-ratanya hampir 0 (`-0.000` karena pembulatan, bukan negatif sungguhan), dan simpangan baku 1,003.
 - Angka 1,003, bukan tepat 1, muncul karena `agg(["std"])` memakai pembagi \(n-1\), sedangkan kita menskalakan dengan pembagi \(n\). Itu hanya beda definisi, bukan kesalahan.
 
@@ -192,6 +292,7 @@ Ringkasan fungsi baru di bab ini:
 
 | Perintah | Kegunaan |
 |---|---|
+| `pd.set_option(nama, nilai)` | Mengatur tampilan pandas (lebar cetak, jumlah kolom) tanpa mengubah data |
 | `X.var()` | Varians tiap kolom |
 | `X.std(ddof=0)` | Simpangan baku dengan pembagi \(n\) |
 | `MinMaxScaler().fit_transform(X)` | Min-Max scaling dengan scikit-learn |

@@ -134,6 +134,8 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 5 — Transformasi logaritma
 
+Transformasi logaritma bertindak seperti peredam: ia menekan angka-angka yang sangat besar tanpa mengubah urutannya. Nilai yang berjarak sangat jauh akan "ditarik" mendekat, sehingga sebaran yang **miring ke kanan** (*right-skewed*) menjadi lebih seimbang. Tetapi efek ini hanya menolong bila memang ada ekor panjang di kanan. Pada data kita itu belum tentu terjadi, jadi kita ukur dulu hasilnya.
+
 ```python
 --8<-- "level-2/09_transformation_encoding.py:log"
 ```
@@ -161,6 +163,24 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 - Dua histogram berdampingan: kiri sebelum, kanan sesudah transformasi.
 - `axes[0]` dan `axes[1]` adalah grafik pertama dan kedua.
 - Kita membandingkan **bentuk** sebarannya dengan mata, bukan hanya angka skewness.
+
+!!! note "Apa itu ekor panjang di kanan?"
+    **Ekor panjang di kanan** adalah bentuk histogram ketika sebagian besar data menumpuk di nilai kecil (sisi kiri), lalu ada sedikit data bernilai jauh lebih besar yang memanjang ke sisi kanan grafik, seperti ekor yang menjulur ke kanan.
+
+    ```text
+    jumlah
+     |█
+     |███
+     |█████
+     |███████▄▂▁  ▁   ▁         <- ekor menjulur ke kanan
+     +-----------------------> nilai
+      kecil              besar
+    ```
+
+    - **Contoh nyata:** pendapatan penduduk. Kebanyakan orang berpenghasilan Rp3–10 juta per bulan, tetapi segelintir orang berpenghasilan ratusan juta atau miliaran. Segelintir nilai besar itulah yang membentuk ekor.
+    - **Istilah lain:** sebaran ini disebut *right-skewed* atau *positively skewed*, dengan skewness bernilai positif besar (misalnya di atas 1). Rata-ratanya biasanya tertarik ke kanan, sehingga lebih besar dari median.
+    - **Kaitannya dengan log:** nilai yang sangat besar membuat jarak antardata tidak seimbang, dan itu dapat mengganggu algoritma clustering berbasis jarak. Log memperpendek ekor karena menekan nilai besar lebih kuat daripada nilai kecil. Contohnya, 10 dan 1.000.000 yang berjarak sangat jauh menjadi sekitar 2,4 dan 13,8 setelah `log1p`.
+    - **Pada data kita:** `Annual Income (k$)` hanya punya ekor tipis di kanan (skewness 0,32), jadi hampir simetris. Log malah memunculkan ekor di kiri (skewness −0,74), sehingga log tidak dipakai untuk kolom ini.
 
 ### Langkah 7 — Binning: mengelompokkan angka
 
