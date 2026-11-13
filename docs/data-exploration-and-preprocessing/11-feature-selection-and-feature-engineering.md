@@ -103,6 +103,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 3 — Mencari fitur yang redundan
 
+Fitur redundan adalah dua kolom yang membawa informasi hampir sama. Pada clustering, jarak dihitung dari semua fitur, sehingga dua kolom yang kembar membuat satu aspek **dihitung dua kali** dan cluster condong ke aspek itu. Karena tidak ada label untuk mengoreksi, kita periksa sendiri lewat korelasi. Pasangan dengan \(\lvert r \rvert \ge 0{,}8\) kita tandai. Tanda ini hanya petunjuk, putusan membuang tetap memakai pengetahuan domain.
+
 ```python
 --8<-- "level-2/11_feature_selection_engineering.py:redundancy"
 ```
@@ -117,6 +119,14 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 - Loop bersarang `for i, a in enumerate(angka)` lalu `for b in angka[i + 1:]` memeriksa **setiap pasangan sekali saja**. `enumerate` memberi nomor urut `i`, dan `angka[i + 1:]` berarti "semua kolom setelah kolom ke-`i`".
 - `abs(korelasi.loc[a, b]) >= 0.8` memeriksa apakah korelasinya kuat. `abs` mengambil nilai mutlak, karena korelasi −0,9 sama kuatnya dengan +0,9.
 - Pasangan yang kuat dimasukkan ke daftar `pasangan_kuat`. Jika daftarnya kosong, tidak ada pasangan redundan.
+
+**Jika ada fitur redundan dan tidak ditangani:**
+
+- **Bobot ganda pada jarak.** Selisih nilai fitur yang kembar masuk ke rumus jarak dua kali, sehingga aspek itu berpengaruh dua kali lipat.
+- **Cluster condong ke satu aspek.** Fitur lain, misalnya skor belanja, jadi kurang berperan.
+- **Tidak ada tanda error.** Tanpa label, algoritma tetap berjalan dan menghasilkan cluster yang tampak wajar, padahal bentuknya bias.
+- **Dimensi bertambah tanpa tambahan informasi**, sehingga memperburuk *curse of dimensionality* dan menambah waktu hitung.
+- **Interpretasi menyesatkan.** Profil cluster tampak didukung dua fitur, padahal sumbernya satu.
 
 ### Langkah 4 — Membuat fitur baru
 
@@ -150,6 +160,12 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 - `skew()` mengukur kemiringan sebaran (Bab 3).
 - `corr().loc["Spend_Income_Ratio"]` mengambil **satu baris** dari matriks korelasi: korelasi fitur baru dengan tiga fitur asalnya.
 - Tujuannya menilai: apakah sebarannya wajar, dan apakah ia hanya menyalin fitur lain?
+
+**Membaca output:**
+
+- **Sebarannya miring ke kanan.** Rata-rata (1,07) lebih besar dari median (0,89), dan nilai terbesar (5,40) jauh di atas kuartil ketiga (1,13). Skewness 2,43 menegaskannya. Nilai ekstrem itu berasal dari pelanggan berpendapatan rendah dengan skor belanja tinggi, misalnya pendapatan 15 dan skor 81 menghasilkan 5,40. Pembaginya kecil, sehingga hasilnya besar.
+- **Ia bukan salinan fitur lain.** Korelasi dengan tiap fitur asal hanya sedang: −0,32 (usia), −0,57 (pendapatan), dan 0,59 (skor belanja). Semuanya jauh di bawah ambang 0,8, jadi fitur ini tidak redundan. Korelasi sedang itu wajar karena fitur ini dihitung dari pendapatan dan skor belanja. Angka 1,00 pada baris `Spend_Income_Ratio` hanyalah korelasi fitur dengan dirinya sendiri.
+- **Kesimpulannya bersyarat.** Fitur ini membawa informasi baru, tetapi sebarannya yang miring dapat membuat nilai ekstrem mendominasi jarak. Bila dipakai, ia perlu ditangani lebih dulu, misalnya dengan transformasi (Bab 9) atau *feature scaling* (Bab 10).
 
 ### Langkah 6 — Menyusun kandidat himpunan fitur
 
