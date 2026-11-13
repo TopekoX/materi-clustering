@@ -208,9 +208,12 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 - `set_xlabel`, `set_ylabel`, `set_title` memberi nama pada sumbu dan judul.
 - `plt.show()` menampilkan gambar. (Skrip kita menyimpannya ke file `docs/assets/level-3/`.)
 
-Selalu **lihat data mentah dulu**. Dari sini kamu mendapat firasat apakah ada gerombol alami.
+!!! tip "Kebiasaan baik"
+    Selalu **lihat data mentah dulu**. Dari sini kamu mendapat firasat apakah ada gerombol alami.
 
 ### Langkah 4 — Kelompokkan data
+
+**Mengapa langkah ini?** Di Langkah 3 kita baru *melihat* bahwa titik-titik tampak bergerombol, tetapi itu masih kesan mata. Komputer belum tahu pelanggan mana masuk gerombol mana. Di langkah ini kita menyerahkan tugas itu ke algoritma: pelanggan dengan pendapatan dan skor belanja yang berdekatan dikumpulkan dalam satu kelompok. Hasilnya berupa nomor kelompok di tiap baris, yang menjadi bahan untuk menghitung ukuran dan membuat profil kelompok di langkah berikutnya.
 
 ```python
 --8<-- "level-3/01_introduction_to_clustering.py:cluster"
@@ -232,6 +235,8 @@ Selalu **lihat data mentah dulu**. Dari sini kamu mendapat firasat apakah ada ge
 
 ### Langkah 5 — Hitung ukuran tiap kelompok
 
+**Mengapa langkah ini?** Setelah tiap pelanggan punya nomor kelompok, pertanyaan pertama yang wajar adalah seberapa besar masing-masing kelompok. Ukuran memberi gambaran kasar kualitas hasil: kelompok yang hanya berisi sedikit pelanggan bisa jadi kasus khusus atau outlier, sedangkan kelompok yang sangat besar bisa berarti beberapa gerombol tergabung jadi satu. Ukuran juga menentukan bobot kelompok dalam keputusan bisnis, karena kelompok besar biasanya lebih layak mendapat perhatian lebih.
+
 ```python
 --8<-- "level-3/01_introduction_to_clustering.py:sizes"
 ```
@@ -246,6 +251,8 @@ Selalu **lihat data mentah dulu**. Dari sini kamu mendapat firasat apakah ada ge
 - `.sort_index()` mengurutkan hasilnya menurut nomor kelompok (0, 1, 2, ...), bukan menurut jumlah.
 
 ### Langkah 6 — Buat profil tiap kelompok
+
+**Mengapa langkah ini?** Nomor kelompok (0 sampai 4) hanyalah label tanpa arti. Algoritma tidak tahu apa makna kelompok 3 bagi bisnis. Dengan merata-ratakan fitur di tiap kelompok, kita mengubah label itu menjadi gambaran yang bisa dibaca manusia, misalnya "pendapatan tinggi, skor belanja rendah". Profil inilah yang membuat hasil clustering berguna: kita bisa memberi nama tiap kelompok dan menentukan tindakan yang cocok untuknya.
 
 ```python
 --8<-- "level-3/01_introduction_to_clustering.py:profile"

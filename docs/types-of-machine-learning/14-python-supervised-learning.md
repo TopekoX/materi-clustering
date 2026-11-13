@@ -95,6 +95,26 @@ Jalankan dengan:
 python klasifikasi_iris.py
 ```
 
+**Output:**
+
+```text
+   sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)
+0                5.1               3.5                1.4               0.2
+1                4.9               3.0                1.4               0.2
+2                4.7               3.2                1.3               0.2
+3                4.6               3.1                1.5               0.2
+4                5.0               3.6                1.4               0.2
+Nama kelas: ['setosa', 'versicolor', 'virginica']
+Ukuran X: (150, 4)
+Ukuran y: (150,)
+Jumlah per kelas: [50, 50, 50]
+Data latih: (120, 4) | Data uji: (30, 4)
+5 prediksi pertama : [0, 2, 1, 1, 0]
+5 jawaban sebenarnya: [0, 2, 1, 1, 0]
+Bunga baru diprediksi: setosa
+Akurasi: 1.00
+```
+
 ## D. Penjelasan kode langkah demi langkah
 
 ### Langkah 1: Mengimpor pustaka
@@ -300,23 +320,7 @@ Akurasi: 1.00
 
 ## E. Ringkasan output yang diharapkan
 
-```text
-   sepal length (cm)  sepal width (cm)  petal length (cm)  petal width (cm)
-0                5.1               3.5                1.4               0.2
-1                4.9               3.0                1.4               0.2
-2                4.7               3.2                1.3               0.2
-3                4.6               3.1                1.5               0.2
-4                5.0               3.6                1.4               0.2
-Nama kelas: ['setosa', 'versicolor', 'virginica']
-Ukuran X: (150, 4)
-Ukuran y: (150,)
-Jumlah per kelas: [50, 50, 50]
-Data latih: (120, 4) | Data uji: (30, 4)
-5 prediksi pertama : [0, 2, 1, 1, 0]
-5 jawaban sebenarnya: [0, 2, 1, 1, 0]
-Bunga baru diprediksi: setosa
-Akurasi: 1.00
-```
+Output teks lengkap program ditampilkan langsung di bawah kode pada bagian [C. Kode lengkap](#c-kode-lengkap). Output tiap langkah juga ada tepat di bawah kodenya masing-masing pada bagian D.
 
 Output ini dihasilkan dengan Python 3.14, pandas 3.1.1, dan scikit-learn 1.9.1. Versi lain bisa sedikit berbeda.
 

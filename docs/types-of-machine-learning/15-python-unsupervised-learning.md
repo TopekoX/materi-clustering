@@ -116,6 +116,42 @@ python clustering_pelanggan.py
 
 Jendela grafik akan muncul. Tutup jendela itu agar program melanjutkan ke langkah 10.
 
+**Output teks** (grafik muncul di jendela terpisah, lihat Langkah 9 pada bagian D):
+
+```text
+   pendapatan  skor_belanja
+0          15            80
+1          16            85
+2          17            78
+3          18            90
+4          19            82
+Ukuran data: (18, 2)
+       pendapatan  skor_belanja
+count        18.0          18.0
+mean         57.0          49.8
+std          32.5          28.7
+min          15.0          10.0
+25%          19.2          20.5
+50%          59.0          49.0
+75%          91.5          79.5
+max          99.0          90.0
+cluster
+0    6
+1    6
+2    6
+Name: count, dtype: int64
+   pendapatan  skor_belanja
+0        58.8          49.5
+1        94.7          16.2
+2        17.5          83.8
+Pelanggan baru masuk cluster: 0
+         pendapatan  skor_belanja
+cluster                          
+0              58.8          49.5
+1              94.7          16.2
+2              17.5          83.8
+```
+
 ## D. Penjelasan kode langkah demi langkah
 
 ### Langkah 1: Mengimpor pustaka
@@ -326,41 +362,7 @@ cluster
 
 ## E. Ringkasan output yang diharapkan
 
-Output teks lengkap (grafik muncul di jendela terpisah):
-
-```text
-   pendapatan  skor_belanja
-0          15            80
-1          16            85
-2          17            78
-3          18            90
-4          19            82
-Ukuran data: (18, 2)
-       pendapatan  skor_belanja
-count        18.0          18.0
-mean         57.0          49.8
-std          32.5          28.7
-min          15.0          10.0
-25%          19.2          20.5
-50%          59.0          49.0
-75%          91.5          79.5
-max          99.0          90.0
-cluster
-0    6
-1    6
-2    6
-Name: count, dtype: int64
-   pendapatan  skor_belanja
-0        58.8          49.5
-1        94.7          16.2
-2        17.5          83.8
-Pelanggan baru masuk cluster: 0
-         pendapatan  skor_belanja
-cluster                          
-0              58.8          49.5
-1              94.7          16.2
-2              17.5          83.8
-```
+Output teks lengkap program ditampilkan langsung di bawah kode pada bagian [C. Kode lengkap](#c-kode-lengkap). Output tiap langkah, termasuk grafik, juga ada tepat di bawah kodenya masing-masing pada bagian D.
 
 Output ini dihasilkan dengan Python 3.14, pandas 3.1.1, matplotlib 3.11.2, dan scikit-learn 1.9.1.
 
