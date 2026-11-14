@@ -164,6 +164,15 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 
 ### Langkah 1 — Buat data sintetis
 
+Pada langkah ini kita memakai **dataset sintetis**, yaitu data buatan yang dibangkitkan oleh program (bukan hasil pengukuran dunia nyata). Alasannya:
+
+- **Kelompok aslinya diketahui pasti.** Kita sendiri yang menentukan pusat dan sebaran tiap gerombol, sehingga kita bisa memeriksa apakah ukuran kekompakan, keterpisahan, dan kepadatan benar-benar menangkap apa yang kita rancang.
+- **Kondisinya bisa dikendalikan.** Dengan mengubah satu parameter saja (`cluster_std`), kita mendapat dua dataset yang hanya berbeda pada tingkat tumpang tindihnya. Pada data nyata, perbedaan seperti ini sulit diisolasi.
+- **Hasilnya dapat diulang.** Dengan `random_state=42`, siapa pun yang menjalankan kode ini mendapat data dan angka yang sama.
+
+!!! note "Batasan data sintetis"
+    Data sintetis rapi dan "ramah" terhadap algoritma, jadi tidak mewakili kerumitan data nyata. Karena itu, pada langkah terakhir kita menerapkan ukuran yang sama pada data nyata (Mall Customers).
+
 ```python
 --8<-- "level-3/02_understanding_clusters.py:setup"
 ```
@@ -171,6 +180,11 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 ```text title="Output"
 --8<-- "level-3/outputs/02/setup.txt"
 ```
+
+**Maksud output:**
+
+- `Bentuk XA: (150, 2)` dan `Bentuk XB: (150, 2)`: *shape* (bentuk) larik data. Angka pertama (150) adalah jumlah titik/baris, angka kedua (2) adalah jumlah fitur/kolom, yaitu koordinat \( x \) dan \( y \). Jadi kedua dataset sama-sama berisi 150 titik pada bidang dua dimensi, sehingga bisa langsung digambar.
+- `Jumlah anggota per kelompok (A): [50 50 50]`: hasil `np.bincount(yA)`, yaitu banyaknya titik pada kelompok 0, 1, dan 2. Ketiganya 50, artinya 150 titik terbagi rata ke tiga gerombol. Ini memastikan kelompok seimbang, sehingga perbedaan ukuran kelompok tidak memengaruhi perbandingan nanti.
 
 **Penjelasan:**
 
@@ -200,6 +214,16 @@ Kita kerjakan dalam delapan langkah kecil. **Setiap potongan kode diikuti penjel
 - `fig.tight_layout()` merapikan jarak antar elemen.
 
 ### Langkah 3 — Ukur kekompakan (compactness)
+
+Setelah melihat kedua dataset secara visual di Langkah 2, kini kita mengubah kesan "rapat" atau "longgar" menjadi **angka**. Ukuran pertama adalah **kekompakan** (*compactness*): seberapa dekat anggota sebuah kelompok dengan pusatnya.
+
+Caranya sederhana, mengikuti rumus di bagian Mathematical Foundation:
+
+1. Cari **pusat** kelompok, yaitu rata-rata koordinat semua anggotanya.
+2. Hitung **jarak** setiap anggota ke pusat itu.
+3. Ambil **rata-rata** jarak tersebut.
+
+Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langkah ini dalam satu fungsi `compactness`, lalu menjalankannya pada Dataset A dan B. Karena hanya `cluster_std` yang berbeda di antara keduanya, selisih angka yang muncul berasal dari tingkat sebaran itu. Angka ini juga menjadi pembagi pada rasio keterpisahan di Langkah 4.
 
 ```python
 --8<-- "level-3/02_understanding_clusters.py:compact"
