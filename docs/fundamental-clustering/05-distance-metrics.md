@@ -204,6 +204,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 1 — Siapkan dua titik
 
+Sebelum membandingkan banyak metrik, kita butuh contoh yang sangat sederhana: dua titik dengan dua fitur, yang bisa dihitung dengan kepala. Semua metrik jarak pada dasarnya dibangun dari satu bahan yang sama, yaitu **selisih tiap fitur** antara dua titik. Maka langkah pertama adalah melihat selisih itu secara langsung, tanpa rumus apa pun.
+
 ```python
 --8<-- "level-3/05_distance_metrics.py:setup"
 ```
@@ -211,6 +213,12 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```text title="Output"
 --8<-- "level-3/outputs/05/setup.txt"
 ```
+
+**Cara membaca output:**
+
+- Titik `A = (1, 2)` dan `B = (4, 6)`. Selisih `B - A` adalah `[3. 4.]`: fitur pertama berbeda 3 satuan, fitur kedua berbeda 4 satuan.
+- Selisih mutlaknya sama, `[3. 4.]`, karena kedua selisih sudah positif. Nilai mutlak baru berpengaruh bila ada selisih negatif.
+- Dua angka inilah, 3 dan 4, yang akan diolah dengan cara berbeda oleh tiap metrik di langkah berikutnya.
 
 **Penjelasan:**
 
@@ -220,6 +228,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 2 — Hitung dengan rumus
 
+Setelah punya selisih 3 dan 4, kita gabungkan menjadi **satu angka jarak**. Cara menggabungkannya yang membedakan metrik: Euclidean menguadratkan dan mengakarkan, Manhattan menjumlahkan, Chebyshev mengambil yang terbesar, dan Minkowski adalah rumus umum yang mencakup semuanya.
+
+Kita menghitung dengan rumus sendiri dulu (bukan fungsi siap pakai) supaya terlihat bahwa tidak ada yang misterius. Dua pemeriksaan di akhir juga menunjukkan bahwa Minkowski bukan metrik tersendiri, melainkan **keluarga** yang memuat Manhattan (\( p=1 \)) dan Euclidean (\( p=2 \)).
+
 ```python
 --8<-- "level-3/05_distance_metrics.py:manual"
 ```
@@ -227,6 +239,15 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```text title="Output"
 --8<-- "level-3/outputs/05/manual.txt"
 ```
+
+**Cara membaca output:**
+
+- **Euclidean = 5.0**: \( \sqrt{3^2 + 4^2} = \sqrt{25} \), jarak garis lurus.
+- **Manhattan = 7.0**: \( 3 + 4 \), jarak bila hanya boleh bergerak sejajar sumbu seperti menyusuri blok kota.
+- **Minkowski (p=3) = 4.4979**: \( (3^3 + 4^3)^{1/3} = 91^{1/3} \). Nilainya di antara Euclidean dan Chebyshev.
+- **Chebyshev = 4.0**: selisih terbesar saja, yaitu `max(3, 4)`.
+- Untuk dua titik yang sama, urutannya Manhattan (7) \( \ge \) Euclidean (5) \( \ge \) Minkowski p=3 (4,50) \( \ge \) Chebyshev (4). Makin besar \( p \), jaraknya makin turun mendekati Chebyshev.
+- Dua baris `True` membuktikan bahwa Minkowski dengan \( p=1 \) sama dengan Manhattan dan dengan \( p=2 \) sama dengan Euclidean.
 
 **Penjelasan:**
 
@@ -239,6 +260,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 3 — Periksa dengan scikit-learn
 
+Hitungan manual rawan salah ketik. Pada pekerjaan nyata kita memakai fungsi pustaka, jadi kita perlu memastikan fungsi itu menghasilkan angka yang sama dengan hitungan kita. Langkah ini adalah **pemeriksaan silang**: bila `scikit-learn` dan rumus manual menunjuk angka yang sama, kita tahu rumus dan kodenya benar, dan kita bisa memakai `pairwise_distances` dengan percaya diri pada data besar.
+
 ```python
 --8<-- "level-3/05_distance_metrics.py:sklearn"
 ```
@@ -246,6 +269,12 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```text title="Output"
 --8<-- "level-3/outputs/05/sklearn.txt"
 ```
+
+**Cara membaca output:**
+
+- Tiga baris ini menghitung jarak A ke B dengan `pairwise_distances`: Euclidean 5.0, Manhattan 7.0, dan Minkowski p=3 4.4979.
+- Semuanya **sama persis** dengan hasil manual di Langkah 2. Jadi rumus kita benar dan fungsi pustaka bisa dipercaya.
+- Chebyshev tidak ditampilkan di sini karena tidak diperlukan untuk pemeriksaan ini. Nilainya sudah dihitung di Langkah 2.
 
 **Penjelasan:**
 
@@ -259,6 +288,10 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 
 ### Langkah 4 — Cosine similarity dan cosine distance
 
+Euclidean dan teman-temannya mengukur **seberapa jauh** dua titik. Ada kebutuhan lain: membandingkan **arah**, bukan jarak. Contohnya dua dokumen dengan topik sama tetapi panjangnya berbeda, atau dua pelanggan dengan pola belanja yang searah tetapi besar belanjanya berlainan. Untuk itu dipakai *cosine similarity*.
+
+Kita membuat tiga vektor untuk melihat perbedaannya dengan jelas: `v` searah dengan `u` tetapi dua kali lebih panjang, dan `w` tegak lurus terhadap `u`. Dengan Euclidean ikut dicetak, kita bisa membandingkan dua cara pandang pada pasangan yang sama.
+
 ```python
 --8<-- "level-3/05_distance_metrics.py:cosine"
 ```
@@ -266,6 +299,13 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 ```text title="Output"
 --8<-- "level-3/outputs/05/cosine.txt"
 ```
+
+**Cara membaca output:**
+
+- **`u` dan `v` (searah):** cosine similarity 1.0000, cosine distance 0.0000. Cosine menganggap keduanya **identik** karena arahnya sama, walau `v` dua kali lebih panjang. Namun jarak Euclidean-nya 2.2361, jadi Euclidean menganggapnya berbeda.
+- **`u` dan `w` (tegak lurus):** cosine similarity 0.0000, cosine distance 1.0000. Vektor yang tegak lurus tidak punya kesamaan arah sama sekali. Euclidean-nya 3.1623.
+- Pelajarannya: Euclidean peka terhadap **panjang**, cosine tidak. Pilih cosine bila yang penting pola atau proporsi, dan Euclidean bila besarnya juga bermakna.
+- Cosine distance di sini dihitung sebagai \( 1 - \) similarity. Rentang nilainya dari 0 (searah) sampai 1 (tegak lurus) pada contoh ini.
 
 **Penjelasan:**
 
@@ -276,11 +316,23 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 
 ### Langkah 5 — Bentuk jarak sama
 
+Angka jarak sulit "dilihat". Gambar membantu menjawab pertanyaan: **titik mana saja yang dianggap sama jauhnya** dari sebuah pusat? Himpunan titik yang berjarak persis 1 dari pusat akan membentuk garis lengkung, dan bentuknya berbeda untuk tiap metrik. Bentuk inilah yang menentukan titik mana yang dianggap "tetangga" oleh algoritma.
+
+Kita menggambar tiga bentuk untuk \( p = 1 \), \( p = 2 \), dan \( p = 8 \) agar terlihat bagaimana bentuknya berubah seiring \( p \).
+
 ```python
 --8<-- "level-3/05_distance_metrics.py:shape"
 ```
 
 ![Tiga bentuk pada bidang dua dimensi: belah ketupat untuk Manhattan, lingkaran untuk Euclidean, dan persegi membulat untuk Minkowski p=8](../assets/level-3/05-bentuk-jarak.png)
+
+**Cara membaca gambar:**
+
+- **Belah ketupat biru (Manhattan, p=1):** titik yang berjarak 1 membentuk belah ketupat dengan ujung di (±1, 0) dan (0, ±1).
+- **Lingkaran oranye (Euclidean, p=2):** bentuk bulat yang kita kenal sehari-hari.
+- **Persegi bersudut membulat hijau (Minkowski, p=8):** hampir persegi. Pada \( p \to \infty \) bentuknya menjadi persegi sempurna, yaitu Chebyshev.
+- Ketiganya melewati titik yang sama pada sumbu: (±1, 0) dan (0, ±1). Perbedaannya ada pada arah **diagonal**: titik diagonal dianggap lebih jauh oleh Manhattan (bentuknya mengecil ke dalam) dan lebih dekat oleh \( p \) besar (bentuknya menggembung keluar).
+- Artinya, memilih metrik mengubah siapa yang dianggap tetangga, terutama bila selisih fitur tersebar ke banyak arah.
 
 **Penjelasan:**
 
@@ -291,6 +343,10 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 
 ### Langkah 6 — Pengaruh skala pada Mall Customers
 
+Langkah 1 sampai 5 memakai titik kecil. Sekarang kita lihat dampak yang nyata: **skala fitur**. Jarak Euclidean menjumlahkan selisih semua fitur, sehingga fitur dengan rentang besar mendominasi. Pada data Mall Customers, `Age` berskala berbeda dari `Annual Income` dan `Spending Score`.
+
+Kita mengukurnya dengan pertanyaan yang konkret: bila setiap pelanggan dicarikan **tetangga terdekatnya**, berapa banyak yang tetangganya berubah setelah fitur distandardisasi? Kalau banyak, berarti skala bukan urusan kecil, karena tetangga adalah dasar hampir semua algoritma clustering.
+
 ```python
 --8<-- "level-3/05_distance_metrics.py:scale"
 ```
@@ -298,6 +354,16 @@ Hasilnya harus sama dengan hitungan manual. Itu cara kita mengecek bahwa kode ki
 ```text title="Output"
 --8<-- "level-3/outputs/05/scale.txt"
 ```
+
+**Cara membaca output:**
+
+- **54 dari 200** pelanggan (27%) mendapat tetangga terdekat yang berbeda setelah standardisasi. Jadi hampir sepertiga pelanggan akan "bertetangga" dengan orang lain hanya karena skala fitur.
+- Simpangan baku mentah: `Age` 13,93, `Annual Income` 26,2, `Spending Score` 25,76. Rentang `Age` sekitar setengah dari dua fitur lain. Setelah standardisasi, ketiganya bernilai 1,0.
+- **Contoh pelanggan 11** (usia 67, pendapatan 19, skor 14):
+    - Pada data mentah, tetangga terdekatnya pelanggan 13 (usia 58, pendapatan 20, skor 15), dengan jarak 9,11. Pelanggan 9 (usia 64, pendapatan 19, skor 3) berjarak 11,4.
+    - Setelah standardisasi, tetangganya berganti ke pelanggan 9 dengan jarak 0,48, sedangkan pelanggan 13 menjadi 0,65.
+- Penyebabnya terlihat dari datanya. Pelanggan 13 berbeda 9 tahun usianya, sedangkan pelanggan 9 berbeda 11 poin skor belanja. Pada skala mentah selisih 9 tahun dan 11 poin terasa hampir sama. Karena simpangan baku `Age` lebih kecil, setelah standardisasi selisih usia dihitung **lebih berat** daripada selisih skor, dan urutan kedekatan bisa terbalik.
+- Kesimpulannya: standardisasi mengubah hasil yang menjadi dasar clustering, bukan sekadar mengubah angka.
 
 **Penjelasan:**
 

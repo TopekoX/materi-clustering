@@ -154,6 +154,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 2 — Hitung centroid
 
+Setelah data siap di Langkah 1, kita mulai dari cara paling umum untuk mewakili sebuah kelompok: **centroid**, yaitu rata-rata tiap fitur dari semua anggotanya. Kita menghitungnya dulu **dengan tangan** (jumlahkan, lalu bagi dengan banyaknya titik) sebelum memakai jalan pintas `mean`. Tujuannya agar jelas bahwa centroid bukan hasil ajaib dari sebuah fungsi, melainkan rumus rata-rata biasa yang sudah kamu lihat di Mathematical Foundation.
+
+Hasilnya kita bandingkan dengan `points.mean(axis=0)` sebagai **pemeriksaan**. Bila keduanya sama, berarti pemahaman kita atas rumus benar dan kita bisa memakai `mean` dengan tenang di langkah-langkah berikutnya, termasuk pada data Mall Customers.
+
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:centroid"
 ```
@@ -161,6 +165,15 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/03/centroid.txt"
 ```
+
+**Cara membaca output:**
+
+- `Jumlah per kolom: [20. 22.]` adalah jumlah semua nilai fitur pertama (2 + 3 + 4 + 3 + 8 = 20) dan fitur kedua (3 + 5 + 4 + 2 + 8 = 22) dari lima titik di Langkah 1.
+- `Jumlah titik n  : 5` adalah pembaginya.
+- `Centroid        : [4.  4.4]` adalah hasil bagi: 20 / 5 = 4 dan 22 / 5 = 4,4. Jadi pusat kelompok ini berada di koordinat (4; 4,4).
+- Centroid ini **bukan salah satu titik data**. Titik yang paling mendekatinya adalah P3 di (4, 4), tetapi tidak persis sama. Perbedaan ini yang nanti membedakan centroid dari medoid (Langkah 3).
+- `Sama dengan points.mean(axis=0)? True` berarti hitungan manual kita cocok dengan fungsi bawaan NumPy.
+- Perhatikan bahwa P5 di (8, 8) menarik centroid ke arah kanan atas. Tanpa P5, centroid empat titik lainnya adalah (3; 3,5). Pengaruh titik yang jauh ini akan kita lihat lebih jelas di Langkah 4.
 
 **Penjelasan:**
 
@@ -171,6 +184,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 3 — Hitung medoid
 
+Centroid di Langkah 2 punya satu kelemahan: ia hanya angka rata-rata dan bisa jatuh di tempat yang tidak ditempati titik mana pun. Kadang kita butuh wakil yang **benar-benar ada** di data, misalnya satu pelanggan nyata yang bisa dilihat dan dijelaskan. Wakil seperti itu disebut **medoid**: anggota kelompok yang paling "sentral".
+
+Ukuran sentral yang dipakai adalah **jumlah jarak** sebuah titik ke semua titik lain. Titik dengan jumlah terkecil adalah yang paling dekat dengan semua anggota secara keseluruhan, sehingga cocok menjadi wakil. Untuk itu kita perlu tahu jarak setiap pasangan titik, dan itu dikerjakan oleh `distance_matrix`. Cara ini lebih mahal daripada centroid karena harus menghitung semua pasangan, tetapi hasilnya selalu titik asli.
+
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:medoid"
 ```
@@ -178,6 +195,14 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/03/medoid.txt"
 ```
+
+**Cara membaca output:**
+
+- Tiap baris `P1: 13.7` dan seterusnya adalah **jumlah jarak** titik itu ke empat titik lainnya. Makin kecil, makin sentral.
+- P3 punya jumlah terkecil (11,54), diikuti P2 (12,48), P1 (13,7), dan P4 (14,46). Keempatnya berada di kumpulan titik yang berdekatan, jadi jumlahnya tidak jauh berbeda.
+- P5 melonjak ke 27,11, sekitar 2,3 kali jumlah P3 (27,11 / 11,54). Karena P5 jauh dari semua titik lain, ia paling tidak cocok menjadi wakil.
+- `Medoid: P3 [4. 4.]` menyatakan medoidnya adalah P3 di koordinat (4, 4). Ini **titik data asli**.
+- Bandingkan dengan centroid dari Langkah 2, yaitu (4; 4,4). Keduanya berdekatan pada data ini, tetapi centroid berupa titik hasil hitungan sedangkan medoid adalah anggota nyata. Perbedaan keduanya akan terasa ketika ada outlier, yang kita lihat di Langkah 4.
 
 **Penjelasan:**
 
@@ -189,6 +214,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 4 — Efek outlier
 
+Kita sudah punya dua wakil kelompok: centroid (Langkah 2) dan medoid (Langkah 3). Pada data bersih, keduanya hampir sama, jadi sulit menilai mana yang lebih baik. Perbedaan baru terlihat saat data **tidak bersih**. Data nyata sering memuat *outlier*, yaitu titik yang jauh dari kebanyakan, misalnya pelanggan dengan pendapatan atau belanja yang tidak biasa.
+
+Karena itu kita sengaja menambahkan satu outlier ekstrem di (30, 30), lalu menghitung ulang centroid dan medoid pada data baru. Dengan membandingkan posisi sebelum dan sesudah, kita bisa melihat wakil mana yang **tahan** terhadap titik aneh dan mana yang ikut terseret. Ini penting karena wakil yang bergeser jauh tidak lagi menggambarkan kelompoknya.
+
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:outlier"
 ```
@@ -197,12 +226,23 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/outputs/03/outlier.txt"
 ```
 
+**Cara membaca output:**
+
+- **Centroid** bergeser dari `[4. 4.4]` ke `[8.33 8.67]`, yaitu sekitar 6,1 satuan hanya karena satu titik tambahan. Rumusnya: (20 + 30) / 6 = 8,33 dan (22 + 30) / 6 = 8,67.
+- Centroid baru berada di (8,33; 8,67), **lebih jauh dari kelima titik asli**, bahkan melewati P5 di (8, 8). Artinya ia tidak lagi mewakili kumpulan titik yang awalnya berdekatan. Ia berada di antara kelompok kecil itu dan outlier, tempat tidak ada titik sama sekali.
+- **Medoid** tetap `[4. 4.]` sebelum dan sesudah, yaitu P3. Medoid ditentukan oleh jumlah jarak, dan P3 masih paling sentral di antara kumpulan titik, sedangkan outlier hanya menambah jarak ke semua titik hampir sama besar.
+- Kesimpulannya: centroid **peka** terhadap outlier, medoid **lebih kokoh**. Karena itu medoid dipilih bila data banyak mengandung outlier, sedangkan centroid tetap umum dipakai karena murah dihitung dan mudah diturunkan secara matematis.
+
 **Penjelasan:**
 
 - `np.vstack([points, [[30, 30]]])` menumpuk satu baris baru (titik (30, 30)) di bawah data lama. Titik ini sengaja jauh: sebuah *outlier*.
 - Kita hitung ulang centroid dan medoid pada data baru, lalu membandingkannya dengan hasil sebelum outlier ditambahkan.
 
 ### Langkah 5 — Centroid berpindah
+
+Di Langkah 2 sampai 4 centroid dihitung dari kelompok yang sudah **diketahui** anggotanya. Pada clustering sungguhan, anggota kelompok justru belum diketahui: yang ada hanya tebakan pusat, lalu titik dikelompokkan ke pusat terdekat, dan pusat dihitung ulang dari anggotanya. Langkah ini memperlihatkan satu putaran proses itu.
+
+Tujuannya menunjukkan bahwa **centroid bukan nilai tetap**: ia berubah setiap kali keanggotaan berubah. Perilaku inilah yang nanti dimanfaatkan K-Means di Level 4, yang mengulang putaran ini sampai pusat berhenti bergeser.
 
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:move"
@@ -211,6 +251,14 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/03/move.txt"
 ```
+
+**Cara membaca output:**
+
+- `Pusat awal` adalah dua tebakan kita: (2, 2) dan (7, 7). Keduanya bukan hasil perhitungan, hanya titik awal.
+- `Kelompok tiap titik: {'P1': 0, 'P2': 0, 'P3': 0, 'P4': 0, 'P5': 1}` menunjukkan bahwa P1 sampai P4 lebih dekat ke pusat 0, sedangkan P5 yang jauh sendirian ke pusat 1. Jadi kelompok 0 punya empat anggota dan kelompok 1 hanya satu.
+- `Pusat baru` adalah rata-rata anggota masing-masing. Pusat 0 menjadi (3; 3,5), yaitu rata-rata P1 sampai P4. Pusat 1 menjadi (8, 8), tepat di P5, karena rata-rata satu titik adalah titik itu sendiri.
+- `Pergeseran pusat: [1.8  1.41]` adalah jarak perpindahan tiap pusat dari tebakan awalnya: pusat 0 bergeser sekitar 1,80 (dari (2, 2) ke (3; 3,5)) dan pusat 1 sekitar 1,41 (dari (7, 7) ke (8, 8)).
+- Pusat yang bergeser berarti tebakan awal belum pas. Bila putarannya diulang dengan pusat baru, keanggotaan kelima titik di sini tidak berubah (P1 sampai P4 tetap lebih dekat ke (3; 3,5), P5 ke (8, 8)), sehingga pusat langsung stabil. Pada data yang lebih rumit, butuh beberapa putaran sampai keanggotaan berhenti berubah.
 
 **Penjelasan:**
 
@@ -225,6 +273,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 6 — Centroid pada Mall Customers
 
+Langkah 2 sampai 5 memakai lima titik kecil agar bisa dihitung dengan tangan. Sekarang kita pindahkan ide yang sama ke **data nyata**: 200 pelanggan Mall Customers. Ada dua tujuan. Pertama, membuktikan bahwa centroid yang dihasilkan K-Means memang **rata-rata anggota kelompoknya**, persis seperti yang kita hitung manual di Langkah 2, bukan sesuatu yang berbeda atau rumit. Kedua, melihat bahwa centroid berguna sebagai **profil**: lima baris angka yang meringkas karakter tiap kelompok.
+
+Pembuktiannya dengan dua jalan: menghitung rata-rata per kelompok memakai pandas (`groupby`), lalu membandingkannya dengan `cluster_centers_` dari K-Means. Bila keduanya sama, ide "pusat = rata-rata anggota" terbukti berlaku pada data sungguhan.
+
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:mall"
 ```
@@ -232,6 +284,18 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/03/mall.txt"
 ```
+
+**Cara membaca output:**
+
+- Ada dua tabel. Tabel pertama (`groupby`) adalah rata-rata yang kita hitung sendiri, tabel kedua adalah centroid dari K-Means. Baris dan kolomnya sama: lima kelompok (0 sampai 4), dua fitur.
+- Isi kedua tabel **identik** pada semua sel, dan baris terakhir `Sama? True` memastikannya. Jadi centroid K-Means tidak lebih dari rata-rata anggota kelompok.
+- Setiap baris centroid bisa dibaca sebagai **profil kelompok** (pendapatan dalam k\$, skor belanja 1-100):
+    - Kelompok 0: pendapatan 55,30 dan skor 49,52, yaitu menengah di kedua fitur.
+    - Kelompok 1: pendapatan 86,54 dan skor 82,13, yaitu pendapatan tinggi dan belanja tinggi.
+    - Kelompok 2: pendapatan 25,73 dan skor 79,36, yaitu pendapatan rendah tetapi belanja tinggi.
+    - Kelompok 3: pendapatan 88,20 dan skor 17,11, yaitu pendapatan tinggi tetapi belanja rendah.
+    - Kelompok 4: pendapatan 26,30 dan skor 20,91, yaitu pendapatan rendah dan belanja rendah.
+- Label seperti "tinggi" dan "rendah" di atas hanya pembacaan dari angka centroid. Centroid adalah rata-rata, jadi tidak semua anggota kelompok persis seperti itu.
 
 **Penjelasan:**
 
@@ -243,15 +307,37 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 7 — Visualisasi
 
+Langkah 2 sampai 6 menghasilkan angka. Angka tepat, tetapi sulit dirasakan: "centroid bergeser 6,1 satuan" belum memberi gambaran sejauh apa itu dibanding sebaran datanya. Karena itu kita menggambar tiga hal yang sudah dihitung: perbandingan centroid dan medoid dengan serta tanpa outlier, perpindahan pusat, dan centroid pada data Mall Customers.
+
+Semua gambar memakai data dan hasil dari langkah sebelumnya, tanpa perhitungan baru, jadi gambar ini hanya **memperlihatkan** apa yang sudah kita buktikan dengan angka.
+
 ```python
 --8<-- "level-3/03_centroid_and_representation.py:plot"
 ```
 
 ![Dua panel: kiri lima titik dengan centroid dan medoid berdekatan, kanan setelah ditambah outlier di (30, 30) sehingga centroid tertarik jauh sedangkan medoid tetap](../assets/level-3/03-centroid-vs-medoid.png)
 
+**Cara membaca gambar 1 (centroid vs medoid):**
+
+- **Panel kiri (tanpa outlier):** `X` oranye (centroid, di (4; 4,4)) dan berlian biru (medoid, di (4, 4)) letaknya berdekatan, di tengah kumpulan empat titik dan P5 di pojok kanan atas.
+- **Panel kanan (dengan outlier di (30, 30)):** sumbu melebar, dan kelima titik asli mengumpul di pojok kiri bawah. Centroid terseret ke sekitar (8,33; 8,67), jauh dari kumpulan itu dan hampir menempel pada P5. Medoid tetap di (4, 4), di tengah kumpulan empat titik.
+- Inilah arti peka dan kokoh dari Langkah 4: satu titik jauh cukup memindahkan centroid, tetapi tidak medoid.
+
 ![Dua pusat awal berpindah ke pusat baru dengan panah, di atas lima titik data](../assets/level-3/03-centroid-berpindah.png)
 
+**Cara membaca gambar 2 (centroid berpindah):**
+
+- Kotak oranye adalah tebakan pusat awal, (2, 2) dan (7, 7). Tanda `X` oranye adalah pusat baru, dan panah menunjukkan arah perpindahannya.
+- Pusat kiri bergerak naik ke kanan ke (3; 3,5), ke tengah empat titik anggotanya (P1 sampai P4). Pusat kanan bergerak ke (8, 8), tepat menimpa P5 karena kelompoknya hanya satu titik.
+- Panah menunjukkan bahwa pusat **mengejar anggotanya**: ia pindah ke tempat rata-rata anggota berada. Panjang panah sesuai `[1.8  1.41]` dari Langkah 5.
+
 ![Scatter plot Mall Customers lima warna dengan label centroid di tengah tiap kelompok](../assets/level-3/03-centroid-mall.png)
+
+**Cara membaca gambar 3 (centroid Mall Customers):**
+
+- Tiap warna adalah satu kelompok, dan kotak putih bertanda \( \mu_0 \) sampai \( \mu_4 \) menandai centroidnya. Letaknya cocok dengan tabel di Langkah 6.
+- Lima kelompok tersebar di lima daerah: \( \mu_0 \) di tengah (pendapatan dan belanja menengah), \( \mu_1 \) di kanan atas, \( \mu_2 \) di kiri atas, \( \mu_3 \) di kanan bawah, dan \( \mu_4 \) di kiri bawah.
+- Tiap centroid berada di tengah awan titik warnanya, sehingga memang menjadi wakil kelompok. Kelompok 0 terlihat paling padat di sekitar \( \mu_0 \), sedangkan kelompok di pojok-pojok lebih tersebar.
 
 **Penjelasan:**
 

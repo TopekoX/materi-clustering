@@ -233,6 +233,15 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 --8<-- "level-3/outputs/02/compact.txt"
 ```
 
+**Cara membaca output:**
+
+- Setiap baris berisi tiga angka, satu per kelompok (kelompok 0, 1, 2 berurutan). Angkanya adalah rata-rata jarak anggota ke pusat kelompoknya, dalam satuan koordinat data.
+- Dataset A: `0.68`, `0.72`, `0.79`. Rata-rata anggota hanya berjarak sekitar 0,7 dari pusatnya, jadi ketiga kelompok rapat.
+- Dataset B: `2.05`, `2.16`, `2.38`. Jaraknya sekitar 2,2, jadi kelompok jauh lebih longgar.
+- Rata-rata ketiga kelompok adalah sekitar 0,73 untuk A dan 2,20 untuk B, selisih sekitar **3 kali**. Ini sejalan dengan `cluster_std` yang kita pilih (0,6 dan 1,8, juga berselisih 3 kali), jadi ukuran ini memang menangkap tingkat sebaran.
+- Dalam satu dataset, ketiga angkanya berdekatan karena ketiga kelompok dibuat dengan sebaran yang sama. Selisih kecil di antaranya berasal dari acak sampel, bukan dari perbedaan yang dirancang.
+- Angka rata-rata inilah yang menjadi pembagi pada rasio di Langkah 4.
+
 **Penjelasan:**
 
 - `def compactness(X, y):` membuat **fungsi**: potongan kode yang bisa dipakai berulang. Ia menerima titik `X` dan nomor kelompok `y`.
@@ -246,6 +255,17 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 
 ### Langkah 4 — Ukur keterpisahan (separation)
 
+Kekompakan di Langkah 3 hanya menjawab setengah pertanyaan: seberapa rapat **satu** kelompok. Kelompok yang rapat belum tentu mudah dibedakan bila kelompok tetangganya menempel di sebelahnya. Karena itu kita perlu ukuran kedua, **keterpisahan** (*separation*): seberapa jauh kelompok yang satu dari kelompok yang lain.
+
+Ukuran paling sederhana adalah **jarak antar pusat** kelompok. Namun jarak ini tidak cukup bila berdiri sendiri. Lihat outputnya: jarak antar pusat di Dataset A (5,69 sampai 6,03) hampir sama dengan di Dataset B (5,41 sampai 6,20), padahal Dataset A jelas terpisah dan Dataset B saling menumpuk. Pusat yang berjauhan tidak berarti kelompoknya terpisah, karena kelompok yang sangat lebar tetap bisa saling bertemu di tengah.
+
+Maka jarak pusat dibandingkan dengan **lebar kelompok** (kekompakan dari Langkah 3) dalam bentuk rasio:
+
+- Kita mengambil **jarak pusat terdekat** karena pasangan yang paling dekat adalah titik terlemah. Dua kelompok yang bertumpuk sudah cukup membuat pemisahan gagal, walaupun pasangan lain berjauhan.
+- Kita membaginya dengan **rata-rata kekompakan** agar jaraknya dinilai relatif terhadap sebaran. Rasio besar berarti jarak antar kelompok jauh melebihi lebar kelompok itu sendiri (terpisah jelas). Rasio kecil berarti lebar kelompok hampir sama dengan jaraknya (mudah tumpang tindih).
+
+Hasilnya, Dataset A mendapat rasio 7,76 dan Dataset B hanya 2,46. Selisih ini yang menangkap perbedaan yang tidak terlihat dari jarak pusat saja. Ide yang sama, jarak antar kelompok dibandingkan dengan sebaran di dalam kelompok, akan muncul lagi dalam metrik evaluasi clustering di level berikutnya.
+
 ```python
 --8<-- "level-3/02_understanding_clusters.py:separate"
 ```
@@ -253,6 +273,15 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 ```text title="Output"
 --8<-- "level-3/outputs/02/separate.txt"
 ```
+
+**Cara membaca output:**
+
+- `{(0, 1): 6.03, (0, 2): 5.95, (1, 2): 5.69}` adalah jarak antar pusat. Kunci `(0, 1)` berarti pasangan kelompok 0 dan 1, nilainya jarak Euclidean kedua pusat. Dataset A punya tiga pasangan karena ada tiga kelompok.
+- Jarak antar pusat kedua dataset hampir sama (sekitar 5,4 sampai 6,2). Wajar, sebab `centers` yang dipakai memang sama. Jadi angka ini saja tidak bisa membedakan A dari B.
+- Pasangan terdekat di Dataset A adalah `(1, 2)` dengan 5,69, sedangkan di Dataset B adalah `(1, 2)` dengan 5,41. Nilai inilah yang menjadi pembilang rasio.
+- Rata-rata kekompakan dari Langkah 3 adalah sekitar 0,73 untuk A dan 2,20 untuk B. Maka rasio A = 5,69 / 0,73 ≈ **7,76**, dan rasio B = 5,41 / 2,20 ≈ **2,46**.
+- Pada Dataset A, jarak pusat terdekat sekitar 7,8 kali lebar kelompok, sehingga ketiga kelompok terpisah lega. Pada Dataset B, jaraknya hanya sekitar 2,5 kali lebar kelompok, jadi tepi kelompok saling bertemu dan itu sesuai dengan gambar yang tumpang tindih di Langkah 2.
+- Jadi yang membedakan kedua dataset adalah **sebarannya**, bukan jarak antar pusatnya.
 
 **Penjelasan:**
 
@@ -264,6 +293,12 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 
 ### Langkah 5 — Ukur kepadatan (density)
 
+Kekompakan dan keterpisahan menilai kelompok dari pusatnya. Ada sisi lain yang belum tertangkap: seberapa **rapat titik-titik berdekatan satu sama lain** di dalam kelompok. Inilah **kepadatan** (*density*). Sebagian algoritma, seperti DBSCAN di Level 4, membentuk kelompok justru dari daerah yang padat, jadi ukuran ini perlu dikenali sejak sekarang.
+
+Caranya, untuk setiap titik kita cari **tetangga terdekatnya**, lalu merata-ratakan jarak itu. Kita memakai tetangga terdekat, bukan jarak ke pusat, karena kepadatan adalah sifat **lokal**: titik yang dikelilingi banyak tetangga dekat berada di daerah padat, apa pun posisinya terhadap pusat. Makin **kecil** angkanya, makin padat kelompoknya.
+
+Untuk membandingkannya secara adil, kita buat dua kelompok dengan jumlah titik sama (60) dan pusat sama, yaitu (0, 0). Satu-satunya perbedaan adalah sebarannya (0,3 dan 1,5). Dengan begitu, selisih angka yang muncul berasal dari kepadatan, bukan dari jumlah titik atau posisi.
+
 ```python
 --8<-- "level-3/02_understanding_clusters.py:density"
 ```
@@ -271,6 +306,13 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 ```text title="Output"
 --8<-- "level-3/outputs/02/density.txt"
 ```
+
+**Cara membaca output:**
+
+- Angka `0.063` dan `0.422` adalah rata-rata jarak setiap titik ke tetangga terdekatnya. Satuannya sama dengan koordinat data.
+- Pada kelompok padat, rata-rata titik hanya berjarak 0,063 dari tetangga terdekatnya. Pada kelompok jarang, jaraknya 0,422, sekitar **6,7 kali** lebih jauh (0,422 / 0,063).
+- Kedua kelompok berisi 60 titik dan berpusat di tempat yang sama. Jadi 60 titik yang sama terasa rapat bila ditempatkan di area sempit (sebaran 0,3) dan renggang bila disebar di area luas (sebaran 1,5).
+- Nilai kecil berarti padat, nilai besar berarti jarang. Kelompok jarang tidak "salah", tetapi algoritma berbasis kepadatan akan kesulitan menganggapnya satu kelompok bila jarak antar titiknya terlalu besar.
 
 **Penjelasan:**
 
@@ -283,11 +325,44 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 
 ### Langkah 6 — Lihat bentuk dan ukuran
 
+Langkah 3 sampai 5 menghasilkan angka, dan semuanya diam-diam mengandaikan kelompok berbentuk **bola**: ada satu pusat, dan titik menyebar merata di sekelilingnya. Padahal data nyata tidak selalu begitu. Langkah ini sengaja memperlihatkan dua keadaan yang membuat asumsi tersebut gagal, supaya kita tahu bahwa angka saja tidak cukup dan **bentuk** serta **ukuran** kelompok juga perlu dilihat.
+
+Kita memakai gambar, bukan angka, karena bentuk adalah sifat yang paling mudah dikenali mata dan paling sulit diringkas dalam satu bilangan. Dua kasus yang ditampilkan:
+
+- **Bentuk melengkung** (`make_moons`): dua kelompok berbentuk bulan sabit yang saling mengait. Pusat (rata-rata) kelompok seperti ini jatuh di ruang kosong, bukan di tempat ada titiknya, sehingga ukuran berbasis pusat menjadi menyesatkan.
+- **Ukuran dan kepadatan berbeda**: satu kelompok besar yang longgar (150 titik) dan satu kelompok kecil yang rapat (15 titik). Jumlah anggota dan kerapatannya timpang, sehingga satu ukuran yang sama sulit adil untuk keduanya.
+
 ```python
 --8<-- "level-3/02_understanding_clusters.py:shape"
 ```
 
 ![Kiri: dua kelompok berbentuk bulan sabit. Kanan: kelompok besar berisi 150 titik dan kelompok kecil berisi 15 titik dengan kepadatan berbeda](../assets/level-3/02-bentuk-dan-ukuran.png)
+
+**Cara membaca gambar:**
+
+- **Panel kiri:** dua bulan sabit, satu biru dan satu oranye, yang saling mengait. Tiap bulan jelas merupakan satu kelompok, tetapi pusatnya (rata-rata koordinat) berada di area lengkung yang kosong. Titik biru di ujung kiri bahkan lebih dekat ke bulan oranye daripada ke pusat birunya sendiri. Artinya, pengelompokan berdasarkan jarak ke pusat akan memotong bulan sabit secara keliru.
+- **Panel kanan:** kelompok biru (150 titik) menyebar lebar sekitar pusat (0, 0), sedangkan kelompok oranye (15 titik) berupa gumpalan kecil dan rapat di sekitar x = 6. Jaraknya jauh, tetapi ukuran dan kepadatannya sangat berbeda. Kelompok kecil seperti ini mudah terlewat atau dianggap *outlier* oleh algoritma yang hanya memperhatikan kelompok besar.
+- Pelajarannya: kekompakan, keterpisahan, dan kepadatan tetap berguna, tetapi hanya sebagai **bahan pertimbangan**. Selalu lihat bentuk data bila memungkinkan, dan ingat bahwa algoritma yang berbeda cocok untuk bentuk yang berbeda (dibahas di Level 4).
+
+**Hasil dalam angka:**
+
+Potongan kode Langkah 6 hanya menggambar, jadi angka berikut dihitung terpisah dengan data dan seed yang sama (`random_state=42`, `default_rng(42)`) memakai ukuran dari Langkah 3 dan 5. Tujuannya membuktikan bahwa kesan visual di atas bukan tebakan.
+
+*Bulan sabit (panel kiri):*
+
+- Pusat kedua bulan sabit hanya berjarak sekitar **1,25** satu sama lain, padahal masing-masing bulan membentang sekitar 3 satuan. Pusat yang "berdekatan" itu muncul karena kedua bulan saling mengait, bukan karena kelompoknya berdekatan.
+- Rata-rata anggota berjarak sekitar 0,74 dari pusat bulannya sendiri. Namun **21 dari 100** titik di tiap bulan justru lebih dekat ke pusat bulan yang lain. Jadi aturan "ikut pusat terdekat" akan salah menempatkan sekitar seperlima titik.
+
+*Dua kelompok berbeda ukuran (panel kanan):*
+
+| | Kelompok besar | Kelompok kecil |
+|---|---|---|
+| Jumlah titik | 150 | 15 |
+| Kekompakan | 1,84 | 0,36 |
+| Jarak tetangga terdekat | 0,291 | 0,141 |
+
+- Kelompok besar sekitar **5 kali** lebih longgar dari kelompok kecil (1,84 melawan 0,36), dan jarak tetangga terdekatnya sekitar 2 kali lebih besar.
+- Jarak antar pusatnya sekitar 6,2, jauh lebih besar dari lebar keduanya, jadi kedua kelompok sebenarnya **terpisah**. Masalahnya bukan keterpisahan, melainkan perbedaan ukuran dan kepadatan: satu ambang jarak yang cocok untuk kelompok besar akan terlalu longgar untuk kelompok kecil, dan sebaliknya.
 
 **Penjelasan:**
 
@@ -297,6 +372,10 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 - Bagian lain sama seperti Langkah 2.
 
 ### Langkah 7 — Keanggotaan di dekat batas
+
+Langkah 3 sampai 6 menilai **kelompok**. Langkah ini beralih ke pertanyaan tentang **satu titik**: kelompok mana yang memilikinya? Pada *hard clustering*, jawabannya selalu tegas, yaitu satu kelompok, biasanya yang pusatnya paling dekat. Aturan itu bekerja baik untuk titik yang jelas berada di tengah kelompok, tetapi bagaimana dengan titik di perbatasan?
+
+Untuk mengujinya kita menaruh satu titik **sengaja di tengah** antara pusat dua kelompok pada Dataset B (yang tumpang tindih), lalu melihat seberapa meyakinkan keputusan "terdekat" itu. Dataset B dipilih karena kelompoknya saling menumpuk, sehingga situasi ambigu seperti ini memang sering terjadi di data nyata.
 
 ```python
 --8<-- "level-3/02_understanding_clusters.py:member"
@@ -308,6 +387,14 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 
 ![Dataset tumpang tindih dengan bintang hitam di perbatasan kelompok 0 dan 1 serta tanda X di tiap pusat](../assets/level-3/02-keanggotaan-batas.png)
 
+**Cara membaca output dan gambar:**
+
+- `Titik uji: [2.79 0.36]` adalah koordinat titik yang kita buat, yaitu bintang hitam pada gambar.
+- `[3.08 3.04 4.66]` adalah jarak titik itu ke pusat kelompok 0, 1, dan 2. Kelompok 2 jelas jauh (4,66), tetapi jarak ke kelompok 0 (3,08) dan 1 (3,04) nyaris sama.
+- `Kelompok terdekat: 1` adalah keputusan hard clustering. Keputusan itu hanya ditentukan oleh selisih **0,04** satuan, jadi pergeseran kecil pada titik atau pusat bisa membalikkannya ke kelompok 0.
+- Pada gambar, bintang berada di antara kelompok biru (0) dan oranye (1), di daerah tempat kedua sebaran bercampur. Kelompok hijau (2) berada lebih jauh di atas. Tanda `X` hitam adalah pusat masing-masing kelompok.
+- Pelajarannya: label tegas "kelompok 1" menyembunyikan fakta bahwa titik ini hampir sama miripnya dengan kelompok 0. Inilah alasan adanya *soft clustering*, yang memberi derajat keanggotaan pada tiap kelompok, bukan satu label.
+
 **Penjelasan:**
 
 - `centers_B` adalah pusat tiga kelompok dataset B, dihitung dengan rata-rata.
@@ -317,6 +404,10 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 
 ### Langkah 8 — Terapkan pada Mall Customers
 
+Sejauh ini kita mengukur kelompok pada data sintetis, yang jawabannya sudah kita ketahui. Langkah ini membawa ukuran yang sama ke **data nyata**: pelanggan Mall Customers dari Bab 1. Tujuannya melihat bahwa fungsi `compactness` tidak terikat pada data buatan, dan bahwa pada data nyata angka seperti ini menjadi satu-satunya petunjuk, karena tidak ada "kelompok asli" untuk dibandingkan.
+
+Kelompok di sini dibentuk dengan K-Means (hanya sebagai alat bantu, bukan fokus bab ini), lalu tiap kelompok diringkas dengan dua hal: **jumlah anggota** dan **kekompakan**. Dua kolom itu menunjukkan apakah kelompok yang terbentuk seimbang ukurannya dan seberapa rapat masing-masing.
+
 ```python
 --8<-- "level-3/02_understanding_clusters.py:mall"
 ```
@@ -324,6 +415,14 @@ Makin **kecil** angkanya, makin rapat kelompoknya. Kita membungkus ketiga langka
 ```text title="Output"
 --8<-- "level-3/outputs/02/mall.txt"
 ```
+
+**Cara membaca output:**
+
+- Setiap baris adalah satu kelompok (indeks 0 sampai 4). Kolom `Jumlah` adalah banyak pelanggan di kelompok itu, dan totalnya 200 (81 + 39 + 22 + 35 + 23), sesuai jumlah baris data.
+- Ukuran kelompok tidak seimbang: kelompok 0 memuat 81 pelanggan, sedangkan kelompok 2 hanya 22. Itu wajar pada data nyata, karena kelompok tidak harus sama besar.
+- Kolom `Kekompakan` adalah rata-rata jarak anggota ke pusat kelompoknya. Kelompok 0 paling rapat (10,1) padahal paling besar, sedangkan kelompok 1 dan 3 paling longgar (sama-sama 16,3).
+- Angka ini tidak bisa dibandingkan langsung dengan 0,7 atau 2,2 pada data sintetis. Satuannya mengikuti data: fitur pendapatan (k\$) dan skor belanja (1-100) berkisar jauh lebih lebar daripada koordinat buatan kita, dan keduanya belum diskalakan.
+- Karena itu kekompakan paling berguna untuk **membandingkan antarkelompok pada data yang sama**, bukan antardataset yang skalanya berbeda.
 
 **Penjelasan:**
 

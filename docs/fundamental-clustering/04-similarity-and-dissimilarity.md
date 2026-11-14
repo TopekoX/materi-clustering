@@ -164,6 +164,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 2 — Hitung matriks jarak
 
+Algoritma clustering tidak "melihat" pelanggan seperti manusia. Yang ia butuhkan adalah angka yang menyatakan **seberapa dekat** dua pelanggan. Cara termudah mengumpulkannya adalah menghitung jarak setiap pelanggan ke setiap pelanggan lain, lalu menyusunnya dalam satu tabel persegi yang disebut **matriks jarak** (*distance matrix*).
+
+Kita memakai jarak Euclidean, yaitu jarak garis lurus yang sudah dikenal dari Bab 3, pada lima pelanggan dari Langkah 1. Dengan lima pelanggan, matriksnya cukup kecil untuk dibaca langsung, tetapi bentuknya sama dengan yang dipakai pada 200 pelanggan. Matriks ini juga menjadi masukan langkah-langkah berikutnya: mengubah jarak menjadi kemiripan (Langkah 3) dan memeriksa sifat-sifatnya (Langkah 4).
+
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:matrix"
 ```
@@ -171,6 +175,16 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/04/matrix.txt"
 ```
+
+**Cara membaca output:**
+
+- Baris dan kolom diberi label `CustomerID` 1 sampai 5. Angka di baris `i` dan kolom `j` adalah jarak antara pelanggan `i` dan `j`.
+- **Diagonal bernilai 0.00**, karena jarak pelanggan ke dirinya sendiri adalah nol.
+- Tabelnya **simetris**: jarak 1 ke 2 (42,05) sama dengan jarak 2 ke 1. Karena itu cukup separuh tabel yang berisi informasi, dan sifat ini kita periksa resmi di Langkah 4.
+- **Pasangan paling dekat** adalah pelanggan 2 dan 4 (4,58). Lihat data di Langkah 1: keduanya muda (21 dan 23 tahun), berpendapatan sama (15 dan 16), dan sama-sama berbelanja tinggi (skor 81 dan 77).
+- **Pasangan paling jauh** adalah pelanggan 2 dan 3 (75,01). Usia dan pendapatan keduanya hampir sama, tetapi skor belanjanya 81 melawan 6.
+- Contoh membaca satu baris: pelanggan terdekat dari pelanggan 1 adalah pelanggan 5 (12,21), karena skor belanja mereka mirip (39 dan 40), sedangkan selisih usianya 12 tahun.
+- Perhatikan bahwa angka jarak sebagian besar ditentukan oleh `Spending Score`, fitur dengan selisih terbesar antarpelanggan (dari 6 sampai 81). Fitur berskala besar mendominasi jarak. Masalah ini kita bahas di Langkah 6.
 
 **Penjelasan:**
 
@@ -180,6 +194,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 3 — Ubah jarak menjadi kemiripan
 
+Matriks di Langkah 2 mengukur **ketidakmiripan**: makin besar angkanya, makin berbeda dua pelanggan. Sebagian metode, dan sebagian cara berpikir kita, lebih natural dengan arah sebaliknya: makin besar angkanya, makin **mirip**. Langkah ini mengubah jarak menjadi kemiripan agar kita bisa berpindah di antara dua sudut pandang itu.
+
+Rumus yang dipakai, \( s = 1/(1+d) \), sederhana dan punya sifat yang berguna: jarak 0 menghasilkan kemiripan 1 (identik), sedangkan jarak yang makin besar menghasilkan kemiripan yang makin mendekati 0 tetapi tidak pernah negatif. Angka `1` di penyebut mencegah pembagian dengan nol saat jaraknya 0.
+
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:similarity"
 ```
@@ -188,12 +206,24 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 --8<-- "level-3/outputs/04/similarity.txt"
 ```
 
+**Cara membaca output:**
+
+- **Diagonal bernilai 1.000**: tiap pelanggan identik dengan dirinya sendiri (jarak 0 menjadi kemiripan 1).
+- Kemiripan tertinggi di luar diagonal adalah pelanggan 2 dan 4 (**0.179**). Ini pasangan yang sama dengan jarak terkecil di Langkah 2 (4,58), karena \( 1/(1+4{,}58) \approx 0{,}179 \).
+- Kemiripan terendah adalah pelanggan 2 dan 3 (**0.013**), pasangan dengan jarak terbesar (75,01).
+- Urutannya **terbalik** dari matriks jarak: jarak kecil menjadi kemiripan besar, dan sebaliknya. Tidak ada informasi baru, hanya cara lain membacanya.
+- Sebagian besar angka kecil (0,01 sampai 0,08) karena jarak antar pelanggan di data mentah relatif besar. Kemiripan ini cocok untuk membandingkan urutan, tetapi nilainya bukan persentase.
+
 **Penjelasan:**
 
 - `S = 1 / (1 + D)` menerapkan rumus \( s = 1/(1+d) \) pada **seluruh matriks sekaligus**. NumPy mengerjakannya untuk setiap sel.
 - Hasilnya matriks kemiripan: diagonalnya 1 (tiap pelanggan identik dengan dirinya sendiri) dan angka lain di antara 0 dan 1.
 
 ### Langkah 4 — Periksa sifat matriks jarak
+
+Sebelum matriks jarak dipakai oleh algoritma, kita perlu yakin bahwa ia memang berperilaku seperti jarak. Kalau tidak, hasil clustering bisa janggal dan sulit dilacak penyebabnya, misalnya jarak negatif atau jarak A ke B berbeda dari B ke A.
+
+Karena itu kita memeriksa tiga sifat dasar secara eksplisit: **simetris**, **diagonal nol**, dan **tidak negatif**. Pemeriksaan semacam ini murah, dan berguna sebagai kebiasaan, terutama saat kelak kita membuat matriks jarak sendiri dengan metrik buatan. Terakhir, kita memakai matriks itu untuk menjawab pertanyaan praktis: siapa pasangan pelanggan yang paling mirip?
 
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:check"
@@ -202,6 +232,12 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/04/check.txt"
 ```
+
+**Cara membaca output:**
+
+- Tiga baris pertama berisi `True`, artinya matriks dari Langkah 2 memenuhi sifat jarak: simetris, diagonal nol, dan tidak ada nilai negatif. Bila salah satunya `False`, ada yang keliru pada perhitungan atau datanya.
+- Pemeriksaan ini tidak mencakup sifat keempat jarak, yaitu ketaksamaan segitiga. Untuk jarak Euclidean sifat itu dijamin berlaku, jadi tidak perlu dicek.
+- `Pasangan paling mirip: pelanggan 2 dan 4 dengan jarak 4.58` adalah pasangan dengan jarak terkecil di luar diagonal, sesuai yang kita lihat langsung di tabel Langkah 2. Pada tabel kecil kita bisa menemukannya dengan mata, tetapi pada 200 pelanggan cara kode ini yang diperlukan.
 
 **Penjelasan:**
 
@@ -213,6 +249,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 5 — Data kategori biner
 
+Jarak Euclidean cocok untuk angka seperti usia dan pendapatan. Namun banyak data berupa **ya/tidak**: apakah pelanggan membeli produk tertentu atau tidak. Untuk data biner seperti ini, selisih angka kurang bermakna, sehingga kita memakai ukuran lain yang menghitung **kecocokan**.
+
+Langkah ini membandingkan dua ukuran pada dua pelanggan dan lima produk: *simple matching* (menghitung semua posisi yang sama) dan *Jaccard* (hanya memperhatikan produk yang dibeli setidaknya oleh salah satu). Perbedaan keduanya penting: pada data belanja, kebanyakan produk tidak dibeli siapa pun, jadi dua pelanggan yang sama-sama **tidak** membeli suatu produk tidak banyak memberi tahu bahwa mereka mirip.
+
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:categorical"
 ```
@@ -220,6 +260,14 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/04/categorical.txt"
 ```
+
+**Cara membaca output:**
+
+- Data kedua pelanggan: `a = [1, 1, 0, 0, 1]` dan `b = [1, 0, 0, 1, 1]`. Posisi yang sama adalah posisi 1, 3, dan 5, jadi `Jumlah posisi yang sama: 3`.
+- **Simple matching similarity = 3 / 5 = 0.6.** Posisi 3 (keduanya 0) ikut dihitung sebagai kecocokan.
+- Posisi **keduanya membeli** adalah 1 dan 5 (2 posisi). Posisi **salah satunya membeli** adalah 1, 2, 4, dan 5 (4 posisi). Posisi 3 tidak dihitung karena tidak ada yang membeli.
+- **Jaccard similarity = 2 / 4 = 0.5**, dan **Jaccard distance = 1 − 0.5 = 0.5**.
+- Hasilnya berbeda (0,6 melawan 0,5) karena Jaccard mengabaikan produk yang tidak dibeli siapa pun. Makin banyak produk yang tidak dibeli keduanya, makin besar simple matching tertarik naik, sedangkan Jaccard tidak terpengaruh.
 
 **Penjelasan:**
 
@@ -230,6 +278,10 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 6 — Kesalahan umum: skala fitur
 
+Di Langkah 2 kita melihat bahwa `Spending Score` tampak mendominasi jarak. Langkah ini membuktikannya dengan angka, lalu menunjukkan perbaikannya. Jarak Euclidean menjumlahkan **kuadrat selisih** semua fitur. Fitur dengan rentang selisih besar akan menenggelamkan fitur lain, walaupun fitur lain itu sama pentingnya.
+
+Cara memperbaikinya adalah **standardisasi**: mengubah tiap fitur menjadi skala yang sebanding (rata-rata 0, simpangan baku 1) sebelum menghitung jarak. Kita mulai dengan membedah satu pasangan pelanggan (1 dan 2) untuk melihat kontribusi tiap fitur, lalu menghitung ulang seluruh matriks setelah standardisasi.
+
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:scale"
 ```
@@ -237,6 +289,14 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 ```text title="Output"
 --8<-- "level-3/outputs/04/scale.txt"
 ```
+
+**Cara membaca output:**
+
+- Selisih pelanggan 1 dan 2: `Age` −2, `Annual Income` 0, `Spending Score` −42. Tanda minus hanya menunjukkan pelanggan 1 lebih kecil nilainya, dan tidak berpengaruh karena selisih dikuadratkan.
+- Kuadratnya: 4, 0, dan **1764**. Totalnya 1768, dan akarnya 42,05, yaitu jarak 1 ke 2 di Langkah 2. `Spending Score` menyumbang 1764 dari 1768 (**sekitar 99,8%**) dari jarak itu. Usia dan pendapatan nyaris tidak berpengaruh.
+- Matriks setelah standardisasi punya angka yang jauh lebih kecil (0,21 sampai 2,91 dibanding 4,58 sampai 75,01), karena satuannya kini simpangan baku, bukan satuan asli.
+- Pada lima pelanggan ini, **urutan kedekatan tidak berubah**: pasangan terdekat tetap 2 dan 4 (0,21), dan terjauh tetap 2 dan 3 (2,91). Standardisasi baru mengubah urutan bila fitur-fiturnya "menarik" ke arah yang berbeda dan besarnya timpang, dan kondisi itu tidak terjadi pada contoh kecil ini.
+- Yang berubah adalah **perbandingan besarnya**. Sebelum standardisasi, jarak 1 ke 5 (12,21) sekitar 2,7 kali jarak 2 ke 4 (4,58). Setelah standardisasi, jarak 1 ke 5 (0,87) sekitar 4,1 kali jarak 2 ke 4 (0,21).
 
 **Penjelasan:**
 
@@ -246,11 +306,23 @@ Kita kerjakan dalam tujuh langkah kecil. **Setiap potongan kode diikuti penjelas
 
 ### Langkah 7 — Visualisasi matriks jarak
 
+Tabel angka mudah dibaca untuk lima pelanggan, tetapi sulit dipindai bila lebih banyak. Peta warna (*heatmap*) memungkinkan kita menangkap pola jarak sekilas pandang: daerah terang berarti dekat, daerah gelap berarti jauh.
+
+Kita menggambar dua matriks berdampingan, sebelum dan sesudah standardisasi dari Langkah 6, supaya pengaruh standardisasi terlihat langsung dalam satu gambar.
+
 ```python
 --8<-- "level-3/04_similarity_and_dissimilarity.py:plot"
 ```
 
 ![Dua peta warna matriks jarak lima pelanggan: kiri data mentah, kanan setelah standardisasi](../assets/level-3/04-matriks-jarak.png)
+
+**Cara membaca gambar:**
+
+- Setiap sel adalah satu pasangan pelanggan, dan angkanya sama dengan tabel di Langkah 2 (kiri) dan Langkah 6 (kanan), dibulatkan satu angka di belakang koma. Sel kuning terang adalah jarak kecil, dan sel ungu tua adalah jarak besar (`viridis_r`).
+- **Diagonal kuning** adalah jarak 0 ke diri sendiri. Gambar tampak **simetris** terhadap diagonal, mencerminkan sifat yang diperiksa di Langkah 4.
+- Sel terang di luar diagonal ada pada pasangan **2 dan 4** (4,6 pada panel kiri dan 0,2 pada panel kanan), dan agak terang pada pasangan 1 dan 5. Pasangan paling gelap adalah **2 dan 3** (75,0 dan 2,9), diikuti 3 dan 4.
+- **Pola warna kedua panel hampir sama.** Ini sejalan dengan Langkah 6: urutan kedekatan pada lima pelanggan ini tidak berubah oleh standardisasi. Yang berbeda adalah skala angkanya (maksimum 75,0 melawan 2,9).
+- Warna pada tiap panel dihitung dari skalanya sendiri, jadi warna gelap di kiri dan di kanan tidak berarti jarak yang sama besar. Bandingkan polanya, bukan warna absolutnya.
 
 **Penjelasan:**
 

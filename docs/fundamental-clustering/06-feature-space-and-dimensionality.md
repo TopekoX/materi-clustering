@@ -150,6 +150,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 1 — Pelanggan sebagai titik
 
+Ide dasar bab ini: setiap pelanggan adalah **satu titik**, dan setiap fitur adalah **satu sumbu**. Tabel data yang biasa kita lihat sebenarnya adalah kumpulan koordinat. Langkah pertama adalah membuktikan hal itu dengan mengambil satu baris data dan memperlakukannya sebagai koordinat, supaya istilah "ruang fitur" tidak terasa abstrak.
+
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:setup"
 ```
@@ -157,6 +159,13 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```text title="Output"
 --8<-- "level-3/outputs/06/setup.txt"
 ```
+
+**Cara membaca output:**
+
+- `[19. 15. 39.]` adalah pelanggan 1: usia 19, pendapatan 15 k\$, skor belanja 39. Tiga angka ini adalah **koordinat** titik tersebut pada tiga sumbu (`Age`, `Annual Income`, `Spending Score`).
+- Pelanggan 2 adalah titik lain di ruang yang sama, `[21. 15. 81.]`.
+- `Jumlah dimensi (fitur): 3` menyatakan ruangnya bertiga dimensi. Dimensi sama dengan jumlah fitur: 3 fitur berarti ruang 3D, 50 fitur berarti ruang 50D.
+- Dengan sudut pandang ini, "mirip" berarti "berdekatan di ruang", dan jaraknya bisa dihitung seperti di Bab 5.
 
 **Penjelasan:**
 
@@ -166,6 +175,8 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 2 — Jarak saat fitur ditambah
 
+Kalau dimensi sama dengan jumlah fitur, apa yang terjadi pada jarak ketika kita menambah fitur? Kita menguji pertanyaan itu dengan pasangan pelanggan yang sama (1 dan 2), tetapi memakai satu fitur, lalu dua, lalu tiga. Dengan begitu terlihat bahwa jarak bukan sifat tetap dua titik: ia bergantung pada fitur mana yang kita pakai.
+
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:grow"
 ```
@@ -173,6 +184,14 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```text title="Output"
 --8<-- "level-3/outputs/06/grow.txt"
 ```
+
+**Cara membaca output:**
+
+- **1 fitur (`Age`): 2,00.** Usia pelanggan 1 dan 2 adalah 19 dan 21, selisihnya 2.
+- **2 fitur (`Age`, `Annual Income`): 2,00.** Pendapatan keduanya sama (15), selisihnya 0, jadi tidak menambah jarak.
+- **3 fitur (ditambah `Spending Score`): 42,05.** Skor belanjanya 39 dan 81, selisih 42. Selisih sebesar itu membuat jarak melonjak dari 2 menjadi 42,05.
+- Dua pelanggan yang tampak "hampir sama" pada dua fitur bisa sangat berbeda setelah satu fitur ditambahkan. Menambah fitur **tidak pernah memperkecil** jarak: paling tidak tetap, biasanya bertambah.
+- Karena itu pilihan fitur menentukan siapa yang dianggap mirip. Ini alasan memilih fitur dengan hati-hati (Level 2) dan mengatur skalanya.
 
 **Penjelasan:**
 
@@ -182,11 +201,20 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 3 — Gambar ruang 1D, 2D, dan 3D
 
+Ruang 1D, 2D, dan 3D masih bisa kita bayangkan. Sebelum melanjutkan ke dimensi yang lebih tinggi, kita lihat dulu bagaimana **data yang sama** tampak pada satu, dua, dan tiga dimensi. Gambar ini membangun intuisi: tiap fitur tambahan memberi ruang gerak baru, dan titik-titik yang tampak bertumpuk di dimensi rendah bisa terpisah di dimensi yang lebih tinggi.
+
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:plot_dims"
 ```
 
 ![Tiga panel: 60 pelanggan sebagai titik pada satu garis (usia), pada bidang (pendapatan dan skor), dan di ruang tiga dimensi](../assets/level-3/06-ruang-1d-2d-3d.png)
+
+**Cara membaca gambar:**
+
+- **Panel kiri (1D):** 60 pelanggan hanya dibedakan lewat `Age`, sehingga semua titik berada di satu garis. Banyak titik tampak bertumpuk atau berdempetan, karena orang berusia hampir sama tidak bisa dibedakan.
+- **Panel tengah (2D):** pendapatan dan skor belanja membentuk bidang. Titik yang tadinya berdempetan kini tersebar, dan pola kelompok mulai tampak, misalnya kumpulan titik di sisi kanan (pendapatan sekitar 40 sampai 45 k\$, skor belanja 40 sampai 60).
+- **Panel kanan (3D):** tiga fitur membentuk ruang. Titik tersebar paling lega, tetapi lebih sulit dibaca di atas kertas karena pandangan 3D bergantung pada sudut kamera.
+- Makin banyak fitur, makin banyak cara dua pelanggan bisa berbeda. Di atas 3 dimensi kita tidak bisa menggambarnya lagi, jadi kita bergantung pada angka seperti jarak.
 
 **Penjelasan:**
 
@@ -198,6 +226,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 4 — Efek dimensi pada jarak
 
+Menambah dimensi tidak selalu menolong. Pada dimensi sangat tinggi, jarak antar titik cenderung menjadi **hampir sama**, sehingga konsep "dekat" dan "jauh" kehilangan daya bedanya. Gejala ini sering disebut *curse of dimensionality*.
+
+Kita mengujinya dengan percobaan terkendali: 200 titik acak di kubus satuan, dengan dimensi dari 1 sampai 1000. Untuk tiap dimensi kita ukur jarak terdekat, jarak terjauh, dan **kontras** \( (d_{\max} - d_{\min})/d_{\min} \). Kontras besar berarti ada pasangan yang jauh lebih dekat dari yang lain, sehingga tetangga terdekat bermakna. Kontras kecil berarti semua pasangan hampir sama jauhnya. Data acak dipakai supaya efeknya murni berasal dari dimensi, bukan dari struktur data.
+
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:curse"
 ```
@@ -206,7 +238,21 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-3/outputs/06/curse.txt"
 ```
 
+**Cara membaca output:**
+
+- Kolom `jarak_min` naik dari 0,000 (satu dimensi) menjadi 11,949 (seribu dimensi), dan `jarak_maks` naik dari 0,985 menjadi 13,859. Keduanya naik, tetapi `jarak_min` naik jauh lebih cepat, sehingga celah di antaranya menyempit.
+- Pada **1000 dimensi**, jarak terjauh (13,859) hanya sekitar 1,16 kali jarak terdekat (11,949). Hampir semua pasangan berjarak sekitar 12,9 (kolom `jarak_rata2`). Tidak ada lagi "tetangga yang jelas dekat".
+- Kolom `kontras` menyusut tajam: 29829,3 (1 dimensi), 438,1 (2), 23,3 (5), 5,5 (10), 1,05 (50), 0,56 (100), 0,25 (500), 0,16 (1000). Nilai di dimensi 1 sangat besar karena jarak terdekat hampir 0, jadi pembaginya sangat kecil.
+- Untuk algoritma berbasis jarak, ini masalah: bila semua jarak hampir sama, mengelompokkan berdasarkan jarak menjadi tidak informatif.
+
 ![Grafik log-log: kontras jarak turun dari puluhan ribu pada satu dimensi menjadi sekitar 0,16 pada seribu dimensi](../assets/level-3/06-efek-dimensi.png)
+
+**Cara membaca gambar:**
+
+- Sumbu x adalah jumlah dimensi dan sumbu y adalah kontras jarak, keduanya berskala logaritma. Skala log dipilih karena nilainya membentang dari puluhan ribu sampai di bawah 1.
+- Garisnya **menurun terus**: makin banyak dimensi, makin kecil kontras. Titik tertinggi di kiri atas (kontras sekitar 30.000) dan titik terendah di kanan bawah (sekitar 0,16).
+- Penurunan paling curam terjadi di dimensi rendah (1 sampai 10), lalu melandai, tetapi tidak berhenti. Bahkan setelah 100 dimensi, kontras masih terus turun.
+- Pelajarannya: menambah fitur tanpa pertimbangan bisa **merusak** kemampuan jarak membedakan titik. Pilih fitur seperlunya, atau kurangi dimensi (dibahas di level selanjutnya).
 
 **Penjelasan:**
 
@@ -219,6 +265,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 5 — Fitur tak relevan mengacaukan tetangga
 
+Langkah 4 memakai data acak murni. Pada data nyata kita juga sering menambahkan fitur yang **tidak relevan**, entah karena ikut terbawa dari tabel atau karena dikira berguna. Pertanyaannya: seberapa besar kerusakan yang ditimbulkan?
+
+Kita mengukurnya dengan cara yang konkret. Mulai dari dua fitur asli yang bermakna (pendapatan dan skor belanja), cari tetangga terdekat tiap pelanggan. Lalu tambahkan fitur acak murni sebanyak 0, 2, 10, dan 50, dan hitung berapa pelanggan yang tetangganya **berganti**. Kalau fitur acak tidak berpengaruh, tetangganya tidak akan berganti.
+
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:noise"
 ```
@@ -226,6 +276,14 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 ```text title="Output"
 --8<-- "level-3/outputs/06/noise.txt"
 ```
+
+**Cara membaca output:**
+
+- **0 fitur acak: 0 dari 200 berubah.** Ini pemeriksaan kewarasan: tanpa fitur tambahan, hasilnya harus sama dengan acuan, dan memang sama.
+- **2 fitur acak: 179 dari 200 berubah (sekitar 90%).** Hanya dua fitur tak bermakna sudah cukup mengganti tetangga hampir semua pelanggan.
+- **10 fitur acak: 193 dari 200.** **50 fitur acak: 197 dari 200.** Kerusakan bertambah, tetapi sebagian besar sudah terjadi pada dua fitur pertama.
+- Fitur acak ini berskala sama dengan fitur asli (keduanya terstandardisasi), jadi mereka sama "kuatnya" dalam menentukan jarak. Karena itu pengaruhnya besar.
+- Kesimpulan: fitur yang tidak relevan bukan sekadar sia-sia, melainkan **berbahaya** bagi algoritma berbasis jarak. Seleksi fitur adalah langkah yang penting, bukan pelengkap.
 
 **Penjelasan:**
 
@@ -237,6 +295,10 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 
 ### Langkah 6 — Skala mengubah bentuk ruang
 
+Sebagai penutup bab ini, kita kembali ke masalah skala yang muncul di Bab 4 dan 5, tetapi dengan sudut pandang ruang: skala menentukan **bentuk ruang**. Bila satu fitur berskala jauh lebih besar, ruangnya "memanjang" ke arah fitur itu, dan jarak jadi hampir hanya soal fitur tersebut.
+
+Kita menggambar data yang sama (usia dan pendapatan) dua kali dengan sumbu sama panjang: sekali pada satuan asli, sekali setelah standardisasi. Dengan sumbu sama panjang, bentuk ruang tampak jujur, dan jarak yang kita lihat di gambar sesuai dengan jarak Euclidean yang akan dihitung algoritma.
+
 ```python
 --8<-- "level-3/06_feature_space_and_dimensionality.py:scale"
 ```
@@ -245,7 +307,19 @@ Kita kerjakan dalam enam langkah kecil. **Setiap potongan kode diikuti penjelasa
 --8<-- "level-3/outputs/06/scale.txt"
 ```
 
+**Cara membaca output:**
+
+- Rentang usia 52 tahun dan rentang pendapatan 122 k\$. Pendapatan sekitar **2,3 kali** lebih lebar daripada usia (122 / 52).
+- Pada skala asli, perbedaan pendapatan sebesar 1 satuan dan perbedaan usia sebesar 1 satuan dihitung setara dalam jarak, padahal rentangnya berbeda. Akibatnya pendapatan cenderung mendominasi.
+
 ![Dua panel scatter usia vs pendapatan: kiri skala asli dengan sumbu sama panjang, kanan setelah standardisasi](../assets/level-3/06-skala-ruang-fitur.png)
+
+**Cara membaca gambar:**
+
+- **Panel kiri (skala asli):** karena sumbu dibuat sama panjang, titik-titik membentuk bentuk yang **tinggi dan sempit**: pendapatan membentang 15 sampai sekitar 137, sedangkan usia hanya 18 sampai 70. Dalam ruang ini perbedaan pendapatan lebih mudah membuat dua titik berjauhan.
+- **Panel kanan (setelah standardisasi):** kedua sumbu kini berskala sebanding (sekitar −1,7 sampai 3 untuk pendapatan dan −1,5 sampai 2,2 untuk usia). Awan titiknya jauh lebih **seimbang**, tidak lagi memanjang ke satu arah.
+- Datanya sama persis. Yang berubah adalah bentuk ruang, dan karena jarak bergantung pada bentuk ruang, tetangga dan kelompok yang ditemukan algoritma juga bisa berubah.
+- Inilah alasan standardisasi menjadi langkah standar sebelum clustering berbasis jarak.
 
 **Penjelasan:**
 

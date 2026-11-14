@@ -142,6 +142,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 2 — Pahami dataset
 
+Sebelum memilih fitur atau algoritma, kita perlu mengenal datanya. Langkah ini mencegah kejutan di tengah jalan: nilai kosong bisa membuat perhitungan jarak gagal, baris ganda bisa membuat satu pelanggan terhitung dua kali, dan rentang nilai tiap kolom menentukan perlu tidaknya penyamaan skala nanti.
+
+Kita memeriksa empat hal secara berurutan: ukuran data, jumlah nilai kosong, jumlah baris ganda, dan ringkasan statistik (minimum, rata-rata, maksimum).
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:understand"
 ```
@@ -149,6 +153,14 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```text title="Output"
 --8<-- "level-3/outputs/07/understand.txt"
 ```
+
+**Cara membaca output:**
+
+- `Ukuran: (200, 5)` berarti 200 pelanggan dan 5 kolom.
+- `Nilai kosong total: 0` dan `Baris duplikat: 0` berarti data bersih. Kita tidak perlu menangani nilai hilang atau menghapus baris ganda, jadi alur bisa langsung berlanjut.
+- Tabel ringkasan hanya memuat kolom numerik, yaitu empat kolom. Kolom kelima, `Gender`, berisi teks sehingga tidak ikut dihitung.
+- `CustomerID` berkisar 1 sampai 200 dengan rata-rata 100,5. Itu hanya nomor urut, bukan ukuran pelanggan, sehingga tidak layak dipakai untuk clustering.
+- Rentang tiap fitur berbeda: `Age` 18 sampai 70 (rentang 52), `Annual Income` 15 sampai 137 (rentang 122), dan `Spending Score` 1 sampai 99 (rentang 98). Perbedaan rentang ini menjadi alasan langkah penyamaan skala nanti.
 
 **Penjelasan:**
 
@@ -159,6 +171,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 3 — Pilih fitur
 
+Tidak semua kolom pantas dijadikan bahan clustering. Fitur yang dipilih menentukan **ruang** tempat pelanggan dibandingkan (Bab 6), jadi pilihan ini langsung memengaruhi hasil. Dasar pilihannya adalah pertanyaan masalah di Langkah 1: kelompok pelanggan menurut **pendapatan dan perilaku belanja**. Maka fiturnya adalah `Annual Income` dan `Spending Score`.
+
+Memilih hanya dua fitur juga membuat hasil mudah divisualisasikan di bidang dua dimensi, dan menghindari fitur yang tidak relevan yang bisa mengacaukan jarak (Bab 6).
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:prepare"
 ```
@@ -166,6 +182,15 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```text title="Output"
 --8<-- "level-3/outputs/07/prepare.txt"
 ```
+
+**Cara membaca output:**
+
+- `Fitur untuk clustering` adalah dua kolom yang dipakai: pendapatan tahunan dan skor belanja.
+- `Kolom yang tidak dipakai: ['CustomerID', 'Gender', 'Age']` memuat tiga kolom yang sengaja disisihkan, masing-masing dengan alasan:
+    - `CustomerID` hanya nomor urut dan tidak mengandung informasi tentang perilaku.
+    - `Gender` berupa kategori. Memakainya perlu *encoding* dan ukuran jarak yang sesuai (Bab 4 dan 5).
+    - `Age` tidak dipakai untuk membentuk kelompok, tetapi kita simpan untuk **menafsirkan** kelompok di Langkah 8.
+- Keputusan ini bukan satu-satunya yang benar. Bila pertanyaannya berbeda, misalnya segmentasi menurut usia, pilihan fiturnya juga berbeda.
 
 **Penjelasan:**
 
@@ -175,6 +200,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 4 — Samakan skala
 
+Kedua fitur terpilih berskala berbeda: pendapatan membentang 15 sampai 137, skor belanja 1 sampai 99. Jarak Euclidean menjumlahkan selisih tiap fitur, sehingga fitur yang rentangnya lebih besar cenderung mendominasi (Bab 5 dan 6). Standardisasi mengubah tiap fitur ke skala sebanding agar keduanya punya bobot setara.
+
+Setelah standardisasi, kita memeriksa hasilnya. Memeriksa rata-rata dan simpangan baku itu cepat, dan menangkap kesalahan seperti lupa menskalakan atau menskalakan kolom yang salah.
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:scale"
 ```
@@ -182,6 +211,12 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```text title="Output"
 --8<-- "level-3/outputs/07/scale.txt"
 ```
+
+**Cara membaca output:**
+
+- `Rata-rata setelah skala: [0. 0.]` dan `Simpangan baku setelah skala: [1. 1.]` berarti kedua fitur kini berpusat di 0 dengan sebaran 1. Itulah definisi standardisasi.
+- Angkanya dibulatkan dua angka di belakang koma oleh kode (`.round(2)`), jadi `0.` dan `1.` berarti sangat dekat dengan 0 dan 1.
+- Satu satuan pada fitur pendapatan kini bermakna sama dengan satu satuan pada skor belanja, yaitu satu simpangan baku. Hasilnya, `X_scaled`, dipakai untuk memilih `k` dan melatih model.
 
 **Penjelasan:**
 
@@ -191,6 +226,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 5 — Pilih jumlah kelompok
 
+K-Means butuh jumlah kelompok `k` yang ditentukan di awal, padahal kita tidak tahu berapa yang tepat. Kita mencobanya dengan `k` dari 2 sampai 8, lalu menilai tiap hasil dengan **silhouette score**. Silhouette mengukur seberapa rapat sebuah titik dengan kelompoknya dibanding kelompok terdekat lain, dan nilainya makin tinggi bila kelompok makin rapat dan terpisah (Level 5 membahas ukuran ini lebih dalam).
+
+Kita memilih `k` dengan silhouette tertinggi sebagai titik awal, lalu menggambar grafiknya agar terlihat seberapa jelas pilihan itu.
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:choose"
 ```
@@ -199,7 +238,20 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 --8<-- "level-3/outputs/07/choose.txt"
 ```
 
+**Cara membaca output:**
+
+- Silhouette naik dari 0,321 pada `k = 2` hingga 0,555 pada `k = 5`, lalu turun lagi: 0,540 (`k = 6`), 0,528 (`k = 7`), dan 0,455 (`k = 8`).
+- Nilai tertinggi ada pada **`k = 5`**, sehingga `best_k = 5`.
+- Selisih antara `k = 5` (0,555) dan `k = 6` (0,540) hanya 0,015. Artinya `k = 6` hampir sama baiknya. Pilihan `k = 5` kuat, tetapi bukan satu-satunya yang masuk akal. Karena itu pemahaman bisnis tetap perlu mendampingi angka.
+
 ![Grafik silhouette score terhadap jumlah kelompok 2 sampai 8, puncak di k=5](../assets/level-3/07-pemilihan-k.png)
+
+**Cara membaca gambar:**
+
+- Sumbu x adalah jumlah kelompok dan sumbu y adalah silhouette score. Titik-titik adalah nilai yang tercetak di atas.
+- Kurvanya **naik tajam** dari `k = 2` ke `k = 5`, mencapai **puncak di `k = 5`**, lalu menurun perlahan sampai `k = 7`, dan turun lebih tajam di `k = 8`.
+- Puncak yang jelas lebih meyakinkan daripada kurva yang datar. Di sini puncaknya cukup tegas, dan itu sejalan dengan pola lima kelompok yang terlihat di gambar-gambar sebelumnya.
+- Penurunan setelah `k = 5` menunjukkan bahwa membagi lagi kelompok-kelompok yang sudah wajar justru membuat batas kelompok kurang bersih.
 
 **Penjelasan:**
 
@@ -213,6 +265,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 6 — Latih model dan beri nomor kelompok
 
+Setelah `k` dipilih, kita melatih model akhir dan memberi **nomor kelompok** pada setiap pelanggan. Nomor ini disimpan sebagai kolom baru `Cluster` pada tabel asli. Dengan begitu, hasil clustering bisa langsung dipakai untuk analisis lanjutan seperti merata-ratakan per kelompok (Langkah 8).
+
+Kita juga menghitung jumlah anggota tiap kelompok. Pemeriksaan ini cepat tetapi penting: kelompok yang sangat kecil (hanya beberapa titik) atau satu kelompok yang menelan hampir semua data adalah tanda untuk mencurigai hasilnya.
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:fit"
 ```
@@ -220,6 +276,13 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```text title="Output"
 --8<-- "level-3/outputs/07/fit.txt"
 ```
+
+**Cara membaca output:**
+
+- Lima baris, kelompok 0 sampai 4, berisi 81, 39, 22, 35, dan 23 pelanggan. Totalnya 200, sama dengan jumlah pelanggan.
+- Tidak ada kelompok yang sangat kecil dan tidak ada yang menguasai hampir seluruh data. Kelompok terbesar (81) sekitar 4 kali kelompok terkecil (22), sebaran yang wajar pada data nyata.
+- Angka dan urutan nomor ini sama dengan yang muncul di bab-bab sebelumnya, karena data, fitur, `k`, dan `random_state` yang sama menghasilkan pengelompokan yang sama. Nomor kelompok hanyalah label, bukan peringkat.
+- `dtype: int64` dan `Name: count` hanya keterangan tipe dan nama kolom hasil hitung, tidak perlu dipikirkan.
 
 **Penjelasan:**
 
@@ -229,6 +292,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 7 — Periksa kestabilan
 
+K-Means dimulai dari pusat awal acak, sehingga pada data tertentu hasilnya bisa berbeda tergantung `random_state`. Kalau kelompok berubah-ubah tiap kali dijalankan, kita tidak bisa mempercayainya sebagai temuan.
+
+Karena itu kita menguji **kestabilan**: menjalankan K-Means lagi dengan lima seed berbeda dan membandingkan tiap hasil dengan hasil utama memakai *Adjusted Rand Index* (ARI). ARI cocok di sini karena membandingkan **cara titik dikelompokkan**, bukan nomor kelompoknya. Nomor boleh tertukar (kelompok 0 di satu hasil bisa jadi kelompok 3 di hasil lain), tetapi ARI tetap 1 selama pengelompokannya sama.
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:stability"
 ```
@@ -236,6 +303,13 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```text title="Output"
 --8<-- "level-3/outputs/07/stability.txt"
 ```
+
+**Cara membaca output:**
+
+- Kelima baris menunjukkan **ARI = 1.000** untuk `random_state` 0 sampai 4. Nilai 1 berarti pengelompokan **identik** dengan hasil utama, walaupun pusat awalnya diacak dengan cara berbeda.
+- Jadi kelima kelompok ini stabil: hasilnya tidak bergantung pada keberuntungan pusat awal. Ini wajar karena data punya lima gerombol yang jelas dan `n_init=10` membuat K-Means mencoba banyak titik awal lalu memilih yang terbaik.
+- Hasil ini hanya berlaku untuk data dan pengaturan ini. Pada data yang gerombolnya kurang jelas, ARI bisa turun di bawah 1, dan itu pertanda kelompok kurang meyakinkan.
+- Lima seed adalah pemeriksaan cepat, bukan bukti mutlak. Cukup sebagai pemeriksaan dasar di alur kerja.
 
 **Penjelasan:**
 
@@ -245,6 +319,10 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 8 — Tafsirkan kelompok
 
+Nomor kelompok `0, 1, 2, 3, 4` belum bermakna bagi orang lain. Agar hasil clustering berguna, kita perlu menjelaskan **siapa** anggota tiap kelompok. Caranya dengan merata-ratakan fitur per kelompok dalam **satuan asli** (bukan terstandardisasi), sehingga angkanya mudah dipahami, misalnya "pendapatan rata-rata 86,5 k\$".
+
+Kita juga menambahkan `Age`, yang tidak dipakai membentuk kelompok. Kalau kelompok yang terbentuk dari pendapatan dan belanja ternyata juga berbeda usianya, tafsirannya jadi lebih kaya.
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:interpret"
 ```
@@ -252,6 +330,22 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```text title="Output"
 --8<-- "level-3/outputs/07/interpret.txt"
 ```
+
+**Cara membaca output:**
+
+Tiap baris adalah profil satu kelompok (jumlah anggota, rata-rata pendapatan, rata-rata skor belanja, rata-rata usia):
+
+| Kelompok | Jumlah | Pendapatan | Skor belanja | Usia | Pembacaan |
+|---|---|---|---|---|---|
+| 0 | 81 | 55,3 | 49,5 | 42,7 | menengah di pendapatan dan belanja |
+| 1 | 39 | 86,5 | 82,1 | 32,7 | pendapatan tinggi, belanja tinggi |
+| 2 | 22 | 25,7 | 79,4 | 25,3 | pendapatan rendah, belanja tinggi |
+| 3 | 35 | 88,2 | 17,1 | 41,1 | pendapatan tinggi, belanja rendah |
+| 4 | 23 | 26,3 | 20,9 | 45,2 | pendapatan rendah, belanja rendah |
+
+- Kelima kelompok memang berbeda satu sama lain di dua fitur yang dipakai: rendah/menengah/tinggi di pendapatan, dan rendah/menengah/tinggi di belanja.
+- `Age` tidak dipakai saat clustering, tetapi nilainya ikut berbeda: kelompok 2 paling muda (25,3) dan kelompok 4 paling tua (45,2). Itu pola yang menarik, tetapi **bukan sebab-akibat**. Ia hanya menunjukkan bahwa usia ikut bervariasi menurut kelompok.
+- Ini rata-rata kelompok. Tidak semua anggota persis seperti itu, dan inilah sebabnya profil ini perlu dibaca bersama gambar di Langkah 9.
 
 **Penjelasan:**
 
@@ -261,11 +355,22 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 
 ### Langkah 9 — Visualisasi akhir dan laporan
 
+Langkah terakhir mengemas hasil. Gambar akhir menunjukkan bahwa kelompok memang terlihat di data, dan ringkasan tertulis menerjemahkan angka menjadi kalimat yang bisa dibaca pemangku kepentingan yang tidak ikut menjalankan kode.
+
+Centroid dikembalikan ke satuan asli (`inverse_transform`) karena model menyimpannya dalam skala standar. Tanpa langkah ini, tanda centroid akan jatuh di tempat yang salah di atas data asli.
+
 ```python
 --8<-- "level-3/07_clustering_workflow.py:plot"
 ```
 
 ![Scatter plot pelanggan dalam lima warna dengan centroid hitam](../assets/level-3/07-segmentasi-akhir.png)
+
+**Cara membaca gambar:**
+
+- Setiap warna adalah satu kelompok, dan tanda `X` hitam adalah centroid dalam satuan asli (k\$ dan skor).
+- Lima daerah terlihat terpisah: kelompok 0 (biru) di tengah, kelompok 1 (kuning) di kanan atas, kelompok 2 (hijau) di kiri atas, kelompok 3 (merah muda) di kanan bawah, dan kelompok 4 (oranye) di kiri bawah.
+- Tiap `X` berada di tengah gerombol warnanya, dan posisinya sesuai tabel Langkah 8, misalnya centroid kelompok 1 sekitar (86,5; 82,1).
+- Kelompok 0 paling padat dan paling dekat ke tengah, sedangkan kelompok di pojok-pojok lebih tersebar. Beberapa titik di perbatasan, misalnya antara kelompok 0 dan 3 di sekitar pendapatan 70 sampai 80, bisa terasa ambigu (Bab 2).
 
 **Penjelasan:**
 
@@ -279,6 +384,14 @@ Kita kerjakan dalam sembilan langkah kecil. **Setiap potongan kode diikuti penje
 ```text title="Output"
 --8<-- "level-3/outputs/07/report.txt"
 ```
+
+**Cara membaca output:**
+
+- Setiap baris adalah satu kalimat laporan per kelompok, dibuat otomatis dari tabel profil di Langkah 8.
+- Persentase anggota: 40,5%, 19,5%, 11,0%, 17,5%, dan 11,5%. Totalnya 100%.
+- Kelompok terbesar adalah kelompok 0 (pelanggan "menengah", 40,5%). Dua kelompok terkecil, kelompok 2 dan 4, masing-masing sekitar 11%.
+- Kalimat seperti ini siap dipindahkan ke laporan. Untuk menjawab pertanyaan di Langkah 1 (promosi berbeda), tiap kelompok bisa dibaca sebagai segmen dengan karakter berbeda, misalnya kelompok 3 dengan pendapatan tinggi tetapi belanja rendah.
+- Keputusan promosi sesungguhnya tetap butuh pertimbangan bisnis. Clustering hanya memberi **bahan** untuk keputusan itu.
 
 **Penjelasan:**
 
