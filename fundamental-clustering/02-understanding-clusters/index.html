@@ -4593,6 +4593,16 @@
 <p><strong>Konteks masalah:</strong> kita membandingkan dua dataset sintetis (satu terpisah jelas, satu tumpang tindih) memakai ukuran kekompakan, keterpisahan, dan kepadatan, lalu menerapkannya pada kelompok Mall Customers dari Bab 1.</p>
 <p><strong>Input yang diharapkan:</strong> tidak ada file khusus untuk data sintetis (dibuat di kode). Langkah terakhir memakai <code>data/mall_customers.csv</code>.</p>
 <h3 id="langkah-1-buat-data-sintetis">Langkah 1 — Buat data sintetis<a class="headerlink" href="#langkah-1-buat-data-sintetis" title="Permanent link">&para;</a></h3>
+<p>Pada langkah ini kita memakai <strong>dataset sintetis</strong>, yaitu data buatan yang dibangkitkan oleh program (bukan hasil pengukuran dunia nyata). Alasannya:</p>
+<ul>
+<li><strong>Kelompok aslinya diketahui pasti.</strong> Kita sendiri yang menentukan pusat dan sebaran tiap gerombol, sehingga kita bisa memeriksa apakah ukuran kekompakan, keterpisahan, dan kepadatan benar-benar menangkap apa yang kita rancang.</li>
+<li><strong>Kondisinya bisa dikendalikan.</strong> Dengan mengubah satu parameter saja (<code>cluster_std</code>), kita mendapat dua dataset yang hanya berbeda pada tingkat tumpang tindihnya. Pada data nyata, perbedaan seperti ini sulit diisolasi.</li>
+<li><strong>Hasilnya dapat diulang.</strong> Dengan <code>random_state=42</code>, siapa pun yang menjalankan kode ini mendapat data dan angka yang sama.</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Batasan data sintetis</p>
+<p>Data sintetis rapi dan "ramah" terhadap algoritma, jadi tidak mewakili kerumitan data nyata. Karena itu, pada langkah terakhir kita menerapkan ukuran yang sama pada data nyata (Mall Customers).</p>
+</div>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="kn">import</span><span class="w"> </span><span class="nn">numpy</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">np</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="kn">import</span><span class="w"> </span><span class="nn">pandas</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">pd</span>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="kn">import</span><span class="w"> </span><span class="nn">matplotlib.pyplot</span><span class="w"> </span><span class="k">as</span><span class="w"> </span><span class="nn">plt</span>
@@ -4612,6 +4622,11 @@
 <div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>Bentuk XA: (150, 2) | Bentuk XB: (150, 2)
 </span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a>Jumlah anggota per kelompok (A): [50 50 50]
 </span></code></pre></div>
+<p><strong>Maksud output:</strong></p>
+<ul>
+<li><code>Bentuk XA: (150, 2)</code> dan <code>Bentuk XB: (150, 2)</code>: <em>shape</em> (bentuk) larik data. Angka pertama (150) adalah jumlah titik/baris, angka kedua (2) adalah jumlah fitur/kolom, yaitu koordinat <span class="arithmatex">\( x \)</span> dan <span class="arithmatex">\( y \)</span>. Jadi kedua dataset sama-sama berisi 150 titik pada bidang dua dimensi, sehingga bisa langsung digambar.</li>
+<li><code>Jumlah anggota per kelompok (A): [50 50 50]</code>: hasil <code>np.bincount(yA)</code>, yaitu banyaknya titik pada kelompok 0, 1, dan 2. Ketiganya 50, artinya 150 titik terbagi rata ke tiga gerombol. Ini memastikan kelompok seimbang, sehingga perbedaan ukuran kelompok tidak memengaruhi perbandingan nanti.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>import numpy as np</code> memanggil <em>NumPy</em>, pustaka untuk menghitung dengan larik (array) angka.</li>
@@ -4648,6 +4663,14 @@
 <li><code>fig.tight_layout()</code> merapikan jarak antar elemen.</li>
 </ul>
 <h3 id="langkah-3-ukur-kekompakan-compactness">Langkah 3 — Ukur kekompakan (compactness)<a class="headerlink" href="#langkah-3-ukur-kekompakan-compactness" title="Permanent link">&para;</a></h3>
+<p>Setelah melihat kedua dataset secara visual di Langkah 2, kini kita mengubah kesan "rapat" atau "longgar" menjadi <strong>angka</strong>. Ukuran pertama adalah <strong>kekompakan</strong> (<em>compactness</em>): seberapa dekat anggota sebuah kelompok dengan pusatnya.</p>
+<p>Caranya sederhana, mengikuti rumus di bagian Mathematical Foundation:</p>
+<ol>
+<li>Cari <strong>pusat</strong> kelompok, yaitu rata-rata koordinat semua anggotanya.</li>
+<li>Hitung <strong>jarak</strong> setiap anggota ke pusat itu.</li>
+<li>Ambil <strong>rata-rata</strong> jarak tersebut.</li>
+</ol>
+<p>Makin <strong>kecil</strong> angkanya, makin rapat kelompoknya. Kita membungkus ketiga langkah ini dalam satu fungsi <code>compactness</code>, lalu menjalankannya pada Dataset A dan B. Karena hanya <code>cluster_std</code> yang berbeda di antara keduanya, selisih angka yang muncul berasal dari tingkat sebaran itu. Angka ini juga menjadi pembagi pada rasio keterpisahan di Langkah 4.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">compactness</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="sd">"""Rata-rata jarak setiap titik ke pusat kelompoknya, per kelompok."""</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">result</span> <span class="o">=</span> <span class="p">[]</span>
@@ -4664,6 +4687,15 @@
 <div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a>Kekompakan dataset A: [0.68 0.72 0.79]
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>Kekompakan dataset B: [2.05 2.16 2.38]
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Setiap baris berisi tiga angka, satu per kelompok (kelompok 0, 1, 2 berurutan). Angkanya adalah rata-rata jarak anggota ke pusat kelompoknya, dalam satuan koordinat data.</li>
+<li>Dataset A: <code>0.68</code>, <code>0.72</code>, <code>0.79</code>. Rata-rata anggota hanya berjarak sekitar 0,7 dari pusatnya, jadi ketiga kelompok rapat.</li>
+<li>Dataset B: <code>2.05</code>, <code>2.16</code>, <code>2.38</code>. Jaraknya sekitar 2,2, jadi kelompok jauh lebih longgar.</li>
+<li>Rata-rata ketiga kelompok adalah sekitar 0,73 untuk A dan 2,20 untuk B, selisih sekitar <strong>3 kali</strong>. Ini sejalan dengan <code>cluster_std</code> yang kita pilih (0,6 dan 1,8, juga berselisih 3 kali), jadi ukuran ini memang menangkap tingkat sebaran.</li>
+<li>Dalam satu dataset, ketiga angkanya berdekatan karena ketiga kelompok dibuat dengan sebaran yang sama. Selisih kecil di antaranya berasal dari acak sampel, bukan dari perbedaan yang dirancang.</li>
+<li>Angka rata-rata inilah yang menjadi pembagi pada rasio di Langkah 4.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>def compactness(X, y):</code> membuat <strong>fungsi</strong>: potongan kode yang bisa dipakai berulang. Ia menerima titik <code>X</code> dan nomor kelompok <code>y</code>.</li>
@@ -4676,6 +4708,14 @@
 <li><code>.round(2)</code> membulatkan ke dua angka di belakang koma.</li>
 </ul>
 <h3 id="langkah-4-ukur-keterpisahan-separation">Langkah 4 — Ukur keterpisahan (separation)<a class="headerlink" href="#langkah-4-ukur-keterpisahan-separation" title="Permanent link">&para;</a></h3>
+<p>Kekompakan di Langkah 3 hanya menjawab setengah pertanyaan: seberapa rapat <strong>satu</strong> kelompok. Kelompok yang rapat belum tentu mudah dibedakan bila kelompok tetangganya menempel di sebelahnya. Karena itu kita perlu ukuran kedua, <strong>keterpisahan</strong> (<em>separation</em>): seberapa jauh kelompok yang satu dari kelompok yang lain.</p>
+<p>Ukuran paling sederhana adalah <strong>jarak antar pusat</strong> kelompok. Namun jarak ini tidak cukup bila berdiri sendiri. Lihat outputnya: jarak antar pusat di Dataset A (5,69 sampai 6,03) hampir sama dengan di Dataset B (5,41 sampai 6,20), padahal Dataset A jelas terpisah dan Dataset B saling menumpuk. Pusat yang berjauhan tidak berarti kelompoknya terpisah, karena kelompok yang sangat lebar tetap bisa saling bertemu di tengah.</p>
+<p>Maka jarak pusat dibandingkan dengan <strong>lebar kelompok</strong> (kekompakan dari Langkah 3) dalam bentuk rasio:</p>
+<ul>
+<li>Kita mengambil <strong>jarak pusat terdekat</strong> karena pasangan yang paling dekat adalah titik terlemah. Dua kelompok yang bertumpuk sudah cukup membuat pemisahan gagal, walaupun pasangan lain berjauhan.</li>
+<li>Kita membaginya dengan <strong>rata-rata kekompakan</strong> agar jaraknya dinilai relatif terhadap sebaran. Rasio besar berarti jarak antar kelompok jauh melebihi lebar kelompok itu sendiri (terpisah jelas). Rasio kecil berarti lebar kelompok hampir sama dengan jaraknya (mudah tumpang tindih).</li>
+</ul>
+<p>Hasilnya, Dataset A mendapat rasio 7,76 dan Dataset B hanya 2,46. Selisih ini yang menangkap perbedaan yang tidak terlihat dari jarak pusat saja. Ide yang sama, jarak antar kelompok dibandingkan dengan sebaran di dalam kelompok, akan muncul lagi dalam metrik evaluasi clustering di level berikutnya.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">center_distances</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">y</span><span class="p">):</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="w">    </span><span class="sd">"""Jarak antar pusat kelompok untuk setiap pasangan kelompok."""</span>
 </span><span id="__span-5-3"><a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a>    <span class="n">centers</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">X</span><span class="p">[</span><span class="n">y</span> <span class="o">==</span> <span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="n">np</span><span class="o">.</span><span class="n">unique</span><span class="p">(</span><span class="n">y</span><span class="p">)])</span>
@@ -4696,6 +4736,15 @@
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>Jarak antar pusat dataset B: {(0, 1): 6.08, (0, 2): 6.2, (1, 2): 5.41}
 </span><span id="__span-6-4"><a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a>  Jarak pusat terdekat / rata-rata kekompakan = 2.46
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><code>{(0, 1): 6.03, (0, 2): 5.95, (1, 2): 5.69}</code> adalah jarak antar pusat. Kunci <code>(0, 1)</code> berarti pasangan kelompok 0 dan 1, nilainya jarak Euclidean kedua pusat. Dataset A punya tiga pasangan karena ada tiga kelompok.</li>
+<li>Jarak antar pusat kedua dataset hampir sama (sekitar 5,4 sampai 6,2). Wajar, sebab <code>centers</code> yang dipakai memang sama. Jadi angka ini saja tidak bisa membedakan A dari B.</li>
+<li>Pasangan terdekat di Dataset A adalah <code>(1, 2)</code> dengan 5,69, sedangkan di Dataset B adalah <code>(1, 2)</code> dengan 5,41. Nilai inilah yang menjadi pembilang rasio.</li>
+<li>Rata-rata kekompakan dari Langkah 3 adalah sekitar 0,73 untuk A dan 2,20 untuk B. Maka rasio A = 5,69 / 0,73 ≈ <strong>7,76</strong>, dan rasio B = 5,41 / 2,20 ≈ <strong>2,46</strong>.</li>
+<li>Pada Dataset A, jarak pusat terdekat sekitar 7,8 kali lebar kelompok, sehingga ketiga kelompok terpisah lega. Pada Dataset B, jaraknya hanya sekitar 2,5 kali lebar kelompok, jadi tepi kelompok saling bertemu dan itu sesuai dengan gambar yang tumpang tindih di Langkah 2.</li>
+<li>Jadi yang membedakan kedua dataset adalah <strong>sebarannya</strong>, bukan jarak antar pusatnya.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>center_distances</code> menghitung pusat tiap kelompok, lalu <strong>jarak antar pusat</strong> untuk setiap pasangan <code>(i, j)</code>.</li>
@@ -4705,6 +4754,9 @@
 <li><code>f"... {ratio:.2f}"</code> adalah <em>f-string</em>: menyisipkan nilai ke teks. <code>:.2f</code> berarti dua angka di belakang koma.</li>
 </ul>
 <h3 id="langkah-5-ukur-kepadatan-density">Langkah 5 — Ukur kepadatan (density)<a class="headerlink" href="#langkah-5-ukur-kepadatan-density" title="Permanent link">&para;</a></h3>
+<p>Kekompakan dan keterpisahan menilai kelompok dari pusatnya. Ada sisi lain yang belum tertangkap: seberapa <strong>rapat titik-titik berdekatan satu sama lain</strong> di dalam kelompok. Inilah <strong>kepadatan</strong> (<em>density</em>). Sebagian algoritma, seperti DBSCAN di Level 4, membentuk kelompok justru dari daerah yang padat, jadi ukuran ini perlu dikenali sejak sekarang.</p>
+<p>Caranya, untuk setiap titik kita cari <strong>tetangga terdekatnya</strong>, lalu merata-ratakan jarak itu. Kita memakai tetangga terdekat, bukan jarak ke pusat, karena kepadatan adalah sifat <strong>lokal</strong>: titik yang dikelilingi banyak tetangga dekat berada di daerah padat, apa pun posisinya terhadap pusat. Makin <strong>kecil</strong> angkanya, makin padat kelompoknya.</p>
+<p>Untuk membandingkannya secara adil, kita buat dua kelompok dengan jumlah titik sama (60) dan pusat sama, yaitu (0, 0). Satu-satunya perbedaan adalah sebarannya (0,3 dan 1,5). Dengan begitu, selisih angka yang muncul berasal dari kepadatan, bukan dari jumlah titik atau posisi.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">mean_nearest_neighbor</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="w">    </span><span class="sd">"""Rata-rata jarak setiap titik ke tetangga terdekatnya. Makin kecil, makin padat."""</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>    <span class="n">diff</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
@@ -4721,6 +4773,13 @@
 <div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a>Jarak tetangga terdekat, kelompok padat  : 0.063
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a>Jarak tetangga terdekat, kelompok jarang : 0.422
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Angka <code>0.063</code> dan <code>0.422</code> adalah rata-rata jarak setiap titik ke tetangga terdekatnya. Satuannya sama dengan koordinat data.</li>
+<li>Pada kelompok padat, rata-rata titik hanya berjarak 0,063 dari tetangga terdekatnya. Pada kelompok jarang, jaraknya 0,422, sekitar <strong>6,7 kali</strong> lebih jauh (0,422 / 0,063).</li>
+<li>Kedua kelompok berisi 60 titik dan berpusat di tempat yang sama. Jadi 60 titik yang sama terasa rapat bila ditempatkan di area sempit (sebaran 0,3) dan renggang bila disebar di area luas (sebaran 1,5).</li>
+<li>Nilai kecil berarti padat, nilai besar berarti jarang. Kelompok jarang tidak "salah", tetapi algoritma berbasis kepadatan akan kesulitan menganggapnya satu kelompok bila jarak antar titiknya terlalu besar.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>X[:, None, :] - X[None, :, :]</code> menghitung selisih <strong>setiap pasangan titik</strong> sekaligus. Hasilnya larik tiga dimensi: (titik pertama, titik kedua, koordinat).</li>
@@ -4731,6 +4790,12 @@
 <li>Kita buat dua kelompok dengan jumlah titik sama (60) tetapi sebaran berbeda (0,3 dan 1,5).</li>
 </ul>
 <h3 id="langkah-6-lihat-bentuk-dan-ukuran">Langkah 6 — Lihat bentuk dan ukuran<a class="headerlink" href="#langkah-6-lihat-bentuk-dan-ukuran" title="Permanent link">&para;</a></h3>
+<p>Langkah 3 sampai 5 menghasilkan angka, dan semuanya diam-diam mengandaikan kelompok berbentuk <strong>bola</strong>: ada satu pusat, dan titik menyebar merata di sekelilingnya. Padahal data nyata tidak selalu begitu. Langkah ini sengaja memperlihatkan dua keadaan yang membuat asumsi tersebut gagal, supaya kita tahu bahwa angka saja tidak cukup dan <strong>bentuk</strong> serta <strong>ukuran</strong> kelompok juga perlu dilihat.</p>
+<p>Kita memakai gambar, bukan angka, karena bentuk adalah sifat yang paling mudah dikenali mata dan paling sulit diringkas dalam satu bilangan. Dua kasus yang ditampilkan:</p>
+<ul>
+<li><strong>Bentuk melengkung</strong> (<code>make_moons</code>): dua kelompok berbentuk bulan sabit yang saling mengait. Pusat (rata-rata) kelompok seperti ini jatuh di ruang kosong, bukan di tempat ada titiknya, sehingga ukuran berbasis pusat menjadi menyesatkan.</li>
+<li><strong>Ukuran dan kepadatan berbeda</strong>: satu kelompok besar yang longgar (150 titik) dan satu kelompok kecil yang rapat (15 titik). Jumlah anggota dan kerapatannya timpang, sehingga satu ukuran yang sama sulit adil untuk keduanya.</li>
+</ul>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">Xm</span><span class="p">,</span> <span class="n">ym</span> <span class="o">=</span> <span class="n">make_moons</span><span class="p">(</span><span class="n">n_samples</span><span class="o">=</span><span class="mi">200</span><span class="p">,</span> <span class="n">noise</span><span class="o">=</span><span class="mf">0.07</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </span><span id="__span-9-2"><a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a>
 </span><span id="__span-9-3"><a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="n">rng</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">default_rng</span><span class="p">(</span><span class="mi">42</span><span class="p">)</span>
@@ -4749,6 +4814,50 @@
 </span><span id="__span-9-16"><a id="__codelineno-9-16" name="__codelineno-9-16" href="#__codelineno-9-16"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 <p><img alt="Kiri: dua kelompok berbentuk bulan sabit. Kanan: kelompok besar berisi 150 titik dan kelompok kecil berisi 15 titik dengan kepadatan berbeda" src="../../assets/level-3/02-bentuk-dan-ukuran.png" /></p>
+<p><strong>Cara membaca gambar:</strong></p>
+<ul>
+<li><strong>Panel kiri:</strong> dua bulan sabit, satu biru dan satu oranye, yang saling mengait. Tiap bulan jelas merupakan satu kelompok, tetapi pusatnya (rata-rata koordinat) berada di area lengkung yang kosong. Titik biru di ujung kiri bahkan lebih dekat ke bulan oranye daripada ke pusat birunya sendiri. Artinya, pengelompokan berdasarkan jarak ke pusat akan memotong bulan sabit secara keliru.</li>
+<li><strong>Panel kanan:</strong> kelompok biru (150 titik) menyebar lebar sekitar pusat (0, 0), sedangkan kelompok oranye (15 titik) berupa gumpalan kecil dan rapat di sekitar x = 6. Jaraknya jauh, tetapi ukuran dan kepadatannya sangat berbeda. Kelompok kecil seperti ini mudah terlewat atau dianggap <em>outlier</em> oleh algoritma yang hanya memperhatikan kelompok besar.</li>
+<li>Pelajarannya: kekompakan, keterpisahan, dan kepadatan tetap berguna, tetapi hanya sebagai <strong>bahan pertimbangan</strong>. Selalu lihat bentuk data bila memungkinkan, dan ingat bahwa algoritma yang berbeda cocok untuk bentuk yang berbeda (dibahas di Level 4).</li>
+</ul>
+<p><strong>Hasil dalam angka:</strong></p>
+<p>Potongan kode Langkah 6 hanya menggambar, jadi angka berikut dihitung terpisah dengan data dan seed yang sama (<code>random_state=42</code>, <code>default_rng(42)</code>) memakai ukuran dari Langkah 3 dan 5. Tujuannya membuktikan bahwa kesan visual di atas bukan tebakan.</p>
+<p><em>Bulan sabit (panel kiri):</em></p>
+<ul>
+<li>Pusat kedua bulan sabit hanya berjarak sekitar <strong>1,25</strong> satu sama lain, padahal masing-masing bulan membentang sekitar 3 satuan. Pusat yang "berdekatan" itu muncul karena kedua bulan saling mengait, bukan karena kelompoknya berdekatan.</li>
+<li>Rata-rata anggota berjarak sekitar 0,74 dari pusat bulannya sendiri. Namun <strong>21 dari 100</strong> titik di tiap bulan justru lebih dekat ke pusat bulan yang lain. Jadi aturan "ikut pusat terdekat" akan salah menempatkan sekitar seperlima titik.</li>
+</ul>
+<p><em>Dua kelompok berbeda ukuran (panel kanan):</em></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Kelompok besar</th>
+<th>Kelompok kecil</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jumlah titik</td>
+<td>150</td>
+<td>15</td>
+</tr>
+<tr>
+<td>Kekompakan</td>
+<td>1,84</td>
+<td>0,36</td>
+</tr>
+<tr>
+<td>Jarak tetangga terdekat</td>
+<td>0,291</td>
+<td>0,141</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Kelompok besar sekitar <strong>5 kali</strong> lebih longgar dari kelompok kecil (1,84 melawan 0,36), dan jarak tetangga terdekatnya sekitar 2 kali lebih besar.</li>
+<li>Jarak antar pusatnya sekitar 6,2, jauh lebih besar dari lebar keduanya, jadi kedua kelompok sebenarnya <strong>terpisah</strong>. Masalahnya bukan keterpisahan, melainkan perbedaan ukuran dan kepadatan: satu ambang jarak yang cocok untuk kelompok besar akan terlalu longgar untuk kelompok kecil, dan sebaliknya.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>make_moons(n_samples=200, noise=0.07, random_state=42)</code> membuat 200 titik dua bulan sabit. <code>noise</code> menambah sedikit getaran acak.</li>
@@ -4757,6 +4866,8 @@
 <li>Bagian lain sama seperti Langkah 2.</li>
 </ul>
 <h3 id="langkah-7-keanggotaan-di-dekat-batas">Langkah 7 — Keanggotaan di dekat batas<a class="headerlink" href="#langkah-7-keanggotaan-di-dekat-batas" title="Permanent link">&para;</a></h3>
+<p>Langkah 3 sampai 6 menilai <strong>kelompok</strong>. Langkah ini beralih ke pertanyaan tentang <strong>satu titik</strong>: kelompok mana yang memilikinya? Pada <em>hard clustering</em>, jawabannya selalu tegas, yaitu satu kelompok, biasanya yang pusatnya paling dekat. Aturan itu bekerja baik untuk titik yang jelas berada di tengah kelompok, tetapi bagaimana dengan titik di perbatasan?</p>
+<p>Untuk mengujinya kita menaruh satu titik <strong>sengaja di tengah</strong> antara pusat dua kelompok pada Dataset B (yang tumpang tindih), lalu melihat seberapa meyakinkan keputusan "terdekat" itu. Dataset B dipilih karena kelompoknya saling menumpuk, sehingga situasi ambigu seperti ini memang sering terjadi di data nyata.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">centers_B</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">XB</span><span class="p">[</span><span class="n">yB</span> <span class="o">==</span> <span class="n">k</span><span class="p">]</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">)])</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="c1"># Titik tepat di tengah antara pusat kelompok 0 dan 1 (bagian batas kelompok)</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">titik</span> <span class="o">=</span> <span class="p">(</span><span class="n">centers_B</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">+</span> <span class="n">centers_B</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">/</span> <span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mf">0.0</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">])</span>
@@ -4779,6 +4890,14 @@
 </span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>Kelompok terdekat: 1
 </span></code></pre></div>
 <p><img alt="Dataset tumpang tindih dengan bintang hitam di perbatasan kelompok 0 dan 1 serta tanda X di tiap pusat" src="../../assets/level-3/02-keanggotaan-batas.png" /></p>
+<p><strong>Cara membaca output dan gambar:</strong></p>
+<ul>
+<li><code>Titik uji: [2.79 0.36]</code> adalah koordinat titik yang kita buat, yaitu bintang hitam pada gambar.</li>
+<li><code>[3.08 3.04 4.66]</code> adalah jarak titik itu ke pusat kelompok 0, 1, dan 2. Kelompok 2 jelas jauh (4,66), tetapi jarak ke kelompok 0 (3,08) dan 1 (3,04) nyaris sama.</li>
+<li><code>Kelompok terdekat: 1</code> adalah keputusan hard clustering. Keputusan itu hanya ditentukan oleh selisih <strong>0,04</strong> satuan, jadi pergeseran kecil pada titik atau pusat bisa membalikkannya ke kelompok 0.</li>
+<li>Pada gambar, bintang berada di antara kelompok biru (0) dan oranye (1), di daerah tempat kedua sebaran bercampur. Kelompok hijau (2) berada lebih jauh di atas. Tanda <code>X</code> hitam adalah pusat masing-masing kelompok.</li>
+<li>Pelajarannya: label tegas "kelompok 1" menyembunyikan fakta bahwa titik ini hampir sama miripnya dengan kelompok 0. Inilah alasan adanya <em>soft clustering</em>, yang memberi derajat keanggotaan pada tiap kelompok, bukan satu label.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>centers_B</code> adalah pusat tiga kelompok dataset B, dihitung dengan rata-rata.</li>
@@ -4787,6 +4906,8 @@
 <li>Bagian grafik menggambar titik uji sebagai bintang hitam dan pusat sebagai tanda <code>X</code>. <code>alpha=0.7</code> membuat titik sedikit transparan agar tumpukan titik terlihat.</li>
 </ul>
 <h3 id="langkah-8-terapkan-pada-mall-customers">Langkah 8 — Terapkan pada Mall Customers<a class="headerlink" href="#langkah-8-terapkan-pada-mall-customers" title="Permanent link">&para;</a></h3>
+<p>Sejauh ini kita mengukur kelompok pada data sintetis, yang jawabannya sudah kita ketahui. Langkah ini membawa ukuran yang sama ke <strong>data nyata</strong>: pelanggan Mall Customers dari Bab 1. Tujuannya melihat bahwa fungsi <code>compactness</code> tidak terikat pada data buatan, dan bahwa pada data nyata angka seperti ini menjadi satu-satunya petunjuk, karena tidak ada "kelompok asli" untuk dibandingkan.</p>
+<p>Kelompok di sini dibentuk dengan K-Means (hanya sebagai alat bantu, bukan fokus bab ini), lalu tiap kelompok diringkas dengan dua hal: <strong>jumlah anggota</strong> dan <strong>kekompakan</strong>. Dua kolom itu menunjukkan apakah kelompok yang terbentuk seimbang ukurannya dan seberapa rapat masing-masing.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/mall_customers.csv"</span><span class="p">)</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"Spending Score (1-100)"</span><span class="p">]]</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="n">labels</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
@@ -4806,6 +4927,14 @@
 </span><span id="__span-13-5"><a id="__codelineno-13-5" name="__codelineno-13-5" href="#__codelineno-13-5"></a>3      35        16.3
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>4      23        14.2
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Setiap baris adalah satu kelompok (indeks 0 sampai 4). Kolom <code>Jumlah</code> adalah banyak pelanggan di kelompok itu, dan totalnya 200 (81 + 39 + 22 + 35 + 23), sesuai jumlah baris data.</li>
+<li>Ukuran kelompok tidak seimbang: kelompok 0 memuat 81 pelanggan, sedangkan kelompok 2 hanya 22. Itu wajar pada data nyata, karena kelompok tidak harus sama besar.</li>
+<li>Kolom <code>Kekompakan</code> adalah rata-rata jarak anggota ke pusat kelompoknya. Kelompok 0 paling rapat (10,1) padahal paling besar, sedangkan kelompok 1 dan 3 paling longgar (sama-sama 16,3).</li>
+<li>Angka ini tidak bisa dibandingkan langsung dengan 0,7 atau 2,2 pada data sintetis. Satuannya mengikuti data: fitur pendapatan (k$) dan skor belanja (1-100) berkisar jauh lebih lebar daripada koordinat buatan kita, dan keduanya belum diskalakan.</li>
+<li>Karena itu kekompakan paling berguna untuk <strong>membandingkan antarkelompok pada data yang sama</strong>, bukan antardataset yang skalanya berbeda.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li>Kita memuat data dan memilih dua fitur seperti Bab 1, lalu <code>.to_numpy()</code> mengubah tabel menjadi larik NumPy agar cocok dengan fungsi <code>compactness</code> kita.</li>

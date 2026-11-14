@@ -4746,6 +4746,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <p><strong>Langkah 1 (definisi masalah)</strong> ditulis sebagai pertanyaan, bukan kode: <em>"Adakah kelompok pelanggan menurut pendapatan dan perilaku belanja, yang bisa diberi promosi berbeda?"</em></p>
 <p><strong>Input yang diharapkan:</strong> <code>data/mall_customers.csv</code>, dijalankan dari folder utama proyek.</p>
 <h3 id="langkah-2-pahami-dataset">Langkah 2 — Pahami dataset<a class="headerlink" href="#langkah-2-pahami-dataset" title="Permanent link">&para;</a></h3>
+<p>Sebelum memilih fitur atau algoritma, kita perlu mengenal datanya. Langkah ini mencegah kejutan di tengah jalan: nilai kosong bisa membuat perhitungan jarak gagal, baris ganda bisa membuat satu pelanggan terhitung dua kali, dan rentang nilai tiap kolom menentukan perlu tidaknya penyamaan skala nanti.</p>
+<p>Kita memeriksa empat hal secara berurutan: ukuran data, jumlah nilai kosong, jumlah baris ganda, dan ringkasan statistik (minimum, rata-rata, maksimum).</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/mall_customers.csv"</span><span class="p">)</span>
 </span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>
 </span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Ukuran:"</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">shape</span><span class="p">)</span>
@@ -4761,6 +4763,14 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 </span><span id="__span-1-6"><a id="__codelineno-1-6" name="__codelineno-1-6" href="#__codelineno-1-6"></a>mean       100.5  38.8                60.6                    50.2
 </span><span id="__span-1-7"><a id="__codelineno-1-7" name="__codelineno-1-7" href="#__codelineno-1-7"></a>max        200.0  70.0               137.0                    99.0
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><code>Ukuran: (200, 5)</code> berarti 200 pelanggan dan 5 kolom.</li>
+<li><code>Nilai kosong total: 0</code> dan <code>Baris duplikat: 0</code> berarti data bersih. Kita tidak perlu menangani nilai hilang atau menghapus baris ganda, jadi alur bisa langsung berlanjut.</li>
+<li>Tabel ringkasan hanya memuat kolom numerik, yaitu empat kolom. Kolom kelima, <code>Gender</code>, berisi teks sehingga tidak ikut dihitung.</li>
+<li><code>CustomerID</code> berkisar 1 sampai 200 dengan rata-rata 100,5. Itu hanya nomor urut, bukan ukuran pelanggan, sehingga tidak layak dipakai untuk clustering.</li>
+<li>Rentang tiap fitur berbeda: <code>Age</code> 18 sampai 70 (rentang 52), <code>Annual Income</code> 15 sampai 137 (rentang 122), dan <code>Spending Score</code> 1 sampai 99 (rentang 98). Perbedaan rentang ini menjadi alasan langkah penyamaan skala nanti.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>df.shape</code> memberi ukuran data (baris, kolom).</li>
@@ -4769,6 +4779,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <li><code>df.describe().round(1).loc[["min", "mean", "max"]]</code> menampilkan ringkasan statistik, lalu <strong>memilih hanya baris</strong> minimum, rata-rata, dan maksimum agar tampil ringkas.</li>
 </ul>
 <h3 id="langkah-3-pilih-fitur">Langkah 3 — Pilih fitur<a class="headerlink" href="#langkah-3-pilih-fitur" title="Permanent link">&para;</a></h3>
+<p>Tidak semua kolom pantas dijadikan bahan clustering. Fitur yang dipilih menentukan <strong>ruang</strong> tempat pelanggan dibandingkan (Bab 6), jadi pilihan ini langsung memengaruhi hasil. Dasar pilihannya adalah pertanyaan masalah di Langkah 1: kelompok pelanggan menurut <strong>pendapatan dan perilaku belanja</strong>. Maka fiturnya adalah <code>Annual Income</code> dan <code>Spending Score</code>.</p>
+<p>Memilih hanya dua fitur juga membuat hasil mudah divisualisasikan di bidang dua dimensi, dan menghindari fitur yang tidak relevan yang bisa mengacaukan jarak (Bab 6).</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">features</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"Spending Score (1-100)"</span><span class="p">]</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">X</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">features</span><span class="p">]</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Fitur untuk clustering:"</span><span class="p">,</span> <span class="n">features</span><span class="p">)</span>
@@ -4777,6 +4789,17 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a>Fitur untuk clustering: ['Annual Income (k$)', 'Spending Score (1-100)']
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>Kolom yang tidak dipakai: ['CustomerID', 'Gender', 'Age']
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><code>Fitur untuk clustering</code> adalah dua kolom yang dipakai: pendapatan tahunan dan skor belanja.</li>
+<li><code>Kolom yang tidak dipakai: ['CustomerID', 'Gender', 'Age']</code> memuat tiga kolom yang sengaja disisihkan, masing-masing dengan alasan:<ul>
+<li><code>CustomerID</code> hanya nomor urut dan tidak mengandung informasi tentang perilaku.</li>
+<li><code>Gender</code> berupa kategori. Memakainya perlu <em>encoding</em> dan ukuran jarak yang sesuai (Bab 4 dan 5).</li>
+<li><code>Age</code> tidak dipakai untuk membentuk kelompok, tetapi kita simpan untuk <strong>menafsirkan</strong> kelompok di Langkah 8.</li>
+</ul>
+</li>
+<li>Keputusan ini bukan satu-satunya yang benar. Bila pertanyaannya berbeda, misalnya segmentasi menurut usia, pilihan fiturnya juga berbeda.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>features</code> adalah daftar kolom yang dipakai: pendapatan dan skor belanja, sesuai pertanyaan masalah.</li>
@@ -4784,6 +4807,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <li>Daftar <code>[c for c in df.columns if c not in features]</code> menampilkan kolom yang <strong>tidak</strong> dipakai: <code>CustomerID</code> (hanya nomor urut), <code>Gender</code> (kategori, perlu encoding), dan <code>Age</code> (kita simpan untuk menafsirkan kelompok).</li>
 </ul>
 <h3 id="langkah-4-samakan-skala">Langkah 4 — Samakan skala<a class="headerlink" href="#langkah-4-samakan-skala" title="Permanent link">&para;</a></h3>
+<p>Kedua fitur terpilih berskala berbeda: pendapatan membentang 15 sampai 137, skor belanja 1 sampai 99. Jarak Euclidean menjumlahkan selisih tiap fitur, sehingga fitur yang rentangnya lebih besar cenderung mendominasi (Bab 5 dan 6). Standardisasi mengubah tiap fitur ke skala sebanding agar keduanya punya bobot setara.</p>
+<p>Setelah standardisasi, kita memeriksa hasilnya. Memeriksa rata-rata dan simpangan baku itu cepat, dan menangkap kesalahan seperti lupa menskalakan atau menskalakan kolom yang salah.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">scaler</span> <span class="o">=</span> <span class="n">StandardScaler</span><span class="p">()</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">X_scaled</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Rata-rata setelah skala:"</span><span class="p">,</span> <span class="p">(</span><span class="n">X_scaled</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.0</span><span class="p">))</span>
@@ -4792,6 +4817,12 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a>Rata-rata setelah skala: [0. 0.]
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>Simpangan baku setelah skala: [1. 1.]
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><code>Rata-rata setelah skala: [0. 0.]</code> dan <code>Simpangan baku setelah skala: [1. 1.]</code> berarti kedua fitur kini berpusat di 0 dengan sebaran 1. Itulah definisi standardisasi.</li>
+<li>Angkanya dibulatkan dua angka di belakang koma oleh kode (<code>.round(2)</code>), jadi <code>0.</code> dan <code>1.</code> berarti sangat dekat dengan 0 dan 1.</li>
+<li>Satu satuan pada fitur pendapatan kini bermakna sama dengan satu satuan pada skor belanja, yaitu satu simpangan baku. Hasilnya, <code>X_scaled</code>, dipakai untuk memilih <code>k</code> dan melatih model.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>StandardScaler()</code> membuat alat standardisasi. <code>.fit_transform(X)</code> mempelajari rata-rata dan simpangan baku tiap fitur, lalu mengubah data sehingga rata-rata 0 dan simpangan baku 1.</li>
@@ -4799,6 +4830,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <li>Hasil <code>X_scaled</code> adalah larik NumPy, dan itulah yang akan dikelompokkan.</li>
 </ul>
 <h3 id="langkah-5-pilih-jumlah-kelompok">Langkah 5 — Pilih jumlah kelompok<a class="headerlink" href="#langkah-5-pilih-jumlah-kelompok" title="Permanent link">&para;</a></h3>
+<p>K-Means butuh jumlah kelompok <code>k</code> yang ditentukan di awal, padahal kita tidak tahu berapa yang tepat. Kita mencobanya dengan <code>k</code> dari 2 sampai 8, lalu menilai tiap hasil dengan <strong>silhouette score</strong>. Silhouette mengukur seberapa rapat sebuah titik dengan kelompoknya dibanding kelompok terdekat lain, dan nilainya makin tinggi bila kelompok makin rapat dan terpisah (Level 5 membahas ukuran ini lebih dalam).</p>
+<p>Kita memilih <code>k</code> dengan silhouette tertinggi sebagai titik awal, lalu menggambar grafiknya agar terlihat seberapa jelas pilihan itu.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">scores</span> <span class="o">=</span> <span class="p">{}</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a>    <span class="n">labels_k</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">k</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
@@ -4825,7 +4858,20 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 </span><span id="__span-7-7"><a id="__codelineno-7-7" name="__codelineno-7-7" href="#__codelineno-7-7"></a>k = 8: silhouette = 0.455
 </span><span id="__span-7-8"><a id="__codelineno-7-8" name="__codelineno-7-8" href="#__codelineno-7-8"></a>k dengan silhouette tertinggi: 5
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Silhouette naik dari 0,321 pada <code>k = 2</code> hingga 0,555 pada <code>k = 5</code>, lalu turun lagi: 0,540 (<code>k = 6</code>), 0,528 (<code>k = 7</code>), dan 0,455 (<code>k = 8</code>).</li>
+<li>Nilai tertinggi ada pada <strong><code>k = 5</code></strong>, sehingga <code>best_k = 5</code>.</li>
+<li>Selisih antara <code>k = 5</code> (0,555) dan <code>k = 6</code> (0,540) hanya 0,015. Artinya <code>k = 6</code> hampir sama baiknya. Pilihan <code>k = 5</code> kuat, tetapi bukan satu-satunya yang masuk akal. Karena itu pemahaman bisnis tetap perlu mendampingi angka.</li>
+</ul>
 <p><img alt="Grafik silhouette score terhadap jumlah kelompok 2 sampai 8, puncak di k=5" src="../../assets/level-3/07-pemilihan-k.png" /></p>
+<p><strong>Cara membaca gambar:</strong></p>
+<ul>
+<li>Sumbu x adalah jumlah kelompok dan sumbu y adalah silhouette score. Titik-titik adalah nilai yang tercetak di atas.</li>
+<li>Kurvanya <strong>naik tajam</strong> dari <code>k = 2</code> ke <code>k = 5</code>, mencapai <strong>puncak di <code>k = 5</code></strong>, lalu menurun perlahan sampai <code>k = 7</code>, dan turun lebih tajam di <code>k = 8</code>.</li>
+<li>Puncak yang jelas lebih meyakinkan daripada kurva yang datar. Di sini puncaknya cukup tegas, dan itu sejalan dengan pola lima kelompok yang terlihat di gambar-gambar sebelumnya.</li>
+<li>Penurunan setelah <code>k = 5</code> menunjukkan bahwa membagi lagi kelompok-kelompok yang sudah wajar justru membuat batas kelompok kurang bersih.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li>Kita mencoba <code>k</code> dari 2 sampai 8. Untuk tiap <code>k</code>, <code>KMeans(...).fit_predict(X_scaled)</code> membuat kelompok dan <code>silhouette_score(X_scaled, labels_k)</code> menghitung kualitasnya.</li>
@@ -4838,6 +4884,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <p>Jumlah kelompok sebaiknya dipilih dengan beberapa petunjuk: silhouette, pemahaman bisnis, dan kemudahan menafsirkan. Silhouette membantu, tetapi bukan keputusan akhir. Level 5 membahas ukuran lain.</p>
 </div>
 <h3 id="langkah-6-latih-model-dan-beri-nomor-kelompok">Langkah 6 — Latih model dan beri nomor kelompok<a class="headerlink" href="#langkah-6-latih-model-dan-beri-nomor-kelompok" title="Permanent link">&para;</a></h3>
+<p>Setelah <code>k</code> dipilih, kita melatih model akhir dan memberi <strong>nomor kelompok</strong> pada setiap pelanggan. Nomor ini disimpan sebagai kolom baru <code>Cluster</code> pada tabel asli. Dengan begitu, hasil clustering bisa langsung dipakai untuk analisis lanjutan seperti merata-ratakan per kelompok (Langkah 8).</p>
+<p>Kita juga menghitung jumlah anggota tiap kelompok. Pemeriksaan ini cepat tetapi penting: kelompok yang sangat kecil (hanya beberapa titik) atau satu kelompok yang menelan hampir semua data adalah tanda untuk mencurigai hasilnya.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">best_k</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
@@ -4850,6 +4898,13 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 </span><span id="__span-9-6"><a id="__codelineno-9-6" name="__codelineno-9-6" href="#__codelineno-9-6"></a>4    23
 </span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a>Name: count, dtype: int64
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Lima baris, kelompok 0 sampai 4, berisi 81, 39, 22, 35, dan 23 pelanggan. Totalnya 200, sama dengan jumlah pelanggan.</li>
+<li>Tidak ada kelompok yang sangat kecil dan tidak ada yang menguasai hampir seluruh data. Kelompok terbesar (81) sekitar 4 kali kelompok terkecil (22), sebaran yang wajar pada data nyata.</li>
+<li>Angka dan urutan nomor ini sama dengan yang muncul di bab-bab sebelumnya, karena data, fitur, <code>k</code>, dan <code>random_state</code> yang sama menghasilkan pengelompokan yang sama. Nomor kelompok hanyalah label, bukan peringkat.</li>
+<li><code>dtype: int64</code> dan <code>Name: count</code> hanya keterangan tipe dan nama kolom hasil hitung, tidak perlu dipikirkan.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>KMeans(n_clusters=best_k, ...)</code> membuat model dengan jumlah kelompok terpilih. <code>random_state=42</code> mengunci hasil.</li>
@@ -4857,6 +4912,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <li><code>value_counts().sort_index()</code> menghitung jumlah anggota tiap kelompok.</li>
 </ul>
 <h3 id="langkah-7-periksa-kestabilan">Langkah 7 — Periksa kestabilan<a class="headerlink" href="#langkah-7-periksa-kestabilan" title="Permanent link">&para;</a></h3>
+<p>K-Means dimulai dari pusat awal acak, sehingga pada data tertentu hasilnya bisa berbeda tergantung <code>random_state</code>. Kalau kelompok berubah-ubah tiap kali dijalankan, kita tidak bisa mempercayainya sebagai temuan.</p>
+<p>Karena itu kita menguji <strong>kestabilan</strong>: menjalankan K-Means lagi dengan lima seed berbeda dan membandingkan tiap hasil dengan hasil utama memakai <em>Adjusted Rand Index</em> (ARI). ARI cocok di sini karena membandingkan <strong>cara titik dikelompokkan</strong>, bukan nomor kelompoknya. Nomor boleh tertukar (kelompok 0 di satu hasil bisa jadi kelompok 3 di hasil lain), tetapi ARI tetap 1 selama pengelompokannya sama.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="k">for</span> <span class="n">seed</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a>    <span class="n">other</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="n">best_k</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">)</span><span class="o">.</span><span class="n">fit_predict</span><span class="p">(</span><span class="n">X_scaled</span><span class="p">)</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">ari</span> <span class="o">=</span> <span class="n">adjusted_rand_score</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">],</span> <span class="n">other</span><span class="p">)</span>
@@ -4868,6 +4925,13 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 </span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>random_state = 3: kesamaan dengan hasil utama (ARI) = 1.000
 </span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>random_state = 4: kesamaan dengan hasil utama (ARI) = 1.000
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Kelima baris menunjukkan <strong>ARI = 1.000</strong> untuk <code>random_state</code> 0 sampai 4. Nilai 1 berarti pengelompokan <strong>identik</strong> dengan hasil utama, walaupun pusat awalnya diacak dengan cara berbeda.</li>
+<li>Jadi kelima kelompok ini stabil: hasilnya tidak bergantung pada keberuntungan pusat awal. Ini wajar karena data punya lima gerombol yang jelas dan <code>n_init=10</code> membuat K-Means mencoba banyak titik awal lalu memilih yang terbaik.</li>
+<li>Hasil ini hanya berlaku untuk data dan pengaturan ini. Pada data yang gerombolnya kurang jelas, ARI bisa turun di bawah 1, dan itu pertanda kelompok kurang meyakinkan.</li>
+<li>Lima seed adalah pemeriksaan cepat, bukan bukti mutlak. Cukup sebagai pemeriksaan dasar di alur kerja.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li>Kita menjalankan K-Means lagi dengan lima <code>random_state</code> berbeda (0 sampai 4).</li>
@@ -4875,6 +4939,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <li>Jika hasil berubah-ubah menurut seed, kelompok tidak stabil dan harus dicurigai.</li>
 </ul>
 <h3 id="langkah-8-tafsirkan-kelompok">Langkah 8 — Tafsirkan kelompok<a class="headerlink" href="#langkah-8-tafsirkan-kelompok" title="Permanent link">&para;</a></h3>
+<p>Nomor kelompok <code>0, 1, 2, 3, 4</code> belum bermakna bagi orang lain. Agar hasil clustering berguna, kita perlu menjelaskan <strong>siapa</strong> anggota tiap kelompok. Caranya dengan merata-ratakan fitur per kelompok dalam <strong>satuan asli</strong> (bukan terstandardisasi), sehingga angkanya mudah dipahami, misalnya "pendapatan rata-rata 86,5 k$".</p>
+<p>Kita juga menambahkan <code>Age</code>, yang tidak dipakai membentuk kelompok. Kalau kelompok yang terbentuk dari pendapatan dan belanja ternyata juga berbeda usianya, tafsirannya jadi lebih kaya.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">profile</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">"Cluster"</span><span class="p">)[</span><span class="n">features</span> <span class="o">+</span> <span class="p">[</span><span class="s2">"Age"</span><span class="p">]]</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="n">profile</span><span class="o">.</span><span class="n">insert</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="s2">"Jumlah"</span><span class="p">,</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Cluster"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">profile</span><span class="p">)</span>
@@ -4887,6 +4953,67 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 </span><span id="__span-13-6"><a id="__codelineno-13-6" name="__codelineno-13-6" href="#__codelineno-13-6"></a>3            35                88.2                    17.1  41.1
 </span><span id="__span-13-7"><a id="__codelineno-13-7" name="__codelineno-13-7" href="#__codelineno-13-7"></a>4            23                26.3                    20.9  45.2
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<p>Tiap baris adalah profil satu kelompok (jumlah anggota, rata-rata pendapatan, rata-rata skor belanja, rata-rata usia):</p>
+<table>
+<thead>
+<tr>
+<th>Kelompok</th>
+<th>Jumlah</th>
+<th>Pendapatan</th>
+<th>Skor belanja</th>
+<th>Usia</th>
+<th>Pembacaan</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>81</td>
+<td>55,3</td>
+<td>49,5</td>
+<td>42,7</td>
+<td>menengah di pendapatan dan belanja</td>
+</tr>
+<tr>
+<td>1</td>
+<td>39</td>
+<td>86,5</td>
+<td>82,1</td>
+<td>32,7</td>
+<td>pendapatan tinggi, belanja tinggi</td>
+</tr>
+<tr>
+<td>2</td>
+<td>22</td>
+<td>25,7</td>
+<td>79,4</td>
+<td>25,3</td>
+<td>pendapatan rendah, belanja tinggi</td>
+</tr>
+<tr>
+<td>3</td>
+<td>35</td>
+<td>88,2</td>
+<td>17,1</td>
+<td>41,1</td>
+<td>pendapatan tinggi, belanja rendah</td>
+</tr>
+<tr>
+<td>4</td>
+<td>23</td>
+<td>26,3</td>
+<td>20,9</td>
+<td>45,2</td>
+<td>pendapatan rendah, belanja rendah</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Kelima kelompok memang berbeda satu sama lain di dua fitur yang dipakai: rendah/menengah/tinggi di pendapatan, dan rendah/menengah/tinggi di belanja.</li>
+<li><code>Age</code> tidak dipakai saat clustering, tetapi nilainya ikut berbeda: kelompok 2 paling muda (25,3) dan kelompok 4 paling tua (45,2). Itu pola yang menarik, tetapi <strong>bukan sebab-akibat</strong>. Ia hanya menunjukkan bahwa usia ikut bervariasi menurut kelompok.</li>
+<li>Ini rata-rata kelompok. Tidak semua anggota persis seperti itu, dan inilah sebabnya profil ini perlu dibaca bersama gambar di Langkah 9.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>df.groupby("Cluster")[features + ["Age"]].mean()</code> menghitung rata-rata tiap fitur <strong>dalam satuan asli</strong> per kelompok. Kita tambahkan <code>Age</code> meski tidak dipakai saat clustering, untuk memperkaya tafsiran.</li>
@@ -4894,6 +5021,8 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 <li><code>profile.insert(0, "Jumlah", ...)</code> menambahkan kolom jumlah anggota di posisi paling kiri.</li>
 </ul>
 <h3 id="langkah-9-visualisasi-akhir-dan-laporan">Langkah 9 — Visualisasi akhir dan laporan<a class="headerlink" href="#langkah-9-visualisasi-akhir-dan-laporan" title="Permanent link">&para;</a></h3>
+<p>Langkah terakhir mengemas hasil. Gambar akhir menunjukkan bahwa kelompok memang terlihat di data, dan ringkasan tertulis menerjemahkan angka menjadi kalimat yang bisa dibaca pemangku kepentingan yang tidak ikut menjalankan kode.</p>
+<p>Centroid dikembalikan ke satuan asli (<code>inverse_transform</code>) karena model menyimpannya dalam skala standar. Tanpa langkah ini, tanda centroid akan jatuh di tempat yang salah di atas data asli.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"#0072B2"</span><span class="p">,</span> <span class="s2">"#E69F00"</span><span class="p">,</span> <span class="s2">"#009E73"</span><span class="p">,</span> <span class="s2">"#CC79A7"</span><span class="p">,</span> <span class="s2">"#D55E00"</span><span class="p">,</span> <span class="s2">"#56B4E9"</span><span class="p">,</span> <span class="s2">"#999999"</span><span class="p">,</span> <span class="s2">"#000000"</span><span class="p">]</span>
 </span><span id="__span-14-2"><a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="n">centers_original</span> <span class="o">=</span> <span class="n">scaler</span><span class="o">.</span><span class="n">inverse_transform</span><span class="p">(</span><span class="n">model</span><span class="o">.</span><span class="n">cluster_centers_</span><span class="p">)</span>
 </span><span id="__span-14-3"><a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a>
@@ -4909,6 +5038,13 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 </span><span id="__span-14-13"><a id="__codelineno-14-13" name="__codelineno-14-13" href="#__codelineno-14-13"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 <p><img alt="Scatter plot pelanggan dalam lima warna dengan centroid hitam" src="../../assets/level-3/07-segmentasi-akhir.png" /></p>
+<p><strong>Cara membaca gambar:</strong></p>
+<ul>
+<li>Setiap warna adalah satu kelompok, dan tanda <code>X</code> hitam adalah centroid dalam satuan asli (k$ dan skor).</li>
+<li>Lima daerah terlihat terpisah: kelompok 0 (biru) di tengah, kelompok 1 (kuning) di kanan atas, kelompok 2 (hijau) di kiri atas, kelompok 3 (merah muda) di kanan bawah, dan kelompok 4 (oranye) di kiri bawah.</li>
+<li>Tiap <code>X</code> berada di tengah gerombol warnanya, dan posisinya sesuai tabel Langkah 8, misalnya centroid kelompok 1 sekitar (86,5; 82,1).</li>
+<li>Kelompok 0 paling padat dan paling dekat ke tengah, sedangkan kelompok di pojok-pojok lebih tersebar. Beberapa titik di perbatasan, misalnya antara kelompok 0 dan 3 di sekitar pendapatan 70 sampai 80, bisa terasa ambigu (Bab 2).</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>scaler.inverse_transform(model.cluster_centers_)</code> mengubah centroid dari skala standar <strong>kembali ke satuan asli</strong> (ribu dolar dan skor) agar pas digambar di atas data asli. Ini penting: centroid model berada di ruang terstandardisasi.</li>
@@ -4928,6 +5064,14 @@ s(i) = \frac{b(i) - a(i)}{\max\{a(i),\, b(i)\}}
 </span><span id="__span-16-4"><a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a>Kelompok 3: 35 pelanggan (17.5%), pendapatan rata-rata 88.2, skor belanja rata-rata 17.1, usia rata-rata 41.1
 </span><span id="__span-16-5"><a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a>Kelompok 4: 23 pelanggan (11.5%), pendapatan rata-rata 26.3, skor belanja rata-rata 20.9, usia rata-rata 45.2
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Setiap baris adalah satu kalimat laporan per kelompok, dibuat otomatis dari tabel profil di Langkah 8.</li>
+<li>Persentase anggota: 40,5%, 19,5%, 11,0%, 17,5%, dan 11,5%. Totalnya 100%.</li>
+<li>Kelompok terbesar adalah kelompok 0 (pelanggan "menengah", 40,5%). Dua kelompok terkecil, kelompok 2 dan 4, masing-masing sekitar 11%.</li>
+<li>Kalimat seperti ini siap dipindahkan ke laporan. Untuk menjawab pertanyaan di Langkah 1 (promosi berbeda), tiap kelompok bisa dibaca sebagai segmen dengan karakter berbeda, misalnya kelompok 3 dengan pendapatan tinggi tetapi belanja rendah.</li>
+<li>Keputusan promosi sesungguhnya tetap butuh pertimbangan bisnis. Clustering hanya memberi <strong>bahan</strong> untuk keputusan itu.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>profile.iterrows()</code> mengulang baris tabel profil satu per satu: <code>k</code> adalah nomor kelompok, <code>row</code> datanya.</li>

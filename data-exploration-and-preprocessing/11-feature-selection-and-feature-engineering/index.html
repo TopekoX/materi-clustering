@@ -4382,6 +4382,7 @@
 <li><code>CustomerID</code> dibuang karena hanya nomor urut (Bab 2). Kalau ikut dihitung, ia akan memengaruhi jarak tanpa makna apa pun.</li>
 </ul>
 <h3 id="langkah-3-mencari-fitur-yang-redundan">Langkah 3 — Mencari fitur yang redundan<a class="headerlink" href="#langkah-3-mencari-fitur-yang-redundan" title="Permanent link">&para;</a></h3>
+<p>Fitur redundan adalah dua kolom yang membawa informasi hampir sama. Pada clustering, jarak dihitung dari semua fitur, sehingga dua kolom yang kembar membuat satu aspek <strong>dihitung dua kali</strong> dan cluster condong ke aspek itu. Karena tidak ada label untuk mengoreksi, kita periksa sendiri lewat korelasi. Pasangan dengan <span class="arithmatex">\(\lvert r \rvert \ge 0{,}8\)</span> kita tandai. Tanda ini hanya petunjuk, putusan membuang tetap memakai pengetahuan domain.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">angka</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"Spending Score (1-100)"</span><span class="p">]</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="n">korelasi</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">angka</span><span class="p">]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nb">print</span><span class="p">(</span><span class="n">korelasi</span><span class="p">)</span>
@@ -4407,6 +4408,14 @@
 <li>Loop bersarang <code>for i, a in enumerate(angka)</code> lalu <code>for b in angka[i + 1:]</code> memeriksa <strong>setiap pasangan sekali saja</strong>. <code>enumerate</code> memberi nomor urut <code>i</code>, dan <code>angka[i + 1:]</code> berarti "semua kolom setelah kolom ke-<code>i</code>".</li>
 <li><code>abs(korelasi.loc[a, b]) &gt;= 0.8</code> memeriksa apakah korelasinya kuat. <code>abs</code> mengambil nilai mutlak, karena korelasi −0,9 sama kuatnya dengan +0,9.</li>
 <li>Pasangan yang kuat dimasukkan ke daftar <code>pasangan_kuat</code>. Jika daftarnya kosong, tidak ada pasangan redundan.</li>
+</ul>
+<p><strong>Jika ada fitur redundan dan tidak ditangani:</strong></p>
+<ul>
+<li><strong>Bobot ganda pada jarak.</strong> Selisih nilai fitur yang kembar masuk ke rumus jarak dua kali, sehingga aspek itu berpengaruh dua kali lipat.</li>
+<li><strong>Cluster condong ke satu aspek.</strong> Fitur lain, misalnya skor belanja, jadi kurang berperan.</li>
+<li><strong>Tidak ada tanda error.</strong> Tanpa label, algoritma tetap berjalan dan menghasilkan cluster yang tampak wajar, padahal bentuknya bias.</li>
+<li><strong>Dimensi bertambah tanpa tambahan informasi</strong>, sehingga memperburuk <em>curse of dimensionality</em> dan menambah waktu hitung.</li>
+<li><strong>Interpretasi menyesatkan.</strong> Profil cluster tampak didukung dua fitur, padahal sumbernya satu.</li>
 </ul>
 <h3 id="langkah-4-membuat-fitur-baru">Langkah 4 — Membuat fitur baru<a class="headerlink" href="#langkah-4-membuat-fitur-baru" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">df_baru</span> <span class="o">=</span> <span class="n">df_fitur</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
@@ -4465,6 +4474,12 @@
 <li><code>skew()</code> mengukur kemiringan sebaran (Bab 3).</li>
 <li><code>corr().loc["Spend_Income_Ratio"]</code> mengambil <strong>satu baris</strong> dari matriks korelasi: korelasi fitur baru dengan tiga fitur asalnya.</li>
 <li>Tujuannya menilai: apakah sebarannya wajar, dan apakah ia hanya menyalin fitur lain?</li>
+</ul>
+<p><strong>Membaca output:</strong></p>
+<ul>
+<li><strong>Sebarannya miring ke kanan.</strong> Rata-rata (1,07) lebih besar dari median (0,89), dan nilai terbesar (5,40) jauh di atas kuartil ketiga (1,13). Skewness 2,43 menegaskannya. Nilai ekstrem itu berasal dari pelanggan berpendapatan rendah dengan skor belanja tinggi, misalnya pendapatan 15 dan skor 81 menghasilkan 5,40. Pembaginya kecil, sehingga hasilnya besar.</li>
+<li><strong>Ia bukan salinan fitur lain.</strong> Korelasi dengan tiap fitur asal hanya sedang: −0,32 (usia), −0,57 (pendapatan), dan 0,59 (skor belanja). Semuanya jauh di bawah ambang 0,8, jadi fitur ini tidak redundan. Korelasi sedang itu wajar karena fitur ini dihitung dari pendapatan dan skor belanja. Angka 1,00 pada baris <code>Spend_Income_Ratio</code> hanyalah korelasi fitur dengan dirinya sendiri.</li>
+<li><strong>Kesimpulannya bersyarat.</strong> Fitur ini membawa informasi baru, tetapi sebarannya yang miring dapat membuat nilai ekstrem mendominasi jarak. Bila dipakai, ia perlu ditangani lebih dulu, misalnya dengan transformasi (Bab 9) atau <em>feature scaling</em> (Bab 10).</li>
 </ul>
 <h3 id="langkah-6-menyusun-kandidat-himpunan-fitur">Langkah 6 — Menyusun kandidat himpunan fitur<a class="headerlink" href="#langkah-6-menyusun-kandidat-himpunan-fitur" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-9-1"><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="n">X_dua</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"Spending Score (1-100)"</span><span class="p">]]</span>

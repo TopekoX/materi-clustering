@@ -4605,6 +4605,8 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 <li><code>.set_index("CustomerID")</code> menjadikan <code>CustomerID</code> sebagai label baris agar tabel jarak mudah dibaca.</li>
 </ul>
 <h3 id="langkah-2-hitung-matriks-jarak">Langkah 2 — Hitung matriks jarak<a class="headerlink" href="#langkah-2-hitung-matriks-jarak" title="Permanent link">&para;</a></h3>
+<p>Algoritma clustering tidak "melihat" pelanggan seperti manusia. Yang ia butuhkan adalah angka yang menyatakan <strong>seberapa dekat</strong> dua pelanggan. Cara termudah mengumpulkannya adalah menghitung jarak setiap pelanggan ke setiap pelanggan lain, lalu menyusunnya dalam satu tabel persegi yang disebut <strong>matriks jarak</strong> (<em>distance matrix</em>).</p>
+<p>Kita memakai jarak Euclidean, yaitu jarak garis lurus yang sudah dikenal dari Bab 3, pada lima pelanggan dari Langkah 1. Dengan lima pelanggan, matriksnya cukup kecil untuk dibaca langsung, tetapi bentuknya sama dengan yang dipakai pada 200 pelanggan. Matriks ini juga menjadi masukan langkah-langkah berikutnya: mengubah jarak menjadi kemiripan (Langkah 3) dan memeriksa sifat-sifatnya (Langkah 4).</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">D</span> <span class="o">=</span> <span class="n">pairwise_distances</span><span class="p">(</span><span class="n">five</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">(),</span> <span class="n">metric</span><span class="o">=</span><span class="s2">"euclidean"</span><span class="p">)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">D_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">five</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">five</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Matriks jarak Euclidean (5 pelanggan):"</span><span class="p">)</span>
@@ -4619,6 +4621,16 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 </span><span id="__span-3-7"><a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a>4           38.22   4.58  71.06   0.00  37.87
 </span><span id="__span-3-8"><a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a>5           12.21  42.25  35.75  37.87   0.00
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Baris dan kolom diberi label <code>CustomerID</code> 1 sampai 5. Angka di baris <code>i</code> dan kolom <code>j</code> adalah jarak antara pelanggan <code>i</code> dan <code>j</code>.</li>
+<li><strong>Diagonal bernilai 0.00</strong>, karena jarak pelanggan ke dirinya sendiri adalah nol.</li>
+<li>Tabelnya <strong>simetris</strong>: jarak 1 ke 2 (42,05) sama dengan jarak 2 ke 1. Karena itu cukup separuh tabel yang berisi informasi, dan sifat ini kita periksa resmi di Langkah 4.</li>
+<li><strong>Pasangan paling dekat</strong> adalah pelanggan 2 dan 4 (4,58). Lihat data di Langkah 1: keduanya muda (21 dan 23 tahun), berpendapatan sama (15 dan 16), dan sama-sama berbelanja tinggi (skor 81 dan 77).</li>
+<li><strong>Pasangan paling jauh</strong> adalah pelanggan 2 dan 3 (75,01). Usia dan pendapatan keduanya hampir sama, tetapi skor belanjanya 81 melawan 6.</li>
+<li>Contoh membaca satu baris: pelanggan terdekat dari pelanggan 1 adalah pelanggan 5 (12,21), karena skor belanja mereka mirip (39 dan 40), sedangkan selisih usianya 12 tahun.</li>
+<li>Perhatikan bahwa angka jarak sebagian besar ditentukan oleh <code>Spending Score</code>, fitur dengan selisih terbesar antarpelanggan (dari 6 sampai 81). Fitur berskala besar mendominasi jarak. Masalah ini kita bahas di Langkah 6.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>five.to_numpy()</code> mengubah tabel menjadi larik NumPy.</li>
@@ -4626,6 +4638,8 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 <li><code>pd.DataFrame(D, index=..., columns=...)</code> memberi label <code>CustomerID</code> pada baris dan kolom, dan <code>.round(2)</code> membulatkan dua angka di belakang koma.</li>
 </ul>
 <h3 id="langkah-3-ubah-jarak-menjadi-kemiripan">Langkah 3 — Ubah jarak menjadi kemiripan<a class="headerlink" href="#langkah-3-ubah-jarak-menjadi-kemiripan" title="Permanent link">&para;</a></h3>
+<p>Matriks di Langkah 2 mengukur <strong>ketidakmiripan</strong>: makin besar angkanya, makin berbeda dua pelanggan. Sebagian metode, dan sebagian cara berpikir kita, lebih natural dengan arah sebaliknya: makin besar angkanya, makin <strong>mirip</strong>. Langkah ini mengubah jarak menjadi kemiripan agar kita bisa berpindah di antara dua sudut pandang itu.</p>
+<p>Rumus yang dipakai, <span class="arithmatex">\( s = 1/(1+d) \)</span>, sederhana dan punya sifat yang berguna: jarak 0 menghasilkan kemiripan 1 (identik), sedangkan jarak yang makin besar menghasilkan kemiripan yang makin mendekati 0 tetapi tidak pernah negatif. Angka <code>1</code> di penyebut mencegah pembagian dengan nol saat jaraknya 0.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="n">S</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">D</span><span class="p">)</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a><span class="n">S_df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">S</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">five</span><span class="o">.</span><span class="n">index</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">five</span><span class="o">.</span><span class="n">index</span><span class="p">)</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Matriks kemiripan S = 1 / (1 + jarak):"</span><span class="p">)</span>
@@ -4640,12 +4654,22 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>4           0.025  0.179  0.014  1.000  0.026
 </span><span id="__span-5-8"><a id="__codelineno-5-8" name="__codelineno-5-8" href="#__codelineno-5-8"></a>5           0.076  0.023  0.027  0.026  1.000
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><strong>Diagonal bernilai 1.000</strong>: tiap pelanggan identik dengan dirinya sendiri (jarak 0 menjadi kemiripan 1).</li>
+<li>Kemiripan tertinggi di luar diagonal adalah pelanggan 2 dan 4 (<strong>0.179</strong>). Ini pasangan yang sama dengan jarak terkecil di Langkah 2 (4,58), karena <span class="arithmatex">\( 1/(1+4{,}58) \approx 0{,}179 \)</span>.</li>
+<li>Kemiripan terendah adalah pelanggan 2 dan 3 (<strong>0.013</strong>), pasangan dengan jarak terbesar (75,01).</li>
+<li>Urutannya <strong>terbalik</strong> dari matriks jarak: jarak kecil menjadi kemiripan besar, dan sebaliknya. Tidak ada informasi baru, hanya cara lain membacanya.</li>
+<li>Sebagian besar angka kecil (0,01 sampai 0,08) karena jarak antar pelanggan di data mentah relatif besar. Kemiripan ini cocok untuk membandingkan urutan, tetapi nilainya bukan persentase.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>S = 1 / (1 + D)</code> menerapkan rumus <span class="arithmatex">\( s = 1/(1+d) \)</span> pada <strong>seluruh matriks sekaligus</strong>. NumPy mengerjakannya untuk setiap sel.</li>
 <li>Hasilnya matriks kemiripan: diagonalnya 1 (tiap pelanggan identik dengan dirinya sendiri) dan angka lain di antara 0 dan 1.</li>
 </ul>
 <h3 id="langkah-4-periksa-sifat-matriks-jarak">Langkah 4 — Periksa sifat matriks jarak<a class="headerlink" href="#langkah-4-periksa-sifat-matriks-jarak" title="Permanent link">&para;</a></h3>
+<p>Sebelum matriks jarak dipakai oleh algoritma, kita perlu yakin bahwa ia memang berperilaku seperti jarak. Kalau tidak, hasil clustering bisa janggal dan sulit dilacak penyebabnya, misalnya jarak negatif atau jarak A ke B berbeda dari B ke A.</p>
+<p>Karena itu kita memeriksa tiga sifat dasar secara eksplisit: <strong>simetris</strong>, <strong>diagonal nol</strong>, dan <strong>tidak negatif</strong>. Pemeriksaan semacam ini murah, dan berguna sebagai kebiasaan, terutama saat kelak kita membuat matriks jarak sendiri dengan metrik buatan. Terakhir, kita memakai matriks itu untuk menjawab pertanyaan praktis: siapa pasangan pelanggan yang paling mirip?</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Simetris (D sama dengan transposnya)?"</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">D</span><span class="p">,</span> <span class="n">D</span><span class="o">.</span><span class="n">T</span><span class="p">))</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Diagonal semuanya nol?               "</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">allclose</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">diag</span><span class="p">(</span><span class="n">D</span><span class="p">),</span> <span class="mi">0</span><span class="p">))</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Tidak ada jarak negatif?             "</span><span class="p">,</span> <span class="nb">bool</span><span class="p">((</span><span class="n">D</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">all</span><span class="p">()))</span>
@@ -4660,6 +4684,12 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Tidak ada jarak negatif?              True
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Pasangan paling mirip: pelanggan 2 dan 4 dengan jarak 4.58
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Tiga baris pertama berisi <code>True</code>, artinya matriks dari Langkah 2 memenuhi sifat jarak: simetris, diagonal nol, dan tidak ada nilai negatif. Bila salah satunya <code>False</code>, ada yang keliru pada perhitungan atau datanya.</li>
+<li>Pemeriksaan ini tidak mencakup sifat keempat jarak, yaitu ketaksamaan segitiga. Untuk jarak Euclidean sifat itu dijamin berlaku, jadi tidak perlu dicek.</li>
+<li><code>Pasangan paling mirip: pelanggan 2 dan 4 dengan jarak 4.58</code> adalah pasangan dengan jarak terkecil di luar diagonal, sesuai yang kita lihat langsung di tabel Langkah 2. Pada tabel kecil kita bisa menemukannya dengan mata, tetapi pada 200 pelanggan cara kode ini yang diperlukan.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>np.allclose(D, D.T)</code> memeriksa <strong>simetri</strong>: <code>D.T</code> adalah transpos (baris dan kolom ditukar). Jika sama, maka <span class="arithmatex">\( d(a,b) = d(b,a) \)</span>.</li>
@@ -4669,6 +4699,8 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 <li><code>masked.argmin()</code> memberi posisi terkecil dalam bentuk satu angka, dan <code>np.unravel_index(..., masked.shape)</code> mengubahnya kembali menjadi (baris, kolom). Itulah pasangan paling mirip.</li>
 </ul>
 <h3 id="langkah-5-data-kategori-biner">Langkah 5 — Data kategori biner<a class="headerlink" href="#langkah-5-data-kategori-biner" title="Permanent link">&para;</a></h3>
+<p>Jarak Euclidean cocok untuk angka seperti usia dan pendapatan. Namun banyak data berupa <strong>ya/tidak</strong>: apakah pelanggan membeli produk tertentu atau tidak. Untuk data biner seperti ini, selisih angka kurang bermakna, sehingga kita memakai ukuran lain yang menghitung <strong>kecocokan</strong>.</p>
+<p>Langkah ini membandingkan dua ukuran pada dua pelanggan dan lima produk: <em>simple matching</em> (menghitung semua posisi yang sama) dan <em>Jaccard</em> (hanya memperhatikan produk yang dibeli setidaknya oleh salah satu). Perbedaan keduanya penting: pada data belanja, kebanyakan produk tidak dibeli siapa pun, jadi dua pelanggan yang sama-sama <strong>tidak</strong> membeli suatu produk tidak banyak memberi tahu bahwa mereka mirip.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="c1"># Dua pelanggan, lima produk (1 = membeli, 0 = tidak)</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="n">a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="n">b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
@@ -4692,6 +4724,14 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 </span><span id="__span-9-4"><a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a>Jaccard similarity: 0.5
 </span><span id="__span-9-5"><a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a>Jaccard distance  : 0.5
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Data kedua pelanggan: <code>a = [1, 1, 0, 0, 1]</code> dan <code>b = [1, 0, 0, 1, 1]</code>. Posisi yang sama adalah posisi 1, 3, dan 5, jadi <code>Jumlah posisi yang sama: 3</code>.</li>
+<li><strong>Simple matching similarity = 3 / 5 = 0.6.</strong> Posisi 3 (keduanya 0) ikut dihitung sebagai kecocokan.</li>
+<li>Posisi <strong>keduanya membeli</strong> adalah 1 dan 5 (2 posisi). Posisi <strong>salah satunya membeli</strong> adalah 1, 2, 4, dan 5 (4 posisi). Posisi 3 tidak dihitung karena tidak ada yang membeli.</li>
+<li><strong>Jaccard similarity = 2 / 4 = 0.5</strong>, dan <strong>Jaccard distance = 1 − 0.5 = 0.5</strong>.</li>
+<li>Hasilnya berbeda (0,6 melawan 0,5) karena Jaccard mengabaikan produk yang tidak dibeli siapa pun. Makin banyak produk yang tidak dibeli keduanya, makin besar simple matching tertarik naik, sedangkan Jaccard tidak terpengaruh.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>a</code> dan <code>b</code> adalah dua pelanggan dan lima produk: 1 berarti membeli, 0 berarti tidak.</li>
@@ -4700,6 +4740,8 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 <li>Rasio keduanya adalah <em>Jaccard similarity</em>, dan <code>1 - ...</code> menghasilkan <em>Jaccard distance</em>.</li>
 </ul>
 <h3 id="langkah-6-kesalahan-umum-skala-fitur">Langkah 6 — Kesalahan umum: skala fitur<a class="headerlink" href="#langkah-6-kesalahan-umum-skala-fitur" title="Permanent link">&para;</a></h3>
+<p>Di Langkah 2 kita melihat bahwa <code>Spending Score</code> tampak mendominasi jarak. Langkah ini membuktikannya dengan angka, lalu menunjukkan perbaikannya. Jarak Euclidean menjumlahkan <strong>kuadrat selisih</strong> semua fitur. Fitur dengan rentang selisih besar akan menenggelamkan fitur lain, walaupun fitur lain itu sama pentingnya.</p>
+<p>Cara memperbaikinya adalah <strong>standardisasi</strong>: mengubah tiap fitur menjadi skala yang sebanding (rata-rata 0, simpangan baku 1) sebelum menghitung jarak. Kita mulai dengan membedah satu pasangan pelanggan (1 dan 2) untuk melihat kontribusi tiap fitur, lalu menghitung ulang seluruh matriks setelah standardisasi.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">raw</span> <span class="o">=</span> <span class="n">five</span><span class="o">.</span><span class="n">to_numpy</span><span class="p">()</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">diff</span> <span class="o">=</span> <span class="n">raw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">-</span> <span class="n">raw</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Selisih tiap fitur antara pelanggan 1 dan 2:"</span><span class="p">,</span> <span class="nb">dict</span><span class="p">(</span><span class="nb">zip</span><span class="p">(</span><span class="n">cols</span><span class="p">,</span> <span class="n">diff</span><span class="o">.</span><span class="n">tolist</span><span class="p">())))</span>
@@ -4723,6 +4765,14 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 </span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>4           1.50  0.21  2.76  0.00  1.55
 </span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>5           0.87  1.75  1.54  1.55  0.00
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Selisih pelanggan 1 dan 2: <code>Age</code> −2, <code>Annual Income</code> 0, <code>Spending Score</code> −42. Tanda minus hanya menunjukkan pelanggan 1 lebih kecil nilainya, dan tidak berpengaruh karena selisih dikuadratkan.</li>
+<li>Kuadratnya: 4, 0, dan <strong>1764</strong>. Totalnya 1768, dan akarnya 42,05, yaitu jarak 1 ke 2 di Langkah 2. <code>Spending Score</code> menyumbang 1764 dari 1768 (<strong>sekitar 99,8%</strong>) dari jarak itu. Usia dan pendapatan nyaris tidak berpengaruh.</li>
+<li>Matriks setelah standardisasi punya angka yang jauh lebih kecil (0,21 sampai 2,91 dibanding 4,58 sampai 75,01), karena satuannya kini simpangan baku, bukan satuan asli.</li>
+<li>Pada lima pelanggan ini, <strong>urutan kedekatan tidak berubah</strong>: pasangan terdekat tetap 2 dan 4 (0,21), dan terjauh tetap 2 dan 3 (2,91). Standardisasi baru mengubah urutan bila fitur-fiturnya "menarik" ke arah yang berbeda dan besarnya timpang, dan kondisi itu tidak terjadi pada contoh kecil ini.</li>
+<li>Yang berubah adalah <strong>perbandingan besarnya</strong>. Sebelum standardisasi, jarak 1 ke 5 (12,21) sekitar 2,7 kali jarak 2 ke 4 (4,58). Setelah standardisasi, jarak 1 ke 5 (0,87) sekitar 4,1 kali jarak 2 ke 4 (0,21).</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>raw[0] - raw[1]</code> adalah selisih tiap fitur antara pelanggan 1 dan 2. Kita cetak selisih dan <strong>kuadrat selisih</strong> (kontribusi tiap fitur pada jarak).</li>
@@ -4730,6 +4780,8 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 <li>Kita hitung ulang matriks jarak pada data terstandardisasi untuk membandingkannya.</li>
 </ul>
 <h3 id="langkah-7-visualisasi-matriks-jarak">Langkah 7 — Visualisasi matriks jarak<a class="headerlink" href="#langkah-7-visualisasi-matriks-jarak" title="Permanent link">&para;</a></h3>
+<p>Tabel angka mudah dibaca untuk lima pelanggan, tetapi sulit dipindai bila lebih banyak. Peta warna (<em>heatmap</em>) memungkinkan kita menangkap pola jarak sekilas pandang: daerah terang berarti dekat, daerah gelap berarti jauh.</p>
+<p>Kita menggambar dua matriks berdampingan, sebelum dan sesudah standardisasi dari Langkah 6, supaya pengaruh standardisasi terlihat langsung dalam satu gambar.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">M</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="p">[(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">D</span><span class="p">,</span> <span class="s2">"Jarak data mentah"</span><span class="p">),</span> <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">1</span><span class="p">],</span> <span class="n">D_scaled</span><span class="p">,</span> <span class="s2">"Jarak setelah standardisasi"</span><span class="p">)]:</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="n">ax</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">M</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">"viridis_r"</span><span class="p">)</span>
@@ -4746,6 +4798,14 @@ d(\mathbf{x}, \mathbf{y}) = \sqrt{\sum_{j=1}^{d} (x_j - y_j)^2}
 </span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 <p><img alt="Dua peta warna matriks jarak lima pelanggan: kiri data mentah, kanan setelah standardisasi" src="../../assets/level-3/04-matriks-jarak.png" /></p>
+<p><strong>Cara membaca gambar:</strong></p>
+<ul>
+<li>Setiap sel adalah satu pasangan pelanggan, dan angkanya sama dengan tabel di Langkah 2 (kiri) dan Langkah 6 (kanan), dibulatkan satu angka di belakang koma. Sel kuning terang adalah jarak kecil, dan sel ungu tua adalah jarak besar (<code>viridis_r</code>).</li>
+<li><strong>Diagonal kuning</strong> adalah jarak 0 ke diri sendiri. Gambar tampak <strong>simetris</strong> terhadap diagonal, mencerminkan sifat yang diperiksa di Langkah 4.</li>
+<li>Sel terang di luar diagonal ada pada pasangan <strong>2 dan 4</strong> (4,6 pada panel kiri dan 0,2 pada panel kanan), dan agak terang pada pasangan 1 dan 5. Pasangan paling gelap adalah <strong>2 dan 3</strong> (75,0 dan 2,9), diikuti 3 dan 4.</li>
+<li><strong>Pola warna kedua panel hampir sama.</strong> Ini sejalan dengan Langkah 6: urutan kedekatan pada lima pelanggan ini tidak berubah oleh standardisasi. Yang berbeda adalah skala angkanya (maksimum 75,0 melawan 2,9).</li>
+<li>Warna pada tiap panel dihitung dari skalanya sendiri, jadi warna gelap di kiri dan di kanan tidak berarti jarak yang sama besar. Bandingkan polanya, bukan warna absolutnya.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>ax.imshow(M, cmap="viridis_r")</code> menggambar matriks sebagai <strong>peta warna</strong>. Dengan <code>viridis_r</code>, jarak kecil berwarna terang (kuning) dan jarak besar berwarna gelap.</li>

@@ -4476,6 +4476,7 @@ x' = \ln(1 + x)
 <li>Hasilnya: Jakarta tampak "lebih dekat" ke Bandung (1) dibanding ke Surabaya (2), padahal ketiganya setara. Inilah <strong>urutan palsu</strong> yang dihasilkan oleh pengkodean nomor.</li>
 </ul>
 <h3 id="langkah-5-transformasi-logaritma">Langkah 5 — Transformasi logaritma<a class="headerlink" href="#langkah-5-transformasi-logaritma" title="Permanent link">&para;</a></h3>
+<p>Transformasi logaritma bertindak seperti peredam: ia menekan angka-angka yang sangat besar tanpa mengubah urutannya. Nilai yang berjarak sangat jauh akan "ditarik" mendekat, sehingga sebaran yang <strong>miring ke kanan</strong> (<em>right-skewed</em>) menjadi lebih seimbang. Tetapi efek ini hanya menolong bila memang ada ekor panjang di kanan. Pada data kita itu belum tentu terjadi, jadi kita ukur dulu hasilnya.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="n">income</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">"Annual Income (k$)"</span><span class="p">]</span>
 </span><span id="__span-7-2"><a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="n">income_log</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">log1p</span><span class="p">(</span><span class="n">income</span><span class="p">)</span>  <span class="c1"># log(1 + x)</span>
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>
@@ -4513,32 +4514,50 @@ x' = \ln(1 + x)
 <li><code>axes[0]</code> dan <code>axes[1]</code> adalah grafik pertama dan kedua.</li>
 <li>Kita membandingkan <strong>bentuk</strong> sebarannya dengan mata, bukan hanya angka skewness.</li>
 </ul>
-<h3 id="langkah-7-binning-mengelompokkan-angka">Langkah 7 — Binning: mengelompokkan angka<a class="headerlink" href="#langkah-7-binning-mengelompokkan-angka" title="Permanent link">&para;</a></h3>
-<div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">df_bin</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">df_bin</span><span class="p">[</span><span class="s2">"Age Group"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
-</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a>    <span class="n">df_bin</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">],</span>
-</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a>    <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
-</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a>    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"18-30"</span><span class="p">,</span> <span class="s2">"31-45"</span><span class="p">,</span> <span class="s2">"46-60"</span><span class="p">,</span> <span class="s2">"61-70"</span><span class="p">],</span>
-</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">)</span>
-</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>
-</span><span id="__span-10-8"><a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">df_bin</span><span class="p">[[</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"Age Group"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
-</span><span id="__span-10-9"><a id="__codelineno-10-9" name="__codelineno-10-9" href="#__codelineno-10-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Jumlah pelanggan per kelompok usia:"</span><span class="p">)</span>
-</span><span id="__span-10-10"><a id="__codelineno-10-10" name="__codelineno-10-10" href="#__codelineno-10-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">df_bin</span><span class="p">[</span><span class="s2">"Age Group"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+<div class="admonition note">
+<p class="admonition-title">Apa itu ekor panjang di kanan?</p>
+<p><strong>Ekor panjang di kanan</strong> adalah bentuk histogram ketika sebagian besar data menumpuk di nilai kecil (sisi kiri), lalu ada sedikit data bernilai jauh lebih besar yang memanjang ke sisi kanan grafik, seperti ekor yang menjulur ke kanan.</p>
+<div class="language-text highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a>jumlah
+</span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a> |█
+</span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a> |███
+</span><span id="__span-10-4"><a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a> |█████
+</span><span id="__span-10-5"><a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a> |███████▄▂▁  ▁   ▁         &lt;- ekor menjulur ke kanan
+</span><span id="__span-10-6"><a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a> +-----------------------&gt; nilai
+</span><span id="__span-10-7"><a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a>  kecil              besar
 </span></code></pre></div>
-<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a>   Age Age Group
-</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a>0   19     18-30
-</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>1   21     18-30
-</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>2   20     18-30
-</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>3   23     18-30
-</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a>4   31     31-45
+<ul>
+<li><strong>Contoh nyata:</strong> pendapatan penduduk. Kebanyakan orang berpenghasilan Rp3–10 juta per bulan, tetapi segelintir orang berpenghasilan ratusan juta atau miliaran. Segelintir nilai besar itulah yang membentuk ekor.</li>
+<li><strong>Istilah lain:</strong> sebaran ini disebut <em>right-skewed</em> atau <em>positively skewed</em>, dengan skewness bernilai positif besar (misalnya di atas 1). Rata-ratanya biasanya tertarik ke kanan, sehingga lebih besar dari median.</li>
+<li><strong>Kaitannya dengan log:</strong> nilai yang sangat besar membuat jarak antardata tidak seimbang, dan itu dapat mengganggu algoritma clustering berbasis jarak. Log memperpendek ekor karena menekan nilai besar lebih kuat daripada nilai kecil. Contohnya, 10 dan 1.000.000 yang berjarak sangat jauh menjadi sekitar 2,4 dan 13,8 setelah <code>log1p</code>.</li>
+<li><strong>Pada data kita:</strong> <code>Annual Income (k$)</code> hanya punya ekor tipis di kanan (skewness 0,32), jadi hampir simetris. Log malah memunculkan ekor di kiri (skewness −0,74), sehingga log tidak dipakai untuk kolom ini.</li>
+</ul>
+</div>
+<h3 id="langkah-7-binning-mengelompokkan-angka">Langkah 7 — Binning: mengelompokkan angka<a class="headerlink" href="#langkah-7-binning-mengelompokkan-angka" title="Permanent link">&para;</a></h3>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-11-1"><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="n">df_bin</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+</span><span id="__span-11-2"><a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="n">df_bin</span><span class="p">[</span><span class="s2">"Age Group"</span><span class="p">]</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">cut</span><span class="p">(</span>
+</span><span id="__span-11-3"><a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a>    <span class="n">df_bin</span><span class="p">[</span><span class="s2">"Age"</span><span class="p">],</span>
+</span><span id="__span-11-4"><a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a>    <span class="n">bins</span><span class="o">=</span><span class="p">[</span><span class="mi">17</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">45</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">70</span><span class="p">],</span>
+</span><span id="__span-11-5"><a id="__codelineno-11-5" name="__codelineno-11-5" href="#__codelineno-11-5"></a>    <span class="n">labels</span><span class="o">=</span><span class="p">[</span><span class="s2">"18-30"</span><span class="p">,</span> <span class="s2">"31-45"</span><span class="p">,</span> <span class="s2">"46-60"</span><span class="p">,</span> <span class="s2">"61-70"</span><span class="p">],</span>
+</span><span id="__span-11-6"><a id="__codelineno-11-6" name="__codelineno-11-6" href="#__codelineno-11-6"></a><span class="p">)</span>
 </span><span id="__span-11-7"><a id="__codelineno-11-7" name="__codelineno-11-7" href="#__codelineno-11-7"></a>
-</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a>Jumlah pelanggan per kelompok usia:
-</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a>Age Group
-</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a>18-30    62
-</span><span id="__span-11-11"><a id="__codelineno-11-11" name="__codelineno-11-11" href="#__codelineno-11-11"></a>31-45    72
-</span><span id="__span-11-12"><a id="__codelineno-11-12" name="__codelineno-11-12" href="#__codelineno-11-12"></a>46-60    49
-</span><span id="__span-11-13"><a id="__codelineno-11-13" name="__codelineno-11-13" href="#__codelineno-11-13"></a>61-70    17
-</span><span id="__span-11-14"><a id="__codelineno-11-14" name="__codelineno-11-14" href="#__codelineno-11-14"></a>Name: count, dtype: int64
+</span><span id="__span-11-8"><a id="__codelineno-11-8" name="__codelineno-11-8" href="#__codelineno-11-8"></a><span class="nb">print</span><span class="p">(</span><span class="n">df_bin</span><span class="p">[[</span><span class="s2">"Age"</span><span class="p">,</span> <span class="s2">"Age Group"</span><span class="p">]]</span><span class="o">.</span><span class="n">head</span><span class="p">())</span>
+</span><span id="__span-11-9"><a id="__codelineno-11-9" name="__codelineno-11-9" href="#__codelineno-11-9"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">Jumlah pelanggan per kelompok usia:"</span><span class="p">)</span>
+</span><span id="__span-11-10"><a id="__codelineno-11-10" name="__codelineno-11-10" href="#__codelineno-11-10"></a><span class="nb">print</span><span class="p">(</span><span class="n">df_bin</span><span class="p">[</span><span class="s2">"Age Group"</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">())</span>
+</span></code></pre></div>
+<div class="language-text highlight"><span class="filename">Output</span><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a>   Age Age Group
+</span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a>0   19     18-30
+</span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>1   21     18-30
+</span><span id="__span-12-4"><a id="__codelineno-12-4" name="__codelineno-12-4" href="#__codelineno-12-4"></a>2   20     18-30
+</span><span id="__span-12-5"><a id="__codelineno-12-5" name="__codelineno-12-5" href="#__codelineno-12-5"></a>3   23     18-30
+</span><span id="__span-12-6"><a id="__codelineno-12-6" name="__codelineno-12-6" href="#__codelineno-12-6"></a>4   31     31-45
+</span><span id="__span-12-7"><a id="__codelineno-12-7" name="__codelineno-12-7" href="#__codelineno-12-7"></a>
+</span><span id="__span-12-8"><a id="__codelineno-12-8" name="__codelineno-12-8" href="#__codelineno-12-8"></a>Jumlah pelanggan per kelompok usia:
+</span><span id="__span-12-9"><a id="__codelineno-12-9" name="__codelineno-12-9" href="#__codelineno-12-9"></a>Age Group
+</span><span id="__span-12-10"><a id="__codelineno-12-10" name="__codelineno-12-10" href="#__codelineno-12-10"></a>18-30    62
+</span><span id="__span-12-11"><a id="__codelineno-12-11" name="__codelineno-12-11" href="#__codelineno-12-11"></a>31-45    72
+</span><span id="__span-12-12"><a id="__codelineno-12-12" name="__codelineno-12-12" href="#__codelineno-12-12"></a>46-60    49
+</span><span id="__span-12-13"><a id="__codelineno-12-13" name="__codelineno-12-13" href="#__codelineno-12-13"></a>61-70    17
+</span><span id="__span-12-14"><a id="__codelineno-12-14" name="__codelineno-12-14" href="#__codelineno-12-14"></a>Name: count, dtype: int64
 </span></code></pre></div>
 <p><strong>Penjelasan:</strong></p>
 <ul>
@@ -4585,10 +4604,10 @@ x' = \ln(1 + x)
 </table>
 <h2 id="how-to-run">How to Run<a class="headerlink" href="#how-to-run" title="Permanent link">&para;</a></h2>
 <p>Jalankan dari <strong>folder utama proyek</strong>:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">python</span> <span class="n">examples</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">2</span><span class="p">/</span><span class="n">09_transformation_encoding</span><span class="p">.</span><span class="n">py</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">python</span> <span class="n">examples</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">2</span><span class="p">/</span><span class="n">09_transformation_encoding</span><span class="p">.</span><span class="n">py</span>
 </span></code></pre></div>
 <p>Skrip menyimpan satu gambar di <code>docs/assets/level-2/</code>. Untuk notebook:</p>
-<div class="language-powershell highlight"><pre><span></span><code><span id="__span-13-1"><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">jupyter</span> <span class="n">notebook</span> <span class="n">notebooks</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">2</span><span class="p">/</span><span class="n">09-data-transformation</span><span class="o">-and</span><span class="n">-encoding</span><span class="p">.</span><span class="n">ipynb</span>
+<div class="language-powershell highlight"><pre><span></span><code><span id="__span-14-1"><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="n">jupyter</span> <span class="n">notebook</span> <span class="n">notebooks</span><span class="p">/</span><span class="n">level</span><span class="p">-</span><span class="n">2</span><span class="p">/</span><span class="n">09-data-transformation</span><span class="o">-and</span><span class="n">-encoding</span><span class="p">.</span><span class="n">ipynb</span>
 </span></code></pre></div>
 <h2 id="expected-output">Expected Output<a class="headerlink" href="#expected-output" title="Permanent link">&para;</a></h2>
 <p>Semua output berasal dari eksekusi nyata skrip (pandas 3.1.1, numpy, matplotlib 3.11.2, Python 3.14.7). Output setiap langkah ditampilkan langsung di bawah kodenya pada bagian <a href="#python-implementation">Python Implementation</a>.</p>

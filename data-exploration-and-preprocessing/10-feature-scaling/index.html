@@ -4348,6 +4348,8 @@ z = \frac{x - \mu}{\sigma}
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li>Kita memanggil pandas dan matplotlib, lalu membaca data ke <code>df</code>.</li>
+<li><code>pd.set_option("display.width", 120)</code> mengatur lebar baris cetakan tabel menjadi 120 karakter, supaya tabel pandas tidak dipotong dan dilipat ke baris berikutnya di terminal.</li>
+<li><code>pd.set_option("display.max_columns", None)</code> menampilkan <strong>semua</strong> kolom. Tanpa ini, pandas menyingkat tabel yang kolomnya banyak dengan <code>...</code>. Kedua pengaturan hanya memengaruhi tampilan, bukan data.</li>
 <li><code>fitur</code> adalah tiga kolom yang akan diskalakan. <code>CustomerID</code> tidak ikut karena hanya nomor urut.</li>
 <li><code>X = df[fitur]</code> adalah tabel yang berisi <strong>hanya tiga kolom itu</strong>. Mulai sekarang, kita bekerja dengan <code>X</code>.</li>
 </ul>
@@ -4386,6 +4388,69 @@ z = \frac{x - \mu}{\sigma}
 <li><code>varians / varians.sum() * 100</code> menghitung <strong>porsi</strong> tiap kolom dari total varians, dalam persen.</li>
 <li>Kalau porsi tiap kolom jauh berbeda, jarak akan didominasi kolom dengan porsi terbesar.</li>
 </ul>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><strong>Rentang.</strong> <code>Age</code> hanya bergerak dari 18 sampai 70 (selisih 52). <code>Annual Income (k$)</code> dari 15 sampai 137 (selisih 122), dan <code>Spending Score (1-100)</code> dari 1 sampai 99 (selisih 98). Satuan dan rentang ketiganya memang berbeda.</li>
+<li><strong>Varians.</strong> <code>Age</code> hanya 195,1, sedangkan <code>Annual Income (k$)</code> 689,8 dan <code>Spending Score (1-100)</code> 666,9. Varians <code>Age</code> kira-kira sepertiga dari dua kolom lainnya.</li>
+<li><strong>Porsi varians.</strong> Dari total varians, <code>Age</code> hanya menyumbang 12,6%, sedangkan <code>Annual Income (k$)</code> 44,5% dan <code>Spending Score (1-100)</code> 43,0%. Ketiga angka ini berjumlah 100%.</li>
+<li><strong>Artinya untuk clustering.</strong> Pada skala asli, jarak antar pelanggan hampir seluruhnya (sekitar 87%) ditentukan oleh pendapatan dan skor belanja. <code>Age</code> nyaris tidak berpengaruh, padahal kita belum memutuskan bahwa usia kurang penting. Ketimpangan inilah yang ingin diperbaiki oleh <em>feature scaling</em> di langkah-langkah berikutnya.</li>
+<li>Pada data ini, tidak ada satu kolom yang mendominasi sendirian. Yang tertinggal jauh adalah <code>Age</code>. Pada data lain dengan satuan yang lebih ekstrem (misalnya gaji dalam rupiah dengan usia dalam tahun), satu kolom bisa menguasai hampir seluruh jarak.</li>
+<li><code>dtype: float64</code> di akhir tiap deret hanya menunjukkan tipe angka hasil hitungan, bukan bagian dari hasil.</li>
+</ul>
+<details class="question">
+<summary>Belum paham rentang, varians, dan porsi varians? Ikuti contoh sederhana ini</summary>
+<p>Bayangkan kita punya dua kolom angka untuk tiga pelanggan:</p>
+<table>
+<thead>
+<tr>
+<th>Pelanggan</th>
+<th>Kolom A</th>
+<th>Kolom B</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>20</td>
+<td>20</td>
+</tr>
+<tr>
+<td>2</td>
+<td>30</td>
+<td>60</td>
+</tr>
+<tr>
+<td>3</td>
+<td>40</td>
+<td>100</td>
+</tr>
+</tbody>
+</table>
+<p><strong>1. Rentang: "dari berapa sampai berapa?"</strong></p>
+<p>Rentang hanya melihat angka terkecil dan terbesar, lalu mengurangkannya.</p>
+<ul>
+<li>Kolom A: dari 20 sampai 40, selisihnya <span class="arithmatex">\( 40 - 20 = 20 \)</span>.</li>
+<li>Kolom B: dari 20 sampai 100, selisihnya <span class="arithmatex">\( 100 - 20 = 80 \)</span>.</li>
+</ul>
+<p>Kolom B "lebih lebar" daripada kolom A. Baris <code>min</code> dan <code>max</code> pada output Langkah 2 adalah hal yang sama.</p>
+<p><strong>2. Varians: "seberapa berserakan angkanya?"</strong></p>
+<p>Varians adalah satu angka yang menggambarkan <strong>seberapa jauh angka-angka menyebar dari titik tengahnya</strong>.</p>
+<ul>
+<li>Kalau angkanya <strong>rapat</strong> (misalnya 29, 30, 31), variansnya <strong>kecil</strong>.</li>
+<li>Kalau angkanya <strong>berserakan</strong> (misalnya 0, 30, 60), variansnya <strong>besar</strong>.</li>
+</ul>
+<p>Pada contoh kita, komputer menghitung varians kolom A = <strong>100</strong> dan kolom B = <strong>1600</strong>. Anda tidak perlu menghitungnya sendiri, cukup ingat artinya: <em>makin besar angkanya, makin berserakan datanya</em>.</p>
+<p><strong>3. Porsi varians: "siapa yang paling berpengaruh?"</strong></p>
+<p>Bayangkan varians sebagai "suara" tiap kolom saat menentukan siapa mirip dengan siapa. Porsi varians adalah <strong>persentase suara</strong> tiap kolom dari seluruh suara.</p>
+<p>Total suara pada contoh: <span class="arithmatex">\( 100 + 1600 = 1700 \)</span>.</p>
+<ul>
+<li>Kolom A: <span class="arithmatex">\( 100 / 1700 \approx 6\% \)</span></li>
+<li>Kolom B: <span class="arithmatex">\( 1600 / 1700 \approx 94\% \)</span></li>
+</ul>
+<p>Artinya kolom B menguasai hampir seluruh suara, sedangkan kolom A nyaris tidak didengar. Kalau kita memakai kedua kolom ini untuk mengelompokkan pelanggan, hasilnya hampir hanya ditentukan kolom B.</p>
+<p><strong>Kaitannya dengan output di atas</strong></p>
+<p>Pada data Mall Customers, <code>Age</code> hanya mendapat "suara" 12,6%, sedangkan pendapatan dan skor belanja masing-masing sekitar 44% dan 43%. Jadi usia kurang didengar, bukan karena tidak penting, tetapi karena angkanya kebetulan lebih sempit. <em>Feature scaling</em> dipakai supaya semua kolom mendapat suara yang lebih adil.</p>
+</details>
 <h3 id="langkah-3-min-max-scaling">Langkah 3 — Min-Max scaling<a class="headerlink" href="#langkah-3-min-max-scaling" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="n">X_minmax</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">())</span> <span class="o">/</span> <span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">max</span><span class="p">()</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">min</span><span class="p">())</span>
 </span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>
@@ -4415,6 +4480,19 @@ z = \frac{x - \mu}{\sigma}
 <li><code>head().round(3)</code> menampilkan 5 baris pertama dengan tiga angka di belakang koma.</li>
 <li><code>agg(["min", "max"])</code> membuktikan bahwa setiap kolom sekarang berada tepat di antara 0 dan 1.</li>
 </ul>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><strong>Tabel 5 baris pertama.</strong> Bentuknya sama dengan tabel asli, tetapi semua angka kini berada di antara 0 dan 1. Pelanggan pertama punya <code>Age</code> 19, <code>Annual Income (k$)</code> 15, dan <code>Spending Score (1-100)</code> 39. Kita bisa mencocokkannya dengan rumus Min-Max menggunakan min dan max dari Langkah 2:<ul>
+<li><code>Age</code>: <span class="arithmatex">\( (19 - 18) / (70 - 18) = 1/52 \approx 0{,}019 \)</span></li>
+<li><code>Annual Income (k$)</code>: <span class="arithmatex">\( (15 - 15) / (137 - 15) = 0 \)</span>, jadi 0,000</li>
+<li><code>Spending Score (1-100)</code>: <span class="arithmatex">\( (39 - 1) / (99 - 1) = 38/98 \approx 0{,}388 \)</span></li>
+</ul>
+</li>
+<li><strong>Nilai 0,000 pada pendapatan.</strong> Pelanggan 1 dan 2 punya pendapatan 15, yaitu yang terkecil di seluruh data, sehingga hasilnya tepat 0. Pelanggan 3 dan 4 punya pendapatan 16, sehingga hasilnya <span class="arithmatex">\( 1/122 \approx 0{,}008 \)</span>, dan pelanggan 5 dengan pendapatan 17 menjadi <span class="arithmatex">\( 2/122 \approx 0{,}016 \)</span>.</li>
+<li><strong>Urutan tetap terjaga.</strong> Pelanggan 2 punya skor belanja 81 (hasil 0,816), jauh lebih tinggi daripada pelanggan 3 dengan skor 6 (hasil 0,051). Min-Max hanya menggeser dan meregangkan skala, sehingga urutan dan perbandingan relatif antar pelanggan tidak berubah.</li>
+<li><strong>Tabel min dan max.</strong> Semua kolom kini bernilai min 0,0 dan max 1,0. Rentang <code>Age</code> (52), pendapatan (122), dan skor belanja (98) yang tadinya berbeda sekarang sama-sama 1, sehingga ketiganya punya skala yang sebanding dalam menghitung jarak.</li>
+<li><strong>Yang belum selesai.</strong> Rentang sudah sama, tetapi varians belum tentu sama. Kolom yang sebagian besar datanya mengumpul di satu sisi tetap punya sebaran yang lebih sempit. Hal ini diperiksa di Langkah 6.</li>
+</ul>
 <h3 id="langkah-4-standardization">Langkah 4 — Standardization<a class="headerlink" href="#langkah-4-standardization" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-5-1"><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="n">X_standar</span> <span class="o">=</span> <span class="p">(</span><span class="n">X</span> <span class="o">-</span> <span class="n">X</span><span class="o">.</span><span class="n">mean</span><span class="p">())</span> <span class="o">/</span> <span class="n">X</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">ddof</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </span><span id="__span-5-2"><a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a>
@@ -4439,9 +4517,78 @@ z = \frac{x - \mu}{\sigma}
 </span></code></pre></div>
 <p><strong>Penjelasan:</strong></p>
 <ul>
-<li><code>(X - X.mean()) / X.std(ddof=0)</code> adalah rumus z-score. <code>ddof=0</code> memakai pembagi <span class="arithmatex">\(n\)</span>, sama dengan scikit-learn.</li>
-<li>Kita memeriksa <strong>rata-rata</strong> dan <strong>simpangan baku</strong> hasilnya. Rata-ratanya hampir 0 (<code>-0.000</code> karena pembulatan, bukan negatif sungguhan), dan simpangan baku 1,003.</li>
-<li>Angka 1,003, bukan tepat 1, muncul karena <code>agg(["std"])</code> memakai pembagi <span class="arithmatex">\(n-1\)</span>, sedangkan kita menskalakan dengan pembagi <span class="arithmatex">\(n\)</span>. Itu hanya beda definisi, bukan kesalahan.</li>
+<li>
+<p><code>(X - X.mean()) / X.std(ddof=0)</code> adalah rumus z-score. <code>ddof=0</code> memakai pembagi <span class="arithmatex">\(n\)</span>, sama dengan scikit-learn.</p>
+<p><strong>Bagian pertama: <code>X - X.mean()</code> dan <code>/ X.std(...)</code>.</strong> Rumus ini sama dengan <span class="arithmatex">\( z = (x - \mu)/\sigma \)</span> di bagian Mathematical Foundation. Ada dua langkah:</p>
+<ol>
+<li><strong>Kurangi dengan rata-rata</strong> (<code>X - X.mean()</code>). Ini menggeser data sehingga titik tengahnya menjadi 0. Nilai di atas rata-rata menjadi positif, dan nilai di bawah rata-rata menjadi negatif.</li>
+<li><strong>Bagi dengan simpangan baku</strong> (<code>/ X.std(...)</code>). Simpangan baku adalah ukuran "seberapa lebar sebaran" data (akar dari varians pada Langkah 2). Pembagian ini mengubah satuan asli (tahun, k$, skor) menjadi satuan baru: <strong>berapa simpangan baku nilai ini dari rata-rata</strong>.</li>
+</ol>
+<p>Jadi z-score <code>-1,425</code> berarti "1,425 simpangan baku di bawah rata-rata", dan z-score <code>1,196</code> berarti "1,196 simpangan baku di atas rata-rata". Karena semua kolom kini memakai satuan yang sama, ketiganya bisa dibandingkan secara adil.</p>
+<p><strong>Contoh dari data kita (<code>Age</code> pelanggan pertama).</strong> Usianya 19, rata-rata <code>Age</code> 38,85, dan simpangan baku (pembagi <span class="arithmatex">\(n\)</span>) ≈ 13,934:</p>
+<div class="arithmatex">\[
+z = \frac{19 - 38{,}85}{13{,}934} \approx -1{,}425
+\]</div>
+<p>Hasilnya sama dengan baris pertama kolom <code>Age</code> pada output.</p>
+<p><strong>Bagian kedua: apa itu <code>ddof=0</code>?</strong> Ada dua cara menghitung simpangan baku yang sedikit berbeda. Bedanya hanya pada <strong>angka pembagi</strong> saat menghitung varians (setelah selisih tiap nilai dikuadratkan dan dijumlahkan):</p>
+<table>
+<thead>
+<tr>
+<th>Pengaturan</th>
+<th>Pembagi</th>
+<th>Nama</th>
+<th>Dipakai oleh</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ddof=0</code></td>
+<td><span class="arithmatex">\(n\)</span> (jumlah data)</td>
+<td>simpangan baku populasi</td>
+<td><code>StandardScaler</code> scikit-learn</td>
+</tr>
+<tr>
+<td><code>ddof=1</code></td>
+<td><span class="arithmatex">\(n-1\)</span></td>
+<td>simpangan baku sampel</td>
+<td><code>.std()</code> pandas (bawaan)</td>
+</tr>
+</tbody>
+</table>
+<p><code>ddof</code> singkatan dari <em>delta degrees of freedom</em>, yaitu "berapa yang dikurangkan dari <span class="arithmatex">\(n\)</span> pada pembagi". Pada <code>ddof=0</code> tidak ada yang dikurangkan, pada <code>ddof=1</code> dikurangi 1.</p>
+<p><strong>Contoh kecil.</strong> Ambil tiga angka: 10, 20, 30. Rata-ratanya 20, selisihnya <span class="arithmatex">\( -10, 0, 10 \)</span>, kuadratnya <span class="arithmatex">\( 100, 0, 100 \)</span>, jumlahnya 200.</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Pembagi</th>
+<th>Varians</th>
+<th>Simpangan baku</th>
+<th>z-score untuk angka 10</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ddof=0</code></td>
+<td><span class="arithmatex">\(3\)</span></td>
+<td><span class="arithmatex">\(200/3 \approx 66{,}7\)</span></td>
+<td><span class="arithmatex">\(\approx 8{,}165\)</span></td>
+<td><span class="arithmatex">\(\approx -1{,}225\)</span></td>
+</tr>
+<tr>
+<td><code>ddof=1</code></td>
+<td><span class="arithmatex">\(2\)</span></td>
+<td><span class="arithmatex">\(200/2 = 100\)</span></td>
+<td><span class="arithmatex">\(10\)</span></td>
+<td><span class="arithmatex">\(-1\)</span></td>
+</tr>
+</tbody>
+</table>
+<p>Pada 3 data, bedanya terlihat jelas. Pada data kita <span class="arithmatex">\(n = 200\)</span>, pembaginya 200 lawan 199, sehingga bedanya sangat kecil: simpangan baku <code>Age</code> 13,934 (<code>ddof=0</code>) lawan 13,969 (<code>ddof=1</code>), dan z-score pelanggan pertama -1,425 lawan -1,421.</p>
+<p><strong>Mengapa kita memilih <code>ddof=0</code>?</strong> Karena kita ingin hasil hitungan manual <strong>persis sama</strong> dengan <code>StandardScaler</code>. Itu dibuktikan di Langkah 5. Jika Anda memakai <code>.std()</code> tanpa <code>ddof=0</code>, angkanya sedikit berbeda dan <code>StandardScaler</code> tidak akan cocok dengan hitungan manual Anda.
+- Kita memeriksa <strong>rata-rata</strong> dan <strong>simpangan baku</strong> hasilnya. Rata-ratanya hampir 0 (<code>-0.000</code> karena pembulatan, bukan negatif sungguhan), dan simpangan baku 1,003.
+- Angka 1,003, bukan tepat 1, muncul karena <code>agg(["std"])</code> memakai pembagi <span class="arithmatex">\(n-1\)</span>, sedangkan kita menskalakan dengan pembagi <span class="arithmatex">\(n\)</span>. Itu hanya beda definisi, bukan kesalahan.</p>
+</li>
 </ul>
 <h3 id="langkah-5-hasil-yang-sama-dengan-scikit-learn">Langkah 5 — Hasil yang sama dengan scikit-learn<a class="headerlink" href="#langkah-5-hasil-yang-sama-dengan-scikit-learn" title="Permanent link">&para;</a></h3>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-7-1"><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="kn">from</span><span class="w"> </span><span class="nn">sklearn.preprocessing</span><span class="w"> </span><span class="kn">import</span> <span class="n">MinMaxScaler</span><span class="p">,</span> <span class="n">StandardScaler</span>
@@ -4522,6 +4669,10 @@ z = \frac{x - \mu}{\sigma}
 </tr>
 </thead>
 <tbody>
+<tr>
+<td><code>pd.set_option(nama, nilai)</code></td>
+<td>Mengatur tampilan pandas (lebar cetak, jumlah kolom) tanpa mengubah data</td>
+</tr>
 <tr>
 <td><code>X.var()</code></td>
 <td>Varians tiap kolom</td>

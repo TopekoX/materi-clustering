@@ -4558,6 +4558,8 @@
 <li><code>pd.DataFrame(points, index=names, columns=[...])</code> menampilkan larik sebagai tabel berlabel.</li>
 </ul>
 <h3 id="langkah-2-hitung-centroid">Langkah 2 — Hitung centroid<a class="headerlink" href="#langkah-2-hitung-centroid" title="Permanent link">&para;</a></h3>
+<p>Setelah data siap di Langkah 1, kita mulai dari cara paling umum untuk mewakili sebuah kelompok: <strong>centroid</strong>, yaitu rata-rata tiap fitur dari semua anggotanya. Kita menghitungnya dulu <strong>dengan tangan</strong> (jumlahkan, lalu bagi dengan banyaknya titik) sebelum memakai jalan pintas <code>mean</code>. Tujuannya agar jelas bahwa centroid bukan hasil ajaib dari sebuah fungsi, melainkan rumus rata-rata biasa yang sudah kamu lihat di Mathematical Foundation.</p>
+<p>Hasilnya kita bandingkan dengan <code>points.mean(axis=0)</code> sebagai <strong>pemeriksaan</strong>. Bila keduanya sama, berarti pemahaman kita atas rumus benar dan kita bisa memakai <code>mean</code> dengan tenang di langkah-langkah berikutnya, termasuk pada data Mall Customers.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="n">n</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">points</span><span class="p">)</span>
 </span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="n">centroid</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span> <span class="o">/</span> <span class="n">n</span>
 </span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Jumlah per kolom:"</span><span class="p">,</span> <span class="n">points</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
@@ -4570,6 +4572,15 @@
 </span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>Centroid        : [4.  4.4]
 </span><span id="__span-3-4"><a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a>Sama dengan points.mean(axis=0)? True
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><code>Jumlah per kolom: [20. 22.]</code> adalah jumlah semua nilai fitur pertama (2 + 3 + 4 + 3 + 8 = 20) dan fitur kedua (3 + 5 + 4 + 2 + 8 = 22) dari lima titik di Langkah 1.</li>
+<li><code>Jumlah titik n  : 5</code> adalah pembaginya.</li>
+<li><code>Centroid        : [4.  4.4]</code> adalah hasil bagi: 20 / 5 = 4 dan 22 / 5 = 4,4. Jadi pusat kelompok ini berada di koordinat (4; 4,4).</li>
+<li>Centroid ini <strong>bukan salah satu titik data</strong>. Titik yang paling mendekatinya adalah P3 di (4, 4), tetapi tidak persis sama. Perbedaan ini yang nanti membedakan centroid dari medoid (Langkah 3).</li>
+<li><code>Sama dengan points.mean(axis=0)? True</code> berarti hitungan manual kita cocok dengan fungsi bawaan NumPy.</li>
+<li>Perhatikan bahwa P5 di (8, 8) menarik centroid ke arah kanan atas. Tanpa P5, centroid empat titik lainnya adalah (3; 3,5). Pengaruh titik yang jauh ini akan kita lihat lebih jelas di Langkah 4.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>n = len(points)</code> memberi jumlah baris (jumlah titik), yaitu 5.</li>
@@ -4578,6 +4589,8 @@
 <li><code>np.allclose(a, b)</code> memeriksa apakah dua larik sama (dengan toleransi pembulatan). Kita membandingkan dengan <code>points.mean(axis=0)</code>, cara singkat NumPy untuk hal yang sama.</li>
 </ul>
 <h3 id="langkah-3-hitung-medoid">Langkah 3 — Hitung medoid<a class="headerlink" href="#langkah-3-hitung-medoid" title="Permanent link">&para;</a></h3>
+<p>Centroid di Langkah 2 punya satu kelemahan: ia hanya angka rata-rata dan bisa jatuh di tempat yang tidak ditempati titik mana pun. Kadang kita butuh wakil yang <strong>benar-benar ada</strong> di data, misalnya satu pelanggan nyata yang bisa dilihat dan dijelaskan. Wakil seperti itu disebut <strong>medoid</strong>: anggota kelompok yang paling "sentral".</p>
+<p>Ukuran sentral yang dipakai adalah <strong>jumlah jarak</strong> sebuah titik ke semua titik lain. Titik dengan jumlah terkecil adalah yang paling dekat dengan semua anggota secara keseluruhan, sehingga cocok menjadi wakil. Untuk itu kita perlu tahu jarak setiap pasangan titik, dan itu dikerjakan oleh <code>distance_matrix</code>. Cara ini lebih mahal daripada centroid karena harus menghitung semua pasangan, tetapi hasilnya selalu titik asli.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-4-1"><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">def</span><span class="w"> </span><span class="nf">distance_matrix</span><span class="p">(</span><span class="n">X</span><span class="p">):</span>
 </span><span id="__span-4-2"><a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="n">diff</span> <span class="o">=</span> <span class="n">X</span><span class="p">[:,</span> <span class="kc">None</span><span class="p">,</span> <span class="p">:]</span> <span class="o">-</span> <span class="n">X</span><span class="p">[</span><span class="kc">None</span><span class="p">,</span> <span class="p">:,</span> <span class="p">:]</span>
 </span><span id="__span-4-3"><a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">return</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">((</span><span class="n">diff</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">2</span><span class="p">))</span>
@@ -4599,6 +4612,14 @@
 </span><span id="__span-5-6"><a id="__codelineno-5-6" name="__codelineno-5-6" href="#__codelineno-5-6"></a>  P5: 27.11
 </span><span id="__span-5-7"><a id="__codelineno-5-7" name="__codelineno-5-7" href="#__codelineno-5-7"></a>Medoid: P3 [4. 4.]
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Tiap baris <code>P1: 13.7</code> dan seterusnya adalah <strong>jumlah jarak</strong> titik itu ke empat titik lainnya. Makin kecil, makin sentral.</li>
+<li>P3 punya jumlah terkecil (11,54), diikuti P2 (12,48), P1 (13,7), dan P4 (14,46). Keempatnya berada di kumpulan titik yang berdekatan, jadi jumlahnya tidak jauh berbeda.</li>
+<li>P5 melonjak ke 27,11, sekitar 2,3 kali jumlah P3 (27,11 / 11,54). Karena P5 jauh dari semua titik lain, ia paling tidak cocok menjadi wakil.</li>
+<li><code>Medoid: P3 [4. 4.]</code> menyatakan medoidnya adalah P3 di koordinat (4, 4). Ini <strong>titik data asli</strong>.</li>
+<li>Bandingkan dengan centroid dari Langkah 2, yaitu (4; 4,4). Keduanya berdekatan pada data ini, tetapi centroid berupa titik hasil hitungan sedangkan medoid adalah anggota nyata. Perbedaan keduanya akan terasa ketika ada outlier, yang kita lihat di Langkah 4.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>distance_matrix(X)</code> adalah fungsi yang menghitung jarak <strong>setiap titik ke setiap titik lain</strong>. Hasilnya tabel <span class="arithmatex">\( n \times n \)</span> (disebut <em>matriks jarak</em>, dibahas di Bab 4).</li>
@@ -4608,6 +4629,8 @@
 <li><code>zip(names, total.round(2))</code> memasangkan nama dan nilai agar bisa dicetak berdampingan.</li>
 </ul>
 <h3 id="langkah-4-efek-outlier">Langkah 4 — Efek outlier<a class="headerlink" href="#langkah-4-efek-outlier" title="Permanent link">&para;</a></h3>
+<p>Kita sudah punya dua wakil kelompok: centroid (Langkah 2) dan medoid (Langkah 3). Pada data bersih, keduanya hampir sama, jadi sulit menilai mana yang lebih baik. Perbedaan baru terlihat saat data <strong>tidak bersih</strong>. Data nyata sering memuat <em>outlier</em>, yaitu titik yang jauh dari kebanyakan, misalnya pelanggan dengan pendapatan atau belanja yang tidak biasa.</p>
+<p>Karena itu kita sengaja menambahkan satu outlier ekstrem di (30, 30), lalu menghitung ulang centroid dan medoid pada data baru. Dengan membandingkan posisi sebelum dan sesudah, kita bisa melihat wakil mana yang <strong>tahan</strong> terhadap titik aneh dan mana yang ikut terseret. Ini penting karena wakil yang bergeser jauh tidak lagi menggambarkan kelompoknya.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-6-1"><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="n">with_outlier</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">vstack</span><span class="p">([</span><span class="n">points</span><span class="p">,</span> <span class="p">[[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">30</span><span class="p">]]])</span>
 </span><span id="__span-6-2"><a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="n">c_before</span> <span class="o">=</span> <span class="n">points</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
 </span><span id="__span-6-3"><a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="n">c_after</span> <span class="o">=</span> <span class="n">with_outlier</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
@@ -4625,12 +4648,21 @@
 </span><span id="__span-7-3"><a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a>Medoid sebelum outlier  : [4. 4.]
 </span><span id="__span-7-4"><a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a>Medoid sesudah outlier  : [4. 4.]
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><strong>Centroid</strong> bergeser dari <code>[4. 4.4]</code> ke <code>[8.33 8.67]</code>, yaitu sekitar 6,1 satuan hanya karena satu titik tambahan. Rumusnya: (20 + 30) / 6 = 8,33 dan (22 + 30) / 6 = 8,67.</li>
+<li>Centroid baru berada di (8,33; 8,67), <strong>lebih jauh dari kelima titik asli</strong>, bahkan melewati P5 di (8, 8). Artinya ia tidak lagi mewakili kumpulan titik yang awalnya berdekatan. Ia berada di antara kelompok kecil itu dan outlier, tempat tidak ada titik sama sekali.</li>
+<li><strong>Medoid</strong> tetap <code>[4. 4.]</code> sebelum dan sesudah, yaitu P3. Medoid ditentukan oleh jumlah jarak, dan P3 masih paling sentral di antara kumpulan titik, sedangkan outlier hanya menambah jarak ke semua titik hampir sama besar.</li>
+<li>Kesimpulannya: centroid <strong>peka</strong> terhadap outlier, medoid <strong>lebih kokoh</strong>. Karena itu medoid dipilih bila data banyak mengandung outlier, sedangkan centroid tetap umum dipakai karena murah dihitung dan mudah diturunkan secara matematis.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>np.vstack([points, [[30, 30]]])</code> menumpuk satu baris baru (titik (30, 30)) di bawah data lama. Titik ini sengaja jauh: sebuah <em>outlier</em>.</li>
 <li>Kita hitung ulang centroid dan medoid pada data baru, lalu membandingkannya dengan hasil sebelum outlier ditambahkan.</li>
 </ul>
 <h3 id="langkah-5-centroid-berpindah">Langkah 5 — Centroid berpindah<a class="headerlink" href="#langkah-5-centroid-berpindah" title="Permanent link">&para;</a></h3>
+<p>Di Langkah 2 sampai 4 centroid dihitung dari kelompok yang sudah <strong>diketahui</strong> anggotanya. Pada clustering sungguhan, anggota kelompok justru belum diketahui: yang ada hanya tebakan pusat, lalu titik dikelompokkan ke pusat terdekat, dan pusat dihitung ulang dari anggotanya. Langkah ini memperlihatkan satu putaran proses itu.</p>
+<p>Tujuannya menunjukkan bahwa <strong>centroid bukan nilai tetap</strong>: ia berubah setiap kali keanggotaan berubah. Perilaku inilah yang nanti dimanfaatkan K-Means di Level 4, yang mengulang putaran ini sampai pusat berhenti bergeser.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-8-1"><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="n">start</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([[</span><span class="mf">2.0</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">],</span> <span class="p">[</span><span class="mf">7.0</span><span class="p">,</span> <span class="mf">7.0</span><span class="p">]])</span>  <span class="c1"># dua tebakan pusat awal</span>
 </span><span id="__span-8-2"><a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nb">print</span><span class="p">(</span><span class="s2">"Pusat awal:</span><span class="se">\n</span><span class="s2">"</span><span class="p">,</span> <span class="n">start</span><span class="p">)</span>
 </span><span id="__span-8-3"><a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a>
@@ -4651,6 +4683,14 @@
 </span><span id="__span-9-7"><a id="__codelineno-9-7" name="__codelineno-9-7" href="#__codelineno-9-7"></a> [8.  8. ]]
 </span><span id="__span-9-8"><a id="__codelineno-9-8" name="__codelineno-9-8" href="#__codelineno-9-8"></a>Pergeseran pusat: [1.8  1.41]
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li><code>Pusat awal</code> adalah dua tebakan kita: (2, 2) dan (7, 7). Keduanya bukan hasil perhitungan, hanya titik awal.</li>
+<li><code>Kelompok tiap titik: {'P1': 0, 'P2': 0, 'P3': 0, 'P4': 0, 'P5': 1}</code> menunjukkan bahwa P1 sampai P4 lebih dekat ke pusat 0, sedangkan P5 yang jauh sendirian ke pusat 1. Jadi kelompok 0 punya empat anggota dan kelompok 1 hanya satu.</li>
+<li><code>Pusat baru</code> adalah rata-rata anggota masing-masing. Pusat 0 menjadi (3; 3,5), yaitu rata-rata P1 sampai P4. Pusat 1 menjadi (8, 8), tepat di P5, karena rata-rata satu titik adalah titik itu sendiri.</li>
+<li><code>Pergeseran pusat: [1.8  1.41]</code> adalah jarak perpindahan tiap pusat dari tebakan awalnya: pusat 0 bergeser sekitar 1,80 (dari (2, 2) ke (3; 3,5)) dan pusat 1 sekitar 1,41 (dari (7, 7) ke (8, 8)).</li>
+<li>Pusat yang bergeser berarti tebakan awal belum pas. Bila putarannya diulang dengan pusat baru, keanggotaan kelima titik di sini tidak berubah (P1 sampai P4 tetap lebih dekat ke (3; 3,5), P5 ke (8, 8)), sehingga pusat langsung stabil. Pada data yang lebih rumit, butuh beberapa putaran sampai keanggotaan berhenti berubah.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li><code>start</code> adalah dua <strong>tebakan</strong> pusat awal: (2, 2) dan (7, 7).</li>
@@ -4664,6 +4704,8 @@
 <p>Kita memakai langkah "tentukan anggota lalu hitung ulang pusat" <strong>sekali</strong> untuk memperlihatkan pergeseran. Pada algoritma K-Means di Level 4, langkah ini diulang sampai pusat tidak banyak berubah.</p>
 </div>
 <h3 id="langkah-6-centroid-pada-mall-customers">Langkah 6 — Centroid pada Mall Customers<a class="headerlink" href="#langkah-6-centroid-pada-mall-customers" title="Permanent link">&para;</a></h3>
+<p>Langkah 2 sampai 5 memakai lima titik kecil agar bisa dihitung dengan tangan. Sekarang kita pindahkan ide yang sama ke <strong>data nyata</strong>: 200 pelanggan Mall Customers. Ada dua tujuan. Pertama, membuktikan bahwa centroid yang dihasilkan K-Means memang <strong>rata-rata anggota kelompoknya</strong>, persis seperti yang kita hitung manual di Langkah 2, bukan sesuatu yang berbeda atau rumit. Kedua, melihat bahwa centroid berguna sebagai <strong>profil</strong>: lima baris angka yang meringkas karakter tiap kelompok.</p>
+<p>Pembuktiannya dengan dua jalan: menghitung rata-rata per kelompok memakai pandas (<code>groupby</code>), lalu membandingkannya dengan <code>cluster_centers_</code> dari K-Means. Bila keduanya sama, ide "pusat = rata-rata anggota" terbukti berlaku pada data sungguhan.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-10-1"><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">"data/mall_customers.csv"</span><span class="p">)</span>
 </span><span id="__span-10-2"><a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="n">cols</span> <span class="o">=</span> <span class="p">[</span><span class="s2">"Annual Income (k$)"</span><span class="p">,</span> <span class="s2">"Spending Score (1-100)"</span><span class="p">]</span>
 </span><span id="__span-10-3"><a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="n">model</span> <span class="o">=</span> <span class="n">KMeans</span><span class="p">(</span><span class="n">n_clusters</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">n_init</span><span class="o">=</span><span class="mi">10</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">42</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="n">cols</span><span class="p">])</span>
@@ -4695,6 +4737,20 @@
 </span><span id="__span-11-17"><a id="__codelineno-11-17" name="__codelineno-11-17" href="#__codelineno-11-17"></a>
 </span><span id="__span-11-18"><a id="__codelineno-11-18" name="__codelineno-11-18" href="#__codelineno-11-18"></a>Sama? True
 </span></code></pre></div>
+<p><strong>Cara membaca output:</strong></p>
+<ul>
+<li>Ada dua tabel. Tabel pertama (<code>groupby</code>) adalah rata-rata yang kita hitung sendiri, tabel kedua adalah centroid dari K-Means. Baris dan kolomnya sama: lima kelompok (0 sampai 4), dua fitur.</li>
+<li>Isi kedua tabel <strong>identik</strong> pada semua sel, dan baris terakhir <code>Sama? True</code> memastikannya. Jadi centroid K-Means tidak lebih dari rata-rata anggota kelompok.</li>
+<li>Setiap baris centroid bisa dibaca sebagai <strong>profil kelompok</strong> (pendapatan dalam k$, skor belanja 1-100):<ul>
+<li>Kelompok 0: pendapatan 55,30 dan skor 49,52, yaitu menengah di kedua fitur.</li>
+<li>Kelompok 1: pendapatan 86,54 dan skor 82,13, yaitu pendapatan tinggi dan belanja tinggi.</li>
+<li>Kelompok 2: pendapatan 25,73 dan skor 79,36, yaitu pendapatan rendah tetapi belanja tinggi.</li>
+<li>Kelompok 3: pendapatan 88,20 dan skor 17,11, yaitu pendapatan tinggi tetapi belanja rendah.</li>
+<li>Kelompok 4: pendapatan 26,30 dan skor 20,91, yaitu pendapatan rendah dan belanja rendah.</li>
+</ul>
+</li>
+<li>Label seperti "tinggi" dan "rendah" di atas hanya pembacaan dari angka centroid. Centroid adalah rata-rata, jadi tidak semua anggota kelompok persis seperti itu.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li>Kita memuat data dan melakukan clustering seperti Bab 1.</li>
@@ -4704,6 +4760,8 @@
 <li><code>pd.DataFrame(model.cluster_centers_, columns=cols)</code> membungkus larik menjadi tabel berlabel.</li>
 </ul>
 <h3 id="langkah-7-visualisasi">Langkah 7 — Visualisasi<a class="headerlink" href="#langkah-7-visualisasi" title="Permanent link">&para;</a></h3>
+<p>Langkah 2 sampai 6 menghasilkan angka. Angka tepat, tetapi sulit dirasakan: "centroid bergeser 6,1 satuan" belum memberi gambaran sejauh apa itu dibanding sebaran datanya. Karena itu kita menggambar tiga hal yang sudah dihitung: perbandingan centroid dan medoid dengan serta tanpa outlier, perpindahan pusat, dan centroid pada data Mall Customers.</p>
+<p>Semua gambar memakai data dan hasil dari langkah sebelumnya, tanpa perhitungan baru, jadi gambar ini hanya <strong>memperlihatkan</strong> apa yang sudah kita buktikan dengan angka.</p>
 <div class="language-python highlight"><pre><span></span><code><span id="__span-12-1"><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="n">fig</span><span class="p">,</span> <span class="n">axes</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
 </span><span id="__span-12-2"><a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">for</span> <span class="n">ax</span><span class="p">,</span> <span class="n">pts</span><span class="p">,</span> <span class="n">title</span> <span class="ow">in</span> <span class="p">[</span>
 </span><span id="__span-12-3"><a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a>    <span class="p">(</span><span class="n">axes</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span> <span class="n">points</span><span class="p">,</span> <span class="s2">"Tanpa outlier"</span><span class="p">),</span>
@@ -4745,8 +4803,26 @@
 </span><span id="__span-12-39"><a id="__codelineno-12-39" name="__codelineno-12-39" href="#__codelineno-12-39"></a><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </span></code></pre></div>
 <p><img alt="Dua panel: kiri lima titik dengan centroid dan medoid berdekatan, kanan setelah ditambah outlier di (30, 30) sehingga centroid tertarik jauh sedangkan medoid tetap" src="../../assets/level-3/03-centroid-vs-medoid.png" /></p>
+<p><strong>Cara membaca gambar 1 (centroid vs medoid):</strong></p>
+<ul>
+<li><strong>Panel kiri (tanpa outlier):</strong> <code>X</code> oranye (centroid, di (4; 4,4)) dan berlian biru (medoid, di (4, 4)) letaknya berdekatan, di tengah kumpulan empat titik dan P5 di pojok kanan atas.</li>
+<li><strong>Panel kanan (dengan outlier di (30, 30)):</strong> sumbu melebar, dan kelima titik asli mengumpul di pojok kiri bawah. Centroid terseret ke sekitar (8,33; 8,67), jauh dari kumpulan itu dan hampir menempel pada P5. Medoid tetap di (4, 4), di tengah kumpulan empat titik.</li>
+<li>Inilah arti peka dan kokoh dari Langkah 4: satu titik jauh cukup memindahkan centroid, tetapi tidak medoid.</li>
+</ul>
 <p><img alt="Dua pusat awal berpindah ke pusat baru dengan panah, di atas lima titik data" src="../../assets/level-3/03-centroid-berpindah.png" /></p>
+<p><strong>Cara membaca gambar 2 (centroid berpindah):</strong></p>
+<ul>
+<li>Kotak oranye adalah tebakan pusat awal, (2, 2) dan (7, 7). Tanda <code>X</code> oranye adalah pusat baru, dan panah menunjukkan arah perpindahannya.</li>
+<li>Pusat kiri bergerak naik ke kanan ke (3; 3,5), ke tengah empat titik anggotanya (P1 sampai P4). Pusat kanan bergerak ke (8, 8), tepat menimpa P5 karena kelompoknya hanya satu titik.</li>
+<li>Panah menunjukkan bahwa pusat <strong>mengejar anggotanya</strong>: ia pindah ke tempat rata-rata anggota berada. Panjang panah sesuai <code>[1.8  1.41]</code> dari Langkah 5.</li>
+</ul>
 <p><img alt="Scatter plot Mall Customers lima warna dengan label centroid di tengah tiap kelompok" src="../../assets/level-3/03-centroid-mall.png" /></p>
+<p><strong>Cara membaca gambar 3 (centroid Mall Customers):</strong></p>
+<ul>
+<li>Tiap warna adalah satu kelompok, dan kotak putih bertanda <span class="arithmatex">\( \mu_0 \)</span> sampai <span class="arithmatex">\( \mu_4 \)</span> menandai centroidnya. Letaknya cocok dengan tabel di Langkah 6.</li>
+<li>Lima kelompok tersebar di lima daerah: <span class="arithmatex">\( \mu_0 \)</span> di tengah (pendapatan dan belanja menengah), <span class="arithmatex">\( \mu_1 \)</span> di kanan atas, <span class="arithmatex">\( \mu_2 \)</span> di kiri atas, <span class="arithmatex">\( \mu_3 \)</span> di kanan bawah, dan <span class="arithmatex">\( \mu_4 \)</span> di kiri bawah.</li>
+<li>Tiap centroid berada di tengah awan titik warnanya, sehingga memang menjadi wakil kelompok. Kelompok 0 terlihat paling padat di sekitar <span class="arithmatex">\( \mu_0 \)</span>, sedangkan kelompok di pojok-pojok lebih tersebar.</li>
+</ul>
 <p><strong>Penjelasan:</strong></p>
 <ul>
 <li>Grafik pertama membandingkan data <strong>tanpa</strong> outlier dan <strong>dengan</strong> outlier. Centroid digambar sebagai <code>X</code> oranye dan medoid sebagai berlian biru.</li>
